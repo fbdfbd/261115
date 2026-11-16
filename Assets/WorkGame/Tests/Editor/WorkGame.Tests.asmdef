@@ -1,0 +1,8 @@
+{
+    "name": "WorkGame.Tests",
+    "references": ["WorkGame", "WorkGame.Editor", "WorkGame.Presentation", "UnityEngine.UI"],
+    "overrideReferences": true,
+    "precompiledReferences": ["nunit.framework.dll"],
+    "includePlatforms": ["Editor"],
+    "optionalUnityReferences": ["TestAssemblies"]
+}

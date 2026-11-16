@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_08
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 08
+  Title: "\uACF5\uACF5\uC870\uB2EC \uC804\uBB38\uC778\uB825 \uC591\uC131"
+  ShortName: "직원 교육"
+  Target: "\uC9C1\uC6D0"
+  Metrics:
+  - Title: "교육 대상 · 반려된 문서에 간식을 주며 달래는 직원"
+    Name: "서류 반려 사유 오해율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "교육 대상 · 엑셀 셀 병합을 세포 분열의 반대로 이해하는 직원"
+    Name: "엑셀 기본 기능 숙련도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "교육 대상 · 클라우드에 올린 파일을 찾으러 옥상에 간 직원"
+    Name: "파일을 올바르게 찾는 비율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "교육 대상 · 로봇에게 자료 정리를 시켰다가 자료와 함께 정리된 직원"
+    Name: "업무 지시 전달 오류율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "교육 대상 · 입찰 공고를 소리 지르는 행사로 이해한 신입 직원"
+    Name: "입찰 공고 교육 필요도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "교육 대상 · 표 계산을 맡기자 표정을 계산하고 돌아온 직원"
+    Name: "표 계산 정답률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "교육 대상 · 전자계약을 하려면 고무장갑부터 찾는 직원"
+    Name: "전자계약 처리 숙련도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "교육 대상 · 검색 조건을 말하자 검색창에게 조건부 협상을 건 직원"
+    Name: "검색 조건 설정 실수율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "교육 대상 · 개인정보 마스킹을 얼굴팩으로 처리한 직원"
+    Name: "개인정보 보호 지식 수준"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "교육 대상 · 시스템 오류 보고서에 시스템도 힘들겠다고 쓴 직원"
+    Name: "오류 신고 내용 누락률"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100

@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_15
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 15
+  Title: "\uACF5\uACF5\uAC74\uC124 \uD604\uC7A5 \uD3ED\uC5FC \uC548\uC804"
+  ShortName: "폭염 점검"
+  Target: "\uAC74\uC124\uD604\uC7A5"
+  Metrics:
+  - Title: "우선 점검 대상 · 안전모 안에서 계란이 익을 것 같다는 제보가 온 건설현장"
+    Name: "현장 체감온도"
+    Unit: "℃"
+    Rule: 0
+    Display: 1
+    Min: 30
+    Max: 50
+    ScaleMax: 50
+  - Title: "우선 점검 대상 · 그늘막 사진으로 그늘을 대체하려는 건설현장"
+    Name: "실제 그늘막 설치율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "우선 점검 대상 · 그늘을 찾아간 순찰 로봇까지 쉬고 있는 건설현장"
+    Name: "작업 구역 냉방 가동률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "우선 점검 대상 · 얼음 조끼 충전기가 장식품이 되어 있는 건설현장"
+    Name: "냉방 조끼 미지급 비율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "우선 점검 대상 · 철근 옆 공기가 아지랑이로 출근부를 쓰는 건설현장"
+    Name: "고온 작업 노출 위험도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "우선 점검 대상 · 급수 로봇이 물 대신 물 사진을 안내하는 건설현장"
+    Name: "식수 공급 기준 충족률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "우선 점검 대상 · 작업 발판이 신발 밑창과 너무 친해지는 건설현장"
+    Name: "작업 발판 단열 성능"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "우선 점검 대상 · 휴식 알림 드론이 고장 나서 계속 응원만 하는 건설현장"
+    Name: "휴식 알림 장치 고장률"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "우선 점검 대상 · 온도 센서가 숫자 대신 구조 요청을 보내는 건설현장"
+    Name: "현장 온도 측정 실시율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "우선 점검 대상 · 그늘막이 태양을 따라가지 못하고 퇴근한 건설현장"
+    Name: "휴게 그늘 부족 비율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100

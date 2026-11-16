@@ -1,0 +1,6 @@
+{
+    "name": "WorkGame.Editor",
+    "rootNamespace": "WorkGame.Editor",
+    "references": ["WorkGame", "WorkGame.Presentation"],
+    "includePlatforms": ["Editor"]
+}

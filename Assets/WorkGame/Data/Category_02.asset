@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_02
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 02
+  Title: "\uD601\uC2E0\uC870\uB2EC \uD655\uB300"
+  ShortName: "혁신제품"
+  Target: "\uC81C\uD488"
+  Metrics:
+  - Title: "퇴근하는 직원을 따라 나오지 않는 사무용 의자"
+    Name: "의자 자동 복귀 성공률"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "서류 한 장 넘기려고 예약하는 전동 책상"
+    Name: "종이 한 장 처리 전력"
+    Unit: "kWh"
+    Rule: 1
+    Display: 0
+    Min: 30
+    Max: 300
+    ScaleMax: 0
+  - Title: "앉은 사람의 결심이 약해지면 스스로 일어서는 의자"
+    Name: "자세 감지 오작동률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "스테이플러 한 번 누를 때마다 충전이 필요한 로봇 팔"
+    Name: "완충 후 사용 시간"
+    Unit: "시간"
+    Rule: 0
+    Display: 0
+    Min: 1
+    Max: 24
+    ScaleMax: 0
+  - Title: "회의가 길어지면 출구 방향으로 접히는 탁자"
+    Name: "탁자 접힘 감지 정확도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "먼지 한 톨을 찾으려고 사무실 전체를 스캔하는 청소기"
+    Name: "먼지 한 톨 처리 전력"
+    Unit: "kWh"
+    Rule: 1
+    Display: 0
+    Min: 30
+    Max: 300
+    ScaleMax: 0
+  - Title: "도장을 찍으면 잉크 대신 위조 방지 홀로그램이 남는 인주"
+    Name: "홀로그램 위조 성공률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "찻잔을 식히려고 작은 겨울을 만드는 냉각 받침대"
+    Name: "전력당 냉각 효율"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "주인을 잃으면 안내 데스크로 기어가는 우산"
+    Name: "주인 잘못 찾아갈 확률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "복도 한 칸을 이동할 때마다 웅장하게 예열하는 카트"
+    Name: "한 번 충전으로 운반 가능한 상자 수"
+    Unit: "개"
+    Rule: 0
+    Display: 0
+    Min: 10
+    Max: 100
+    ScaleMax: 0

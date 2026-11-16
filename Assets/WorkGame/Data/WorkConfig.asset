@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8c2e4995e78d8449ca001d6158f301, type: 3}
+  m_Name: WorkConfig
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkConfigSO
+  Settings:
+    MonthSeconds: 120
+    HoldSeconds: 0.5
+    StartAttendance: 100
+    WrongPenalty: 1
+    SPercent: 85
+    APercent: 70
+    SBonus: 300
+    ABonus: 200
+    BBonus: 100
+  Plan: {fileID: 11400000, guid: 6a8ab4f30c4e35749b4d6b888f88ad20, type: 2}
+  ChoiceCount: 3

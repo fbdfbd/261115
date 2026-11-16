@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_03
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 03
+  Title: "\uC870\uB2EC \uADDC\uC81C \uD569\uB9AC\uD654"
+  ShortName: "규제 개선"
+  Target: "\uD589\uC815\uC808\uCC28"
+  Metrics:
+  - Title: "개선 대상 · 도장 분실 신고에 분실한 도장을 요구하는 절차"
+    Name: "중복 도장 확인 단계 수"
+    Unit: "단계"
+    Rule: 0
+    Display: 0
+    Min: 3
+    Max: 20
+    ScaleMax: 0
+  - Title: "개선 대상 · 종이 없는 사무실 신청서를 종이로만 받는 절차"
+    Name: "종이 없이 접수 가능한 비율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "개선 대상 · 자율주행 배달 로봇에게 사람용 신발 규격서를 요구하는 절차"
+    Name: "한 번 접수에 필요한 서류 수"
+    Unit: "장"
+    Rule: 0
+    Display: 0
+    Min: 3
+    Max: 20
+    ScaleMax: 0
+  - Title: "개선 대상 · 전자서명을 출력한 뒤 다시 스캔해 제출하는 절차"
+    Name: "전자서명 처리 속도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "개선 대상 · 수중 드론의 바퀴 개수를 확인해야 접수되는 절차"
+    Name: "규격 확인 대기 일수"
+    Unit: "일"
+    Rule: 0
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "개선 대상 · 우주용 정수기 신청서를 지상용과 따로 세 번 쓰는 절차"
+    Name: "한 번에 접수 완료되는 비율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "개선 대상 · 창고 로봇의 휴대전화 번호가 없으면 멈추는 절차"
+    Name: "담당자 연락 성공률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "개선 대상 · 동일한 인증서를 로봇 부품마다 다시 제출하는 절차"
+    Name: "같은 인증서 재제출 횟수"
+    Unit: "회"
+    Rule: 0
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+  - Title: "개선 대상 · 공기청정기의 날개가 없다는 확인서를 요구하는 절차"
+    Name: "제품 확인 업무 효율"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "개선 대상 · 시험성적서가 도착했는지 확인서를 우편으로 보내는 절차"
+    Name: "접수 확인서 도착 대기 일수"
+    Unit: "일"
+    Rule: 0
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0

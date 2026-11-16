@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_09
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 09
+  Title: "\uCC3D\uC5C5\xB7\uBCA4\uCC98\xB7\uC0AC\uD68C\uC801\uAE30\uC5C5 \uC9C0\uC6D0"
+  ShortName: "기업 지원"
+  Target: "\uAE30\uC5C5"
+  Metrics:
+  - Title: "지원 우선 대상 · 대표와 전 직원과 사내 밴드가 동일인인 기업"
+    Name: "첫 공공시장 진입 어려움"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "지원 우선 대상 · 첫 납품부터 납품 실적을 요구받는 기업"
+    Name: "지금까지 납품 참여 횟수"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+  - Title: "지원 우선 대상 · 손이 없는 사람도 조작할 수 있는 공구를 만든 작은 기업"
+    Name: "보조기기 판매망 확보 수준"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "지원 우선 대상 · 재활용 로봇과 대표 둘이서 첫 납품을 기다리는 기업"
+    Name: "첫 납품을 기다린 개월 수"
+    Unit: "개월"
+    Rule: 0
+    Display: 0
+    Min: 1
+    Max: 24
+    ScaleMax: 0
+  - Title: "지원 우선 대상 · 소음 대신 자장가를 내는 공사 장비를 개발한 벤처"
+    Name: "혁신 장비 판로 개척 어려움"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "지원 우선 대상 · 퇴역 안내 로봇에게 새 직업을 주는 사회적기업"
+    Name: "재제조 제품 납품 실적 수"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+  - Title: "지원 우선 대상 · 주문서보다 발명 특허가 더 많은 일인 기업"
+    Name: "초기 기업의 공공시장 접근성"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "지원 우선 대상 · 점자와 촉각으로 길을 알려주는 난간을 만든 기업"
+    Name: "접근성 제품의 시장 진입 장벽"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "지원 우선 대상 · 달팽이 속도로 자라도 튼튼한 생분해 가구를 만든 기업"
+    Name: "친환경 가구 납품 기회 수"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+  - Title: "지원 우선 대상 · 사람과 로봇이 함께 일하는 첫 작업복을 납품하려는 기업"
+    Name: "신규 작업복 판로 지원 필요도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100

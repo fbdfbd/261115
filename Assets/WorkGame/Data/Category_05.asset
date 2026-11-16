@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_05
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 05
+  Title: "\uC548\uC804\xB7\uD488\uC9C8 \uAD00\uB9AC \uAC15\uD654"
+  ShortName: "안전·품질"
+  Target: "\uC81C\uD488"
+  Metrics:
+  - Title: "사용자를 적으로 인식하지 않는 자동문"
+    Name: "사람 감지 정확도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "박수 소리를 들으면 퇴사 선언을 출력하는 프린터"
+    Name: "프린터 오작동률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "사용자를 소독하려다 기억까지 지우지 않는 살균기"
+    Name: "살균 중 인체 노출 위험도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "복사할 때마다 직원의 얼굴에 수염을 더하는 복합기"
+    Name: "원본 그대로 복사 성공률"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "위급할 때 철학적 질문 없이 열리는 비상문"
+    Name: "비상문 개방 성공률"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "물을 마실 때마다 오늘의 운세를 틀리게 출력하는 정수기"
+    Name: "음수 안전 기준 미달률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "사람 손과 먼지를 구별하는 책상 청소 로봇"
+    Name: "청소 중 손 끼임 위험도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "파일을 저장하면 제목을 자기 이름으로 바꾸는 저장장치"
+    Name: "파일 원본 보존율"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "우산을 말리면서 주인을 함께 건조하지 않는 보관함"
+    Name: "건조 장치 과열 발생률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "발표 자료의 마지막 장을 자꾸 자기소개로 바꾸는 프로젝터"
+    Name: "화면 정상 출력률"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100

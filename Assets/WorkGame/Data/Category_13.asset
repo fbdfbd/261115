@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_13
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 13
+  Title: "\uC870\uB2EC\uC815\uCC45 \uD611\uC5C5 \uAE30\uBC18 \uC870\uC131"
+  ShortName: "기관 협업"
+  Target: "\uAE30\uAD00"
+  Metrics:
+  - Title: "협업 기관 선정 · 각자 보유한 로봇의 왼팔과 오른팔을 합치려는 기관"
+    Name: "장비를 함께 쓸 때의 기대효과"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "협업 기관 선정 · 공동회의 이름을 정하는 회의만 계속한 기관"
+    Name: "협업 결정까지 필요한 회의 횟수"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+  - Title: "협업 기관 선정 · 기상 로봇과 도로 로봇이 우산 정보를 공유하려는 기관"
+    Name: "정보 공유 실패율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "협업 기관 선정 · 서로의 공문만 번갈아 번역해 본 기관"
+    Name: "공동 데이터 전달 정확도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "협업 기관 선정 · 남는 드론과 남는 충전소를 서로 연결하려는 기관"
+    Name: "드론 공동 활용 기대효과"
+    Unit: ""
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "협업 기관 선정 · 공동 로봇의 이름만 여섯 번 바꿔본 기관"
+    Name: "기관 간 중복 장비 구매 건수"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+  - Title: "협업 기관 선정 · 산불 감시 화면과 소방 로봇 지도를 합치려는 기관"
+    Name: "재난 정보 전달 지연 시간"
+    Unit: "분"
+    Rule: 1
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "협업 기관 선정 · 회의용 홀로그램끼리만 친해진 기관"
+    Name: "공동 사업 완료율"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "협업 기관 선정 · 같은 길을 세 번 청소하던 로봇의 노선을 합치려는 기관"
+    Name: "함께 작업할 때 중복되는 작업 비율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "협업 기관 선정 · 공동 데이터 금고를 만들고 열쇠 회의만 한 기관"
+    Name: "데이터 연계 준비 수준"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5

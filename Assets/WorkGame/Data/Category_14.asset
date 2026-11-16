@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_14
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 14
+  Title: "\uC785\uCC30\uC790\uACA9 \uC0AC\uC2E4\uC870\uC0AC"
+  ShortName: "자격 조사"
+  Target: "\uC5C5\uCCB4"
+  Metrics:
+  - Title: "조사 대상 · 제출한 공장 사진 구석에 저장하지 않은 게임이 보이는 업체"
+    Name: "공장 사진 위조 의심도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "조사 대상 · 자격증 발급기관 주소가 사장님 꿈속인 업체"
+    Name: "자격 증빙 신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "조사 대상 · 공장 견학을 신청하면 게임 접속 코드를 보내는 업체"
+    Name: "실제 공장 위치 확인 성공률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 시험성적서 직인이 감자 단면처럼 보이는 업체"
+    Name: "시험성적서 위조 의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 상근 기술자가 모두 같은 충전기에 꽂혀 있는 업체"
+    Name: "기술인력 허위 등록 의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 생산 인증서 발급자가 자사 반려 로봇인 업체"
+    Name: "생산 인증서 확인 신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "조사 대상 · 등록된 창고가 배송 로봇 배 속에만 있는 업체"
+    Name: "창고 실재 여부 확인 성공률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 실적 증명 사진마다 달의 모양이 다른 업체"
+    Name: "납품 사진 불일치율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 빌린 공장 간판이 견학 중 반납되는 업체"
+    Name: "공장 보유 증빙 신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "조사 대상 · 면허 조회 주소가 자꾸 온라인 놀이터로 연결되는 업체"
+    Name: "면허 정보 위조 의심도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5

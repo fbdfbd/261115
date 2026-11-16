@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_01
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 01
+  Title: "AI \uC0B0\uC5C5 \uC721\uC131"
+  ShortName: "AI 육성"
+  Target: "\uC81C\uD488"
+  Metrics:
+  - Title: "직장동료의 괜찮아요에 숨은 분노를 읽는 AI"
+    Name: "숨은 감정 판독 정확도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "상사 대신 회의에 참석하고 혼나는 AI"
+    Name: "회의 중 비밀 누설 확률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "회의 중 졸면 눈꺼풀에 가짜 눈을 띄워주는 AI 안경"
+    Name: "졸음 위장 들통 확률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "점심 메뉴를 고르다가 인류의 식문화를 재설계한 AI"
+    Name: "점심 메뉴 취향 일치율"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "메일의 느낌표 개수로 상사의 기압을 예보하는 AI"
+    Name: "상사 기분 예측 정확도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "야근 중인 주인 대신 집에서 고양이에게 사과하는 AI"
+    Name: "고양이를 더 화나게 할 확률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "분리수거통 앞에서 망설이면 재질부터 알려주는 AI"
+    Name: "쓰레기 재질 오인식률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "발표자의 아는 척을 도와주는 귓속 AI 비서"
+    Name: "질문에 맞는 답변 제공률"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "회의록에서 실제로 결정된 것이 있는지 찾아주는 AI"
+    Name: "회의 결정사항 누락률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "휴가 사유를 묻는 상사에게 날씨 이야기만 하는 AI"
+    Name: "개인정보 보호 성능"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5

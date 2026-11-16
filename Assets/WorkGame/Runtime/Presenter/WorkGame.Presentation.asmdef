@@ -1,0 +1,5 @@
+{
+    "name": "WorkGame.Presentation",
+    "rootNamespace": "WorkGame",
+    "references": ["WorkGame", "UnityEngine.UI", "Unity.TextMeshPro"]
+}

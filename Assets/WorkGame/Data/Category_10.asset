@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_10
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 10
+  Title: "\uC870\uB2EC\uD3C9\uAC00 \uACF5\uC815\uC131 \uAC15\uD654"
+  ShortName: "공정 평가"
+  Target: "\uD3C9\uAC00\uC704\uC6D0 \uD6C4\uBCF4"
+  Metrics:
+  - Title: "평가위원 선정 · 말하는 정수기의 주장과 시험성적서를 구분하는 평가위원"
+    Name: "정수기 성능 검증 전문성"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "평가위원 선정 · 제안서보다 업체 대표의 돌잔치 사진이 익숙한 평가위원"
+    Name: "업체 대표와의 이해충돌 위험도"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "평가위원 선정 · 스스로를 천재라고 소개하는 계산기를 직접 검증하는 위원"
+    Name: "과장된 성능에 속을 확률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "평가위원 선정 · 심사할 로봇의 이름을 가족 단체 채팅방에서 정해준 위원"
+    Name: "평가 기준 이해도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "평가위원 선정 · 무중력 청소기의 지상 시험 결과를 구분하는 위원"
+    Name: "시험 조건 차이 발견률"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "평가위원 선정 · 업체 홍보 영상 끝에 본인 목소리가 등장하는 위원"
+    Name: "후보 업체 홍보 참여 횟수"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+  - Title: "평가위원 선정 · 통역 이어폰이 몰래 말을 순화하는지 확인하는 위원"
+    Name: "후보 업체 투자 관계 위험도"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "평가위원 선정 · 후보 업체 주식을 반려 로봇에게 맡겨 관리하는 위원"
+    Name: "통역 오류 발견 정확도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "평가위원 선정 · 친환경 포장재를 포장지만 보고 판단하지 않는 위원"
+    Name: "포장재 평가 기준 오해율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "평가위원 선정 · 납품업체 대표와 주말마다 달 낚시를 다니는 위원"
+    Name: "사적 친분 없이 평가할 수 있는 정도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5

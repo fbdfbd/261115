@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_11
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 11
+  Title: "\uB098\uB77C\uC7A5\uD130 \uD574\uC678\uC218\uCD9C"
+  ShortName: "나라장터 수출"
+  Target: "\uAD6D\uAC00"
+  Metrics:
+  - Title: "도입 지원 대상 · 입찰 공고를 아직도 말 탄 전령이 전달하는 국가"
+    Name: "전자조달 전환 필요도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "도입 지원 대상 · 전자조달 완료 화면을 양피지로 출력하는 국가"
+    Name: "전자조달 보급률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "도입 지원 대상 · 입찰 서류를 운반하던 드래곤의 은퇴가 다가오는 국가"
+    Name: "온라인으로 입찰 가능한 비율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "도입 지원 대상 · 도장 찍는 로봇만 디지털 전환을 마친 국가"
+    Name: "입찰 서류 운반 대기 일수"
+    Unit: "일"
+    Rule: 0
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "도입 지원 대상 · 섬마다 입찰함이 있어 공고 확인에 배가 필요한 국가"
+    Name: "원격 입찰 도입 수요"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "도입 지원 대상 · 정부 홈페이지 대신 전광판 한 대를 함께 보는 국가"
+    Name: "온라인 공고 확인 가능률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "도입 지원 대상 · 폭설이 오면 입찰 서류도 봄까지 잠드는 국가"
+    Name: "폭설에도 접수 가능한 비율"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "도입 지원 대상 · 전자서명을 번개 모양 도장으로 이해하는 국가"
+    Name: "전자서명 도입 필요도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "도입 지원 대상 · 서류 창고가 커져 수도 지도를 다시 그리는 국가"
+    Name: "전자문서 전환 완료율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "도입 지원 대상 · 물품 목록을 왕실 앵무새 한 마리가 암기하는 국가"
+    Name: "물품 관리 전산화 필요도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5

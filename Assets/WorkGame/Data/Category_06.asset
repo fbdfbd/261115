@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_06
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 06
+  Title: "\uACF5\uACF5\uBE44\uCD95 \uAE30\uB2A5 \uD655\uCDA9"
+  ShortName: "원자재 비축"
+  Target: "\uC6D0\uC790\uC7AC"
+  Metrics:
+  - Title: "비축 우선 대상 · 모든 사무용 로봇이 동시에 무릎을 꿇게 할 희토류"
+    Name: "희토류 공급 중단 위험도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "비축 우선 대상 · 비상시 거대 로봇 한 대는 수리해야 한다며 비축한 구리"
+    Name: "거대 로봇 수리용 구리 재고량"
+    Unit: "톤"
+    Rule: 1
+    Display: 0
+    Min: 10
+    Max: 300
+    ScaleMax: 0
+  - Title: "비축 우선 대상 · 사무용 드론들이 일제히 충전을 요구할 때 필요한 리튬"
+    Name: "리튬으로 버틸 수 있는 일수"
+    Unit: "일"
+    Rule: 1
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "비축 우선 대상 · 도시 냉방 로봇의 한숨으로는 대체할 수 없는 알루미늄"
+    Name: "알루미늄 다시 확보하는 데 걸리는 일수"
+    Unit: "일"
+    Rule: 0
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "비축 우선 대상 · 로봇 손가락이 동시에 삐걱거리면 찾게 될 니켈"
+    Name: "니켈 공급 부족 위험도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "비축 우선 대상 · 해저 케이블 수리 로봇이 간식처럼 챙기는 구리"
+    Name: "해저 케이블용 구리 비축량"
+    Unit: "톤"
+    Rule: 1
+    Display: 0
+    Min: 10
+    Max: 300
+    ScaleMax: 0
+  - Title: "비축 우선 대상 · 공중 정원 지지대 주문이 갑자기 몰린 날의 아연"
+    Name: "아연 재고 충족률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "비축 우선 대상 · 재난 대응 로봇의 예비 관절을 만들 티타늄"
+    Name: "티타늄 추가 수요량"
+    Unit: "톤"
+    Rule: 0
+    Display: 0
+    Min: 10
+    Max: 300
+    ScaleMax: 0
+  - Title: "비축 우선 대상 · 투명 화면이 유행해 모든 창문이 모니터가 될 때의 인듐"
+    Name: "인듐 대체 공급처 수"
+    Unit: "곳"
+    Rule: 1
+    Display: 0
+    Min: 1
+    Max: 12
+    ScaleMax: 0
+  - Title: "비축 우선 대상 · 우주 엘리베이터 정비팀이 유난히 넉넉히 챙긴 주석"
+    Name: "주석 수입 지연 일수"
+    Unit: "일"
+    Rule: 0
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0

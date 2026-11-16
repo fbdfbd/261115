@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27071a4458c62e049a5a7bbcba0db5b3, type: 3}
+  m_Name: Category_07
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
+  Id: 07
+  Title: "\uBD88\uACF5\uC815 \uC870\uB2EC\uD589\uC704 \uADFC\uC808"
+  ShortName: "불공정 조사"
+  Target: "\uC5C5\uCCB4"
+  Metrics:
+  - Title: "조사 대상 · 서로 다른 제안서에 같은 고양이 발자국이 찍힌 업체"
+    Name: "경쟁사 제안서 일치율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 계약 상대가 누구인지 물으면 일단 커튼을 치는 업체"
+    Name: "계약 내용 공개 수준"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "조사 대상 · 경쟁 업체 로봇들이 입찰 직전에 같은 대사를 외우는 업체"
+    Name: "독립적으로 입찰했다는 증거 신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "조사 대상 · 거래 내역을 보여달라면 별자리 지도를 펼치는 업체"
+    Name: "다른 업체와 견적서가 겹친 비율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 서로 다른 견적서가 같은 오타로 인사를 건네는 업체"
+    Name: "입찰 전 가격 조율 의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 하도급 관계도를 그리면 끝없이 원만 생기는 업체"
+    Name: "하도급 내역 확인 가능률"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 다른 회사 대표 홀로그램이 같은 기침을 하는 업체"
+    Name: "대표자 정보 확인 신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "조사 대상 · 납품 수량을 물으면 로봇이 갑자기 시를 낭독하는 업체"
+    Name: "납품 수량 불일치율"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 입찰가를 정하기 전에 경쟁사 단체 채팅방부터 여는 업체"
+    Name: "입찰가격 산정 근거 공개율"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "조사 대상 · 결제 경로가 너무 길어 배송 로봇도 길을 잃은 업체"
+    Name: "대금 지급 기록 누락률"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
