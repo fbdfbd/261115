@@ -13,7 +13,9 @@ namespace WorkGame
         public string CategoryShortName { get; }
         public string Target { get; }
         public string Title { get; }
+        public string Agency { get; }
         public string Metric { get; }
+        public IReadOnlyList<string> HighlightWords { get; }
         public string Unit { get; }
         public PickRule Rule { get; }
         public PaperDisplay Display { get; }
@@ -21,11 +23,12 @@ namespace WorkGame
         public IReadOnlyList<WorkChoice> Choices { get; }
         public PaperState State { get; private set; }
         public int PickedIndex { get; private set; } = -1;
+        public bool IsInFax { get; internal set; }
 
         public WorkPaper(int id, int month, string categoryId, string categoryName,
             string target, string metric, string unit, PickRule rule,
             PaperDisplay display, IEnumerable<WorkChoice> choices, string categoryShortName = null, int displayMax = 0,
-            string title = null)
+            string title = null, IEnumerable<string> highlightWords = null, string agency = null)
         {
             var copy = choices?.ToArray() ?? throw new ArgumentNullException(nameof(choices));
             if (copy.Length < 2 || copy.Any(x => x == null))
@@ -43,7 +46,9 @@ namespace WorkGame
             CategoryShortName = string.IsNullOrWhiteSpace(categoryShortName) ? categoryName : categoryShortName;
             Target = target;
             Title = title;
+            Agency = agency;
             Metric = metric;
+            HighlightWords = Array.AsReadOnly((highlightWords ?? Array.Empty<string>()).ToArray());
             Unit = unit;
             Rule = rule;
             Display = display;
@@ -64,7 +69,7 @@ namespace WorkGame
         internal WorkPaper Copy()
         {
             return new WorkPaper(Id, Month, CategoryId, CategoryName, Target, Metric, Unit, Rule, Display, Choices,
-                CategoryShortName, DisplayMax, Title);
+                CategoryShortName, DisplayMax, Title, HighlightWords, Agency);
         }
 
         public string GetChoiceText(int index)

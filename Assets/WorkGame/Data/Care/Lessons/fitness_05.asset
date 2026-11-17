@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: fitness_05
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: fitness_05
+  Name: "왕복 달리기 실전반"
+  ShortName: "왕복 달리기"
+  Description: "신호음에 맞춰 정해진 거리를 왕복합니다. 나르미가 싸 준 도토리는 훈련 종료 후 지급이라 달이의 목표가 명확합니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 6
+  Cost: 260
+  Gains:
+  - Stat: 8
+    Amount: 12
+  - Stat: 7
+    Amount: 4
+  ResultLine: "왕복 달리기를 했어요. 결승선 너머 간식이 큰 힘이 됐어요."
+  ResultImage: {fileID: 0}

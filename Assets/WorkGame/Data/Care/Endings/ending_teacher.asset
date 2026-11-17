@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_teacher
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_teacher
+  Name: "체육교사"
+  Priority: 250
+  Needs:
+  - Stat: 8
+    Amount: 60
+  - Stat: 15
+    Amount: 60
+  MainNeeds:
+  - Stat: 1
+    Grade: 2
+  - Stat: 3
+    Grade: 2
+  Text: "달이는 잘 뛰는 아이도 천천히 뛰는 아이도 함께 보는 체육교사가 됐습니다. 작은 통나무 코스에서 시작한 경험이 다양한 수업으로 이어졌습니다. 운동장에서는 앞발로 호루라기를 들고, 결승선에서는 마지막 아이와 나란히 달립니다."
+  LowText: "나르미는 공개 수업에서 달이의 다른 표정을 처음 봤습니다. 끝나고 좋았다고 말하자 달이는 고맙다는 답을 조금 늦게 했습니다."
+  NormalText: "달이는 나르미에게도 가벼운 운동을 권합니다. 두 사람은 운동량을 두고 협상하다가 결국 산책과 간식으로 합의합니다."
+  HighText: "달이가 학생들에게 자신을 기다려 준 어른 이야기를 하자 나르미는 조용히 웃었습니다. 돌아오는 길에는 달이가 먼저 나르미의 느린 걸음에 맞춰 꼬리를 흔들며 나란히 걸었습니다."

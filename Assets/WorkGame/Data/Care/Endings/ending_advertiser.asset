@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_advertiser
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_advertiser
+  Name: "광고 기획자"
+  Priority: 250
+  Needs:
+  - Stat: 10
+    Amount: 60
+  - Stat: 13
+    Amount: 60
+  MainNeeds:
+  - Stat: 2
+    Grade: 2
+  - Stat: 3
+    Grade: 2
+  Text: "달이는 친숙한 이야기를 기억에 남게 만드는 광고 기획자가 됐습니다. 자기소개를 1분에 맞추던 솜씨로 긴 제품 설명도 짧게 바꿉니다. 첫 인기 광고는 도토리 나누기였고, 동료들은 설명보다 달이의 앞발 연기를 더 오래 기억했습니다."
+  LowText: "나르미는 광고 속 화해 장면을 보고 혹시 자기 이야기냐고 물었습니다. 달이는 아직 결말을 못 정했다며 차를 마시자고 했고, 다음 광고에서는 둘이 먹던 과자가 화면에 나왔습니다."
+  NormalText: "나르미는 새 광고를 볼 때마다 제일 솔직한 의견을 보냅니다. 달이는 칭찬만 부탁했다가 결국 수정 회의에 그 말을 들고 갑니다."
+  HighText: "달이는 중요한 광고를 나르미에게 먼저 보여 줍니다. 나르미가 제품보다 출연자의 얇은 옷을 걱정하자 다음 회의 자료에 추워 보인다는 아주 구체적인 의견이 추가됐습니다."

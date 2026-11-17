@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06482c79cd24bef46ba0913cf361a206, type: 3}
+  m_Name: time_2
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
+  Id: time_2
+  Name: "\uBE60\uB978 \uC190 II"
+  Description: "\uC815\uC2DC \uADFC\uBB34\uC2DC\uAC04 +10\uCD08 \uCD94\uAC00"
+  Icon: {fileID: 0}
+  Cost: 600
+  Required:
+  - {fileID: 11400000, guid: d4b9623fb7390714ebc6c6e634cb2dc3, type: 2}
+  Effects:
+  - Kind: 11
+    Value: 10

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0058837f5bc59f04c9c9be41451ca7f9, type: 3}
+  m_Name: gift_wheel
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareGiftSO
+  Id: gift_wheel
+  Name: "나무 쳇바퀴"
+  Description: "방 한쪽에 놓는 조용한 쳇바퀴입니다. 달이는 산책 숙제도 여기서 인정되는지 진지하게 물어봅니다."
+  Icon: {fileID: 0}
+  Cost: 250
+  Kind: 1
+  Friendship: 5
+  Bonuses:
+  - Stat: 1
+    Percent: 10

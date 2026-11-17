@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: knowledge_04
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: knowledge_04
+  Name: "숲속 관찰일지 심화반"
+  ShortName: "관찰일지"
+  Description: "잎과 씨앗을 관찰하고 차이를 기록합니다. 나르미는 산책 가방을 챙겼는데 달이는 보고서용 돋보기를 넣었습니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 3
+  Cost: 180
+  Gains:
+  - Stat: 5
+    Amount: 9
+  - Stat: 6
+    Amount: 3
+  ResultLine: "공원 관찰일지를 썼어요. 나무마다 간식 장소도 표시했어요."
+  ResultImage: {fileID: 0}

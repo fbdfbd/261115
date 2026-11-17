@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: fitness_08
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: fitness_08
+  Name: "셔틀런 기록 단축 특강"
+  ShortName: "셔틀런"
+  Description: "왕복 달리기의 호흡과 속도를 세밀하게 조절합니다. 나르미는 기록표를 모으고 달이는 완주 도장을 모읍니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 9
+  Cost: 340
+  Gains:
+  - Stat: 8
+    Amount: 15
+  - Stat: 9
+    Amount: 5
+  ResultLine: "셔틀런 기록을 올렸어요. 삑 소리가 꿈에서도 들릴 것 같아요."
+  ResultImage: {fileID: 0}

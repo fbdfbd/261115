@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd29206dbc603f4a958021d345842cd, type: 3}
+  m_Name: WorkUpgradeTree
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeTreeSO
+  Nodes:
+  - {fileID: 11400000, guid: 0ebd2073aca56a648b03515d0ee401cc, type: 2}
+  - {fileID: 11400000, guid: c2cc0b501e4a65641bc1bc2af723868a, type: 2}
+  - {fileID: 11400000, guid: 0d19642a051a9de4195d13636bfccfad, type: 2}
+  - {fileID: 11400000, guid: 139eb5f79cd359d408deff5e6b98506c, type: 2}
+  - {fileID: 11400000, guid: 19e5b579f3840e840b8278b104547623, type: 2}
+  - {fileID: 11400000, guid: 6ce729aed0d2c9342924127673355736, type: 2}
+  - {fileID: 11400000, guid: e6846926338b2514395f3377c2c2bb66, type: 2}
+  - {fileID: 11400000, guid: 898816dafd964784081a1061f9e1d721, type: 2}
+  - {fileID: 11400000, guid: 661cb02cb3ef16c4db114f9e0e47fec6, type: 2}
+  - {fileID: 11400000, guid: c6898665fb660c24b8eddd65bd325a2a, type: 2}
+  - {fileID: 11400000, guid: aaba933ec30f97248affd9bd5d9fa9c5, type: 2}
+  - {fileID: 11400000, guid: cabfb4cb6c3e086448bc7b87a5f61ba4, type: 2}
+  - {fileID: 11400000, guid: beeb12b11a59da84e9fdc4ee8722009f, type: 2}
+  - {fileID: 11400000, guid: 75f4757c0d7159c4da50444267980e6d, type: 2}
+  - {fileID: 11400000, guid: f6e9ceaea2fe25a4fa8fc0bb74524bd3, type: 2}
+  - {fileID: 11400000, guid: e64b4dffc2f422941be88f452aafddba, type: 2}
+  - {fileID: 11400000, guid: a5d7f49424b9ccc4189a65b690b15df5, type: 2}
+  - {fileID: 11400000, guid: 8bb86e3a639bbf3459fb4044013e4912, type: 2}
+  - {fileID: 11400000, guid: a87546c639879f3458ade5b3a51b6201, type: 2}
+  - {fileID: 11400000, guid: 3fed49c0fab4c844098b7f2f63bf891b, type: 2}
+  - {fileID: 11400000, guid: 03cc251470b3f804c8ed08057241cb3b, type: 2}
+  - {fileID: 11400000, guid: 32ae2583d3fed1c489cb7e47df9dfde1, type: 2}
+  - {fileID: 11400000, guid: b61cc32538a89bc43a5a536f9434d1ff, type: 2}
+  - {fileID: 11400000, guid: d4b9623fb7390714ebc6c6e634cb2dc3, type: 2}
+  - {fileID: 11400000, guid: f1a35bfde211fc248b318418211fd192, type: 2}
+  - {fileID: 11400000, guid: dbb10f67921efcf4ca897db4a5579223, type: 2}
+  - {fileID: 11400000, guid: 9a751dc84505b984bb90093f452cc1f3, type: 2}
+  - {fileID: 11400000, guid: f3d0040346a36364a94768f92d4a027f, type: 2}
+  FaxSeconds: 5

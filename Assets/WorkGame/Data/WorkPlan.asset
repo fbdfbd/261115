@@ -12,397 +12,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94de6f3846c64c4fa3ad0a0d8944144, type: 3}
   m_Name: WorkPlan
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkPlanSO
+  RandomizeCategories: 1
   Batches:
   - Month: 1
     Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 4
-  - Month: 1
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 4
-  - Month: 2
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
+    Count: 8
   - Month: 2
     Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 2
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 2
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 3
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 3
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
+    Count: 8
   - Month: 3
     Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 3
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 3
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 3
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 4
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 4
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 4
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
+    Count: 12
   - Month: 4
     Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
+    Count: 8
   - Month: 4
     Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 4
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 4
-    Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
-  - Month: 4
-    Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
+    Count: 8
   - Month: 5
     Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
+    Count: 10
   - Month: 5
     Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
-  - Month: 5
-    Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
+    Count: 10
   - Month: 6
     Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
+    Count: 12
   - Month: 6
     Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 619dcc3eae4ee51409534485d64c6877, type: 2}
-    Count: 2
-  - Month: 6
-    Category: {fileID: 11400000, guid: 8d32dd065a5907f4d9336acba1a60e36, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
+    Count: 12
   - Month: 7
     Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
+    Count: 10
   - Month: 7
     Category: {fileID: 11400000, guid: 619dcc3eae4ee51409534485d64c6877, type: 2}
-    Count: 2
+    Count: 9
   - Month: 7
     Category: {fileID: 11400000, guid: 8d32dd065a5907f4d9336acba1a60e36, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: aa122e23b099a4d498cc6b28d3032e6b, type: 2}
-    Count: 2
-  - Month: 7
-    Category: {fileID: 11400000, guid: 70ba6d8d81363a04f8183998e4a997a1, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 619dcc3eae4ee51409534485d64c6877, type: 2}
-    Count: 2
-  - Month: 8
-    Category: {fileID: 11400000, guid: 8d32dd065a5907f4d9336acba1a60e36, type: 2}
-    Count: 2
+    Count: 9
   - Month: 8
     Category: {fileID: 11400000, guid: aa122e23b099a4d498cc6b28d3032e6b, type: 2}
-    Count: 2
+    Count: 10
   - Month: 8
     Category: {fileID: 11400000, guid: 70ba6d8d81363a04f8183998e4a997a1, type: 2}
-    Count: 2
+    Count: 10
   - Month: 8
     Category: {fileID: 11400000, guid: ef5105328dcad1f48942431bb171c603, type: 2}
-    Count: 2
+    Count: 10
   - Month: 9
     Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
+    Count: 10
   - Month: 9
     Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
+    Count: 10
   - Month: 9
     Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 619dcc3eae4ee51409534485d64c6877, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 8d32dd065a5907f4d9336acba1a60e36, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: aa122e23b099a4d498cc6b28d3032e6b, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: 70ba6d8d81363a04f8183998e4a997a1, type: 2}
-    Count: 2
-  - Month: 9
-    Category: {fileID: 11400000, guid: ef5105328dcad1f48942431bb171c603, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
+    Count: 10
   - Month: 10
     Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
+    Count: 10
   - Month: 10
     Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
+    Count: 10
   - Month: 10
     Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 619dcc3eae4ee51409534485d64c6877, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 8d32dd065a5907f4d9336acba1a60e36, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: aa122e23b099a4d498cc6b28d3032e6b, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: 70ba6d8d81363a04f8183998e4a997a1, type: 2}
-    Count: 2
-  - Month: 10
-    Category: {fileID: 11400000, guid: ef5105328dcad1f48942431bb171c603, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
+    Count: 10
   - Month: 11
     Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
+    Count: 10
   - Month: 11
     Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
+    Count: 10
   - Month: 11
     Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 619dcc3eae4ee51409534485d64c6877, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 8d32dd065a5907f4d9336acba1a60e36, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: aa122e23b099a4d498cc6b28d3032e6b, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: 70ba6d8d81363a04f8183998e4a997a1, type: 2}
-    Count: 2
-  - Month: 11
-    Category: {fileID: 11400000, guid: ef5105328dcad1f48942431bb171c603, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: ce9e002e95072d64bb85d30f215e5a77, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: 50b3ebfcfe749734a950222dfed86414, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: 45ac4a306d4d87948a6961183239fe02, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: 45f95d34acf716e4ab0fbd78430a7829, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: 5bc22f064eba64d4396af7afda290566, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: f80a9d50c21ae2a40907fcc25f2593b1, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: 9fa2a06c89641e04fb629a5bed46be07, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: f194873039f949d4b957fa0c28cdd337, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: 5196c1e404da62e41af7386365f040dc, type: 2}
-    Count: 2
+    Count: 10
   - Month: 12
     Category: {fileID: 11400000, guid: 81eaa9633557e4f4ca5a058a737dda00, type: 2}
-    Count: 2
+    Count: 10
   - Month: 12
     Category: {fileID: 11400000, guid: 619dcc3eae4ee51409534485d64c6877, type: 2}
-    Count: 2
+    Count: 10
   - Month: 12
     Category: {fileID: 11400000, guid: 8d32dd065a5907f4d9336acba1a60e36, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: aa122e23b099a4d498cc6b28d3032e6b, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: 70ba6d8d81363a04f8183998e4a997a1, type: 2}
-    Count: 2
-  - Month: 12
-    Category: {fileID: 11400000, guid: ef5105328dcad1f48942431bb171c603, type: 2}
-    Count: 2
+    Count: 10

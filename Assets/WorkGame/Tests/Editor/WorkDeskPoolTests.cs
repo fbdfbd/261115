@@ -27,6 +27,7 @@ namespace WorkGame.Tests
             second = MakePaper("Second");
             SetField(desk, "looseRoot", area);
             SetField(desk, "paperViews", new List<WorkPaperItemView> { first, second });
+            SetField(desk, "maxPapers", 2);
             var papers = new List<WorkPaper>();
             for (int i = 1; i <= 4; i++)
                 papers.Add(new WorkPaper(i, 1, "01", "Test", "제품", "점수", "", PickRule.Highest, PaperDisplay.Number,
@@ -41,6 +42,43 @@ namespace WorkGame.Tests
         {
             system.Dispose();
             Object.DestroyImmediate(root);
+        }
+
+        [Test]
+        public void SortedDeskExpandsPoolToShowNinetyPapersAndReusesIt()
+        {
+            SetField(desk, "sortedRoot", area);
+            SetField(desk, "maxPapers", 90);
+            desk.SetModes(false, true);
+            var papers = new List<WorkPaper>();
+            for (int i = 1; i <= 90; i++)
+                papers.Add(new WorkPaper(i, 1, (i % 3).ToString(), "Test", "Target", "Metric", "",
+                    PickRule.Highest, PaperDisplay.Number,
+                    new[] { new WorkChoice("A", 1), new WorkChoice("B", 2), new WorkChoice("C", 3) }));
+
+            desk.ShowPapers(papers, 1);
+            Assert.That(desk.PoolCount, Is.EqualTo(90));
+            Assert.That(desk.MaxVisible, Is.EqualTo(90));
+            var views = area.GetComponentsInChildren<WorkPaperItemView>();
+            Assert.That(views.Length, Is.EqualTo(90));
+            Assert.That(new HashSet<int>(System.Array.ConvertAll(views, x => x.PaperId)).Count, Is.EqualTo(90));
+            desk.ClearPapers();
+            desk.ShowPapers(papers, 2);
+            Assert.That(desk.PoolCount, Is.EqualTo(90));
+            Assert.That(area.childCount, Is.EqualTo(90));
+        }
+
+        [Test]
+        public void SortedDeskRefillsBeyondVisibleLimit()
+        {
+            SetField(desk, "sortedRoot", area);
+            desk.SetModes(false, true);
+            desk.ShowPapers(system.MonthPapers, 1);
+            Assert.That(first.PaperId, Is.EqualTo(1));
+            SubmitFirst();
+            desk.ShowPapers(system.MonthPapers, 1);
+            Assert.That(first.PaperId, Is.EqualTo(3));
+            Assert.That(second.PaperId, Is.EqualTo(2));
         }
 
         [Test]

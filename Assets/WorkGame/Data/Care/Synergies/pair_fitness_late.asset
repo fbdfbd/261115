@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: pair_fitness_late
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: pair_fitness_late
+  Name: "실기장에서 침착한 착지"
+  Description: "도약의 힘과 달리기의 체력을 묶어 실기 동작을 마칩니다. 마지막 균형은 꼬리까지 함께 잡습니다."
+  Lessons:
+  - {fileID: 11400000, guid: f02b582a2840515698a770936f04c3ec, type: 2}
+  - {fileID: 11400000, guid: 89c791500fb45741a66b13d5ceed356e, type: 2}
+  Gains:
+  - Stat: 9
+    Amount: 18

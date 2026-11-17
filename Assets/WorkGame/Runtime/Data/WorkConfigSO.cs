@@ -17,7 +17,7 @@ namespace WorkGame
         {
             var errors = GetErrors();
             if (errors.Count > 0) throw new InvalidOperationException(string.Join("\n", errors));
-            return new WorkSystem(Settings, WorkPaperFactory.Create(Plan, ChoiceCount, seed));
+            return new WorkSystem(Settings, WorkPaperFactory.Create(Plan, ChoiceCount, seed), unchecked(seed + 3571));
         }
     }
 }

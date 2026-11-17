@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: fitness_01
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: fitness_01
+  Name: "앞발 악력 입문반"
+  ShortName: "앞발 악력"
+  Description: "말랑한 공을 쥐며 앞발 힘을 기릅니다. 손이 작아도 할 수 있다는 설명에 나르미가 체대 진학 안내까지 챙겨 왔습니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 1
+  Cost: 100
+  Gains:
+  - Stat: 7
+    Amount: 6
+  - Stat: 8
+    Amount: 2
+  ResultLine: "앞발 악력을 길렀어요. 이제 과자 봉지는 혼자 열 수 있어요."
+  ResultImage: {fileID: 0}

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0058837f5bc59f04c9c9be41451ca7f9, type: 3}
+  m_Name: gift_artdesk
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareGiftSO
+  Id: gift_artdesk
+  Name: "달이의 창작 작업대"
+  Description: "그림 도구와 이야기책을 함께 놓는 작은 작업대입니다. 작품 보관함에는 나르미가 버리지 못한 첫 낙서도 들어갑니다."
+  Icon: {fileID: 0}
+  Cost: 600
+  Kind: 0
+  Friendship: 6
+  Bonuses:
+  - Stat: 2
+    Percent: 15
+  - Stat: 10
+    Percent: 10
+  - Stat: 12
+    Percent: 10

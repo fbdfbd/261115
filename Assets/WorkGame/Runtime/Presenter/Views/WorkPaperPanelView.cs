@@ -25,6 +25,10 @@ namespace WorkGame
         private bool layoutDirty;
         private Tween bumpTween;
         private Vector3 restPosition;
+        private WorkPaper shownPaper;
+        private int assistLevel;
+        private bool hintShown;
+        private double openedAt;
 
         public event Action<int> HoldStarted;
         public event Action HoldStopped;
@@ -55,13 +59,17 @@ namespace WorkGame
         private void OnApplicationFocus(bool focused) { if (!focused) ClearHold(); }
         private void OnApplicationPause(bool paused) { if (paused) ClearHold(); }
 
-        public void Show(WorkPaper paper)
+        public void Show(WorkPaper paper, int highlightLevel = 0, double workSeconds = 0)
         {
+            shownPaper = paper;
+            assistLevel = highlightLevel;
+            hintShown = false;
+            openedAt = workSeconds;
             if (titleText != null) titleText.text = paper.CategoryName;
             if (numberText != null) numberText.text = "문서번호  " + WorkPaperText.GetNumber(paper);
             if (monthText != null) monthText.text = "시행  " + paper.Month + "달";
             if (ruleText != null) ruleText.gameObject.SetActive(false);
-            if (graphView != null) graphView.Show(paper);
+            if (graphView != null) graphView.Show(paper, highlightLevel > 0);
             for (int i = 0; i < choices.Count; i++)
             {
                 var choice = choices[i];
@@ -74,6 +82,24 @@ namespace WorkGame
                 Debug.LogError("서류 선택지보다 연결한 선택 버튼이 적습니다.", this);
             ShowHold(-1, 0, true);
             layoutDirty = true;
+            ShowAssist(highlightLevel, workSeconds);
+        }
+
+        public void ShowAssist(int level, double workSeconds)
+        {
+            if (shownPaper == null) return;
+            if (assistLevel != level)
+            {
+                assistLevel = level;
+                graphView?.Show(shownPaper, level > 0);
+                foreach (var choice in choices) if (choice != null) choice.SetHint(false);
+                hintShown = false;
+                layoutDirty = true;
+            }
+            if (level < 2 || hintShown || (level == 2 && workSeconds - openedAt < 1)) return;
+            int right = WorkRules.GetRightIndex(shownPaper);
+            if (right < choices.Count && choices[right] != null) choices[right].SetHint(true);
+            hintShown = true;
         }
 
         public void ShowHold(int index, float progress, bool allowInput)
@@ -83,6 +109,7 @@ namespace WorkGame
             {
                 if (choices[i] == null) continue;
                 choices[i].SetInput(allowInput);
+                choices[i].SetHintPaused(!allowInput);
                 choices[i].SetProgress(i == index ? progress : 0);
             }
         }

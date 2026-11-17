@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: fitness_06
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: fitness_06
+  Name: "장애물 코스 실전반"
+  ShortName: "장애물 코스"
+  Description: "허들과 회전 코스를 연달아 통과합니다. 꼬리까지 결승선을 넘어야 기록이 끝나므로 마지막까지 방심할 수 없습니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 6
+  Cost: 260
+  Gains:
+  - Stat: 9
+    Amount: 12
+  - Stat: 8
+    Amount: 4
+  ResultLine: "장애물 코스를 완주했어요. 꼬리는 건드리면 반칙이래요."
+  ResultImage: {fileID: 0}

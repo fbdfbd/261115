@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: mix_fitness_social
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: mix_fitness_social
+  Name: "큰 간식 접시는 같이 들기"
+  Description: "튼튼한 앞발로 접시를 들고 친구들과 나눌 순서를 정합니다. 힘이 센 친구가 더 먹는 규칙은 만들지 않았습니다."
+  Lessons:
+  - {fileID: 11400000, guid: 58a3fbf7c258571abcd717d4b0fc1029, type: 2}
+  - {fileID: 11400000, guid: fa658dbcc3db5532b5b3d1ea8ff87fd8, type: 2}
+  Gains:
+  - Stat: 15
+    Amount: 8

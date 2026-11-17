@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +13,12 @@ namespace WorkGame
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private Image fill;
+        [Header("정답 강조 — 비우면 버튼 배경 사용")]
+        [SerializeField] private Image hintImage;
+        [SerializeField] private Color hintColor = new Color(1f, 0.85f, 0.25f);
+        [SerializeField, Min(0.05f)] private float hintSeconds = 0.45f;
+        private Tween hintTween;
+        private Color hintRestColor;
         private int index;
         private bool holding;
 
@@ -21,6 +28,7 @@ namespace WorkGame
         public void Show(int choiceIndex, string name)
         {
             CancelHold();
+            SetHint(false);
             index = choiceIndex;
             if (button == null) button = GetComponent<Button>();
             if (nameText != null) nameText.text = name;
@@ -61,7 +69,31 @@ namespace WorkGame
         }
 
         public void OnPointerExit(PointerEventData data) => CancelHold();
-        private void OnDisable() => CancelHold();
+        private void OnDisable() { CancelHold(); SetHint(false); }
+
+        public void SetHint(bool visible)
+        {
+            if (!visible)
+            {
+                if (hintTween == null) return;
+                hintTween.Kill();
+                hintTween = null;
+                if (hintImage != null) hintImage.color = hintRestColor;
+                return;
+            }
+            if (hintTween != null) return;
+            if (hintImage == null) hintImage = GetComponent<Image>();
+            if (hintImage == null) return;
+            hintRestColor = hintImage.color;
+            hintTween = DOTween.To(() => hintImage.color, color => hintImage.color = color, hintColor,
+                Mathf.Max(0.05f, hintSeconds)).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
+        }
+
+        public void SetHintPaused(bool paused)
+        {
+            if (paused) hintTween?.Pause();
+            else hintTween?.Play();
+        }
 
         public void CancelHold()
         {

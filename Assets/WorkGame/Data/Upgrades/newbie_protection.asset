@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06482c79cd24bef46ba0913cf361a206, type: 3}
+  m_Name: newbie_protection
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
+  Id: newbie_protection
+  Name: "\uC2E0\uC785 \uBCF4\uD638"
+  Description: "모든 오답의 숙련·근태 감점이 50% 감소합니다. 소수점은 버리며 오답 기록과 평가는 유지됩니다."
+  Icon: {fileID: 0}
+  Cost: 300
+  Required: []
+  Effects:
+  - Kind: 12
+    Value: 50

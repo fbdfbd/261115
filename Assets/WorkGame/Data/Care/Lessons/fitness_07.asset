@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: fitness_07
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: fitness_07
+  Name: "체대 실기 도약 특강"
+  ShortName: "실기 도약"
+  Description: "앞발로 버티고 뒷발로 뛰는 도약 동작을 다듬습니다. 작은 몸집을 장점으로 쓰되 측정선은 모두에게 같습니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 9
+  Cost: 340
+  Gains:
+  - Stat: 7
+    Amount: 15
+  - Stat: 9
+    Amount: 5
+  ResultLine: "실기 도약을 연습했어요. 작은 앞발로 꽤 멀리 갔어요."
+  ResultImage: {fileID: 0}

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: knowledge_07
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: knowledge_07
+  Name: "수리논술 오답 특강"
+  ShortName: "수리논술"
+  Description: "낯선 문제의 풀이 과정을 끝까지 설명합니다. 유명 강사보다 달이의 볼주머니가 작지만 오답노트 두께는 만만하지 않습니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 9
+  Cost: 340
+  Gains:
+  - Stat: 4
+    Amount: 15
+  - Stat: 6
+    Amount: 5
+  ResultLine: "수리논술 답안을 썼어요. 정답보다 풀이가 더 길어졌어요."
+  ResultImage: {fileID: 0}

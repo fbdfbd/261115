@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_astronaut
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_astronaut
+  Name: "우주비행사"
+  Priority: 200
+  Needs:
+  - Stat: 8
+    Amount: 90
+  MainNeeds:
+  - Stat: 1
+    Grade: 2
+  Text: "달이는 긴 훈련을 마치고 우주비행사가 됐습니다. 작은 몸을 지탱하던 지구력은 낯선 환경에서도 힘이 됐습니다. 무중력에서 꼬리가 자꾸 떠올라, 공식 임무 사진마다 조금씩 다른 방향을 보고 있습니다."
+  LowText: "지구로 돌아온 달이는 나르미에게 엽서 한 장을 보냈습니다. 안부는 짧았지만, 대기권 진입 때도 구겨지지 않게 따로 보관한 흔적이 있었습니다."
+  NormalText: "우주 통신 지연 탓에 둘의 말은 자꾸 겹칩니다. 나르미가 밥 먹었냐고 묻자 20분 뒤 먹었다는 답과 메뉴를 왜 안 물어보냐는 서운함이 차례대로 도착했습니다."
+  HighText: "달이는 우주에서 나르미에게 영상 편지를 보냈습니다. 거창한 첫 문장 뒤로 빨래를 널었는지 묻는 나르미의 예약 메시지가 도착해, 공식 중계가 잠시 웃음바다가 됐습니다."

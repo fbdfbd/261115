@@ -65,6 +65,51 @@ namespace WorkGame.Tests
         }
 
         [Test]
+        public void RandomMonthlyCategoriesRespectLimitsTotalsAndSeed()
+        {
+            var pool = new List<WorkCategorySO>();
+            try
+            {
+                plan.Batches.Clear();
+                plan.RandomizeCategories = true;
+                for (int i = 0; i < 15; i++)
+                {
+                    var item = ScriptableObject.CreateInstance<WorkCategorySO>();
+                    pool.Add(item);
+                    item.Id = i.ToString();
+                    item.Title = "Category " + i;
+                    item.Target = "Target";
+                    for (int j = 0; j < 45; j++)
+                        item.Metrics.Add(new WorkMetric { Name = "Metric " + j, Max = 100 });
+                    plan.Batches.Add(new WorkBatch { Month = 1, Category = item, Count = 0 });
+                }
+                for (int month = 1; month <= 12; month++)
+                    plan.Batches.Add(new WorkBatch { Month = month, Category = pool[0], Count = 30 });
+
+                var first = WorkPaperFactory.Create(plan, 3, 123);
+                var same = WorkPaperFactory.Create(plan, 3, 123);
+                var different = WorkPaperFactory.Create(plan, 3, 456);
+                Assert.That(first.Select(x => (x.Month, x.CategoryId, x.Metric)),
+                    Is.EqualTo(same.Select(x => (x.Month, x.CategoryId, x.Metric))));
+                Assert.That(first.Select(x => x.CategoryId), Is.Not.EqualTo(different.Select(x => x.CategoryId)));
+                foreach (var month in first.GroupBy(x => x.Month))
+                {
+                    Assert.That(month.Count(), Is.EqualTo(30));
+                    Assert.That(month.Select(x => x.CategoryId).Distinct().Count(),
+                        Is.EqualTo(month.Key <= 3 ? 1 : month.Key <= 6 ? 2 : 3));
+                    foreach (var group in month.GroupBy(x => x.CategoryId))
+                        Assert.That(group.Select(x => x.Metric).Distinct().Count(), Is.EqualTo(group.Count()));
+                }
+                Assert.That(pool.All(x => x.Metrics.Count == 45), Is.True);
+                Assert.That(plan.Batches.Count, Is.EqualTo(27));
+            }
+            finally
+            {
+                foreach (var item in pool) UnityEngine.Object.DestroyImmediate(item);
+            }
+        }
+
+        [Test]
         public void InvalidDataIsReportedBeforeRunStarts()
         {
             category.Metrics[0].Max = 2;

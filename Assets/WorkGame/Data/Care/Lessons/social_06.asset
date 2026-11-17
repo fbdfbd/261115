@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: social_06
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: social_06
+  Name: "모둠 토론 실전반"
+  ShortName: "모둠 토론"
+  Description: "서로 다른 의견을 정리하고 공동 결론을 냅니다. 도토리 전량 간식화를 주장하던 달이도 비축 의견을 듣기 시작합니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 6
+  Cost: 260
+  Gains:
+  - Stat: 15
+    Amount: 12
+  - Stat: 13
+    Amount: 4
+  ResultLine: "모둠 토론을 했어요. 앞발을 들고 차례를 기다릴 줄도 알아요."
+  ResultImage: {fileID: 0}

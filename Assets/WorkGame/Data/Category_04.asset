@@ -14,84 +14,553 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkCategorySO
   Id: 04
   Title: "\uD574\uC678\uC870\uB2EC\uC2DC\uC7A5 \uC9C4\uCD9C \uC9C0\uC6D0"
-  ShortName: "해외 진출"
+  ShortName: "\uD574\uC678 \uC9C4\uCD9C"
+  HudColor: {r: 1, g: 1, b: 1, a: 1}
   Target: "\uAE30\uC5C5"
   Metrics:
-  - Title: "해외 납품 검토 · 김치 냉장고의 자아를 현지 언어로 설명하는 기업"
-    Name: "현지 언어 설명 정확도"
-    Unit: "%"
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uAE40\uCE58 \uB0C9\uC7A5\uACE0\uC758
+      \uC790\uC544\uB97C \uD604\uC9C0 \uC5B8\uC5B4\uB85C \uC124\uBA85\uD558\uB294
+      \uAE30\uC5C5"
+    Agency: 
+    Name: "\uD604\uC9C0 \uC5B8\uC5B4 \uC124\uBA85 \uC815\uD655\uB3C4"
+    HighlightWords:
+    - "\uC815\uD655\uB3C4"
+    Unit: '%'
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "해외 납품 검토 · 번역기가 사장님을 최종 보스로 소개하는 기업"
-    Name: "해외시장 진출 장애도"
-    Unit: ""
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uBC88\uC5ED\uAE30\uAC00
+      \uC0AC\uC7A5\uB2D8\uC744 \uCD5C\uC885 \uBCF4\uC2A4\uB85C \uC18C\uAC1C\uD558\uB294
+      \uAE30\uC5C5"
+    Agency: 
+    Name: "\uD574\uC678\uC2DC\uC7A5 \uC9C4\uCD9C \uC7A5\uC560\uB3C4"
+    HighlightWords:
+    - "\uD574\uC678\uC2DC\uC7A5 \uC9C4\uCD9C \uC7A5\uC560\uB3C4"
+    Unit: 
     Rule: 1
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "해외 납품 검토 · 눈사람 제설 로봇에게 현지 인사말을 가르친 기업"
-    Name: "현지 인사말 오역률"
-    Unit: "%"
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uB208\uC0AC\uB78C \uC81C\uC124
+      \uB85C\uBD07\uC5D0\uAC8C \uD604\uC9C0 \uC778\uC0AC\uB9D0\uC744 \uAC00\uB974\uCE5C
+      \uAE30\uC5C5"
+    Agency: 
+    Name: "\uD604\uC9C0 \uC778\uC0AC\uB9D0 \uC624\uC5ED\uB960"
+    HighlightWords:
+    - "\uC624\uC5ED\uB960"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "해외 납품 검토 · 수출용 통역기가 모든 문장을 청혼으로 끝내는 기업"
-    Name: "통역 내용 전달 정확도"
-    Unit: "%"
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uC218\uCD9C\uC6A9 \uD1B5\uC5ED\uAE30\uAC00
+      \uBAA8\uB4E0 \uBB38\uC7A5\uC744 \uCCAD\uD63C\uC73C\uB85C \uB05D\uB0B4\uB294
+      \uAE30\uC5C5"
+    Agency: 
+    Name: "\uD1B5\uC5ED \uB0B4\uC6A9 \uC804\uB2EC \uC815\uD655\uB3C4"
+    HighlightWords:
+    - "\uC815\uD655\uB3C4"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "해외 납품 검토 · 사막용 가습기의 모래바람 시험을 끝낸 기업"
-    Name: "모래바람 내구성"
-    Unit: ""
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uC0AC\uB9C9\uC6A9 \uAC00\uC2B5\uAE30\uC758
+      \uBAA8\uB798\uBC14\uB78C \uC2DC\uD5D8\uC744 \uB05D\uB0B8 \uAE30\uC5C5"
+    Agency: 
+    Name: "\uBAA8\uB798\uBC14\uB78C \uB0B4\uAD6C\uC131"
+    HighlightWords:
+    - "\uBAA8\uB798\uBC14\uB78C \uB0B4\uAD6C\uC131"
+    Unit: 
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "해외 납품 검토 · 충전 단자가 현지 콘센트 앞에서 낯을 가리는 기업"
-    Name: "현지 전원 연결 실패율"
-    Unit: "%"
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uCDA9\uC804 \uB2E8\uC790\uAC00
+      \uD604\uC9C0 \uCF58\uC13C\uD2B8 \uC55E\uC5D0\uC11C \uB0AF\uC744 \uAC00\uB9AC\uB294
+      \uAE30\uC5C5"
+    Agency: 
+    Name: "\uD604\uC9C0 \uC804\uC6D0 \uC5F0\uACB0 \uC2E4\uD328\uC728"
+    HighlightWords:
+    - "\uC2E4\uD328\uC728"
+    Unit: '%'
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "해외 납품 검토 · 야간 배달 로봇의 자장가를 현지 취향으로 바꾼 기업"
-    Name: "자장가 현지 민원 발생률"
-    Unit: "%"
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uC57C\uAC04 \uBC30\uB2EC
+      \uB85C\uBD07\uC758 \uC790\uC7A5\uAC00\uB97C \uD604\uC9C0 \uCDE8\uD5A5\uC73C\uB85C
+      \uBC14\uAFBC \uAE30\uC5C5"
+    Agency: 
+    Name: "\uC790\uC7A5\uAC00 \uD604\uC9C0 \uBBFC\uC6D0 \uBC1C\uC0DD\uB960"
+    HighlightWords:
+    - "\uC790\uC7A5\uAC00 \uD604\uC9C0 \uBBFC\uC6D0 \uBC1C\uC0DD\uB960"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "해외 납품 검토 · 제품 설명서가 번역되면 갑자기 추리소설이 되는 기업"
-    Name: "설명서 번역 정확도"
-    Unit: "%"
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uC81C\uD488 \uC124\uBA85\uC11C\uAC00
+      \uBC88\uC5ED\uB418\uBA74 \uAC11\uC790\uAE30 \uCD94\uB9AC\uC18C\uC124\uC774
+      \uB418\uB294 \uAE30\uC5C5"
+    Agency: 
+    Name: "\uC124\uBA85\uC11C \uBC88\uC5ED \uC815\uD655\uB3C4"
+    HighlightWords:
+    - "\uC815\uD655\uB3C4"
+    Unit: '%'
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "해외 납품 검토 · 남극 납품 로봇의 펭귄 양보 교육을 마친 기업"
-    Name: "해외 납품 지연 일수"
-    Unit: "일"
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uB0A8\uADF9 \uB0A9\uD488
+      \uB85C\uBD07\uC758 \uD3AD\uADC4 \uC591\uBCF4 \uAD50\uC721\uC744 \uB9C8\uCE5C
+      \uAE30\uC5C5"
+    Agency: 
+    Name: "\uD574\uC678 \uB0A9\uD488 \uC9C0\uC5F0 \uC77C\uC218"
+    HighlightWords:
+    - "\uC9C0\uC5F0"
+    Unit: "\uC77C"
     Rule: 1
     Display: 0
     Min: 1
     Max: 30
     ScaleMax: 0
-  - Title: "해외 납품 검토 · 수리 로봇이 국경을 넘으면 공구 이름을 잊는 기업"
-    Name: "현지 수리 대응 준비도"
-    Unit: ""
+  - Title: "\uD574\uC678 \uB0A9\uD488 \uAC80\uD1A0 \xB7 \uC218\uB9AC \uB85C\uBD07\uC774
+      \uAD6D\uACBD\uC744 \uB118\uC73C\uBA74 \uACF5\uAD6C \uC774\uB984\uC744 \uC78A\uB294
+      \uAE30\uC5C5"
+    Agency: 
+    Name: "\uD604\uC9C0 \uC218\uB9AC \uB300\uC751 \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uD604\uC9C0 \uC218\uB9AC \uB300\uC751 \uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uAD50\uACFC\uC11C \uC694\uC815\uC744 \uD604\uC9C0\uC5B4\uB85C \uC18C\uAC1C\uD558\uB294
+      \uAE30\uC5C5"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
+    Name: "\uD604\uC9C0 \uC5B8\uC5B4 \uB300\uC751 \uC218\uC900"
+    HighlightWords:
+    - "\uD604\uC9C0 \uC5B8\uC5B4 \uB300\uC751 \uC218\uC900"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uC218\uD559 \uAD50\uAD6C\uAC00 \uB2F5\uC744 \uB85C\uB9C8\uC790\uB85C\uB9CC
+      \uC4F0\uB294 \uAE30\uC5C5"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
+    Name: "\uD604\uC9C0 \uD45C\uAE30 \uC624\uB958\uC728"
+    HighlightWords:
+    - "\uC624\uB958"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uC678\uAD6D \uAD50\uC2E4 \uCC9C\uC7A5 \uB192\uC774\uC5D0 \uB9DE\uCD98
+      \uAE30\uC5C5"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
+    Name: "\uAD50\uC2E4 \uADDC\uACA9 \uB300\uC751 \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uB3C4\uC11C\uAD00 \uC758\uC790\uAC00 \uD604\uC9C0 \uC778\uC0AC\uB97C
+      \uAC70\uC808\uD558\uB294 \uAE30\uC5C5"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
+    Name: "\uBB38\uD654 \uC801\uC751 \uC7A5\uC560\uB3C4"
+    HighlightWords:
+    - "\uBB38\uD654 \uC801\uC751 \uC7A5\uC560\uB3C4"
+    Unit: 
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uAE30\uC219\uC0AC \uB09C\uBC29\uAE30\uB97C \uD574\uC678 \uADDC\uACA9\uC73C\uB85C
+      \uB9CC\uB4E0 \uAE30\uC5C5"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
+    Name: "\uD574\uC678 \uC778\uC99D \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uC9C4\uB8CC \uC548\uB0B4\uD310\uC758 \uC678\uACC4\uC5B4 \uBC88\uC5ED\uC744
+      \uB9C8\uCE5C \uAE30\uC5C5"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
+    Name: "\uC758\uB8CC \uC548\uB0B4 \uC624\uC5ED\uB960"
+    HighlightWords:
+    - "\uC624\uC5ED"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uBCD1\uC6D0 \uCE68\uB300\uAC00 \uAD6D\uACBD\uC5D0\uC11C \uC7A0\uB4DC\uB294
+      \uAE30\uC5C5"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
+    Name: "\uD574\uC678 \uC6B4\uC1A1 \uC9C0\uC5F0 \uC77C\uC218"
+    HighlightWords:
+    - "\uC9C0\uC5F0"
+    Unit: "\uC77C"
+    Rule: 1
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "\uAD6D\uAC00\uBCC4 \uBCD1\uB3D9 \uADDC\uACA9\uC744 \uC775\uD78C \uAE30\uC5C5"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
+    Name: "\uD604\uC9C0 \uC2DC\uC124 \uD638\uD658\uC131"
+    HighlightWords:
+    - "\uD638\uD658\uC131"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uD604\uC9C0\uC5D0\uC11C \uCC3E\uC744 \uC218 \uC5C6\uB294 \uB098\uC0AC\uB97C
+      \uC4F0\uB294 \uAE30\uC5C5"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
+    Name: "\uC218\uB9AC \uBD80\uD488 \uC870\uB2EC \uB300\uAE30 \uC77C\uC218"
+    HighlightWords:
+    - "\uB300\uAE30"
+    Unit: "\uC77C"
+    Rule: 1
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "\uBCD1\uC6D0 \uAE09\uC2DD \uCE74\uD2B8\uC758 \uD574\uC678 \uC810\uAC80\uC744
+      \uB9C8\uCE5C \uAE30\uC5C5"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
+    Name: "\uD604\uC9C0 \uC810\uAC80 \uB300\uC751 \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uAD6C\uC870 \uBD80\uD45C\uC5D0 \uC5EC\uB7EC \uB098\uB77C \uC778\uC0AC\uB97C
+      \uB123\uC740 \uAE30\uC5C5"
+    Agency: "\uC18C\uBC29\uC11C"
+    Name: "\uD574\uC678 \uC0AC\uC6A9 \uC548\uB0B4 \uC644\uC131\uB3C4"
+    HighlightWords:
+    - "\uC644\uC131\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uC548\uC804 \uD45C\uC9C0\uAC00 \uBC88\uC5ED\uB418\uBA74 \uD658\uC601\uC0AC\uAC00
+      \uB418\uB294 \uAE30\uC5C5"
+    Agency: "\uC18C\uBC29\uC11C"
+    Name: "\uC548\uC804 \uBB38\uAD6C \uC624\uC5ED\uB960"
+    HighlightWords:
+    - "\uC624\uC5ED"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uD604\uC9C0 \uC0B0\uC545 \uC9C0\uD615\uC6A9 \uC370\uB9E4\uB97C \uB9CC\uB4E0
+      \uAE30\uC5C5"
+    Agency: "\uC18C\uBC29\uC11C"
+    Name: "\uD604\uC9C0 \uC9C0\uD615 \uB300\uC751 \uC131\uB2A5"
+    HighlightWords:
+    - "\uC131\uB2A5"
+    Unit: 
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uAD6C\uC870 \uC7A5\uAC11\uC774 \uD604\uC9C0 \uC190 \uBAA8\uC591\uC744
+      \uB0AF\uC124\uC5B4\uD558\uB294 \uAE30\uC5C5"
+    Agency: "\uC18C\uBC29\uC11C"
+    Name: "\uCC29\uC6A9 \uADDC\uACA9 \uBD88\uC77C\uCE58\uC728"
+    HighlightWords:
+    - "\uBD88\uC77C\uCE58"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uD574\uC678 \uC218\uB9AC\uC18C\uC5D0 \uAD6C\uC870 \uC7A5\uBE44\uB97C
+      \uBC30\uCE58\uD55C \uAE30\uC5C5"
+    Agency: "\uC18C\uBC29\uC11C"
+    Name: "\uD604\uC9C0 \uC720\uC9C0\uBCF4\uC218 \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uB2E4\uAD6D\uC5B4 \uAE38 \uC548\uB0B4 \uC870\uB07C\uB97C \uC218\uCD9C\uD558\uB824\uB294
+      \uAE30\uC5C5"
+    Agency: "\uACBD\uCC30\uC11C"
+    Name: "\uD574\uC678 \uC548\uB0B4 \uBBFC\uC6D0 \uBC1C\uC0DD\uB960"
+    HighlightWords:
+    - "\uD574\uC678 \uC548\uB0B4 \uBBFC\uC6D0 \uBC1C\uC0DD\uB960"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uAD50\uD1B5 \uD45C\uC9C0\uAC00 \uD574\uC678\uC5D0\uC11C \uBC18\uB300\uB85C
+      \uCF1C\uC9C0\uB294 \uAE30\uC5C5"
+    Agency: "\uACBD\uCC30\uC11C"
+    Name: "\uD604\uC9C0 \uADDC\uCE59 \uC801\uC6A9 \uC624\uB958\uC728"
+    HighlightWords:
+    - "\uC624\uB958"
+    Unit: '%'
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uD604\uC9C0 \uACBD\uCC30 \uBB34\uC804\uC5D0 \uB9DE\uCD98 \uC911\uACC4\uAE30\uB97C
+      \uB9CC\uB4E0 \uAE30\uC5C5"
+    Agency: "\uACBD\uCC30\uC11C"
+    Name: "\uD1B5\uC2E0 \uADDC\uACA9 \uD638\uD658\uC131"
+    HighlightWords:
+    - "\uD638\uD658\uC131"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uBD84\uC2E4\uBB3C \uC0C1\uC790\uAC00 \uD604\uC9C0 \uC8FC\uC18C\uB97C
+      \uBABB \uC77D\uB294 \uAE30\uC5C5"
+    Agency: "\uACBD\uCC30\uC11C"
+    Name: "\uD574\uC678 \uC8FC\uC18C \uC778\uC2DD \uC624\uB958\uC728"
+    HighlightWords:
+    - "\uC624\uB958"
+    Unit: '%'
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uACBD\uCC30 \uC790\uC804\uAC70\uC758 \uD574\uC678 \uBD80\uD488\uB9DD\uC744
+      \uAC16\uCD98 \uAE30\uC5C5"
+    Agency: "\uACBD\uCC30\uC11C"
+    Name: "\uD604\uC9C0 \uBD80\uD488 \uACF5\uAE09 \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uADF9\uC9C0\uC6A9 \uCDE8\uC0AC \uC1A5\uC758 \uD574\uC678 \uC2DC\uD5D8\uC744
+      \uB9C8\uCE5C \uAE30\uC5C5"
+    Agency: "\uAD70\uBD80\uB300"
+    Name: "\uD604\uC9C0 \uAE30\uD6C4 \uB300\uC751 \uC131\uB2A5"
+    HighlightWords:
+    - "\uC131\uB2A5"
+    Unit: 
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uCE68\uB0AD \uC124\uBA85\uC11C\uAC00 \uD604\uC9C0\uC5D0\uC11C \uC2DC\uC9D1\uC774
+      \uB418\uB294 \uAE30\uC5C5"
+    Agency: "\uAD70\uBD80\uB300"
+    Name: "\uC0AC\uC6A9\uBC95 \uBC88\uC5ED \uC624\uB958\uC728"
+    HighlightWords:
+    - "\uC624\uB958"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uB098\uB77C\uBCC4 \uC2DD\uD310 \uD06C\uAE30\uC5D0 \uB9DE\uCD98 \uC138\uCC99
+      \uAE30\uC5C5"
+    Agency: "\uAD70\uBD80\uB300"
+    Name: "\uAE09\uC2DD \uADDC\uACA9 \uB300\uC751 \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uAD70\uBCF5 \uC8FC\uBA38\uB2C8\uAC00 \uD604\uC9C0 \uC138\uD0C1\uAE30\uB97C
+      \uAC70\uBD80\uD558\uB294 \uAE30\uC5C5"
+    Agency: "\uAD70\uBD80\uB300"
+    Name: "\uC138\uD0C1 \uADDC\uACA9 \uBD88\uC77C\uCE58\uC728"
+    HighlightWords:
+    - "\uBD88\uC77C\uCE58"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uD574\uC678 \uC0DD\uD65C\uAD00\uC6A9 \uC815\uC218\uD1B5 \uC778\uC99D\uC744
+      \uBC1B\uC740 \uAE30\uC5C5"
+    Agency: "\uAD70\uBD80\uB300"
+    Name: "\uC218\uCD9C \uC778\uC99D \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uD574\uC678 \uACF5\uC6D0\uC5D0 \uB9DE\uB294 \uB098\uBB34 \uC9C0\uC9C0\uB300\uB97C
+      \uB9CC\uB4E0 \uAE30\uC5C5"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
+    Name: "\uD604\uC9C0 \uC870\uACBD \uADDC\uACA9 \uBD88\uC77C\uCE58\uC728"
+    HighlightWords:
+    - "\uBD88\uC77C\uCE58"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uAC00\uB85C\uB4F1\uC774 \uD604\uC9C0 \uBC24\uC744 \uB0AE\uC73C\uB85C
+      \uCC29\uAC01\uD558\uB294 \uAE30\uC5C5"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
+    Name: "\uD604\uC9C0 \uC2DC\uAC01 \uC801\uC6A9 \uC624\uB958\uC728"
+    HighlightWords:
+    - "\uC624\uB958"
+    Unit: '%'
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uC678\uAD6D \uB3C4\uB85C \uD3ED\uC5D0 \uB9DE\uCDB0 \uC81C\uC124 \uB0A0\uC744
+      \uB9CC\uB4E0 \uAE30\uC5C5"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
+    Name: "\uB3C4\uB85C \uADDC\uACA9 \uB300\uC751 \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uB3C4\uB85C \uCCAD\uC18C\uCC28\uAC00 \uD574\uC678\uC5D0\uC11C \uCDA9\uC804\uC18C\uB97C
+      \uBABB \uCC3E\uB294 \uAE30\uC5C5"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
+    Name: "\uD604\uC9C0 \uCDA9\uC804 \uD638\uD658 \uC7A5\uC560\uB3C4"
+    HighlightWords:
+    - "\uD604\uC9C0 \uCDA9\uC804 \uD638\uD658 \uC7A5\uC560\uB3C4"
+    Unit: 
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uC5EC\uB7EC \uB098\uB77C \uACF5\uD734\uC77C\uC744 \uC544\uB294 \uC548\uB0B4\uD310
+      \uAE30\uC5C5"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
+    Name: "\uD604\uC9C0 \uC77C\uC815 \uB300\uC751 \uC218\uC900"
+    HighlightWords:
+    - "\uD604\uC9C0 \uC77C\uC815 \uB300\uC751 \uC218\uC900"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uD604\uC9C0 \uBB3C \uC131\uBD84\uC5D0 \uB9DE\uCD98 \uD544\uD130\uB97C
+      \uB9CC\uB4E0 \uAE30\uC5C5"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
+    Name: "\uC6D0\uC218 \uD658\uACBD \uB300\uC751 \uC131\uB2A5"
+    HighlightWords:
+    - "\uC131\uB2A5"
+    Unit: 
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uACC4\uB7C9 \uB2E8\uC704\uAC00 \uBC14\uB2E4\uB97C \uAC74\uB108\uBA70
+      \uBC14\uB00C\uB294 \uAE30\uC5C5"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
+    Name: "\uD604\uC9C0 \uB2E8\uC704 \uBCC0\uD658 \uC624\uB958\uC728"
+    HighlightWords:
+    - "\uC624\uB958"
+    Unit: '%'
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+  - Title: "\uD574\uC678 \uBC30\uAD00 \uAD75\uAE30\uC5D0 \uB9DE\uCD98 \uD0D0\uC0AC\uAE30\uB97C
+      \uB9CC\uB4E0 \uAE30\uC5C5"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
+    Name: "\uBC30\uAD00 \uADDC\uACA9 \uD638\uD658\uC131"
+    HighlightWords:
+    - "\uD638\uD658\uC131"
+    Unit: 
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+  - Title: "\uC815\uC218 \uC7A5\uBE44\uC758 \uD574\uC678 \uC218\uB9AC\uD3B8\uC774
+      \uB4DC\uBB38 \uAE30\uC5C5"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
+    Name: "\uD604\uC9C0 \uC218\uB9AC \uB300\uAE30 \uC77C\uC218"
+    HighlightWords:
+    - "\uB300\uAE30"
+    Unit: "\uC77C"
+    Rule: 1
+    Display: 0
+    Min: 1
+    Max: 30
+    ScaleMax: 0
+  - Title: "\uC218\uC9C8 \uC13C\uC11C\uC758 \uD574\uC678 \uAC80\uC0AC \uC778\uC99D\uC744
+      \uBC1B\uC740 \uAE30\uC5C5"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
+    Name: "\uD574\uC678 \uAC80\uC99D \uC900\uBE44\uB3C4"
+    HighlightWords:
+    - "\uC900\uBE44\uB3C4"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_festival
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_festival
+  Name: "축제 기획자"
+  Priority: 200
+  Needs:
+  - Stat: 14
+    Amount: 90
+  MainNeeds:
+  - Stat: 3
+    Grade: 2
+  Text: "달이는 서로 다른 사람들이 즐길 축제를 만드는 기획자가 됐습니다. 친구들의 간식 몫을 나누던 경험으로 역할과 일정을 조율합니다. 처음 만든 행사 지도에 쉼터와 간식 판매대가 유난히 자세해 참가자들의 칭찬을 받았습니다."
+  LowText: "나르미는 초대장 뒷면의 표시를 특별 좌석 안내로 오해했습니다. 표시된 곳은 가장 덜 붐비는 붕어빵집이었고, 달이는 예전부터 거기부터 찾을 줄 알았다고 했습니다."
+  NormalText: "나르미는 매년 축제에서 달이를 잠깐 만납니다. 대화는 늘 무전으로 끊기지만, 돌아가는 길에는 간식 봉투가 손에 들려 있습니다."
+  HighText: "나르미는 개막식의 좋은 자리를 받고 옷을 차려입었습니다. 달이는 쉬기 좋은 자리라며 도토리 도시락을 밀어 줬고, 나르미는 결국 그 옷으로 작은 접시를 나르는 일을 도왔습니다."

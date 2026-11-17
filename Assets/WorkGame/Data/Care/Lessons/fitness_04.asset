@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: fitness_04
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: fitness_04
+  Name: "가지 건너뛰기 심화반"
+  ShortName: "가지 뛰기"
+  Description: "안전 매트 위에서 간격이 다른 가지를 건넙니다. 옆 반 진도보다 중요한 건 자기 발이 닿는 거리라고 배웁니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 3
+  Cost: 180
+  Gains:
+  - Stat: 9
+    Amount: 9
+  - Stat: 7
+    Amount: 3
+  ResultLine: "가지 사이를 뛰었어요. 착지 자세까지 칭찬받았어요."
+  ResultImage: {fileID: 0}

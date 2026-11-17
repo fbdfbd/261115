@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: repeat_knowledge_01
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: repeat_knowledge_01
+  Name: "간식은 계산 후에"
+  Description: "두 번 연습하니 먹은 도토리까지 빼서 셉니다. 나르미는 벌써 문장제를 알아보고 있습니다."
+  Lessons:
+  - {fileID: 11400000, guid: 47351dd9f3b5546fbe65bc8a9f52a11e, type: 2}
+  - {fileID: 11400000, guid: 47351dd9f3b5546fbe65bc8a9f52a11e, type: 2}
+  Gains:
+  - Stat: 4
+    Amount: 5

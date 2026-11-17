@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: knowledge_03
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: knowledge_03
+  Name: "도토리 문장제 심화반"
+  ShortName: "문장제"
+  Description: "먹고 숨기고 남긴 도토리를 식으로 풉니다. 보호자 단톡방에는 벌써 분수 선행을 묻는 글이 올라왔습니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 3
+  Cost: 180
+  Gains:
+  - Stat: 4
+    Amount: 9
+  - Stat: 6
+    Amount: 3
+  ResultLine: "도토리 문장제를 풀었어요. 먹은 도토리도 식에 넣었어요."
+  ResultImage: {fileID: 0}

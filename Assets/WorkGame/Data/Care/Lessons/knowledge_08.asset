@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: knowledge_08
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: knowledge_08
+  Name: "탐구보고서 발표 특강"
+  ShortName: "탐구보고서"
+  Description: "직접 세운 질문을 관찰과 자료로 설명합니다. 도토리가 어디서 잘 자라는지 묻던 앞발이 이제 출처까지 적습니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 9
+  Cost: 340
+  Gains:
+  - Stat: 5
+    Amount: 15
+  - Stat: 4
+    Amount: 5
+  ResultLine: "탐구보고서를 발표했어요. 질문 시간까지 앞발이 번쩍 들렸어요."
+  ResultImage: {fileID: 0}

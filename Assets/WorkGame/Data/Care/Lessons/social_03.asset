@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: social_03
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: social_03
+  Name: "짝꿍 과제 심화반"
+  ShortName: "짝꿍 과제"
+  Description: "둘이 역할을 나눠 작은 집 모형을 만듭니다. 혼자 다 하면 빨라도 이름표는 둘 다 붙어야 한다는 걸 배웁니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 3
+  Cost: 180
+  Gains:
+  - Stat: 14
+    Amount: 9
+  - Stat: 13
+    Amount: 3
+  ResultLine: "짝꿍 과제를 했어요. 의견은 달라도 간식 시간은 같았어요."
+  ResultImage: {fileID: 0}

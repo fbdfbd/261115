@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_controller
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_controller
+  Name: "항공관제사"
+  Priority: 200
+  Needs:
+  - Stat: 6
+    Amount: 90
+  MainNeeds:
+  - Stat: 0
+    Grade: 2
+  Text: "달이는 여러 비행체의 길을 살피는 항공관제사가 됐습니다. 긴 지문도 끝까지 읽던 집중력으로 작은 변화까지 놓치지 않습니다. 업무 전 볼주머니를 비우는 습관은 말하기 입문반 때부터 지금까지 한 번도 바뀌지 않았습니다."
+  LowText: "나르미가 전화를 걸면 달이는 통화 가능한 시간을 먼저 잡습니다. 달력에 적힌 약속을 지키며 둘은 천천히 대화를 다시 늘려 갑니다."
+  NormalText: "나르미가 도착 시간을 물으면 달이는 분 단위로 답합니다. 어느 날 나르미가 3분 늦자 괜찮다는 문자 뒤로 착륙 예정 시각 변경 안내가 한 통 더 왔습니다."
+  HighText: "나르미가 집에 오면 달이는 귀가 확인부터 합니다. 나르미가 오늘은 자유 비행이라고 하자 달이는 웃으면서도 현관 불을 켜 놓았습니다."

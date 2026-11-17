@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0058837f5bc59f04c9c9be41451ca7f9, type: 3}
+  m_Name: gift_piano
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareGiftSO
+  Id: gift_piano
+  Name: "콩알 건반 피아노"
+  Description: "앞발에 맞는 작은 피아노입니다. 첫 연주는 세 음뿐이었지만 나르미의 촬영 파일은 열 개가 생겼습니다."
+  Icon: {fileID: 0}
+  Cost: 250
+  Kind: 1
+  Friendship: 5
+  Bonuses:
+  - Stat: 2
+    Percent: 10

@@ -10,13 +10,21 @@ namespace WorkGame
         public bool IsRight { get; }
         public int RightCount { get; }
         public int WrongCount { get; }
+        // Actual balance change: negative on a wrong answer, never below a zero balance.
+        public int SkillPointsGained { get; }
+        public bool IsProtected { get; }
+        public bool IsPointBoosted { get; }
 
-        public WorkSubmitResult(int paperId, bool isRight, int rightCount, int wrongCount)
+        public WorkSubmitResult(int paperId, bool isRight, int rightCount, int wrongCount, int skillPointsGained = 0,
+            bool isProtected = false, bool isPointBoosted = false)
         {
             PaperId = paperId;
             IsRight = isRight;
             RightCount = rightCount;
             WrongCount = wrongCount;
+            SkillPointsGained = skillPointsGained;
+            IsProtected = isProtected;
+            IsPointBoosted = isPointBoosted;
         }
     }
 

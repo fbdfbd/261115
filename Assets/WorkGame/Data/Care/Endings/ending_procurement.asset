@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_procurement
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_procurement
+  Name: "조달청 공무원"
+  Priority: 400
+  Needs:
+  - Stat: 4
+    Amount: 40
+  - Stat: 14
+    Amount: 40
+  - Stat: 12
+    Amount: 25
+  MainNeeds:
+  - Stat: 0
+    Grade: 1
+  - Stat: 1
+    Grade: 1
+  - Stat: 2
+    Grade: 1
+  - Stat: 3
+    Grade: 1
+  Text: "달이는 공공기관에 필요한 물품과 서비스를 꼼꼼히 살피는 조달청 공무원이 됐습니다. 가격만 보지 않고 품질과 안전, 필요한 곳에 제때 도착하는지도 확인합니다. 도토리 한 알을 비교하던 작은 앞발이 이제 두꺼운 검토 자료를 끝까지 넘깁니다."
+  LowText: "나르미에게 새 명함이 한 장 왔습니다. 달이의 앞발 자국처럼 작은 메모에는 잘 지내냐는 말이 있었고, 둘은 오랜만에 업무 이야기가 아닌 안부부터 꺼냈습니다."
+  NormalText: "나르미가 일을 가르쳐 주겠다고 나섰다가 달이의 꼼꼼한 질문을 한 시간 받았습니다. 설명이 끝나자 둘은 볼주머니 비우고 말하기부터 배운 보람이 너무 크다며 웃었습니다."
+  HighText: "달이는 나르미와 나란히 공무원이 됐지만 집에서는 여전히 작은 다람쥐입니다. 퇴근 뒤 서로 검토한 서류 수를 자랑하다가, 저녁 도토리 접시부터 함께 나누기로 했습니다."

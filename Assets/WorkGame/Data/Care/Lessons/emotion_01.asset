@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: emotion_01
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: emotion_01
+  Name: "도토리 그림일기 입문반"
+  ShortName: "그림일기"
+  Description: "오늘 본 것과 느낀 것을 그립니다. 매일 도토리만 나와도 다른 도토리라며 작품 설명을 끝까지 들어 줍니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 1
+  Cost: 100
+  Gains:
+  - Stat: 10
+    Amount: 6
+  - Stat: 11
+    Amount: 2
+  ResultLine: "도토리 그림일기를 그렸어요. 오늘 기분은 아주 큰 도토리예요."
+  ResultImage: {fileID: 0}

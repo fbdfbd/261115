@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86adc81f4ed23df49bca0ff70997896d, type: 3}
+  m_Name: CareConfig
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareConfigSO
+  Lessons:
+  - {fileID: 11400000, guid: 47351dd9f3b5546fbe65bc8a9f52a11e, type: 2}
+  - {fileID: 11400000, guid: 065c81577d4655c3a1d3a50c4676ad1e, type: 2}
+  - {fileID: 11400000, guid: 58a3fbf7c258571abcd717d4b0fc1029, type: 2}
+  - {fileID: 11400000, guid: f786191a9b1251c795814e4179739a71, type: 2}
+  - {fileID: 11400000, guid: cb93815f835e5d568119892f69f2b5b3, type: 2}
+  - {fileID: 11400000, guid: 72bafcece1a95d5699c356bd5bc39226, type: 2}
+  - {fileID: 11400000, guid: b70dee51cb56579ca63fcbbcf160522e, type: 2}
+  - {fileID: 11400000, guid: fa658dbcc3db5532b5b3d1ea8ff87fd8, type: 2}
+  - {fileID: 11400000, guid: f7adf56e3fc1547aa863e72d35fa6b5e, type: 2}
+  - {fileID: 11400000, guid: 518042e252c9532bb1f4748c059bd707, type: 2}
+  - {fileID: 11400000, guid: a6f3c77f33ba5d958b192eec52e56948, type: 2}
+  - {fileID: 11400000, guid: e8c8ce86452958519dc90becec1ecad0, type: 2}
+  - {fileID: 11400000, guid: 4c77ef88f9b25a14b3733dd63adc8241, type: 2}
+  - {fileID: 11400000, guid: 9bb5975252da5f9c864f8ff33c7d7302, type: 2}
+  - {fileID: 11400000, guid: c4515573bb705fea90c38d85f2015ae2, type: 2}
+  - {fileID: 11400000, guid: 432a8df288cd58249785fef092ae343f, type: 2}
+  - {fileID: 11400000, guid: 387b1cef747a5a81957fe411fb912aa6, type: 2}
+  - {fileID: 11400000, guid: 0eed1d6661a25a0db8c216374ef18789, type: 2}
+  - {fileID: 11400000, guid: eefe12332eff5b2c975c1e34d2b5f73f, type: 2}
+  - {fileID: 11400000, guid: 0f1e48cb5265527b8103f1aaf5b67657, type: 2}
+  - {fileID: 11400000, guid: dba39409006e5811a1985ac966fb1e0a, type: 2}
+  - {fileID: 11400000, guid: db30e932d66e5d73bf7f6207ddad8e60, type: 2}
+  - {fileID: 11400000, guid: 788b4ce0895e51b6ba248fb8b894897a, type: 2}
+  - {fileID: 11400000, guid: e68ed4f5d4535f07979dc1822905a540, type: 2}
+  - {fileID: 11400000, guid: a69be7a40fcc5a86b0f8083e525eb311, type: 2}
+  - {fileID: 11400000, guid: 82e66eb0bd4854aeb7dc037764016e39, type: 2}
+  - {fileID: 11400000, guid: f02b582a2840515698a770936f04c3ec, type: 2}
+  - {fileID: 11400000, guid: 89c791500fb45741a66b13d5ceed356e, type: 2}
+  - {fileID: 11400000, guid: db1c107192955661af0b5b04af2d5caf, type: 2}
+  - {fileID: 11400000, guid: e15ecb61d8545651b44440d3e31da88a, type: 2}
+  - {fileID: 11400000, guid: 4161e91061ac5c259df41917e4716596, type: 2}
+  - {fileID: 11400000, guid: 6fcc0468c5ff582fbe5a0e9351211340, type: 2}
+  Synergies:
+  - {fileID: 11400000, guid: 95b2b6bd5def5836a057ffb16ee5aef7, type: 2}
+  - {fileID: 11400000, guid: e950767b961756a9bcaf0b3f27ff2b4f, type: 2}
+  - {fileID: 11400000, guid: e120434d7aae561b840e9b044437ee8b, type: 2}
+  - {fileID: 11400000, guid: 69d9fbf3e6395e03b5edc7efc692dc80, type: 2}
+  - {fileID: 11400000, guid: 255bc6a56e15533aac4003e8c1107231, type: 2}
+  - {fileID: 11400000, guid: e8045a98084a517ba451101d9e5ac44d, type: 2}
+  - {fileID: 11400000, guid: 0e0cc520821452f19366be30492e2fa2, type: 2}
+  - {fileID: 11400000, guid: c57755a8ff42516fbbedb5fdc7b198ef, type: 2}
+  Gifts:
+  - {fileID: 11400000, guid: e5ecfa202ace5e728022415057c57405, type: 2}
+  - {fileID: 11400000, guid: ba7c610d07c65f8990bb406e553f00ad, type: 2}
+  - {fileID: 11400000, guid: 5f68de058b9c5c29ae6a4db511836b9c, type: 2}
+  - {fileID: 11400000, guid: 10fece069756582abe97983fc17e1151, type: 2}
+  - {fileID: 11400000, guid: 3f69dcf50400522abca45bf5e159e25b, type: 2}
+  - {fileID: 11400000, guid: e049fc14b38b526c98f21aa9217e3c1a, type: 2}
+  - {fileID: 11400000, guid: ddc55d46a72552ab8761c2619730f7df, type: 2}
+  - {fileID: 11400000, guid: fa8aed3fe25b56688e053bb555683703, type: 2}
+  - {fileID: 11400000, guid: fd91d2236a385bea9876905b84f5de4e, type: 2}
+  - {fileID: 11400000, guid: afdd4b8e2d5c5804bfcddd80c8a02696, type: 2}
+  - {fileID: 11400000, guid: 399abf9fe6c3505e8c71200e21e74eb5, type: 2}
+  - {fileID: 11400000, guid: 532eb0fb43785d709ddc40b14d308eb6, type: 2}
+  Endings:
+  - {fileID: 11400000, guid: c4776fa9db525c71b5bd397ae7aaadfd, type: 2}
+  - {fileID: 11400000, guid: f1b08ccc8e0557c19c07034bc89d3b66, type: 2}
+  - {fileID: 11400000, guid: 5211decccf0b57b09b4869b6fbaccdc2, type: 2}
+  - {fileID: 11400000, guid: 7c28727b3cf553e180584b442129456f, type: 2}
+  - {fileID: 11400000, guid: 40192cb04c245545bc216ad912163660, type: 2}
+  - {fileID: 11400000, guid: 73870480134e5980a2c3cf024ffe9066, type: 2}
+  - {fileID: 11400000, guid: c57acc2f5ee75c4f9b2252392a21f754, type: 2}
+  - {fileID: 11400000, guid: 2c55a8f227ac5f038cc75a31ec99c11a, type: 2}
+  - {fileID: 11400000, guid: b681e1b77a5657c98d9d22455e096fd6, type: 2}
+  - {fileID: 11400000, guid: 993f475e6f335a1281be023340c80b7b, type: 2}
+  - {fileID: 11400000, guid: 16376a524e4b5cd7be82b4f96836ae91, type: 2}
+  - {fileID: 11400000, guid: 0a7c3be1e457525d8f66b9c77c24487e, type: 2}
+  - {fileID: 11400000, guid: bccf8715bd4c50c19b5b6e7d8fe78ed0, type: 2}
+  - {fileID: 11400000, guid: 0d35bb5620795cf985be1595c8a87ceb, type: 2}
+  - {fileID: 11400000, guid: c085365f6c9751abbb99b86e9a6af704, type: 2}
+  - {fileID: 11400000, guid: 263242d4152552099a9f8286d5e34560, type: 2}
+  - {fileID: 11400000, guid: ea3ee6666f2950b78fbe48565626c0ba, type: 2}
+  - {fileID: 11400000, guid: 48b01f16c5865e34971333190ceecb42, type: 2}
+  - {fileID: 11400000, guid: 74e16400b174525a8024971735eb5ba9, type: 2}
+  - {fileID: 11400000, guid: c67161a88ad35d648b880ae9e9779c70, type: 2}
+  - {fileID: 11400000, guid: 7a7ccf14621554c4bad8eb25fa4d0dad, type: 2}
+  - {fileID: 11400000, guid: 9c1e18ec5a155a7bb125c1d31bf621d7, type: 2}
+  - {fileID: 11400000, guid: 9cb28f7f089759d0bf2ffc5625b05cb1, type: 2}
+  - {fileID: 11400000, guid: 7c976f8a8858521786ecfe088cfebd6b, type: 2}
+  FallbackEnding: {fileID: 11400000, guid: e6ddedba14eb527e93802154aeb9b1a5, type: 2}
+  InitialStats: []
+  InitialFriendship: 0
+  LowFriendshipMax: -1
+  HighFriendshipMin: 50
+  Grades:
+    B: 100
+    A: 200
+    S: 350
+  HomeGains:
+  - Stat: 6
+    Amount: 1
+  - Stat: 8
+    Amount: 1
+  - Stat: 12
+    Amount: 1
+  - Stat: 14
+    Amount: 1
+  RestGains: []
+  Dialogues: {fileID: 4900000, guid: d7c80702930de39429d3b6b0e7c2d0fd, type: 3}
+  StatMax: 300

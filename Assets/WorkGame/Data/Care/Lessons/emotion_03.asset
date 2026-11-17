@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: emotion_03
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: emotion_03
+  Name: "동화 짓기 심화반"
+  ShortName: "동화 짓기"
+  Description: "처음과 중간과 끝이 있는 이야기를 씁니다. 도토리를 먹고 끝나는 결말은 이번 주에만 세 번 나와 새 결말을 고민합니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 3
+  Cost: 180
+  Gains:
+  - Stat: 10
+    Amount: 9
+  - Stat: 12
+    Amount: 3
+  ResultLine: "동화를 지었어요. 주인공이 간식을 나눠 주는 결말이에요."
+  ResultImage: {fileID: 0}

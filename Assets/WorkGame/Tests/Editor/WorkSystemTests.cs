@@ -19,6 +19,32 @@ namespace WorkGame.Tests
             return system;
         }
 
+        [TestCase(0, 2, 0, false, 200)]
+        [TestCase(100, 2, 0, true, 400)]
+        [TestCase(100, 3, 0, true, 600)]
+        [TestCase(100, 2, 1, false, 0)]
+        public void SubmitReportsActualPointBoost(int chance, int multiplier, int choice, bool boosted, int gained)
+        {
+            using var system = Create(Paper());
+            var upgrades = new WorkUpgradeSystem(system, new[]
+            {
+                new WorkUpgradeNode("luck", 0, Array.Empty<string>(), new[]
+                {
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.PointFlat, Value = 100 },
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.PointChancePercent, Value = chance },
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.PointMultiplier, Value = multiplier }
+                })
+            });
+            Assert.That(upgrades.Buy("luck"), Is.True);
+            WorkSubmitResult result = null;
+            system.PaperSubmitted += value => result = value;
+            system.StartHold(1, choice);
+            system.AddTime(0.5);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.IsPointBoosted, Is.EqualTo(boosted));
+            Assert.That(result.SkillPointsGained, Is.EqualTo(gained));
+        }
+
         [TestCase(PaperDisplay.Stars, 0, "★☆☆☆☆")]
         [TestCase(PaperDisplay.Stars, 2, "★★★★★")]
         [TestCase(PaperDisplay.Grade, 0, "D")]

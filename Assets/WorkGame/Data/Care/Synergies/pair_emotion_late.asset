@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: pair_emotion_late
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: pair_emotion_late
+  Name: "내 작품을 관객의 눈으로"
+  Description: "작품을 고르고 무대에 올리며 보는 사람의 마음을 생각합니다. 달이는 나르미의 박수도 조금 이해하게 됐습니다."
+  Lessons:
+  - {fileID: 11400000, guid: db1c107192955661af0b5b04af2d5caf, type: 2}
+  - {fileID: 11400000, guid: e15ecb61d8545651b44440d3e31da88a, type: 2}
+  Gains:
+  - Stat: 12
+    Amount: 18

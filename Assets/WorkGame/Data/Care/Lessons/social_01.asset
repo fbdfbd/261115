@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: social_01
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: social_01
+  Name: "볼주머니 말하기 입문반"
+  ShortName: "말하기"
+  Description: "볼주머니를 비우고 이름과 좋아하는 것을 말합니다. 좋아하는 도토리 종류가 많아 첫 자기소개부터 시간이 모자랍니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 1
+  Cost: 100
+  Gains:
+  - Stat: 13
+    Amount: 6
+  - Stat: 14
+    Amount: 2
+  ResultLine: "볼주머니를 비우고 또박또박 말했어요. 발음이 훨씬 잘됐어요."
+  ResultImage: {fileID: 0}

@@ -4,6 +4,15 @@ namespace WorkGame
 {
     public static class WorkRules
     {
+        public static int GetRightIndex(WorkPaper paper)
+        {
+            int best = 0;
+            for (int i = 1; i < paper.Choices.Count; i++)
+                if (paper.Rule == PickRule.Highest ? paper.Choices[i].Value > paper.Choices[best].Value
+                    : paper.Choices[i].Value < paper.Choices[best].Value) best = i;
+            return best;
+        }
+
         public static bool IsRight(WorkPaper paper, int choiceIndex)
         {
             if (choiceIndex < 0 || choiceIndex >= paper.Choices.Count)
@@ -19,7 +28,7 @@ namespace WorkGame
         }
 
         // Empty quarters receive B and no bonus. Compare before rounding for display.
-        public static WorkGrade GetGrade(int right, int total, int sPercent = 85, int aPercent = 70)
+        public static WorkGrade GetGrade(int right, int total, int sPercent = 90, int aPercent = 80)
         {
             if (right < 0 || total < 0 || right > total)
                 throw new ArgumentOutOfRangeException(nameof(right));

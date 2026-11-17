@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: WorkConfig
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkConfigSO
   Settings:
-    MonthSeconds: 120
+    MonthSeconds: 90
     HoldSeconds: 0.5
     StartAttendance: 100
     WrongPenalty: 1
-    SPercent: 85
-    APercent: 70
-    SBonus: 300
-    ABonus: 200
-    BBonus: 100
+    SkillPointsPerPaper: 100
+    WrongSkillPointPenalty: 20
+    MonthlySalary: 1000
+    SPercent: 90
+    APercent: 80
+    SBonusPercent: 300
+    ABonusPercent: 200
+    BBonusPercent: 150
   Plan: {fileID: 11400000, guid: 6a8ab4f30c4e35749b4d6b888f88ad20, type: 2}
   ChoiceCount: 3

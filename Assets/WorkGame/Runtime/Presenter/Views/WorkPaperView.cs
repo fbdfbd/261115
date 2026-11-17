@@ -30,7 +30,7 @@ namespace WorkGame
             if (outsideButton != null) outsideButton.onClick.RemoveListener(ClickClose);
         }
 
-        public void Show(WorkPaper paper)
+        public void Show(WorkPaper paper, int highlightLevel = 0, double workSeconds = 0)
         {
             Hide();
             GameObject panel;
@@ -55,7 +55,7 @@ namespace WorkGame
             }
             else if (panel != null) Debug.LogWarning("문서 루트에 WorkPaperPanelView를 연결해 주세요.", panel);
             WorkUi.Show(panel, true);
-            if (activePanel != null) activePanel.Show(paper);
+            if (activePanel != null) activePanel.Show(paper, highlightLevel, workSeconds);
             WorkUi.Show(paperGroup, panel != null);
         }
 
@@ -83,6 +83,8 @@ namespace WorkGame
         {
             if (activePanel != null) activePanel.ShowHold(index, progress, allowInput);
         }
+
+        public void ShowAssist(int level, double workSeconds) => activePanel?.ShowAssist(level, workSeconds);
 
         private void StartChoice(int index) => ChoiceStarted?.Invoke(index);
         private void StopChoice() => ChoiceStopped?.Invoke();

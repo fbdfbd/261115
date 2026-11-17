@@ -45,6 +45,7 @@ namespace WorkGame.Editor
                 }
                 var plan = ScriptableObject.CreateInstance<WorkPlanSO>();
                 tempObjects.Add(plan);
+                plan.RandomizeCategories = config.Plan.RandomizeCategories;
                 plan.Batches = config.Plan.Batches.Select(x => new WorkBatch {
                     Month = x.Month, Count = x.Count, Category = x.Category == null ? null : categories[x.Category.Id]
                 }).ToList();
@@ -120,6 +121,10 @@ namespace WorkGame.Editor
             category.Target = first["Target"];
             category.Metrics = values.Select(x => new WorkMetric {
                 Title = x.TryGetValue("PaperTitle", out string title) ? title : "",
+                Agency = x.TryGetValue("Agency", out string agency) ? agency : "",
+                HighlightWords = x.TryGetValue("HighlightWords", out string words)
+                    ? words.Split('|').Where(w => !string.IsNullOrWhiteSpace(w)).Select(w => w.Trim()).ToList()
+                    : new List<string>(),
                 Name = x["Metric"], Unit = x["Unit"], Rule = ReadEnum<PickRule>(x["Rule"]),
                 Display = ReadEnum<PaperDisplay>(x["Display"]), Min = ReadInt(x["Min"]), Max = ReadInt(x["Max"]),
                 ScaleMax = x.TryGetValue("ScaleMax", out string scale) ? ReadInt(scale) : 0
@@ -149,9 +154,12 @@ namespace WorkGame.Editor
         {
             var headers = new List<string> { "Id", "Title" };
             if (WorkCsv.HasColumn(text, "ShortName")) headers.Add("ShortName");
+            headers.Add("Target");
             if (WorkCsv.HasColumn(text, "PaperTitle")) headers.Add("PaperTitle");
-            headers.AddRange(new[] { "Target", "Metric", "Unit", "Rule", "Display", "Min", "Max" });
+            headers.AddRange(new[] { "Metric", "Unit", "Rule", "Display", "Min", "Max" });
             if (WorkCsv.HasColumn(text, "ScaleMax")) headers.Add("ScaleMax");
+            if (WorkCsv.HasColumn(text, "HighlightWords")) headers.Add("HighlightWords");
+            if (WorkCsv.HasColumn(text, "Agency")) headers.Add("Agency");
             return WorkCsv.Read(text, headers.ToArray());
         }
 

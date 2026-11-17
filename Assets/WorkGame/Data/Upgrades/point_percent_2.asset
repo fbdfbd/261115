@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06482c79cd24bef46ba0913cf361a206, type: 3}
+  m_Name: point_percent_2
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
+  Id: point_percent_2
+  Name: "\uC219\uB828 \uD6A8\uC728 II"
+  Description: "\uC219\uB828 \uD3EC\uC778\uD2B8 \uD68D\uB4DD\uB7C9 +20% \uCD94\uAC00"
+  Icon: {fileID: 0}
+  Cost: 700
+  Required:
+  - {fileID: 11400000, guid: f6e9ceaea2fe25a4fa8fc0bb74524bd3, type: 2}
+  Effects:
+  - Kind: 7
+    Value: 20

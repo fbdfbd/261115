@@ -12,10 +12,13 @@ namespace WorkGame
         private readonly WorkPaperView paperView;
         private readonly WorkFeedback feedback;
         private readonly WorkFeedbackView feedbackView;
+        private readonly WorkFaxView faxView;
         private readonly Dictionary<string, WorkCategorySO> categories = new Dictionary<string, WorkCategorySO>();
         private WorkPaper openedPaper;
         private int shownMonth = -1;
         private int shownPending = -1;
+        private int shownFaxCount = -1;
+        private bool shownSorted;
         private bool connected;
         private bool disposed;
 
@@ -25,7 +28,7 @@ namespace WorkGame
         public WorkPresenter(WorkSystem system, WorkMenuView menuView = null, WorkHudView hudView = null,
             WorkDeskView deskView = null, WorkPaperView paperView = null,
             IEnumerable<WorkCategorySO> categories = null, WorkFeedback feedback = null,
-            WorkFeedbackView feedbackView = null)
+            WorkFeedbackView feedbackView = null, WorkFaxView faxView = null)
         {
             System = system ?? throw new ArgumentNullException(nameof(system));
             this.menuView = menuView;
@@ -34,6 +37,7 @@ namespace WorkGame
             this.paperView = paperView;
             this.feedback = feedback;
             this.feedbackView = feedbackView;
+            this.faxView = faxView;
             if (categories != null)
                 foreach (var category in categories)
                     if (category != null) this.categories[category.Id] = category;
@@ -44,7 +48,8 @@ namespace WorkGame
             if (disposed || connected) return;
             connected = true;
             System.Changed += Refresh;
-            System.PaperSubmitted += ShowFeedback;
+            System.PaperSubmitted += OnPaperSubmitted;
+            if (faxView != null) faxView.PaperDropped += SendFax;
             if (menuView != null)
             {
                 menuView.LeaveClicked += LeaveWork;
@@ -66,8 +71,9 @@ namespace WorkGame
             if (!connected) return;
             connected = false;
             System.Changed -= Refresh;
-            System.PaperSubmitted -= ShowFeedback;
-            feedbackView?.Clear();
+            System.PaperSubmitted -= OnPaperSubmitted;
+            if (faxView != null) faxView.PaperDropped -= SendFax;
+            if (feedbackView != null) feedbackView.Clear();
             if (menuView != null)
             {
                 menuView.LeaveClicked -= LeaveWork;
@@ -87,9 +93,10 @@ namespace WorkGame
 
         public void OpenPaper(int paperId)
         {
+            if (connected && System.TryInstantPaper(paperId)) return;
             if (!connected || !System.SelectPaper(paperId)) return;
             openedPaper = System.CurrentPaper;
-            paperView?.Show(openedPaper);
+            paperView?.Show(openedPaper, System.Upgrades.HighlightLevel, System.Run.Seconds);
         }
 
         public void ClosePaper()
@@ -113,9 +120,14 @@ namespace WorkGame
         public void StartNextMonth() { if (connected) System.StartNextMonth(); }
         public void Pause() { if (connected) System.SetPaused(true); }
         public void Resume() { if (connected) System.SetPaused(false); }
-
-        private void ShowFeedback(WorkSubmitResult result)
+        private void SendFax(int paperId)
         {
+            if (connected) System.Fax.TrySend(paperId, faxView != null && faxView.ForceEnabled);
+        }
+
+        private void OnPaperSubmitted(WorkSubmitResult result)
+        {
+            hudView?.ShowSkillPointResult(System.Run.SkillPoints, result.IsRight, result.IsPointBoosted);
             if (feedback != null && feedbackView != null) feedbackView.Show(feedback.Pick(result));
         }
 
@@ -123,6 +135,11 @@ namespace WorkGame
         {
             bool newMonth = shownMonth != System.Run.Month;
             bool working = System.Run.Phase == WorkPhase.Working;
+            bool sorted = System.Upgrades.SortUnlocked && System.Run.SortEnabled;
+            bool faxEnabled = (faxView != null && faxView.ForceEnabled)
+                || (System.Upgrades.FaxUnlocked && System.Run.FaxVisible);
+            deskView?.SetSorted(sorted);
+            deskView?.SetFaxDragEnabled(System.IsWorking && faxEnabled);
             deskView?.SetWorking(working);
             if (newMonth)
             {
@@ -134,19 +151,30 @@ namespace WorkGame
                     .Where(categories.ContainsKey).Select(x => categories[x]);
                 hudView?.ShowMonth(System.Run.Month, monthCategories);
             }
-            if (newMonth || shownPending != System.PendingCount)
+            if (newMonth || shownPending != System.PendingCount || shownFaxCount != System.Fax.Jobs.Count || shownSorted != sorted)
             {
                 shownPending = System.PendingCount;
+                shownFaxCount = System.Fax.Jobs.Count;
+                shownSorted = sorted;
                 deskView?.ShowPapers(System.MonthPapers, System.Run.Month);
             }
-            if (openedPaper != null && (!working || openedPaper.State != PaperState.Pending))
+            if (openedPaper != null && (!working || openedPaper.IsInFax || openedPaper.State != PaperState.Pending))
             {
                 openedPaper = null;
                 paperView?.Hide();
             }
             if (openedPaper != null)
+            {
+                paperView?.ShowAssist(System.Upgrades.HighlightLevel, System.Run.Seconds);
                 paperView?.ShowHold(System.HeldChoiceIndex, (float)System.HoldProgress, !System.IsPaused);
+            }
+            int faxCount = System.Fax.Jobs.Count;
+            faxView?.ShowState(working && faxEnabled,
+                !System.IsPaused && faxCount < System.Upgrades.FaxSlots, faxCount, System.Upgrades.FaxSlots,
+                faxCount == 0 ? 0 : (float)System.Fax.Jobs[0].Progress);
             hudView?.ShowProgress(System.MonthDone, System.MonthTotal);
+            hudView?.ShowSkillPoints(System.Run.SkillPoints);
+            hudView?.ShowTime(System.RemainingSeconds, System.MonthSeconds);
             menuView?.ShowState(System.CanLeave, System.IsPaused, working);
         }
 
@@ -156,8 +184,9 @@ namespace WorkGame
             Disconnect();
             disposed = true;
             openedPaper = null;
-            paperView?.Hide();
-            deskView?.ClearPapers();
+            // Unity 객체는 파괴된 뒤에도 C# 참조가 남으므로 ?. 대신 Unity null 검사를 씁니다.
+            if (paperView != null) paperView.Hide();
+            if (deskView != null) deskView.ClearPapers();
         }
     }
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_actor
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_actor
+  Name: "뮤지컬 배우"
+  Priority: 200
+  Needs:
+  - Stat: 11
+    Amount: 90
+  MainNeeds:
+  - Stat: 2
+    Grade: 2
+  Text: "달이는 작은 몸으로 객석 끝까지 마음을 전하는 뮤지컬 배우가 됐습니다. 앞발 피아노와 연기반에서 익힌 표현력이 무대에서 만났습니다. 긴장한 장면에서 꼬리가 먼저 움직인 공연은 관객들이 가장 좋아하는 장면으로 남았습니다."
+  LowText: "나르미가 표를 구하려 하자 매진 안내가 먼저 떴습니다. 잠시 뒤 매표소에서 보관 중인 표 한 장이 있다는 연락이 왔습니다."
+  NormalText: "달이는 나르미를 발견하면 커튼콜 때 아주 작게 손을 흔듭니다. 나르미는 매번 자신에게 한 것이 맞는지 주변을 한 번 둘러봅니다."
+  HighText: "나르미의 좌석에는 늘 달이가 맡겨 둔 표가 있습니다. 극장 직원이 유명 평론가냐고 묻자 나르미는 평가는 잘 안 하지만 밥은 먹였다고 답해, 그날 대기실에 새 별명이 생겼습니다."

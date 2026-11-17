@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: social_05
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: social_05
+  Name: "1분 자기소개 실전반"
+  ShortName: "자기소개"
+  Description: "시간 안에 자기 장점을 분명하게 말합니다. 좋아하는 간식 설명만으로 50초를 쓰는 습관부터 줄입니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 6
+  Cost: 260
+  Gains:
+  - Stat: 13
+    Amount: 12
+  - Stat: 15
+    Amount: 4
+  ResultLine: "1분 자기소개를 했어요. 좋아하는 간식 얘기는 조금 줄였어요."
+  ResultImage: {fileID: 0}

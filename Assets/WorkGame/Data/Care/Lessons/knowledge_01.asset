@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: knowledge_01
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: knowledge_01
+  Name: "도토리 수 세기 입문반"
+  ShortName: "도토리 셈"
+  Description: "도토리 열 알로 수 개념을 배웁니다. 달이가 셈하기 전에 먹지 않도록 교구와 간식은 따로 지급합니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 1
+  Cost: 100
+  Gains:
+  - Stat: 4
+    Amount: 6
+  - Stat: 5
+    Amount: 2
+  ResultLine: "도토리를 열까지 셌어요. 간식으로 먹은 건 별도 계산이에요."
+  ResultImage: {fileID: 0}

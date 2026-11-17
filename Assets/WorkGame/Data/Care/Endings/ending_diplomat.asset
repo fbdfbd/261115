@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d2de8bc2e925743821e69796945449, type: 3}
+  m_Name: ending_diplomat
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareEndingSO
+  Id: ending_diplomat
+  Name: "외교관"
+  Priority: 300
+  Needs:
+  - Stat: 13
+    Amount: 110
+  - Stat: 15
+    Amount: 70
+  MainNeeds:
+  - Stat: 3
+    Grade: 3
+  Text: "달이는 서로 다른 입장을 듣고 합의를 찾는 외교관이 됐습니다. 반장 수업에서 배운 의견 모으기가 먼 나라에서도 통했습니다. 몸에 맞춘 낮은 의자에 앉아도 목소리는 분명했고, 회담 뒤 다과는 양쪽이 함께 고르게 했습니다."
+  LowText: "나르미에게는 귀국 일정이 적힌 정중한 메시지가 옵니다. 짧게라도 만나자는 문장은 보내기 전에 두 번 고친 흔적이 남아 있습니다."
+  NormalText: "여러 행성과 합의를 이룬 달이도 집에서는 반찬 하나를 더 먹는 문제로 자주 집니다. 나르미가 승리의 표정으로 접시를 밀면 오늘 회담도 성공적이었다고 받아 듭니다."
+  HighText: "나르미는 달이가 배운 외교 예절을 보고 집에서도 존댓말을 해야 하느냐고 물었습니다. 달이가 편하게 하라고 하자 그럼 설거지는 네가 하라는 가장 익숙한 협상이 시작됐습니다."

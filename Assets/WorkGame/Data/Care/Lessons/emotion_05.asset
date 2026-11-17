@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e190d2a619c1a1d448dbb9054299cc75, type: 3}
+  m_Name: emotion_05
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareLessonSO
+  Id: emotion_05
+  Name: "콩쿠르 무대 실전반"
+  ShortName: "콩쿠르"
+  Description: "입장부터 연주와 인사까지 실전처럼 준비합니다. 나르미는 달이보다 긴장해 객석에서 자기 무릎에 박자를 칩니다."
+  Icon: {fileID: 0}
+  UnlockMonth: 6
+  Cost: 260
+  Gains:
+  - Stat: 11
+    Amount: 12
+  - Stat: 10
+    Amount: 4
+  ResultLine: "콩쿠르를 준비했어요. 무대 인사에 꼬리 각도도 맞췄어요."
+  ResultImage: {fileID: 0}
