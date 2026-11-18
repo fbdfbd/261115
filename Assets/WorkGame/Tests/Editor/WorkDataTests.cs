@@ -20,7 +20,9 @@ namespace WorkGame.Tests
             category.Id = "test_category";
             category.Title = "Test";
             category.Target = "제품";
-            category.Metrics.Add(new WorkMetric { Name = "점수", Min = 1, Max = 3 });
+            category.Metrics.Add(new WorkMetric { Name = "점수", Min = 1, Max = 3, Difficulty = WorkDifficulty.Easy });
+            category.Metrics.Add(new WorkMetric { Name = "보조 점수 1", Min = 1, Max = 3, Difficulty = WorkDifficulty.Easy });
+            category.Metrics.Add(new WorkMetric { Name = "보조 점수 2", Min = 1, Max = 3, Difficulty = WorkDifficulty.Easy });
             plan = ScriptableObject.CreateInstance<WorkPlanSO>();
             for (int month = 1; month <= 12; month++)
                 plan.Batches.Add(new WorkBatch { Month = month, Category = category, Count = 3 });
@@ -80,7 +82,8 @@ namespace WorkGame.Tests
                     item.Title = "Category " + i;
                     item.Target = "Target";
                     for (int j = 0; j < 45; j++)
-                        item.Metrics.Add(new WorkMetric { Name = "Metric " + j, Max = 100 });
+                        item.Metrics.Add(new WorkMetric { Name = "Metric " + j, Max = 100,
+                            Difficulty = j < 30 ? WorkDifficulty.Easy : WorkDifficulty.Normal });
                     plan.Batches.Add(new WorkBatch { Month = 1, Category = item, Count = 0 });
                 }
                 for (int month = 1; month <= 12; month++)
@@ -134,9 +137,10 @@ namespace WorkGame.Tests
         [Test]
         public void CsvCarriesShortNameAndFixedBarScaleIntoPapers()
         {
+            foreach (var batch in plan.Batches) batch.Count = 1;
             var import = new WorkCsvImport(
-                "Id,Title,ShortName,Target,Metric,Unit,Rule,Display,Min,Max,ScaleMax\n" +
-                "test_category,Test,짧은 이름,제품,점수,%,Highest,HorizontalBar,10,90,100\n", true);
+                "Id,Title,ShortName,Target,Metric,Unit,Rule,Display,Min,Max,ScaleMax,Difficulty\n" +
+                "test_category,Test,짧은 이름,제품,점수,%,Highest,HorizontalBar,10,90,100,Easy\n", true);
             import.Apply(config);
             using var system = config.CreateSystem(1);
             system.StartRun();
@@ -148,12 +152,13 @@ namespace WorkGame.Tests
         [Test]
         public void CsvPreviewDoesNotChangePlanOrCategory()
         {
-            var import = new WorkCsvImport("Month,CategoryId,Count\n1,test_category,99\n", false);
+            var import = new WorkCsvImport("Month,CategoryId,Count\n1,test_category,2\n", false);
             import.Check(config);
             Assert.That(plan.Batches[0].Count, Is.EqualTo(3));
+            foreach (var batch in plan.Batches) batch.Count = 1;
             var categories = new WorkCsvImport(
-                "Id,Title,Target,Metric,Unit,Rule,Display,Min,Max\n" +
-                "test_category,Changed,제품,\"점수,비교\",,Lowest,Number,1,5\n", true);
+                "Id,Title,Target,Metric,Unit,Rule,Display,Min,Max,Difficulty\n" +
+                "test_category,Changed,제품,\"점수,비교\",,Lowest,Number,1,5,Easy\n", true);
             categories.Check(config);
             Assert.That(category.Title, Is.EqualTo("Test"));
             Assert.That(category.Metrics[0].Name, Is.EqualTo("점수"));
@@ -162,9 +167,9 @@ namespace WorkGame.Tests
         [Test]
         public void ApplyingMonthCsvUpdatesOnlyMatchingRowsAndKeepsReferences()
         {
-            var import = new WorkCsvImport("Month,CategoryId,Count\n1,test_category,99\n", false);
+            var import = new WorkCsvImport("Month,CategoryId,Count\n1,test_category,2\n", false);
             import.Apply(config);
-            Assert.That(plan.Batches[0].Count, Is.EqualTo(99));
+            Assert.That(plan.Batches[0].Count, Is.EqualTo(2));
             Assert.That(plan.Batches[1].Count, Is.EqualTo(3));
             Assert.That(plan.Batches.Count, Is.EqualTo(12));
             Assert.That(plan.Batches.All(x => x.Category == category), Is.True);
@@ -173,9 +178,10 @@ namespace WorkGame.Tests
         [Test]
         public void ApplyingCategoryCsvKeepsCategoryReferenceAndReplacesMetrics()
         {
+            foreach (var batch in plan.Batches) batch.Count = 1;
             var import = new WorkCsvImport(
-                "Id,Title,Target,Metric,Unit,Rule,Display,Min,Max\n" +
-                "test_category,Changed,기업,지원 필요도,점,Lowest,HorizontalBar,1,10\n", true);
+                "Id,Title,Target,Metric,Unit,Rule,Display,Min,Max,Difficulty\n" +
+                "test_category,Changed,기업,지원 필요도,점,Lowest,HorizontalBar,1,10,Easy\n", true);
             import.Apply(config);
             Assert.That(category.Title, Is.EqualTo("Changed"));
             Assert.That(category.Metrics.Count, Is.EqualTo(1));
@@ -209,9 +215,10 @@ namespace WorkGame.Tests
         [Test]
         public void CsvSupportsBomEscapedQuotesAndMultilineText()
         {
+            foreach (var batch in plan.Batches) batch.Count = 1;
             var import = new WorkCsvImport(
-                "\uFEFFId,Title,Target,Metric,Unit,Rule,Display,Min,Max\r\n" +
-                "test_category,\"Title \"\"quoted\"\"\nnext line\",제품,점수,,Highest,Number,1,5\r\n", true);
+                "\uFEFFId,Title,Target,Metric,Unit,Rule,Display,Min,Max,Difficulty\r\n" +
+                "test_category,\"Title \"\"quoted\"\"\nnext line\",제품,점수,,Highest,Number,1,5,Easy\r\n", true);
             Assert.DoesNotThrow(() => import.Check(config));
         }
 

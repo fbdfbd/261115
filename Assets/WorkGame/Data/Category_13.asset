@@ -18,554 +18,544 @@ MonoBehaviour:
   HudColor: {r: 1, g: 1, b: 1, a: 1}
   Target: "\uAE30\uAD00"
   Metrics:
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uAC01\uC790 \uBCF4\uC720\uD55C
-      \uB85C\uBD07\uC758 \uC67C\uD314\uACFC \uC624\uB978\uD314\uC744 \uD569\uCE58\uB824\uB294
-      \uAE30\uAD00"
-    Agency: 
-    Name: "\uC7A5\uBE44\uB97C \uD568\uAED8 \uC4F8 \uB54C\uC758 \uAE30\uB300\uD6A8\uACFC"
+  - Title: "장비 협업 기관 선정"
+    Agency: ""
+    Name: "장비 공동 활용 효과"
     HighlightWords:
-    - "\uC7A5\uBE44\uB97C \uD568\uAED8 \uC4F8 \uB54C\uC758 \uAE30\uB300\uD6A8\uACFC"
-    Unit: 
+    - "장비 공동 활용 효과"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uACF5\uB3D9\uD68C\uC758
-      \uC774\uB984\uC744 \uC815\uD558\uB294 \uD68C\uC758\uB9CC \uACC4\uC18D\uD55C
-      \uAE30\uAD00"
-    Agency: 
-    Name: "\uD611\uC5C5 \uACB0\uC815\uAE4C\uC9C0 \uD544\uC694\uD55C \uD68C\uC758
-      \uD69F\uC218"
+    Difficulty: 1
+  - Title: "신속한 협업 기관 선정"
+    Agency: ""
+    Name: "협업 준비 회의 횟수"
     HighlightWords:
-    - "\uD69F\uC218"
-    Unit: "\uD68C"
+    - "협업 준비 회의 횟수"
+    Unit: "회"
     Rule: 1
     Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uAE30\uC0C1 \uB85C\uBD07\uACFC
-      \uB3C4\uB85C \uB85C\uBD07\uC774 \uC6B0\uC0B0 \uC815\uBCF4\uB97C \uACF5\uC720\uD558\uB824\uB294
-      \uAE30\uAD00"
-    Agency: 
-    Name: "\uC815\uBCF4 \uACF5\uC720 \uC2E4\uD328\uC728"
+    Min: 1
+    Max: 20
+    ScaleMax: 20
+    Difficulty: 1
+  - Title: "정보 공유 기관 선정"
+    Agency: ""
+    Name: "정보 공유 성공률"
     HighlightWords:
-    - "\uC2E4\uD328\uC728"
-    Unit: '%'
-    Rule: 1
-    Display: 2
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uC11C\uB85C\uC758 \uACF5\uBB38\uB9CC
-      \uBC88\uAC08\uC544 \uBC88\uC5ED\uD574 \uBCF8 \uAE30\uAD00"
-    Agency: 
-    Name: "\uACF5\uB3D9 \uB370\uC774\uD130 \uC804\uB2EC \uC815\uD655\uB3C4"
-    HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정보 공유 성공률"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uB0A8\uB294 \uB4DC\uB860\uACFC
-      \uB0A8\uB294 \uCDA9\uC804\uC18C\uB97C \uC11C\uB85C \uC5F0\uACB0\uD558\uB824\uB294
-      \uAE30\uAD00"
-    Agency: 
-    Name: "\uB4DC\uB860 \uACF5\uB3D9 \uD65C\uC6A9 \uAE30\uB300\uD6A8\uACFC"
+    Difficulty: 1
+  - Title: "데이터 협업 기관 선정"
+    Agency: ""
+    Name: "데이터 전달 정확도"
     HighlightWords:
-    - "\uB4DC\uB860 \uACF5\uB3D9 \uD65C\uC6A9 \uAE30\uB300\uD6A8\uACFC"
-    Unit: 
+    - "데이터 전달 정확도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "드론 협업 기관 선정"
+    Agency: ""
+    Name: "드론 공동 활용 효과"
+    HighlightWords:
+    - "드론 공동 활용 효과"
+    Unit: ""
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uACF5\uB3D9 \uB85C\uBD07\uC758
-      \uC774\uB984\uB9CC \uC5EC\uC12F \uBC88 \uBC14\uAFD4\uBCF8 \uAE30\uAD00"
-    Agency: 
-    Name: "\uAE30\uAD00 \uAC04 \uC911\uBCF5 \uC7A5\uBE44 \uAD6C\uB9E4 \uAC74\uC218"
+    Difficulty: 1
+  - Title: "구매 협업 기관 선정"
+    Agency: ""
+    Name: "중복 구매 건수"
     HighlightWords:
-    - "\uAE30\uAD00 \uAC04 \uC911\uBCF5 \uC7A5\uBE44 \uAD6C\uB9E4 \uAC74\uC218"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uC0B0\uBD88 \uAC10\uC2DC
-      \uD654\uBA74\uACFC \uC18C\uBC29 \uB85C\uBD07 \uC9C0\uB3C4\uB97C \uD569\uCE58\uB824\uB294
-      \uAE30\uAD00"
-    Agency: 
-    Name: "\uC7AC\uB09C \uC815\uBCF4 \uC804\uB2EC \uC9C0\uC5F0 \uC2DC\uAC04"
-    HighlightWords:
-    - "\uC9C0\uC5F0"
-    Unit: "\uBD84"
+    - "중복 구매 건수"
+    Unit: "회"
     Rule: 1
     Display: 0
     Min: 1
-    Max: 30
-    ScaleMax: 0
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uD68C\uC758\uC6A9 \uD640\uB85C\uADF8\uB7A8\uB07C\uB9AC\uB9CC
-      \uCE5C\uD574\uC9C4 \uAE30\uAD00"
-    Agency: 
-    Name: "\uACF5\uB3D9 \uC0AC\uC5C5 \uC644\uB8CC\uC728"
+    Max: 20
+    ScaleMax: 20
+    Difficulty: 1
+  - Title: "재난 정보 협업 기관 선정"
+    Agency: ""
+    Name: "재난 정보 전달 지연 시간"
     HighlightWords:
-    - "\uC644\uB8CC\uC728"
-    Unit: '%'
+    - "재난 정보 전달 지연 시간"
+    Unit: "시간"
+    Rule: 1
+    Display: 0
+    Min: 1
+    Max: 20
+    ScaleMax: 20
+    Difficulty: 1
+  - Title: "사업 협업 기관 선정"
+    Agency: ""
+    Name: "공동 사업 완료율"
+    HighlightWords:
+    - "공동 사업 완료율"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uAC19\uC740 \uAE38\uC744
-      \uC138 \uBC88 \uCCAD\uC18C\uD558\uB358 \uB85C\uBD07\uC758 \uB178\uC120\uC744
-      \uD569\uCE58\uB824\uB294 \uAE30\uAD00"
-    Agency: 
-    Name: "\uD568\uAED8 \uC791\uC5C5\uD560 \uB54C \uC911\uBCF5\uB418\uB294 \uC791\uC5C5
-      \uBE44\uC728"
+    Difficulty: 1
+  - Title: "청소 협업 기관 선정"
+    Agency: ""
+    Name: "중복 작업 비율"
     HighlightWords:
-    - "\uD568\uAED8 \uC791\uC5C5\uD560 \uB54C \uC911\uBCF5\uB418\uB294 \uC791\uC5C5
-      \uBE44\uC728"
-    Unit: '%'
+    - "중복 작업 비율"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD611\uC5C5 \uAE30\uAD00 \uC120\uC815 \xB7 \uACF5\uB3D9 \uB370\uC774\uD130
-      \uAE08\uACE0\uB97C \uB9CC\uB4E4\uACE0 \uC5F4\uC1E0 \uD68C\uC758\uB9CC \uD55C
-      \uAE30\uAD00"
-    Agency: 
-    Name: "\uB370\uC774\uD130 \uC5F0\uACC4 \uC900\uBE44 \uC218\uC900"
+    Difficulty: 1
+  - Title: "데이터 연계 기관 선정"
+    Agency: ""
+    Name: "데이터 연계 준비도"
     HighlightWords:
-    - "\uB370\uC774\uD130 \uC5F0\uACC4 \uC900\uBE44 \uC218\uC900"
-    Unit: 
+    - "데이터 연계 준비도"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uAE09\uC2DD \uC794\uC5F4\uB85C \uC774\uC6C3 \uC218\uC601\uC7A5\uC744
-      \uB365\uD788\uB294 \uD611\uB825"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uACF5\uB3D9 \uC5D0\uB108\uC9C0 \uD65C\uC6A9 \uAE30\uB300\uD6A8\uACFC"
+    Difficulty: 1
+  - Title: "에너지 협업 기관 선정"
+    Agency: "교육청·학교"
+    Name: "에너지 공동 활용 효과"
     HighlightWords:
-    - "\uACF5\uB3D9 \uC5D0\uB108\uC9C0 \uD65C\uC6A9 \uAE30\uB300\uD6A8\uACFC"
-    Unit: 
+    - "에너지 공동 활용 효과"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uD559\uAD50\uC640 \uB3C4\uC11C\uAD00\uC758 \uCC45 \uB85C\uBD07\uC744
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uB3C4\uC11C \uC815\uBCF4 \uC5F0\uACC4 \uC624\uB958\uC728"
+    Difficulty: 1
+  - Title: "도서 정보 협업 기관 선정"
+    Agency: "교육청·학교"
+    Name: "도서 정보 연계 오류율"
     HighlightWords:
-    - "\uC624\uB958"
-    Unit: '%'
+    - "도서 정보 연계 오류율"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBC24\uC5D0 \uC26C\uB294 \uCCB4\uC721\uAD00 \uC7A5\uBE44\uB97C \uBE4C\uB824\uC8FC\uB294
-      \uD611\uB825"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uACF5\uB3D9 \uC7A5\uBE44 \uD65C\uC6A9\uB960"
+    Difficulty: 1
+  - Title: "장비 공유 기관 선정"
+    Agency: "교육청·학교"
+    Name: "공동 장비 활용률"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "공동 장비 활용률"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD559\uAD50 \uC6B0\uC0B0\uD568\uACFC \uAE30\uC0C1 \uAD00\uCE21\uC18C\uB97C
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC815\uBCF4 \uC804\uB2EC \uB300\uAE30 \uC2DC\uAC04"
+    Difficulty: 1
+  - Title: "정보 전달 기관 선정"
+    Agency: "교육청·학교"
+    Name: "정보 전달 대기 시간"
     HighlightWords:
-    - "\uB300\uAE30"
-    Unit: "\uBD84"
+    - "정보 전달 대기 시간"
+    Unit: "시간"
     Rule: 1
     Display: 0
     Min: 1
-    Max: 30
-    ScaleMax: 0
-  - Title: "\uD1B5\uD559 \uC9C0\uB3C4\uC640 \uB3C4\uB85C \uACF5\uC0AC \uC9C0\uB3C4\uB97C
-      \uD569\uCE58\uB294 \uD611\uB825"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC911\uBCF5 \uC548\uB0B4 \uAC10\uC18C\uC728"
+    Max: 20
+    ScaleMax: 20
+    Difficulty: 1
+  - Title: "안내 협업 기관 선정"
+    Agency: "교육청·학교"
+    Name: "중복 안내 감소율"
     HighlightWords:
-    - "\uC911\uBCF5"
-    Unit: '%'
+    - "중복 안내 감소율"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBE48 \uC774\uC1A1 \uCE74\uD2B8\uB97C \uC774\uC6C3 \uC2DC\uC124\uACFC
-      \uB098\uB204\uB294 \uD611\uB825"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uACF5\uB3D9 \uC6B4\uBC18 \uC77C\uC815 \uCDA9\uB3CC\uB960"
+    Difficulty: 1
+  - Title: "운반 협업 기관 선정"
+    Agency: "국공립병원"
+    Name: "운반 일정 충돌률"
     HighlightWords:
-    - "\uACF5\uB3D9 \uC6B4\uBC18 \uC77C\uC815 \uCDA9\uB3CC\uB960"
-    Unit: '%'
+    - "운반 일정 충돌률"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBCD1\uC6D0\uACFC \uAE09\uC2DD\uC13C\uD130\uC758 \uBB3C\uB958\uD568\uC744
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uBB3C\uB958 \uC815\uBCF4 \uB204\uB77D\uB960"
+    Difficulty: 1
+  - Title: "물류 정보 협업 기관 선정"
+    Agency: "국공립병원"
+    Name: "물류 정보 누락률"
     HighlightWords:
-    - "\uB204\uB77D"
-    Unit: '%'
+    - "물류 정보 누락률"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC26C\uB294 \uC138\uCC99 \uC7A5\uBE44\uB97C \uC774\uC6C3 \uACF5\uACF5\uC2DC\uC124\uC5D0
-      \uBE4C\uB9AC\uB294 \uD611\uB825"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uACF5\uB3D9 \uC138\uCC99 \uC7A5\uBE44 \uD65C\uC6A9\uB960"
+    Difficulty: 1
+  - Title: "세척 장비 협업 기관 선정"
+    Agency: "국공립병원"
+    Name: "공동 세척 장비 활용률"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "공동 세척 장비 활용률"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBCD1\uC6D0 \uC548\uB0B4 \uC9C0\uB3C4\uC640 \uB300\uC911\uAD50\uD1B5
-      \uC9C0\uB3C4\uB97C \uC787\uB294 \uD611\uB825"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uACBD\uB85C \uC815\uBCF4 \uBC18\uC601 \uB300\uAE30 \uC77C\uC218"
+    Difficulty: 1
+  - Title: "이송 경로 협업 기관 선정"
+    Agency: "국공립병원"
+    Name: "경로 정보 반영 대기 일수"
     HighlightWords:
-    - "\uB300\uAE30"
-    Unit: "\uC77C"
+    - "경로 정보 반영 대기 일수"
+    Unit: "일"
     Rule: 1
     Display: 0
     Min: 1
-    Max: 30
-    ScaleMax: 0
-  - Title: "\uC2DC\uC124\uBCC4 \uBE44\uD488 \uCC3D\uACE0\uB97C \uD568\uAED8 \uD655\uC778\uD558\uB294
-      \uD611\uB825"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uC911\uBCF5 \uBB3C\uD488 \uAD6C\uB9E4 \uAC10\uC18C\uC728"
+    Max: 20
+    ScaleMax: 20
+    Difficulty: 1
+  - Title: "물품 구매 협업 기관 선정"
+    Agency: "국공립병원"
+    Name: "중복 구매 감소율"
     HighlightWords:
-    - "\uC911\uBCF5"
-    Unit: '%'
+    - "중복 구매 감소율"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC18C\uBC29 \uB4DC\uB860\uACFC \uC0B0\uB9BC \uAD00\uCE21 \uC7A5\uBE44\uAC00
-      \uC9C0\uB3C4\uB97C \uB098\uB204\uB294 \uD611\uB825"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC7AC\uB09C \uC9C0\uB3C4 \uACF5\uC720 \uAE30\uB300\uD6A8\uACFC"
+    Difficulty: 1
+  - Title: "소방 드론과 산림 관측 장비가 지도를 나누는 협력"
+    Agency: "소방서"
+    Name: "재난 지도 공유 기대효과"
     HighlightWords:
-    - "\uC7AC\uB09C \uC9C0\uB3C4 \uACF5\uC720 \uAE30\uB300\uD6A8\uACFC"
-    Unit: 
+    - "재난 지도 공유 기대효과"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uB300\uD53C \uC548\uB0B4\uD310\uACFC \uAE30\uC0C1 \uC54C\uB9BC\uC744
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC704\uD5D8 \uC815\uBCF4 \uC804\uB2EC \uC624\uB958\uC728"
+    Difficulty: 0
+  - Title: "대피 안내판과 기상 알림을 잇는 협력"
+    Agency: "소방서"
+    Name: "위험 정보 전달 오류율"
     HighlightWords:
-    - "\uC624\uB958"
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "오류"
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uB180\uACE0 \uC788\uB294 \uAD6C\uC870 \uD6C8\uB828\uC7A5\uC744 \uD568\uAED8
-      \uC4F0\uB294 \uD611\uB825"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uD6C8\uB828 \uC2DC\uC124 \uACF5\uB3D9 \uD65C\uC6A9\uB960"
+    Difficulty: 0
+  - Title: "놀고 있는 구조 훈련장을 함께 쓰는 협력"
+    Agency: "소방서"
+    Name: "훈련 시설 공동 활용률"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "활용률"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAD6C\uC870 \uC7A5\uBE44 \uC704\uCE58\uB97C \uB3C4\uB85C \uC9C0\uB3C4\uC640
-      \uD569\uCE58\uB294 \uD611\uB825"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC7A5\uBE44 \uC704\uCE58 \uAC31\uC2E0 \uB300\uAE30 \uC2DC\uAC04"
+    Difficulty: 0
+  - Title: "구조 장비 위치를 도로 지도와 합치는 협력"
+    Agency: "소방서"
+    Name: "장비 위치 갱신 대기 시간"
     HighlightWords:
-    - "\uB300\uAE30"
-    Unit: "\uBD84"
+    - "대기"
+    Unit: "분"
     Rule: 1
     Display: 0
     Min: 1
     Max: 30
     ScaleMax: 0
-  - Title: "\uC18C\uBC29 \uC6A9\uC218 \uC7AC\uACE0\uB97C \uC9C0\uC790\uCCB4\uC640
-      \uD568\uAED8 \uBCF4\uB294 \uD611\uB825"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC911\uBCF5 \uD604\uC7A5 \uD655\uC778 \uAC10\uC18C\uC728"
+    Difficulty: 0
+  - Title: "소방 용수 재고를 지자체와 함께 보는 협력"
+    Agency: "소방서"
+    Name: "중복 현장 확인 감소율"
     HighlightWords:
-    - "\uC911\uBCF5"
-    Unit: '%'
+    - "감소율"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAD50\uD1B5 \uC2E0\uD638\uC640 \uB4F1\uD558\uAD50 \uC548\uB0B4\uB97C
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC2E0\uD638 \uC815\uBCF4 \uC804\uB2EC \uC9C0\uC5F0 \uC2DC\uAC04"
+    Difficulty: 0
+  - Title: "교통 신호와 등하교 안내를 잇는 협력"
+    Agency: "경찰서"
+    Name: "신호 정보 전달 지연 시간"
     HighlightWords:
-    - "\uC9C0\uC5F0"
-    Unit: "\uBD84"
+    - "지연"
+    Unit: "분"
     Rule: 1
     Display: 0
     Min: 1
     Max: 30
     ScaleMax: 0
-  - Title: "\uACBD\uCC30 \uC548\uB0B4\uD310\uACFC \uCD95\uC81C \uC9C0\uB3C4\uB97C
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uD589\uC0AC \uACBD\uB85C \uC5F0\uACC4 \uC624\uB958\uC728"
+    Difficulty: 0
+  - Title: "경찰 안내판과 축제 지도를 잇는 협력"
+    Agency: "경찰서"
+    Name: "행사 경로 연계 오류율"
     HighlightWords:
-    - "\uC624\uB958"
-    Unit: '%'
+    - "오류"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC26C\uB294 \uC774\uB3D9 \uC6B8\uD0C0\uB9AC\uB97C \uC774\uC6C3 \uAE30\uAD00\uC5D0
-      \uBE4C\uB9AC\uB294 \uD611\uB825"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC548\uC804 \uC7A5\uBE44 \uACF5\uB3D9 \uD65C\uC6A9\uB960"
+    Difficulty: 0
+  - Title: "쉬는 이동 울타리를 이웃 기관에 빌리는 협력"
+    Agency: "경찰서"
+    Name: "안전 장비 공동 활용률"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "활용률"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBD84\uC2E4\uBB3C \uBCF4\uAD00 \uC704\uCE58\uB97C \uACF5\uACF5\uC2DC\uC124\uACFC
-      \uACF5\uC720\uD558\uB294 \uD611\uB825"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uBCF4\uAD00 \uC704\uCE58 \uD655\uC778 \uB300\uAE30 \uC77C\uC218"
+    Difficulty: 0
+  - Title: "분실물 보관 위치를 공공시설과 공유하는 협력"
+    Agency: "경찰서"
+    Name: "보관 위치 확인 대기 일수"
     HighlightWords:
-    - "\uB300\uAE30"
-    Unit: "\uC77C"
+    - "대기"
+    Unit: "일"
     Rule: 1
     Display: 0
     Min: 1
     Max: 30
     ScaleMax: 0
-  - Title: "\uB3C4\uB85C \uC810\uAC80 \uC0AC\uC9C4\uC744 \uC9C0\uC790\uCCB4\uC640
-      \uD568\uAED8 \uC4F0\uB294 \uD611\uB825"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC911\uBCF5 \uC810\uAC80 \uCD2C\uC601 \uAC10\uC18C\uC728"
+    Difficulty: 0
+  - Title: "도로 점검 사진을 지자체와 함께 쓰는 협력"
+    Agency: "경찰서"
+    Name: "중복 점검 촬영 감소율"
     HighlightWords:
-    - "\uC911\uBCF5"
-    Unit: '%'
+    - "감소율"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uB0A8\uB294 \uBCF4\uAE09 \uC0C1\uC790\uB97C \uC7AC\uB09C \uBB3C\uC790
-      \uC6B4\uBC18\uC5D0 \uC4F0\uB294 \uD611\uB825"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uBCF4\uAE09 \uC790\uC6D0 \uACF5\uC720 \uAE30\uB300\uD6A8\uACFC"
+    Difficulty: 0
+  - Title: "남은 군수품 상자를 재난 구호품 운반에 쓰는 협력"
+    Agency: "군부대"
+    Name: "보급 자원 공유 기대효과"
     HighlightWords:
-    - "\uBCF4\uAE09 \uC790\uC6D0 \uACF5\uC720 \uAE30\uB300\uD6A8\uACFC"
-    Unit: 
+    - "보급 자원 공유 기대효과"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uC0DD\uD65C \uBB3C\uC790 \uCC3D\uACE0\uC640 \uC9C0\uC790\uCCB4 \uC7AC\uACE0\uB97C
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uBB3C\uC790 \uC7AC\uACE0 \uC5F0\uACC4 \uC624\uB958\uC728"
+    Difficulty: 0
+  - Title: "생활 물자 창고와 지자체 재고를 잇는 협력"
+    Agency: "군부대"
+    Name: "물자 재고 연계 오류율"
     HighlightWords:
-    - "\uC624\uB958"
-    Unit: '%'
+    - "오류"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC26C\uB294 \uC138\uD0C1 \uC124\uBE44\uB97C \uC7AC\uB09C \uC9C0\uC6D0\uC5D0
-      \uC4F0\uB294 \uD611\uB825"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC138\uD0C1 \uC7A5\uBE44 \uACF5\uB3D9 \uD65C\uC6A9\uB960"
+    Difficulty: 0
+  - Title: "쉬는 세탁 설비를 재난 지원에 쓰는 협력"
+    Agency: "군부대"
+    Name: "세탁 장비 공동 활용률"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "활용률"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uACF5\uC6A9 \uC81C\uC124 \uC7A5\uBE44\uC758 \uC774\uB3D9 \uC77C\uC815\uC744
-      \uB098\uB204\uB294 \uD611\uB825"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uACF5\uB3D9 \uC77C\uC815 \uC870\uC728 \uB300\uAE30 \uC77C\uC218"
+    Difficulty: 0
+  - Title: "공용 제설 장비의 이동 일정을 나누는 협력"
+    Agency: "군부대"
+    Name: "공동 일정 조율 대기 일수"
     HighlightWords:
-    - "\uB300\uAE30"
-    Unit: "\uC77C"
+    - "대기"
+    Unit: "일"
     Rule: 1
     Display: 0
     Min: 1
     Max: 30
     ScaleMax: 0
-  - Title: "\uC0DD\uD65C\uAD00 \uBCF4\uC218 \uC790\uC7AC\uB97C \uC774\uC6C3 \uAE30\uAD00\uACFC
-      \uBAA8\uC73C\uB294 \uD611\uB825"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC911\uBCF5 \uC790\uC7AC \uBC1C\uC8FC \uAC10\uC18C\uC728"
+    Difficulty: 0
+  - Title: "생활관 보수 자재를 이웃 기관과 모으는 협력"
+    Agency: "군부대"
+    Name: "중복 자재 발주 감소율"
     HighlightWords:
-    - "\uC911\uBCF5"
-    Unit: '%'
+    - "감소율"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAC00\uB85C\uB4F1 \uC810\uAC80\uCC28\uC640 \uACF5\uC6D0 \uAD00\uB9AC\uCC28\uAC00
-      \uB178\uC120\uC744 \uB098\uB204\uB294 \uD611\uB825"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uACF5\uB3D9 \uC810\uAC80 \uB178\uC120 \uCDA9\uB3CC\uB960"
+    Difficulty: 0
+  - Title: "가로등 점검차와 공원 관리차가 노선을 나누는 협력"
+    Agency: "시청·구청"
+    Name: "공동 점검 노선 충돌률"
     HighlightWords:
-    - "\uACF5\uB3D9 \uC810\uAC80 \uB178\uC120 \uCDA9\uB3CC\uB960"
-    Unit: '%'
+    - "공동 점검 노선 충돌률"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uB3C4\uB85C \uAD74\uCC29 \uC77C\uC815\uACFC \uC218\uB3C4 \uACF5\uC0AC
-      \uC77C\uC815\uC744 \uC787\uB294 \uD611\uB825"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uACF5\uC0AC \uC77C\uC815 \uCDA9\uB3CC\uB960"
+    Difficulty: 0
+  - Title: "도로 굴착 일정과 수도 공사 일정을 잇는 협력"
+    Agency: "시청·구청"
+    Name: "공사 일정 충돌률"
     HighlightWords:
-    - "\uACF5\uC0AC \uC77C\uC815 \uCDA9\uB3CC\uB960"
-    Unit: '%'
+    - "공사 일정 충돌률"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD589\uC0AC \uB05D\uB09C \uADF8\uB298\uB9C9\uC744 \uB2E4\uB978 \uACF5\uC6D0\uC5D0
-      \uBE4C\uB9AC\uB294 \uD611\uB825"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uADF8\uB298\uB9C9 \uACF5\uB3D9 \uD65C\uC6A9\uB960"
+    Difficulty: 0
+  - Title: "행사 끝난 그늘막을 다른 공원에 빌리는 협력"
+    Agency: "시청·구청"
+    Name: "그늘막 공동 활용률"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "활용률"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uB208 \uCE58\uC6B0\uB294 \uB85C\uBD07\uC758 \uC704\uCE58\uB97C \uC774\uC6C3
-      \uAD6C\uC640 \uACF5\uC720\uD558\uB294 \uD611\uB825"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC7A5\uBE44 \uC704\uCE58 \uC804\uB2EC \uB300\uAE30 \uC2DC\uAC04"
+    Difficulty: 0
+  - Title: "제설 로봇 위치를 이웃 구청과 실시간 공유하는 협력"
+    Agency: "시청·구청"
+    Name: "장비 위치 전달 대기 시간"
     HighlightWords:
-    - "\uB300\uAE30"
-    Unit: "\uBD84"
+    - "대기"
+    Unit: "분"
     Rule: 1
     Display: 0
     Min: 1
     Max: 30
     ScaleMax: 0
-  - Title: "\uAC00\uB85C\uC218 \uC9C0\uB3C4\uC640 \uC804\uC120 \uC810\uAC80 \uC9C0\uB3C4\uB97C
-      \uD569\uCE58\uB294 \uD611\uB825"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC911\uBCF5 \uD604\uC7A5 \uBC29\uBB38 \uAC10\uC18C\uC728"
+    Difficulty: 0
+  - Title: "가로수 지도와 전선 점검 지도를 합치는 협력"
+    Agency: "시청·구청"
+    Name: "중복 현장 방문 감소율"
     HighlightWords:
-    - "\uC911\uBCF5"
-    Unit: '%'
+    - "감소율"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBE57\uBB3C \uC13C\uC11C\uC640 \uB18D\uC5C5 \uAD00\uCE21\uC18C\uAC00
-      \uC18C\uC2DD\uC744 \uB098\uB204\uB294 \uD611\uB825"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uAD00\uCE21 \uC815\uBCF4 \uACF5\uC720 \uC624\uB958\uC728"
+    Difficulty: 0
+  - Title: "빗물 센서와 농업 관측소가 소식을 나누는 협력"
+    Agency: "환경·상하수도 기관"
+    Name: "관측 정보 공유 오류율"
     HighlightWords:
-    - "\uC624\uB958"
-    Unit: '%'
+    - "오류"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAD00\uB85C \uC9C0\uB3C4\uC640 \uB3C4\uB85C \uBCF4\uC218 \uC9C0\uB3C4\uB97C
-      \uC787\uB294 \uD611\uB825"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC9C0\uD558 \uC2DC\uC124 \uC815\uBCF4 \uB204\uB77D\uB960"
+    Difficulty: 0
+  - Title: "관로 지도와 도로 보수 지도를 잇는 협력"
+    Agency: "환경·상하수도 기관"
+    Name: "지하 시설 정보 누락률"
     HighlightWords:
-    - "\uB204\uB77D"
-    Unit: '%'
+    - "누락"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC26C\uB294 \uC218\uC9C8 \uAC80\uC0AC \uC7A5\uBE44\uB97C \uD568\uAED8
-      \uC4F0\uB294 \uD611\uB825"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uAC80\uC0AC \uC7A5\uBE44 \uACF5\uB3D9 \uD65C\uC6A9\uB960"
+    Difficulty: 0
+  - Title: "쉬는 수질 검사 장비를 함께 쓰는 협력"
+    Agency: "환경·상하수도 기관"
+    Name: "검사 장비 공동 활용률"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "활용률"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAE09\uC218\uCC28 \uC704\uCE58\uB97C \uC7AC\uB09C \uBD80\uC11C\uC640
-      \uACF5\uC720\uD558\uB294 \uD611\uB825"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uAE09\uC218 \uC704\uCE58 \uD655\uC778 \uB300\uAE30 \uC2DC\uAC04"
+    Difficulty: 0
+  - Title: "급수차 위치를 재난 부서와 공유하는 협력"
+    Agency: "환경·상하수도 기관"
+    Name: "급수 위치 확인 대기 시간"
     HighlightWords:
-    - "\uB300\uAE30"
-    Unit: "\uBD84"
+    - "대기"
+    Unit: "분"
     Rule: 1
     Display: 0
     Min: 1
     Max: 30
     ScaleMax: 0
-  - Title: "\uC815\uC218\uC7A5 \uBD80\uD488 \uBAA9\uB85D\uC744 \uC774\uC6C3 \uC2DC\uC124\uACFC
-      \uD569\uCE58\uB294 \uD611\uB825"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC911\uBCF5 \uBD80\uD488 \uAD6C\uB9E4 \uAC10\uC18C\uC728"
+    Difficulty: 0
+  - Title: "정수장 부품 목록을 이웃 시설과 합치는 협력"
+    Agency: "환경·상하수도 기관"
+    Name: "중복 부품 구매 감소율"
     HighlightWords:
-    - "\uC911\uBCF5"
-    Unit: '%'
+    - "감소율"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0

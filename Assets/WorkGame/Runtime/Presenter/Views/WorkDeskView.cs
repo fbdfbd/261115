@@ -54,6 +54,12 @@ namespace WorkGame
         public int PoolCount => pool.Count;
         public int MaxVisible { get; private set; }
         public event Action<int> PaperClicked;
+        public WorkPaperItemView FindPaper(int paperId)
+        {
+            foreach (var view in pool)
+                if (view != null && view.PaperId == paperId && !view.IsLeaving) return view;
+            return null;
+        }
         private bool IsSorted => forceSorted || sortedMode;
         private RectTransform ActiveRoot => IsSorted && sortedRoot != null ? sortedRoot
             : looseMode ? looseRoot : null;

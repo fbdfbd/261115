@@ -1602,7 +1602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b3ccc42cb5d142848d1833433b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: WorkGame.Presentation::WorkGame.WorkGradeGraphView
-  documentStyle: {fileID: 11400000, guid: d54811bf29544a6586ee2d453d30b185, type: 2}
   metricTitle: {fileID: 779176886258806303}
   unitText: {fileID: 0}
   items:

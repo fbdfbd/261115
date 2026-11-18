@@ -93,18 +93,20 @@ namespace WorkGame
 
         public void OpenPaper(int paperId)
         {
+            if (paperView != null && paperView.IsTransitioning) return;
             if (connected && System.TryInstantPaper(paperId)) return;
             if (!connected || !System.SelectPaper(paperId)) return;
             openedPaper = System.CurrentPaper;
-            paperView?.Show(openedPaper, System.Upgrades.HighlightLevel, System.Run.Seconds);
+            paperView?.Show(openedPaper, System.Upgrades.HighlightLevel, System.Run.Seconds, deskView?.FindPaper(paperId));
         }
 
         public void ClosePaper()
         {
             if (disposed) return;
+            if (paperView != null && paperView.IsTransitioning) return;
             openedPaper = null;
             System?.ClearPaper();
-            paperView?.Hide();
+            paperView?.Close();
         }
 
         public void StartHold(int paperId, int choiceIndex)
@@ -129,7 +131,15 @@ namespace WorkGame
 
         private void OnPaperSubmitted(WorkSubmitResult result)
         {
-            hudView?.ShowSkillPointResult(System.Run.SkillPoints, result.IsRight, result.IsPointBoosted);
+            float shineDelay = 0;
+            if (openedPaper != null && openedPaper.Id == result.PaperId)
+            {
+                // 판정/보충은 기존 순서로 진행하고 상세 종이의 퇴장만 별도로 재생합니다.
+                openedPaper = null;
+                paperView?.PlayComplete();
+                if (paperView != null) shineDelay = paperView.CompletionShineDelay;
+            }
+            hudView?.ShowSkillPointResult(System.Run.SkillPoints, result.IsRight, result.IsPointBoosted, shineDelay);
             if (feedback != null && feedbackView != null) feedbackView.Show(feedback.Pick(result));
         }
 
@@ -137,6 +147,7 @@ namespace WorkGame
         {
             bool newMonth = shownMonth != System.Run.Month;
             bool working = System.Run.Phase == WorkPhase.Working;
+            if (newMonth || !working) paperView?.Hide();
             bool sorted = System.Upgrades.SortUnlocked && System.Run.SortEnabled;
             bool faxEnabled = (faxView != null && faxView.ForceEnabled)
                 || (System.Upgrades.FaxUnlocked && System.Run.FaxVisible);
@@ -173,7 +184,7 @@ namespace WorkGame
             int faxCount = System.Fax.Jobs.Count;
             faxView?.ShowState(working && faxEnabled,
                 !System.IsPaused && faxCount < System.Upgrades.FaxSlots, faxCount, System.Upgrades.FaxSlots,
-                faxCount == 0 ? 0 : (float)System.Fax.Jobs[0].Progress);
+                faxCount == 0 ? 0 : (float)System.Fax.Jobs[0].Progress, System.IsWorking);
             hudView?.ShowProgress(System.MonthDone, System.MonthTotal);
             hudView?.ShowSkillPoints(System.Run.SkillPoints);
             hudView?.ShowTime(System.RemainingSeconds, System.MonthSeconds);

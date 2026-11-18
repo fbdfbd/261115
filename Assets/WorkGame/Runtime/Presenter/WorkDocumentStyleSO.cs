@@ -13,14 +13,10 @@ namespace WorkGame
         [SerializeField] private Color barColor3 = new Color32(139, 122, 166, 255);
         [SerializeField] private Color barColor4 = new Color32(111, 148, 116, 255);
         [SerializeField] private Color barColor5 = new Color32(188, 115, 120, 255);
-        [Header("숫자 뒤 단위")]
-        [SerializeField] private Color unitColor = new Color32(138, 148, 129, 255);
 
         // Weak keys retain assignments while a paper exists without keeping old runs alive.
         private readonly ConditionalWeakTable<WorkPaper, int[]> paperColors = new ConditionalWeakTable<WorkPaper, int[]>();
         private readonly System.Random colorRandom = new System.Random();
-
-        public Color UnitColor => unitColor;
 
         public Color GetBarColor(WorkPaper paper, int choiceIndex)
         {

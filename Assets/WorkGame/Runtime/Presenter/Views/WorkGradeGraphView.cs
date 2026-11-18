@@ -16,7 +16,6 @@ namespace WorkGame
         }
 
         [SerializeField] private List<TextItem> items = new List<TextItem>();
-        [SerializeField] private WorkDocumentStyleSO documentStyle;
 
         protected override void ShowValues(WorkPaper paper)
         {
@@ -34,9 +33,8 @@ namespace WorkGame
                     string value = paper.GetChoiceText(i);
                     if (paper.Display == PaperDisplay.Number && !string.IsNullOrWhiteSpace(paper.Unit))
                     {
-                        Color unitColor = documentStyle != null ? documentStyle.UnitColor : new Color32(138, 148, 129, 255);
                         string number = paper.Choices[i].Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                        value = number + "<color=#" + ColorUtility.ToHtmlStringRGBA(unitColor) + ">" + paper.Unit + "</color>";
+                        value = number + "<size=90%>" + paper.Unit + "</size>";
                     }
                     item.ValueText.text = value;
                 }

@@ -18,565 +18,557 @@ MonoBehaviour:
   HudColor: {r: 1, g: 1, b: 1, a: 1}
   Target: "\uC5C5\uCCB4"
   Metrics:
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uC81C\uCD9C\uD55C \uACF5\uC7A5 \uC0AC\uC9C4
-      \uAD6C\uC11D\uC5D0 \uC800\uC7A5\uD558\uC9C0 \uC54A\uC740 \uAC8C\uC784\uC774
-      \uBCF4\uC774\uB294 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uACF5\uC7A5 \uC0AC\uC9C4 \uC704\uC870 \uC758\uC2EC\uB3C4"
+  - Title: "공장 사진 조사 대상 선정"
+    Agency: ""
+    Name: "공장 사진 조사 필요도"
     HighlightWords:
-    - "\uACF5\uC7A5 \uC0AC\uC9C4 \uC704\uC870 \uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uC790\uACA9\uC99D \uBC1C\uAE09\uAE30\uAD00
-      \uC8FC\uC18C\uAC00 \uC0AC\uC7A5\uB2D8 \uAFC8\uC18D\uC778 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uC790\uACA9 \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uACF5\uC7A5 \uACAC\uD559\uC744 \uC2E0\uCCAD\uD558\uBA74
-      \uAC8C\uC784 \uC811\uC18D \uCF54\uB4DC\uB97C \uBCF4\uB0B4\uB294 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uC2E4\uC81C \uACF5\uC7A5 \uC704\uCE58 \uD655\uC778 \uC131\uACF5\uB960"
-    HighlightWords:
-    - "\uC131\uACF5\uB960"
-    Unit: '%'
-    Rule: 1
-    Display: 2
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uC2DC\uD5D8\uC131\uC801\uC11C \uC9C1\uC778\uC774
-      \uAC10\uC790 \uB2E8\uBA74\uCC98\uB7FC \uBCF4\uC774\uB294 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uC2DC\uD5D8\uC131\uC801\uC11C \uC704\uC870 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uC2DC\uD5D8\uC131\uC801\uC11C \uC704\uC870 \uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "공장 사진 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uC0C1\uADFC \uAE30\uC220\uC790\uAC00
-      \uBAA8\uB450 \uAC19\uC740 \uCDA9\uC804\uAE30\uC5D0 \uAF42\uD600 \uC788\uB294
-      \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uAE30\uC220\uC778\uB825 \uD5C8\uC704 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
+    Difficulty: 1
+  - Title: "자격 증빙 조사 대상 선정"
+    Agency: ""
+    Name: "자격 증빙 조사 필요도"
     HighlightWords:
-    - "\uAE30\uC220\uC778\uB825 \uD5C8\uC704 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "자격 증빙 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uC0DD\uC0B0 \uC778\uC99D\uC11C \uBC1C\uAE09\uC790\uAC00
-      \uC790\uC0AC \uBC18\uB824 \uB85C\uBD07\uC778 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uC0DD\uC0B0 \uC778\uC99D\uC11C \uD655\uC778 \uC2E0\uB8B0\uB3C4"
+    Difficulty: 1
+  - Title: "공장 위치 조사 대상 선정"
+    Agency: ""
+    Name: "공장 위치 조사 필요도"
     HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uB4F1\uB85D\uB41C \uCC3D\uACE0\uAC00
-      \uBC30\uC1A1 \uB85C\uBD07 \uBC30 \uC18D\uC5D0\uB9CC \uC788\uB294 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uCC3D\uACE0 \uC2E4\uC7AC \uC5EC\uBD80 \uD655\uC778 \uC131\uACF5\uB960"
-    HighlightWords:
-    - "\uC131\uACF5\uB960"
-    Unit: '%'
-    Rule: 1
-    Display: 1
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uC2E4\uC801 \uC99D\uBA85 \uC0AC\uC9C4\uB9C8\uB2E4
-      \uB2EC\uC758 \uBAA8\uC591\uC774 \uB2E4\uB978 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uB0A9\uD488 \uC0AC\uC9C4 \uBD88\uC77C\uCE58\uC728"
-    HighlightWords:
-    - "\uC77C\uCE58\uC728"
-    Unit: '%'
+    - "공장 위치 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uBE4C\uB9B0 \uACF5\uC7A5 \uAC04\uD310\uC774
-      \uACAC\uD559 \uC911 \uBC18\uB0A9\uB418\uB294 \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uACF5\uC7A5 \uBCF4\uC720 \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
+    Difficulty: 1
+  - Title: "시험서 조사 대상 선정"
+    Agency: ""
+    Name: "시험서 조사 필요도"
     HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC870\uC0AC \uB300\uC0C1 \xB7 \uBA74\uD5C8 \uC870\uD68C \uC8FC\uC18C\uAC00
-      \uC790\uAFB8 \uC628\uB77C\uC778 \uB180\uC774\uD130\uB85C \uC5F0\uACB0\uB418\uB294
-      \uC5C5\uCCB4"
-    Agency: 
-    Name: "\uBA74\uD5C8 \uC815\uBCF4 \uC704\uC870 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uBA74\uD5C8 \uC815\uBCF4 \uC704\uC870 \uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uAD50\uAD6C \uACF5\uC7A5 \uC0AC\uC9C4\uC5D0 \uAC8C\uC784 \uCCB4\uB825\uBC14\uAC00
-      \uB728\uB294 \uC5C5\uCCB4"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uACF5\uC7A5 \uC0AC\uC9C4 \uC704\uC870 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uC704\uC870"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
-    Rule: 0
-    Display: 1
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uCC45\uC0C1 \uC778\uC99D\uC11C\uC5D0 \uAD50\uC7A5 \uACE0\uC591\uC774\uAC00
-      \uC11C\uBA85\uD55C \uC5C5\uCCB4"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC81C\uD488 \uC778\uC99D \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uAE30\uC220\uC790\uAC00 \uBAA8\uB450 \uAD50\uAD6C \uC0C1\uC790 \uADF8\uB9BC\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uAE30\uC220\uC778\uB825 \uD5C8\uC704 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uD559\uC2B5 \uC7A5\uBE44 \uBA74\uD5C8\uC758 \uBC1C\uAE09\uCC98\uAC00
-      \uAFC8\uC18D\uC778 \uC5C5\uCCB4"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uBA74\uD5C8 \uD655\uC778 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uCC45\uC7A5 \uC0DD\uC0B0 \uC124\uBE44\uAC00 \uC885\uC774 \uBAA8\uD615\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC0DD\uC0B0\uC2DC\uC124 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
-    Rule: 0
-    Display: 1
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uBA78\uADE0\uD568 \uACF5\uC7A5 \uACAC\uD559\uC5D0 \uAC00\uC0C1 \uC548\uACBD\uB9CC
-      \uC8FC\uB294 \uC5C5\uCCB4"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uACF5\uC7A5 \uC8FC\uC18C \uD655\uC778 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uBCD1\uC6D0 \uCE74\uD2B8 \uC778\uC99D\uC11C \uC9C1\uC778\uC774 \uAF43\uBB34\uB2AC\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uCE74\uD2B8 \uC778\uC99D\uC11C \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC758\uB8CC \uAC00\uAD6C \uAE30\uC220\uC790 \uC774\uB984\uC774 \uC804\uBD80
-      \uBCF5\uC0AC\uB41C \uC5C5\uCCB4"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uAE30\uC220\uC778\uB825 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC138\uCC99 \uC7A5\uBE44 \uC2E4\uC801 \uC99D\uBA85\uC774 \uAD11\uACE0
-      \uC7A5\uBA74\uC778 \uC5C5\uCCB4"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uB0A9\uD488 \uC2E4\uC801 \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    - "\uC2E4\uC801"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uBCF4\uAD00 \uC6A9\uAE30 \uC0DD\uC0B0 \uC8FC\uC18C\uAC00 \uC5D8\uB9AC\uBCA0\uC774\uD130
-      \uC548\uC778 \uC5C5\uCCB4"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uC0DD\uC0B0 \uC0AC\uC5C5\uC7A5 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "시험서 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD638\uC2A4 \uACF5\uC7A5 \uAC04\uD310\uC774 \uD48D\uC120\uC5D0 \uB9E4\uB2EC\uB9B0
-      \uC5C5\uCCB4"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uACF5\uC7A5 \uBCF4\uC720 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
+    Difficulty: 1
+  - Title: "기술인력 조사 대상 선정"
+    Agency: ""
+    Name: "기술인력 조사 필요도"
     HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "기술인력 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBC29\uD654\uBCF5 \uC2DC\uD5D8\uC11C\uC5D0 \uC6A9\uC758 \uBC1C\uD1B1
-      \uB3C4\uC7A5\uC774 \uCC0D\uD78C \uC5C5\uCCB4"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC2DC\uD5D8\uC11C \uBC1C\uAE09 \uD655\uC778 \uC2E0\uB8B0\uB3C4"
+    Difficulty: 1
+  - Title: "생산 인증 조사 대상 선정"
+    Agency: ""
+    Name: "생산 인증 조사 필요도"
     HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uAD6C\uC870\uC815 \uAE30\uC220\uC790\uAC00 \uC5F0\uB77D\uD558\uBA74
-      \uB179\uC74C\uB9CC \uD2B8\uB294 \uC5C5\uCCB4"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC0C1\uADFC \uC778\uB825 \uD5C8\uC704 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC0AC\uB2E4\uB9AC \uC81C\uC870 \uBA74\uD5C8\uAC00 \uCD95\uD558 \uCE74\uB4DC\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC81C\uC870 \uBA74\uD5C8 \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uBCF4\uD638 \uC7A5\uBE44 \uC0DD\uC0B0 \uB77C\uC778\uC774 \uD14C\uB9C8\uD30C\uD06C\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC0DD\uC0B0 \uC124\uBE44 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "생산 인증 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAD50\uD1B5\uBD09 \uACF5\uC7A5 \uB3C4\uBA74\uC5D0 \uBCF4\uBB3C \uC0C1\uC790\uAC00
-      \uC788\uB294 \uC5C5\uCCB4"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC0DD\uC0B0\uC2DC\uC124 \uC2E4\uC7AC \uD655\uC778\uB960"
+    Difficulty: 1
+  - Title: "창고 실사 대상 선정"
+    Agency: ""
+    Name: "창고 실사 필요도"
     HighlightWords:
-    - "\uC0DD\uC0B0\uC2DC\uC124 \uC2E4\uC7AC \uD655\uC778\uB960"
-    Unit: '%'
-    Rule: 1
-    Display: 2
+    - "창고 실사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBB34\uC804\uAE30 \uC778\uC99D\uBC88\uD638\uAC00 \uB85C\uBD07 \uBCC4\uBA85\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uD1B5\uC2E0 \uC7A5\uBE44 \uC778\uC99D \uC2E0\uB8B0\uB3C4"
+    Difficulty: 1
+  - Title: "납품 사진 조사 대상 선정"
+    Agency: ""
+    Name: "납품 사진 조사 필요도"
     HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uD604\uC7A5 \uCE74\uBA54\uB77C \uAE30\uC220\uC790\uAC00 \uC0AC\uC9C4
-      \uC561\uC790\uC778 \uC5C5\uCCB4"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uAE30\uC220\uC778\uB825 \uD5C8\uC704 \uAE30\uC7AC \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uBCF4\uD638 \uC870\uB07C \uBA74\uD5C8\uAC00 \uC18C\uC6D0 \uC885\uC774\uC5D0
-      \uC801\uD78C \uC5C5\uCCB4"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uBA74\uD5C8 \uBC1C\uAE09 \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC548\uC804 \uD45C\uC9C0 \uACF5\uC7A5 \uC8FC\uC18C\uAC00 \uC21C\uD68C
-      \uACF5\uC5F0\uC7A5\uC778 \uC5C5\uCCB4"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC0C1\uC2DC \uC0DD\uC0B0\uC2DC\uC124 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "납품 사진 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uCE68\uB0AD \uC0DD\uC0B0 \uC0AC\uC9C4\uC5D0 \uAC8C\uC784 \uC800\uC7A5\uCC3D\uC774
-      \uC788\uB294 \uC5C5\uCCB4"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC0DD\uC0B0 \uD604\uC7A5 \uC0AC\uC9C4 \uC704\uC870 \uC758\uC2EC\uB3C4"
+    Difficulty: 1
+  - Title: "공장 보유 조사 대상 선정"
+    Agency: ""
+    Name: "공장 보유 조사 필요도"
     HighlightWords:
-    - "\uC704\uC870"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
-    Rule: 0
-    Display: 1
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uAD70\uD654 \uB0A9\uD488 \uC2E4\uC801\uC744 \uBC1C\uC790\uAD6D\uC73C\uB85C
-      \uC99D\uBA85\uD55C \uC5C5\uCCB4"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uB0A9\uD488 \uC2E4\uC801 \uD655\uC778 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    - "\uC2E4\uC801"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uCDE8\uC0AC \uC7A5\uBE44 \uAE30\uC220\uC790\uAC00 \uC0AC\uC7A5\uB2D8
-      \uBD84\uC2E0\uC778 \uC5C5\uCCB4"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uAE30\uC220\uC778\uB825 \uC911\uBCF5 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uC911\uBCF5"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uBC29\uD55C\uBCF5 \uC778\uC99D\uC11C\uAC00 \uC5EC\uD589 \uAE30\uB150
-      \uB3C4\uC7A5\uC778 \uC5C5\uCCB4"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uBC29\uD55C\uBCF5 \uC778\uC99D \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC0DD\uD65C\uAD00 \uAC00\uAD6C \uACF5\uC7A5\uC774 \uC811\uC774\uC2DD
-      \uBC30\uACBD\uC778 \uC5C5\uCCB4"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uACF5\uC7A5 \uC2E4\uC7AC \uC5EC\uBD80 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
-    Rule: 0
-    Display: 1
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uBCF4\uB3C4\uBE14\uB85D \uACF5\uC7A5 \uC0AC\uC9C4\uC774 \uC7A5\uB09C\uAC10
-      \uB3C4\uC2DC\uC778 \uC5C5\uCCB4"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uACF5\uC7A5 \uC0AC\uC9C4 \uAC80\uC99D \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uAC00\uB85C\uB4F1 \uBA74\uD5C8\uB97C \uBCC4\uC790\uB9AC\uB85C \uC99D\uBA85\uD558\uB294
-      \uC5C5\uCCB4"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC81C\uC870 \uC790\uACA9 \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uCCAD\uC18C \uC7A5\uBE44 \uAE30\uC220\uC790\uAC00 \uC8FC\uBB38\uD558\uBA74
-      \uB098\uD0C0\uB098\uB294 \uC5C5\uCCB4"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC0C1\uADFC \uAE30\uC220\uC790 \uD5C8\uC704 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uACF5\uC6D0 \uC2DC\uC124 \uC2DC\uD5D8\uC11C\uAC00 \uC18C\uD48D \uC77C\uAE30\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC2DC\uD5D8\uC131\uC801\uC11C \uD655\uC778 \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC81C\uC124 \uC7A5\uBE44 \uCC3D\uACE0\uAC00 \uB208 \uC624\uBA74 \uC0AC\uB77C\uC9C0\uB294
-      \uC5C5\uCCB4"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uB0A9\uD488 \uC2DC\uC124 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "공장 보유 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD544\uD130 \uC0DD\uC0B0 \uB77C\uC778\uC774 \uC218\uC871\uAD00 \uC7A5\uC2DD\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC0DD\uC0B0 \uB77C\uC778 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
+    Difficulty: 1
+  - Title: "면허 정보 조사 대상 선정"
+    Agency: ""
+    Name: "면허 정보 조사 필요도"
     HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "면허 정보 조사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uACC4\uB7C9\uAE30 \uC778\uC99D\uC11C\uB97C \uAC70\uD488\uC73C\uB85C
-      \uCD9C\uB825\uD55C \uC5C5\uCCB4"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uACC4\uB7C9\uAE30 \uC778\uC99D \uC99D\uBE59 \uC2E0\uB8B0\uB3C4"
+    Difficulty: 1
+  - Title: "교구 공장 실사 대상 선정"
+    Agency: "교육청·학교"
+    Name: "교구 공장 실사 필요도"
     HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uBC30\uAD00 \uAE30\uC220\uC790 \uBA85\uB2E8\uC774 \uBB3C\uACE0\uAE30
-      \uB3C4\uAC10\uC778 \uC5C5\uCCB4"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uAE30\uC220\uC778\uB825 \uD5C8\uC704 \uB4F1\uB85D \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uAC80\uC0AC \uC7A5\uBE44 \uC2E4\uC801 \uC0AC\uC9C4\uC774 \uC804\uC2DC
-      \uD3EC\uC2A4\uD130\uC778 \uC5C5\uCCB4"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uB0A9\uD488 \uC2E4\uC801 \uC790\uB8CC \uC2E0\uB8B0\uB3C4"
-    HighlightWords:
-    - "\uC2E0\uB8B0\uB3C4"
-    - "\uC2E4\uC801"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC800\uC7A5\uD1B5 \uACF5\uC7A5 \uC8FC\uC18C\uAC00 \uC774\uB3D9 \uAE09\uC218\uCC28\uC778
-      \uC5C5\uCCB4"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uACE0\uC815 \uC0DD\uC0B0\uC2DC\uC124 \uD5C8\uC704 \uC2E0\uACE0 \uC758\uC2EC\uB3C4"
-    HighlightWords:
-    - "\uD5C8\uC704"
-    - "\uC758\uC2EC\uB3C4"
-    Unit: '%'
+    - "교구 공장 실사 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 1
+  - Title: "교구 인증 조사 대상 선정"
+    Agency: "교육청·학교"
+    Name: "교구 인증 조사 필요도"
+    HighlightWords:
+    - "교구 인증 조사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "가구 기술인력 조사 선정"
+    Agency: "교육청·학교"
+    Name: "가구 기술인력 조사 필요도"
+    HighlightWords:
+    - "가구 기술인력 조사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "가구 면허 조사 대상 선정"
+    Agency: "교육청·학교"
+    Name: "가구 면허 조사 필요도"
+    HighlightWords:
+    - "가구 면허 조사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "학교 물품 공장 실사 선정"
+    Agency: "교육청·학교"
+    Name: "학교 물품 공장 실사 필요도"
+    HighlightWords:
+    - "학교 물품 공장 실사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "병원 공장 주소 조사 선정"
+    Agency: "국공립병원"
+    Name: "병원 공장 주소 조사 필요도"
+    HighlightWords:
+    - "병원 공장 주소 조사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "카트 인증 조사 대상 선정"
+    Agency: "국공립병원"
+    Name: "카트 인증 조사 필요도"
+    HighlightWords:
+    - "카트 인증 조사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "병원 장비 인력 조사 선정"
+    Agency: "국공립병원"
+    Name: "병원 장비 인력 조사 필요도"
+    HighlightWords:
+    - "병원 장비 인력 조사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "병원 납품 실적 조사 선정"
+    Agency: "국공립병원"
+    Name: "병원 납품 실적 조사 필요도"
+    HighlightWords:
+    - "병원 납품 실적 조사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "의료 생산시설 실사 선정"
+    Agency: "국공립병원"
+    Name: "의료 생산시설 실사 필요도"
+    HighlightWords:
+    - "의료 생산시설 실사 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "호스 공장 간판을 풍선에 매달아 놓은 업체"
+    Agency: "소방서"
+    Name: "공장 보유 허위 신고 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "방화복 시험서에 용 발톱 도장이 찍힌 업체"
+    Agency: "소방서"
+    Name: "시험서 발급 확인 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "구조정 기술자에게 전화하면 녹음만 나오는 업체"
+    Agency: "소방서"
+    Name: "상근 인력 허위 등록 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "사다리 제조 면허 대신 축하 카드를 낸 업체"
+    Agency: "소방서"
+    Name: "제조 면허 증빙 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "보호 장비 공장이라더니 놀이공원인 업체"
+    Agency: "소방서"
+    Name: "생산 설비 허위 신고 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "교통봉 공장 도면에 보물 상자만 그려놓은 업체"
+    Agency: "경찰서"
+    Name: "생산시설 실재 확인률"
+    HighlightWords:
+    - "생산시설 실재 확인률"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "무전기 공식 인증번호가 로봇 별명인 업체"
+    Agency: "경찰서"
+    Name: "통신 장비 인증 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "현장 카메라 기술자라며 사진 액자를 내민 업체"
+    Agency: "경찰서"
+    Name: "기술인력 허위 기재 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "보호 조끼 제조 면허를 소원 종이에 적어 낸 업체"
+    Agency: "경찰서"
+    Name: "면허 발급 증빙 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "안전 표지 공장 주소가 순회 공연장인 업체"
+    Agency: "경찰서"
+    Name: "상시 생산시설 허위 신고 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "침낭 생산 사진에 게임 저장창이 뜬 업체"
+    Agency: "군부대"
+    Name: "생산 현장 사진 위조 의심도"
+    HighlightWords:
+    - "위조"
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "군화 납품 실적을 발자국 사진으로만 증명한 업체"
+    Agency: "군부대"
+    Name: "납품 실적 확인 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    - "실적"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "취사 장비 기술자 명단에 사장님 분신까지 넣은 업체"
+    Agency: "군부대"
+    Name: "기술인력 중복 등록 의심도"
+    HighlightWords:
+    - "중복"
+    - "의심도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "방한복 인증서 대신 여행 기념 도장을 내민 업체"
+    Agency: "군부대"
+    Name: "방한복 인증 증빙 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "생활관 가구 공장이 접이식 사진 배경인 업체"
+    Agency: "군부대"
+    Name: "공장 실재 여부 의심도"
+    HighlightWords:
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "보도블록 공장 사진이 장난감 도시인 업체"
+    Agency: "시청·구청"
+    Name: "공장 사진 검증 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "가로등 제조 면허 대신 별자리 그림을 낸 업체"
+    Agency: "시청·구청"
+    Name: "제조 자격 증빙 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "청소 장비 기술자가 주문할 때만 출근하는 업체"
+    Agency: "시청·구청"
+    Name: "상근 기술자 허위 등록 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "공원 시설 시험성적서 대신 소풍 일기를 낸 업체"
+    Agency: "시청·구청"
+    Name: "시험성적서 확인 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "제설 장비 창고가 눈만 오면 사라지는 업체"
+    Agency: "시청·구청"
+    Name: "납품 시설 허위 신고 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "필터 생산 라인이라더니 수족관 장식인 업체"
+    Agency: "환경·상하수도 기관"
+    Name: "생산 라인 허위 신고 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "계량기 인증서를 비눗방울로 출력한 업체"
+    Agency: "환경·상하수도 기관"
+    Name: "계량기 인증 증빙 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "배관 기술자 명단 대신 물고기 도감을 낸 업체"
+    Agency: "환경·상하수도 기관"
+    Name: "기술인력 허위 등록 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "검사 장비 납품 사진이 전시회 포스터인 업체"
+    Agency: "환경·상하수도 기관"
+    Name: "납품 실적 자료 신뢰도"
+    HighlightWords:
+    - "신뢰도"
+    - "실적"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "저장통 공장 주소가 이동하는 급수차인 업체"
+    Agency: "환경·상하수도 기관"
+    Name: "고정 생산시설 허위 신고 의심도"
+    HighlightWords:
+    - "허위"
+    - "의심도"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0

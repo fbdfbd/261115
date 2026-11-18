@@ -70,7 +70,7 @@ namespace WorkGame.Tests
         }
 
         [Test]
-        public void NumericUnitsAreMutedAndReusedGradeLabelsHaveNoUnitMarkup()
+        public void NumericUnitsUseNinetyPercentSizeAndReusedGradeLabelsHaveNoUnitMarkup()
         {
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/WorkGame/Prefab/WorkDocument_Grade.prefab");
             var root = Object.Instantiate(prefab.GetComponentInChildren<WorkGradeGraphView>(true).gameObject);
@@ -78,11 +78,10 @@ namespace WorkGame.Tests
             {
                 var view = root.GetComponent<WorkGradeGraphView>();
                 var data = new SerializedObject(view);
-                Assert.That(data.FindProperty("documentStyle").objectReferenceValue, Is.EqualTo(AssetDatabase.LoadAssetAtPath<WorkDocumentStyleSO>(StylePath)));
                 var label = new SerializedObject(data.FindProperty("items").GetArrayElementAtIndex(0).FindPropertyRelative("ValueText").objectReferenceValue);
                 view.Show(Paper(1, PaperDisplay.Number, "kWh"));
                 label.Update();
-                Assert.That(label.FindProperty("m_text").stringValue, Is.EqualTo("1<color=#8A9481FF>kWh</color>"));
+                Assert.That(label.FindProperty("m_text").stringValue, Is.EqualTo("1<size=90%>kWh</size>"));
                 Assert.That(label.FindProperty("m_isRichText").boolValue, Is.True);
                 view.Show(Paper(2, PaperDisplay.Grade));
                 label.Update();

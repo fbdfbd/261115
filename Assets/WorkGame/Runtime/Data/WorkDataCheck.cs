@@ -32,8 +32,9 @@ namespace WorkGame
                     errors.Add("Batch month must be 1 to 12 and count cannot be negative.");
                 var category = batch.Category;
                 if (category == null) { errors.Add($"Month {batch.Month}: category is missing."); continue; }
-                if (!config.Plan.RandomizeCategories && category.Metrics != null && batch.Count > category.Metrics.Count)
-                    errors.Add($"Month {batch.Month}/{category.Id}: {batch.Count} papers requested, but only {category.Metrics.Count} unique metrics are available.");
+                int available = WorkPaperFactory.GetAvailableMetrics(category, batch.Month).Count();
+                if (!config.Plan.RandomizeCategories && batch.Count > available)
+                    errors.Add($"Month {batch.Month}/{category.Id}: {batch.Count} papers requested, but only {available} eligible unique metrics are available (months 1–3 require Easy).");
                 if (!monthKeys.Add($"{batch.Month}:{category.Id}")) errors.Add($"Duplicate month/category: {batch.Month}/{category.Id}");
                 if (string.IsNullOrWhiteSpace(category.Id)) { errors.Add("Category ID is empty."); continue; }
                 if (categories.TryGetValue(category.Id, out var previous))
@@ -63,6 +64,8 @@ namespace WorkGame
                         errors.Add($"{category.Id}/{metric.Name}: range needs at least ChoiceCount unique values; Max must be below int.MaxValue.");
                     if (!Enum.IsDefined(typeof(PickRule), metric.Rule) || !Enum.IsDefined(typeof(PaperDisplay), metric.Display))
                         errors.Add($"{category.Id}/{metric.Name}: invalid rule or display.");
+                    if (!Enum.IsDefined(typeof(WorkDifficulty), metric.Difficulty))
+                        errors.Add($"{category.Id}/{metric.Name}: invalid difficulty.");
                     if (metric.ScaleMax < 0)
                         errors.Add($"{category.Id}/{metric.Name}: ScaleMax cannot be negative.");
                     if ((metric.Display == PaperDisplay.Stars || metric.Display == PaperDisplay.Grade)
@@ -87,8 +90,8 @@ namespace WorkGame
                         errors.Add($"Month {month.Key}: need {count} categories and at least {count} papers.");
                     long required = (total + count - 1) / count;
                     foreach (var category in categories.Values)
-                        if (category.Metrics == null || category.Metrics.Count < required)
-                            errors.Add($"Month {month.Key}/{category.Id}: random selection needs at least {required} unique metrics.");
+                        if (WorkPaperFactory.GetAvailableMetrics(category, month.Key).LongCount() < required)
+                            errors.Add($"Month {month.Key}/{category.Id}: random selection needs at least {required} eligible unique metrics (months 1–3 require Easy).");
                 }
             }
             return errors;

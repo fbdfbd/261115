@@ -45,7 +45,11 @@ namespace WorkGame
         [SerializeField, Min(0)] private float salaryDelay = 0.2f;
         [SerializeField, Min(0)] private float salarySeconds = 0.25f;
         [SerializeField, Min(0)] private float closeSeconds = 0.2f;
-        [SerializeField] private float riseDistance = 24;
+        [Tooltip("화면 위쪽에서 내려올 때 문서 아래에 확보할 여백입니다.")]
+        [SerializeField, Min(0)] private float riseDistance = 24;
+        [Header("착지 후 작은 출렁임")]
+        [SerializeField, Min(0.01f)] private float settleSeconds = 0.24f;
+        [SerializeField, Min(0)] private float settleDistance = 12;
         [Header("추가 연출 연결 — 각 단계 시작 시 호출")]
         [SerializeField] private UnityEvent onOpen = new UnityEvent();
         [SerializeField] private UnityEvent onPoints = new UnityEvent();
@@ -96,14 +100,25 @@ namespace WorkGame
             SetAlpha(pointsGroup, 0);
             SetAlpha(salaryGroup, 0);
             if (confirmButton != null) confirmButton.interactable = false;
-            if (document != null) document.anchoredPosition = home + Vector2.down * riseDistance;
+            if (document != null)
+            {
+                float distance = riseDistance;
+                if (document.parent is RectTransform parent)
+                    distance += Mathf.Max(0, parent.rect.yMax - document.localPosition.y
+                        + document.rect.height * document.pivot.y * Mathf.Abs(document.localScale.y));
+                document.anchoredPosition = home + Vector2.up * distance;
+            }
 
             sequence = DOTween.Sequence().SetUpdate(true);
             sequence.AppendCallback(() => onOpen.Invoke());
             sequence.Append(Fade(panelGroup, 1, openSeconds));
             if (document != null)
                 sequence.Join(DOTween.To(() => document.anchoredPosition,
-                    value => document.anchoredPosition = value, home, openSeconds).SetEase(Ease.OutQuad));
+                    value => document.anchoredPosition = value, home, openSeconds).SetEase(Ease.OutCubic));
+            // 착지한 다음에만 작게 흔들고, 기존 행 등장 순서는 그대로 이어갑니다.
+            if (document != null && settleDistance > 0)
+                sequence.Append(document.DOPunchPosition(new Vector3(0, -settleDistance, 0),
+                    settleSeconds, 2, 0.4f));
             sequence.AppendInterval(pointsDelay);
             sequence.AppendCallback(() => onPoints.Invoke());
             sequence.Append(Fade(pointsGroup, 1, pointsSeconds));

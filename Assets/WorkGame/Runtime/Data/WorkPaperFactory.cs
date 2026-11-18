@@ -13,9 +13,9 @@ namespace WorkGame
             foreach (var batch in CreateBatches(plan, random))
             {
                 var category = batch.Category;
-                if (batch.Count > category.Metrics.Count)
-                    throw new InvalidOperationException($"Month {batch.Month}/{category.Id}: not enough unique metrics for {batch.Count} papers.");
-                var remaining = new List<WorkMetric>(category.Metrics);
+                var remaining = GetAvailableMetrics(category, batch.Month).ToList();
+                if (batch.Count > remaining.Count)
+                    throw new InvalidOperationException($"Month {batch.Month}/{category.Id}: not enough eligible unique metrics for {batch.Count} papers ({remaining.Count} available).");
                 for (int i = 0; i < batch.Count; i++)
                 {
                     int index = random.Next(remaining.Count);
@@ -31,6 +31,10 @@ namespace WorkGame
         }
 
         public static int CategoryCountForMonth(int month) => month <= 3 ? 1 : month <= 6 ? 2 : 3;
+
+        internal static IEnumerable<WorkMetric> GetAvailableMetrics(WorkCategorySO category, int month) =>
+            (category.Metrics ?? Enumerable.Empty<WorkMetric>())
+                .Where(metric => metric != null && (month > 3 || metric.Difficulty == WorkDifficulty.Easy));
 
         private static IEnumerable<WorkBatch> CreateBatches(WorkPlanSO plan, Random random)
         {

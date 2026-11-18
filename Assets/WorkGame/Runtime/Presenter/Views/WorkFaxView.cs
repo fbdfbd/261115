@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,10 +17,25 @@ namespace WorkGame
         [SerializeField] private Image dropArea;
         [SerializeField] private TMP_Text countText;
         [SerializeField] private Slider progressSlider;
+        [Tooltip("실제 진행률이 0일 때 슬라이더에 표시할 시작 비율입니다.")]
+        [SerializeField, Range(0, 1)] private float progressStart = 0.1f;
+        [Header("작동 중 외형 진동 — 판정 영역과 UI는 고정")]
+        [SerializeField] private RectTransform faxVisual;
+        [SerializeField, Min(0)] private float vibrationPixels = 1.5f;
+        [SerializeField, Range(0, 2)] private float vibrationAngle = 0.3f;
+        [SerializeField, Min(0.04f)] private float vibrationSeconds = 0.12f;
         public event Action<int> PaperDropped;
         public bool ForceEnabled => forceEnabled;
         private int lastCount = -1;
         private int lastSlots = -1;
+        private Tween vibration;
+        private float vibrationPhase;
+        private Vector2 visualHome;
+        private Quaternion visualRotation;
+        private bool operating;
+
+        private void OnDisable() => SetOperating(false);
+        private void OnDestroy() => vibration?.Kill();
 
         public void OnDrop(PointerEventData data)
         {
@@ -29,11 +45,12 @@ namespace WorkGame
             if (paper != null && paper.DraggedPaperId >= 0) PaperDropped?.Invoke(paper.DraggedPaperId);
         }
 
-        public void ShowState(bool visible, bool canDrop, int count, int slots, float progress)
+        public void ShowState(bool visible, bool canDrop, int count, int slots, float progress, bool processing = true)
         {
             if (group == null) group = GetComponent<CanvasGroup>();
             WorkUi.Show(group, visible);
             group.interactable = visible && canDrop;
+            SetOperating(visible && count > 0 && processing && isActiveAndEnabled);
             if (dropArea != null) dropArea.raycastTarget = true;
             if (lastCount != count || lastSlots != slots)
             {
@@ -48,7 +65,39 @@ namespace WorkGame
             progressSlider.maxValue = 1;
             progressSlider.wholeNumbers = false;
             progressSlider.interactable = false;
-            progressSlider.SetValueWithoutNotify(Mathf.Clamp01(progress));
+            progressSlider.SetValueWithoutNotify(Mathf.Lerp(progressStart, 1f, Mathf.Clamp01(progress)));
+        }
+
+        private void SetOperating(bool value)
+        {
+            if (faxVisual == null || operating == value) return;
+            operating = value;
+            if (operating)
+            {
+                if (vibration == null)
+                {
+                    visualHome = faxVisual.anchoredPosition;
+                    visualRotation = faxVisual.localRotation;
+                    vibration = DOTween.To(() => vibrationPhase, ApplyVibration, 1f, vibrationSeconds)
+                        .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart)
+                        .SetAutoKill(false).SetUpdate(true).Pause();
+                }
+                vibration.Restart();
+            }
+            else
+            {
+                vibration?.Pause();
+                faxVisual.anchoredPosition = visualHome;
+                faxVisual.localRotation = visualRotation;
+            }
+        }
+
+        private void ApplyVibration(float phase)
+        {
+            vibrationPhase = phase;
+            float wave = Mathf.Sin(phase * Mathf.PI * 2);
+            faxVisual.anchoredPosition = visualHome + new Vector2(wave * vibrationPixels, 0);
+            faxVisual.localRotation = visualRotation * Quaternion.Euler(0, 0, wave * vibrationAngle);
         }
     }
 }

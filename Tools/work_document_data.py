@@ -9,6 +9,7 @@ import argparse
 import csv
 import json
 import re
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -16,8 +17,9 @@ GAME = ROOT / "Assets/WorkGame"
 SNAPSHOT = GAME / "Samples/WorkCategories.json"
 RULES = ["Highest", "Lowest"]
 DISPLAYS = ["Number", "VerticalBar", "HorizontalBar", "Stars", "Grade"]
+DIFFICULTIES = ["Normal", "Easy"]
 CATEGORY_FIELDS = {"Id", "Title", "ShortName", "HudColor", "Target"}
-METRIC_FIELDS = {"Title", "Agency", "Name", "HighlightWords", "Unit", "Rule", "Display", "Min", "Max", "ScaleMax"}
+METRIC_FIELDS = {"Title", "Agency", "Name", "HighlightWords", "Unit", "Rule", "Display", "Min", "Max", "ScaleMax", "Difficulty"}
 
 
 def scalar(raw):
@@ -66,11 +68,13 @@ def fields(text, allowed):
         if key == "HudColor":
             result[key] = {k: float(v) for k, v in re.findall(r"([rgba]): ([\d.eE+-]+)", raw)}
             assert set(result[key]) == set("rgba"), raw
-        elif key in {"Rule", "Display", "Min", "Max", "ScaleMax"}:
+        elif key in {"Rule", "Display", "Min", "Max", "ScaleMax", "Difficulty"}:
             value = int(raw)
-            result[key] = RULES[value] if key == "Rule" else DISPLAYS[value] if key == "Display" else value
+            result[key] = RULES[value] if key == "Rule" else DISPLAYS[value] if key == "Display" else DIFFICULTIES[value] if key == "Difficulty" else value
         else:
             result[key] = scalar(raw)
+    if allowed == METRIC_FIELDS:
+        result.setdefault("Difficulty", "Normal")
     if set(result) != allowed:
         raise ValueError(f"Missing fields: {allowed - set(result)}")
     return result
@@ -100,6 +104,7 @@ def read_csv():
                 "Title": row["PaperTitle"], "Agency": row["Agency"], "Name": row["Metric"],
                 "HighlightWords": [word.strip() for word in row["HighlightWords"].split("|") if word.strip()],
                 "Unit": row["Unit"], "Rule": row["Rule"], "Display": row["Display"],
+                "Difficulty": row.get("Difficulty") or "Normal",
                 **{key: int(row[key]) for key in ("Min", "Max", "ScaleMax")},
             })
     return list(categories.values())
@@ -129,6 +134,7 @@ def audit(categories, check_json=True):
     without_colors = [{key: value for key, value in c.items() if key != "HudColor"} for c in categories]
     report = {
         "categoryCount": len(categories), "metricCount": sum(len(c["Metrics"]) for c in categories),
+        "difficultyCounts": dict(Counter(m["Difficulty"] for c in categories for m in c["Metrics"])),
         "csvDifferences": differences(without_colors, read_csv()),
     }
     if check_json:

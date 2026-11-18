@@ -18,553 +18,544 @@ MonoBehaviour:
   HudColor: {r: 1, g: 1, b: 1, a: 1}
   Target: "\uAE30\uC5C5"
   Metrics:
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uD2B9\uC0B0\uBB3C\uB85C
-      \uB9CC\uB4E0 \uBC29\uC74C\uBCBD\uC774 \uAD00\uAD11\uBA85\uC18C\uAE4C\uC9C0
-      \uB41C \uAE30\uC5C5"
-    Agency: 
-    Name: "\uC9C0\uC5ED \uC77C\uC790\uB9AC \uCC3D\uCD9C \uAE30\uC5EC\uB3C4"
+  - Title: "지역 고용 기업 지원 선정"
+    Agency: ""
+    Name: "지역 일자리 기여도"
     HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
+    - "지역 일자리 기여도"
+    Unit: ""
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uD64D\uBCF4 \uC601\uC0C1\uC740
-      \uC6B0\uC8FC\uC5D0 \uB2FF\uC558\uC9C0\uB9CC \uC8FC\uBB38\uC740 \uC5C6\uB294
-      \uD2B9\uC0B0\uBB3C \uAE30\uC5C5"
-    Agency: 
-    Name: "\uD2B9\uC0B0\uBB3C \uD310\uB85C \uD655\uBCF4 \uC218\uC900"
+    Difficulty: 1
+  - Title: "특산물 판로 지원 대상 선정"
+    Agency: ""
+    Name: "특산물 판로 지원 필요도"
     HighlightWords:
-    - "\uD2B9\uC0B0\uBB3C \uD310\uB85C \uD655\uBCF4 \uC218\uC900"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uC9C0\uC5ED \uD574\uC870\uB958\uB85C
-      \uC7A0\uC218 \uB85C\uBD07 \uC644\uCDA9\uC7AC\uB97C \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: 
-    Name: "\uD574\uC870\uB958 \uC81C\uD488 \uD310\uB9E4\uB9DD \uD655\uBCF4 \uC218\uC900"
-    HighlightWords:
-    - "\uD574\uC870\uB958 \uC81C\uD488 \uD310\uB9E4\uB9DD \uD655\uBCF4 \uC218\uC900"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uD654\uC131\uC5D0\uC11C\uB3C4
-      \uBCF4\uC774\uB294 \uD2B9\uC0B0\uBB3C \uAC04\uD310\uB9CC \uAC00\uC9C4 \uAE30\uC5C5"
-    Agency: 
-    Name: "\uD2B9\uC0B0\uD488 \uC720\uD1B5 \uC9C0\uC6D0 \uD544\uC694\uB3C4"
-    HighlightWords:
-    - "\uD544\uC694\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uB3D9\uB124 \uD3D0\uBAA9\uC7AC\uB85C
-      \uAC10\uC815 \uD45C\uD604 \uBCA4\uCE58\uB97C \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: 
-    Name: "\uC9C0\uC5ED \uD3D0\uC790\uC6D0 \uD65C\uC6A9\uB960"
-    HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
-    Rule: 0
-    Display: 2
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uC9C0\uC5ED \uAD11\uBB3C\uC744
-      \uC4F4 \uBC30\uD130\uB9AC\uAC00 \uC544\uC9C1 \uB3D9\uB124 \uBC16\uC73C\uB85C
-      \uBABB \uB098\uAC04 \uAE30\uC5C5"
-    Agency: 
-    Name: "\uC9C0\uC5ED \uC18C\uC7AC \uC81C\uD488 \uB0A9\uD488 \uD69F\uC218"
-    HighlightWords:
-    - "\uD69F\uC218"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uC9C0\uC5ED \uC9C1\uBB3C\uB85C
-      \uB85C\uBD07 \uBB34\uB98E \uBCF4\uD638\uB300\uB97C \uC9DC\uB294 \uAE30\uC5C5"
-    Agency: 
-    Name: "\uC9C0\uC5ED \uC9C1\uBB3C \uC81C\uD488\uC758 \uC2DC\uC7A5 \uC9C4\uCD9C
-      \uAE30\uD68C \uC218"
-    HighlightWords:
-    - "\uC9C0\uC5ED \uC9C1\uBB3C \uC81C\uD488\uC758 \uC2DC\uC7A5 \uC9C4\uCD9C \uAE30\uD68C
-      \uC218"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uC804\uD1B5 \uC639\uAE30
-      \uB0C9\uAC01 \uC11C\uBC84\uB97C \uB9CC\uB4E4\uACE0 \uC190\uB2D8\uC744 \uAE30\uB2E4\uB9AC\uB294
-      \uAE30\uC5C5"
-    Agency: 
-    Name: "\uC804\uD1B5\uC0B0\uC5C5 \uC77C\uC790\uB9AC \uC720\uC9C0 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 3
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uC9C0\uC5ED \uB18D\uC5C5
-      \uBD80\uC0B0\uBB3C\uB85C \uB4DC\uB860 \uCC29\uB959\uC7A5\uC744 \uB9CC\uB4DC\uB294
-      \uAE30\uC5C5"
-    Agency: 
-    Name: "\uB18D\uC5C5 \uBD80\uC0B0\uBB3C \uC81C\uD488 \uD310\uB85C \uD655\uBCF4\uC728"
-    HighlightWords:
-    - "\uD655\uBCF4\uC728"
-    Unit: '%'
-    Rule: 1
-    Display: 2
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uC9C0\uC6D0 \uC6B0\uC120 \uB300\uC0C1 \xB7 \uC9C0\uC5ED \uC11D\uC7AC\uB85C
-      \uB9CC\uB4E0 \uC6B0\uC8FC \uC815\uC6D0 \uD654\uBD84\uC744 \uCC3D\uACE0\uC5D0\uC11C
-      \uD0A4\uC6B0\uB294 \uAE30\uC5C5"
-    Agency: 
-    Name: "\uC9C0\uC5ED \uC2E0\uC81C\uD488 \uD64D\uBCF4 \uC9C0\uC6D0 \uD544\uC694\uB3C4"
-    HighlightWords:
-    - "\uD544\uC694\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uB3D9\uB124 \uB300\uB098\uBB34\uB85C \uACF5\uC911 \uCC45\uAF42\uC774\uB97C
-      \uC9DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC9C0\uC5ED \uC18C\uC7AC \uD65C\uC6A9\uB960"
-    HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "특산물 판로 지원 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD55C\uC9C0 \uAD50\uAD6C\uAC00 \uC8FC\uBB38\uC744 \uAE30\uB2E4\uB9AC\uBA70
-      \uC811\uD78C \uAE30\uC5C5"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uACF5\uACF5 \uB0A9\uD488 \uCC38\uC5EC \uAE30\uD68C"
+    Difficulty: 1
+  - Title: "해조류 제품 지원 대상 선정"
+    Agency: ""
+    Name: "해조류 판로 지원 필요도"
     HighlightWords:
-    - "\uCC38\uC5EC"
-    - "\uAE30\uD68C"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uD3D0\uAD50 \uC885\uC744 \uB2E4\uC2DC \uD559\uC2B5 \uC7A5\uBE44\uB85C
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC9C0\uC5ED \uC77C\uC790\uB9AC \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 3
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uD759\uC73C\uB85C \uB9CC\uB4E0 \uBD84\uD544\uD568\uC744
-      \uCC3D\uACE0\uC5D0 \uC313\uC740 \uAE30\uC5C5"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC9C0\uC5ED \uC81C\uD488 \uD310\uB85C \uD655\uBCF4\uC728"
-    HighlightWords:
-    - "\uD310\uB85C"
-    Unit: '%'
-    Rule: 1
-    Display: 2
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uB3D9\uB124 \uC9C1\uBB3C\uB85C \uC18C\uB9AC \uBA39\uB294 \uAD50\uC2E4
-      \uCEE4\uD2BC\uC744 \uC9DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC9C0\uC5ED \uC81C\uC870\uC5C5 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uBAA8\uC2DC\uB85C \uBCD1\uC2E4 \uAC00\uB9BC\uB9C9\uC744
-      \uC9DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uBCD1\uC2E4 \uAC00\uB9BC\uB9C9 \uB0A9\uD488 \uC2E4\uC801 \uC218"
-    HighlightWords:
-    - "\uC2E4\uC801"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uC639\uAE30\uB85C \uB9CC\uB4E0 \uBE44\uD488 \uAC74\uC870\uD568\uC774
-      \uC190\uB2D8\uC744 \uAE30\uB2E4\uB9AC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uACF5\uACF5 \uB0A9\uD488 \uC2E4\uC801 \uC218"
-    HighlightWords:
-    - "\uC2E4\uC801"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uB3D9\uB124 \uC720\uB9AC \uACF5\uBC29\uC774 \uAC80\uC0AC \uC6A9\uAE30\uAE4C\uC9C0
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uC9C0\uC5ED \uACF5\uC608\uC0B0\uC5C5 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 3
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uBAA9\uC7AC \uC190\uC7A1\uC774\uAC00 \uC804\uC2DC\uC7A5\uC5D0\uC11C\uB9CC
-      \uC545\uC218\uD558\uB294 \uAE30\uC5C5"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uB0A9\uD488 \uD310\uB85C \uD655\uBCF4 \uC218\uC900"
-    HighlightWords:
-    - "\uD310\uB85C"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uBD09\uC81C \uAE30\uC220\uB85C \uC774\uB3D9 \uBCF4\uC870
-      \uAC00\uBC29\uC744 \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uC9C0\uC5ED \uACE0\uC6A9 \uC720\uC9C0 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uD604\uBB34\uC554\uC73C\uB85C \uD6C8\uB828\uC7A5 \uBCF4\uD638\uBCBD\uC744
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC9C0\uC5ED \uC790\uC6D0 \uD65C\uC6A9\uB960"
-    HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
-    Rule: 0
-    Display: 1
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uB3D9\uB124 \uC0BC\uBCA0\uC758 \uAD6C\uC870\uC6A9 \uBCF4\uAD00\uD3EC\uAC00
-      \uBB36\uC5EC \uC788\uB294 \uAE30\uC5C5"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uACF5\uACF5 \uB0A9\uD488 \uAE30\uD68C \uC218"
-    HighlightWords:
-    - "\uAE30\uD68C"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uC9C0\uC5ED \uD3D0\uC12C\uC720\uB85C \uC7A5\uBE44 \uC644\uCDA9\uC7AC\uB97C
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC9C0\uC5ED \uC21C\uD658\uC0B0\uC5C5 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 3
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uB3C4\uC608 \uC7A5\uC778\uC758 \uC7A5\uBE44 \uAC70\uCE58\uB300\uAC00
-      \uC2DC\uC7A5\uC744 \uAE30\uB2E4\uB9AC\uB294 \uAE30\uC5C5"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC9C0\uC5ED \uC81C\uD488 \uC720\uD1B5\uB9DD \uC218\uC900"
-    HighlightWords:
-    - "\uC9C0\uC5ED \uC81C\uD488 \uC720\uD1B5\uB9DD \uC218\uC900"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uCF54\uB974\uD06C\uB85C \uAD6C\uC870 \uC7A5\uBE44 \uD328\uB4DC\uB97C
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC9C0\uC5ED\uC0B0\uC5C5 \uD30C\uAE09 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uC790\uAC1C\uB85C \uBE5B\uC744 \uBAA8\uC73C\uB294 \uC548\uB0B4\uD310\uC744
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC790\uAC1C \uC548\uB0B4\uD310 \uD310\uB85C \uD655\uBCF4\uC728"
-    HighlightWords:
-    - "\uD310\uB85C"
-    Unit: '%'
-    Rule: 1
-    Display: 2
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uB3D9\uB124 \uAC00\uC8FD \uACF5\uBC29\uC758 \uC11C\uB958 \uAC00\uBC29\uC774
-      \uB300\uAE30 \uC911\uC778 \uAE30\uC5C5"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uACF5\uACF5\uC2DC\uC7A5 \uCC38\uC5EC \uAE30\uD68C"
-    HighlightWords:
-    - "\uCC38\uC5EC"
-    - "\uAE30\uD68C"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uC9C0\uC5ED \uB300\uB098\uBB34\uB85C \uBD84\uC2E4\uBB3C \uBCF4\uAD00\uD568\uC744
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC9C0\uC5ED \uC18C\uC7AC \uC0AC\uC6A9\uB960"
-    HighlightWords:
-    - "\uC9C0\uC5ED \uC18C\uC7AC \uC0AC\uC6A9\uB960"
-    Unit: '%'
+    - "해조류 판로 지원 필요도"
+    Unit: "점"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC9C0\uC5ED \uB3CC\uB85C \uB9CC\uB4E0 \uC774\uB3D9 \uD45C\uC9C0\uAC00
-      \uCC3D\uACE0\uC5D0 \uC120 \uAE30\uC5C5"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC9C0\uC5ED \uC81C\uD488 \uD310\uB85C \uD655\uBCF4\uC728"
+    Difficulty: 1
+  - Title: "특산품 유통 지원 대상 선정"
+    Agency: ""
+    Name: "특산품 유통 지원 필요도"
     HighlightWords:
-    - "\uD310\uB85C"
-    Unit: '%'
-    Rule: 1
-    Display: 1
-    Min: 5
-    Max: 95
-    ScaleMax: 100
-  - Title: "\uB3D9\uB124 \uAE08\uC18D \uACF5\uBC29\uC774 \uC548\uC804 \uC7A5\uBE44
-      \uD2C0\uC744 \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC9C0\uC5ED \uC81C\uC870 \uC77C\uC790\uB9AC \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uC591\uBAA8\uB85C \uC0DD\uD65C\uAD00 \uB2F4\uC694\uB97C
-      \uC9DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC9C0\uC5ED \uC12C\uC720\uC0B0\uC5C5 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
-    Rule: 0
-    Display: 3
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uBAA9\uC7AC \uCE68\uB300 \uBC1B\uCE68\uC774 \uC7A0\uB9CC
-      \uC790\uB294 \uAE30\uC5C5"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uAE30\uC874 \uB0A9\uD488 \uAE30\uD68C \uC218"
-    HighlightWords:
-    - "\uAE30\uD68C"
-    Unit: "\uD68C"
-    Rule: 1
-    Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uB18D\uCD0C \uD3D0\uBE44\uB2D0\uB85C \uBCF4\uAE09 \uC0C1\uC790\uB97C
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC9C0\uC5ED \uC21C\uD658\uC790\uC6D0 \uD65C\uC6A9\uB960"
-    HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "특산품 유통 지원 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC9C0\uC5ED \uC63B\uCE60 \uBCF4\uAD00\uD568\uC774 \uAD6C\uACBD\uB9CC
-      \uBC1B\uB294 \uAE30\uC5C5"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uACF5\uACF5 \uD310\uB85C \uD655\uBCF4 \uC218\uC900"
+    Difficulty: 1
+  - Title: "폐목재 기업 지원 선정"
+    Agency: ""
+    Name: "지역 폐목재 활용률"
     HighlightWords:
-    - "\uD310\uB85C"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uBD09\uC81C \uACF5\uBC29\uC774 \uD639\uD55C\uC6A9 \uB36E\uAC1C\uB97C
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC9C0\uC5ED \uACE0\uC6A9 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
+    - "지역 폐목재 활용률"
+    Unit: "%"
     Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uAC08\uB300\uB85C \uC5EC\uB984 \uACF5\uC6D0 \uC9C0\uBD95\uC744
-      \uC5EE\uB294 \uAE30\uC5C5"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uACF5\uC6D0 \uC9C0\uBD95 \uC81C\uD488 \uC720\uD1B5\uB9DD \uC218\uC900"
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "광물 제품 지원 대상 선정"
+    Agency: ""
+    Name: "광물 제품 판로 지원 필요도"
     HighlightWords:
-    - "\uACF5\uC6D0 \uC9C0\uBD95 \uC81C\uD488 \uC720\uD1B5\uB9DD \uC218\uC900"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uBC84\uC12F \uADE0\uC0AC \uBCA4\uCE58\uAC00 \uC8FC\uBB38 \uC804\uC5D0
-      \uC790\uB77C\uB294 \uAE30\uC5C5"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uAE30\uC874 \uACF5\uACF5 \uB0A9\uD488 \uC2E4\uC801"
-    HighlightWords:
-    - "\uC2E4\uC801"
-    Unit: "\uD68C"
-    Rule: 1
+    - "광물 제품 판로 지원 필요도"
+    Unit: "점"
+    Rule: 0
     Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uB3D9\uB124 \uB3CC\uAC00\uB8E8\uB85C \uBBF8\uB044\uB7FC \uBC29\uC9C0\uD310\uC744
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC9C0\uC5ED\uC0B0\uC5C5 \uC5F0\uACC4 \uAE30\uC5EC\uB3C4"
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "직물 제품 지원 대상 선정"
+    Agency: ""
+    Name: "직물 제품 판로 지원 필요도"
     HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
+    - "직물 제품 판로 지원 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 0
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "전통산업 기업 지원 선정"
+    Agency: ""
+    Name: "전통산업 일자리 기여도"
+    HighlightWords:
+    - "전통산업 일자리 기여도"
+    Unit: ""
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uC5FC\uC0C9 \uC548\uB0B4 \uAE43\uBC1C\uC774 \uCC3D\uACE0\uC5D0\uC11C
-      \uD754\uB4E4\uB9AC\uB294 \uAE30\uC5C5"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC9C0\uC5ED \uC2E0\uC81C\uD488 \uD310\uB85C \uC218\uC900"
+    Difficulty: 1
+  - Title: "농업 제품 지원 대상 선정"
+    Agency: ""
+    Name: "농업 제품 판로 지원 필요도"
     HighlightWords:
-    - "\uD310\uB85C"
-    Unit: 
-    Rule: 1
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uB18D\uC5C5 \uBD80\uC0B0\uBB3C\uB85C \uC218\uBAA9 \uBC1B\uCE68\uC744
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC9C0\uC5ED \uB18D\uC0B0\uC5C5 \uAE30\uC5EC\uB3C4"
-    HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
+    - "농업 제품 판로 지원 필요도"
+    Unit: "점"
     Rule: 0
-    Display: 4
-    Min: 1
-    Max: 5
-    ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uAD74 \uAECD\uB370\uAE30\uB85C \uAC80\uC0AC \uC6A9\uAE30
-      \uBC1B\uCE68\uC744 \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC9C0\uC5ED \uBD80\uC0B0\uBB3C \uD65C\uC6A9\uB960"
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "지역 신제품 지원 대상 선정"
+    Agency: ""
+    Name: "지역 신제품 홍보 필요도"
     HighlightWords:
-    - "\uD65C\uC6A9\uB960"
-    Unit: '%'
+    - "지역 신제품 홍보 필요도"
+    Unit: "점"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC9C0\uC5ED \uB3C4\uC790 \uAD00\uCE21\uD310\uC774 \uC190\uB2D8\uC744
-      \uAE30\uB2E4\uB9AC\uB294 \uAE30\uC5C5"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uACF5\uACF5\uC2DC\uC7A5 \uCC38\uC5EC \uD69F\uC218"
+    Difficulty: 1
+  - Title: "대나무 기업 지원 선정"
+    Agency: "교육청·학교"
+    Name: "지역 대나무 활용률"
     HighlightWords:
-    - "\uCC38\uC5EC"
-    Unit: "\uD68C"
-    Rule: 1
+    - "지역 대나무 활용률"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "한지 교구 지원 대상 선정"
+    Agency: "교육청·학교"
+    Name: "한지 교구 판로 지원 필요도"
+    HighlightWords:
+    - "한지 교구 판로 지원 필요도"
+    Unit: "점"
+    Rule: 0
     Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "\uB3D9\uB124 \uAE08\uC18D \uAE30\uC220\uB85C \uBC30\uAD00 \uC5F0\uACB0\uBD80\uB97C
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC9C0\uC5ED \uAE30\uC220\uC0B0\uC5C5 \uAE30\uC5EC\uB3C4"
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "지역 공방 기업 지원 선정"
+    Agency: "교육청·학교"
+    Name: "지역 공방 일자리 기여도"
     HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
+    - "지역 공방 일자리 기여도"
+    Unit: ""
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uC9C0\uC5ED \uC12C\uC720 \uC5EC\uACFC \uC8FC\uBA38\uB2C8\uAC00 \uCD9C\uACE0\uB97C
-      \uAE30\uB2E4\uB9AC\uB294 \uAE30\uC5C5"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC9C0\uC5ED \uC81C\uD488 \uD310\uB85C \uD655\uBCF4\uC728"
+    Difficulty: 1
+  - Title: "지역 분필함 지원 대상 선정"
+    Agency: "교육청·학교"
+    Name: "분필함 판로 지원 필요도"
     HighlightWords:
-    - "\uD310\uB85C"
-    Unit: '%'
+    - "분필함 판로 지원 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "지역 봉제 기업 지원 선정"
+    Agency: "교육청·학교"
+    Name: "지역 봉제 일자리 기여도"
+    HighlightWords:
+    - "지역 봉제 일자리 기여도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 1
+  - Title: "모시 가림막 지원 대상 선정"
+    Agency: "국공립병원"
+    Name: "모시 제품 판로 지원 필요도"
+    HighlightWords:
+    - "모시 제품 판로 지원 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 0
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "옹기 건조함 지원 대상 선정"
+    Agency: "국공립병원"
+    Name: "옹기 제품 판로 지원 필요도"
+    HighlightWords:
+    - "옹기 제품 판로 지원 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 0
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "지역 유리 기업 지원 선정"
+    Agency: "국공립병원"
+    Name: "지역 유리산업 기여도"
+    HighlightWords:
+    - "지역 유리산업 기여도"
+    Unit: ""
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 1
+  - Title: "지역 목재 제품 지원 선정"
+    Agency: "국공립병원"
+    Name: "목재 제품 판로 지원 필요도"
+    HighlightWords:
+    - "목재 제품 판로 지원 필요도"
+    Unit: "점"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 1
+  - Title: "지역 보조 가방 지원 선정"
+    Agency: "국공립병원"
+    Name: "지역 고용 유지 기여도"
+    HighlightWords:
+    - "지역 고용 유지 기여도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 1
+  - Title: "지역 현무암으로 훈련장 보호벽을 만드는 기업"
+    Agency: "소방서"
+    Name: "지역 자원 활용률"
+    HighlightWords:
+    - "활용률"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "동네 삼베로 만든 구조 장비 보관포가 창고에 쌓인 기업"
+    Agency: "소방서"
+    Name: "공공 납품 기회 수"
+    HighlightWords:
+    - "기회"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+    Difficulty: 0
+  - Title: "지역 폐섬유로 장비 완충재를 만드는 기업"
+    Agency: "소방서"
+    Name: "지역 순환산업 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "도예 장인의 장비 거치대를 만들고도 팔 곳이 없는 기업"
+    Agency: "소방서"
+    Name: "지역 제품 유통망 수준"
+    HighlightWords:
+    - "지역 제품 유통망 수준"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 코르크로 구조 장비 패드를 만드는 기업"
+    Agency: "소방서"
+    Name: "지역산업 파급 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 자개로 빛을 모으는 안내판을 만드는 기업"
+    Agency: "경찰서"
+    Name: "자개 안내판 판로 확보율"
+    HighlightWords:
+    - "판로"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC9C0\uC5ED \uC720\uB9AC \uACF5\uBC29\uC774 \uACC4\uB7C9\uAE30 \uB36E\uAC1C\uB97C
-      \uB9CC\uB4DC\uB294 \uAE30\uC5C5"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC9C0\uC5ED \uC77C\uC790\uB9AC \uC720\uC9C0 \uAE30\uC5EC\uB3C4"
+    Difficulty: 0
+  - Title: "동네 가죽 공방에서 서류 가방만 쌓아두는 기업"
+    Agency: "경찰서"
+    Name: "공공시장 참여 기회"
     HighlightWords:
-    - "\uAE30\uC5EC\uB3C4"
-    Unit: 
+    - "참여"
+    - "기회"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+    Difficulty: 0
+  - Title: "지역 대나무로 분실물 보관함을 만드는 기업"
+    Agency: "경찰서"
+    Name: "지역 소재 사용률"
+    HighlightWords:
+    - "지역 소재 사용률"
+    Unit: "%"
+    Rule: 0
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "지역 돌로 만든 이동 표지가 창고에서만 근무하는 기업"
+    Agency: "경찰서"
+    Name: "지역 제품 판로 확보율"
+    HighlightWords:
+    - "판로"
+    Unit: "%"
+    Rule: 1
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "동네 금속 공방이 안전 장비 틀을 만드는 기업"
+    Agency: "경찰서"
+    Name: "지역 제조 일자리 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 양모로 생활관 담요를 짜는 기업"
+    Agency: "군부대"
+    Name: "지역 섬유산업 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 목재 침대 받침이 주문 없이 잠만 자는 기업"
+    Agency: "군부대"
+    Name: "기존 납품 기회 수"
+    HighlightWords:
+    - "기회"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+    Difficulty: 0
+  - Title: "농촌 폐비닐로 보급 상자를 만드는 기업"
+    Agency: "군부대"
+    Name: "지역 순환자원 활용률"
+    HighlightWords:
+    - "활용률"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "지역 옻칠 보관함을 만들었지만 구경만 시키는 기업"
+    Agency: "군부대"
+    Name: "공공 판로 확보 수준"
+    HighlightWords:
+    - "판로"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 봉제 공방이 혹한용 덮개를 만드는 기업"
+    Agency: "군부대"
+    Name: "지역 고용 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 갈대로 여름 공원 지붕을 엮는 기업"
+    Agency: "시청·구청"
+    Name: "공원 지붕 제품 유통망 수준"
+    HighlightWords:
+    - "공원 지붕 제품 유통망 수준"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "주문이 들어오기 전에 버섯 벤치부터 자라는 기업"
+    Agency: "시청·구청"
+    Name: "기존 공공 납품 실적"
+    HighlightWords:
+    - "실적"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+    Difficulty: 0
+  - Title: "동네 돌가루로 미끄럼 방지판을 만드는 기업"
+    Agency: "시청·구청"
+    Name: "지역산업 연계 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 염색 안내 깃발이 창고에서만 펄럭이는 기업"
+    Agency: "시청·구청"
+    Name: "지역 신제품 판로 수준"
+    HighlightWords:
+    - "판로"
+    Unit: ""
+    Rule: 1
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 농업 부산물로 수목 받침을 만드는 기업"
+    Agency: "시청·구청"
+    Name: "지역 농산업 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 굴 껍데기로 검사 용기 받침을 만드는 기업"
+    Agency: "환경·상하수도 기관"
+    Name: "지역 부산물 활용률"
+    HighlightWords:
+    - "활용률"
+    Unit: "%"
+    Rule: 0
+    Display: 1
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "지역 도자 관측판이 손님만 기다리는 기업"
+    Agency: "환경·상하수도 기관"
+    Name: "공공시장 참여 횟수"
+    HighlightWords:
+    - "참여"
+    Unit: "회"
+    Rule: 1
+    Display: 0
+    Min: 0
+    Max: 12
+    ScaleMax: 0
+    Difficulty: 0
+  - Title: "동네 금속 기술로 배관 연결부를 만드는 기업"
+    Agency: "환경·상하수도 기관"
+    Name: "지역 기술산업 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 3
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0
+  - Title: "지역 섬유 여과 주머니가 출고도 못 하고 쌓인 기업"
+    Agency: "환경·상하수도 기관"
+    Name: "지역 제품 판로 확보율"
+    HighlightWords:
+    - "판로"
+    Unit: "%"
+    Rule: 1
+    Display: 2
+    Min: 5
+    Max: 95
+    ScaleMax: 100
+    Difficulty: 0
+  - Title: "지역 유리 공방이 계량기 덮개를 만드는 기업"
+    Agency: "환경·상하수도 기관"
+    Name: "지역 일자리 유지 기여도"
+    HighlightWords:
+    - "기여도"
+    Unit: ""
+    Rule: 0
+    Display: 4
+    Min: 1
+    Max: 5
+    ScaleMax: 5
+    Difficulty: 0

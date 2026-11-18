@@ -18,229 +18,247 @@ MonoBehaviour:
   HudColor: {r: 1, g: 1, b: 1, a: 1}
   Target: "후보"
   Metrics:
-  - Title: "정수기 성능을 검증할 위원"
+  - Title: "정수기 평가위원 선정"
     Agency: ""
     Name: "정수기 검증 전문성"
     HighlightWords:
-    - "전문성"
+    - "정수기 검증 전문성"
     Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "업체 대표와 친한 위원"
+    Difficulty: 1
+  - Title: "공정한 평가위원 선정"
     Agency: ""
     Name: "이해충돌 위험도"
     HighlightWords:
-    - "위험도"
-    Unit: "%"
+    - "이해충돌 위험도"
+    Unit: "점"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "천재 계산기를 검증할 위원"
+    Difficulty: 1
+  - Title: "계산기 평가위원 선정"
     Agency: ""
-    Name: "성능 과장 오판 확률"
+    Name: "계산 성능 검증 정확도"
     HighlightWords:
-    - "확률"
+    - "계산 성능 검증 정확도"
     Unit: "%"
-    Rule: 1
+    Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "가족이 이름 지은 로봇 심사"
+    Difficulty: 1
+  - Title: "로봇 평가위원 선정"
     Agency: ""
-    Name: "평가 기준 이해도"
+    Name: "로봇 평가 기준 이해도"
     HighlightWords:
-    - "이해도"
+    - "로봇 평가 기준 이해도"
     Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "무중력 청소기 시험 검토"
+    Difficulty: 1
+  - Title: "청소기 평가위원 선정"
     Agency: ""
-    Name: "시험 조건 차이 발견률"
+    Name: "시험 조건 확인 정확도"
     HighlightWords:
-    - "발견률"
+    - "시험 조건 확인 정확도"
     Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "업체 광고에 출연한 위원"
+    Difficulty: 1
+  - Title: "독립적인 평가위원 선정"
     Agency: ""
     Name: "업체 홍보 참여 횟수"
     HighlightWords:
-    - "횟수"
+    - "업체 홍보 참여 횟수"
     Unit: "회"
     Rule: 1
     Display: 0
-    Min: 0
-    Max: 12
-    ScaleMax: 0
-  - Title: "로봇에게 업체 주식을 맡긴 위원"
+    Min: 1
+    Max: 20
+    ScaleMax: 20
+    Difficulty: 1
+  - Title: "투자 관계 없는 위원 선정"
     Agency: ""
     Name: "투자 관계 위험도"
     HighlightWords:
-    - "위험도"
-    Unit: "%"
+    - "투자 관계 위험도"
+    Unit: "점"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "말을 순화하는 통역기 검증"
+    Difficulty: 1
+  - Title: "통역기 평가위원 선정"
     Agency: ""
-    Name: "통역 오류 발견 정확도"
+    Name: "통역 검증 정확도"
     HighlightWords:
-    - "정확도"
+    - "통역 검증 정확도"
     Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "친환경 포장재 성능 검토"
+    Difficulty: 1
+  - Title: "포장재 평가위원 선정"
     Agency: ""
-    Name: "포장재 기준 오해율"
+    Name: "포장재 기준 이해도"
     HighlightWords:
-    - "오해율"
-    Unit: "%"
-    Rule: 1
+    - "포장재 기준 이해도"
+    Unit: "점"
+    Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "업체 대표와 달 낚시 간 위원"
+    Difficulty: 1
+  - Title: "친분 없는 평가위원 선정"
     Agency: ""
-    Name: "평가 독립성"
+    Name: "사적 친분 위험도"
     HighlightWords:
-    - "독립성"
+    - "사적 친분 위험도"
     Unit: ""
-    Rule: 0
+    Rule: 1
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "만점 주장하는 교구 검증"
+    Difficulty: 1
+  - Title: "교구 평가위원 선정"
     Agency: "교육청·학교"
     Name: "교구 평가 전문성"
     HighlightWords:
-    - "전문성"
+    - "교구 평가 전문성"
     Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "업체 동요를 작곡한 위원"
+    Difficulty: 1
+  - Title: "공정한 교구 위원 선정"
     Agency: "교육청·학교"
     Name: "업체 이해충돌 위험도"
     HighlightWords:
-    - "위험"
-    Unit: "%"
+    - "업체 이해충돌 위험도"
+    Unit: "점"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "자라는 책상 시험 검토"
+    Difficulty: 1
+  - Title: "책상 평가위원 선정"
     Agency: "교육청·학교"
     Name: "시험자료 해석 정확도"
     HighlightWords:
-    - "정확도"
+    - "시험자료 해석 정확도"
     Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "업체 대표와 앨범 만든 위원"
+    Difficulty: 1
+  - Title: "공정한 가구 위원 선정"
     Agency: "교육청·학교"
-    Name: "사적 친분 위험도"
+    Name: "사적 관계 위험도"
     HighlightWords:
-    - "위험"
-    Unit: "%"
+    - "사적 관계 위험도"
+    Unit: "점"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "교실 소음 장비 심사"
+    Difficulty: 1
+  - Title: "소음 장비 평가위원 선정"
     Agency: "교육청·학교"
     Name: "소음 기준 이해도"
     HighlightWords:
-    - "이해도"
+    - "소음 기준 이해도"
     Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "병원 카트 시험표 검토"
+    Difficulty: 1
+  - Title: "병원 카트 평가위원 선정"
     Agency: "국공립병원"
-    Name: "검수자료 오해율"
+    Name: "검수자료 이해도"
     HighlightWords:
-    - "오해"
-    Unit: "%"
-    Rule: 1
+    - "검수자료 이해도"
+    Unit: "점"
+    Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "소독 장비 광고에 나온 위원"
+    Difficulty: 1
+  - Title: "광고 관계 없는 위원 선정"
     Agency: "국공립병원"
     Name: "광고 참여 위험도"
     HighlightWords:
-    - "위험"
-    - "참여"
-    Unit: "%"
+    - "광고 참여 위험도"
+    Unit: "점"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "멸균함 시험 조건 검토"
+    Difficulty: 1
+  - Title: "멸균함 평가위원 선정"
     Agency: "국공립병원"
-    Name: "검증 조건 판단 정확도"
+    Name: "시험 조건 판단 정확도"
     HighlightWords:
-    - "정확도"
+    - "시험 조건 판단 정확도"
     Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "침대 업체에 투자한 위원"
+    Difficulty: 1
+  - Title: "공정한 병상 위원 선정"
     Agency: "국공립병원"
     Name: "금전 관계 위험도"
     HighlightWords:
-    - "위험"
-    Unit: "%"
+    - "금전 관계 위험도"
+    Unit: "점"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "정전 시 장비 성능 검토"
+    Difficulty: 1
+  - Title: "비상 장비 평가위원 선정"
     Agency: "국공립병원"
     Name: "비상 성능 평가 전문성"
     HighlightWords:
-    - "성능"
-    - "전문성"
+    - "비상 성능 평가 전문성"
     Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "불꽃 장식 방호복 검증"
+    Difficulty: 1
+  - Title: "불꽃 장식이 달린 방화복을 검증할 위원"
     Agency: "소방서"
     Name: "방호 성능 검증 전문성"
     HighlightWords:
@@ -252,7 +270,8 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "업체 마스코트 이름 지은 위원"
+    Difficulty: 0
+  - Title: "업체 마스코트 이름까지 지어준 위원"
     Agency: "소방서"
     Name: "홍보 관계 위험도"
     HighlightWords:
@@ -263,6 +282,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "구조 줄 하중 시험 검토"
     Agency: "소방서"
     Name: "하중 시험 해석 정확도"
@@ -274,7 +294,8 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "호스 업체와 동업한 위원"
+    Difficulty: 0
+  - Title: "심사할 호스 업체와 함께 사업하는 위원"
     Agency: "소방서"
     Name: "사업 관계 위험도"
     HighlightWords:
@@ -285,6 +306,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "말하는 구명대 성능 심사"
     Agency: "소방서"
     Name: "구조 장비 기준 이해도"
@@ -296,6 +318,7 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
+    Difficulty: 0
   - Title: "야광 교통 장비 성능 심사"
     Agency: "경찰서"
     Name: "교통 장비 평가 오류율"
@@ -307,7 +330,8 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "무전기 업체와 로봇 공동 소유"
+    Difficulty: 0
+  - Title: "무전기 업체와 로봇 한 대를 공동 소유한 위원"
     Agency: "경찰서"
     Name: "공동 소유 위험도"
     HighlightWords:
@@ -318,6 +342,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "기록장치 시험 누락 확인"
     Agency: "경찰서"
     Name: "시험 누락 발견 정확도"
@@ -330,7 +355,8 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "업체 대표와 주소 같은 위원"
+    Difficulty: 0
+  - Title: "업체 대표와 집 주소가 같은 위원"
     Agency: "경찰서"
     Name: "사적 관계 위험도"
     HighlightWords:
@@ -341,6 +367,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "차량 거치대 진동 시험 검토"
     Agency: "경찰서"
     Name: "내구 시험 평가 전문성"
@@ -352,6 +379,7 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
+    Difficulty: 0
   - Title: "털 많은 방한복 성능 심사"
     Agency: "군부대"
     Name: "보온 성능 평가 전문성"
@@ -364,7 +392,8 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "업체에게 식탁 받은 위원"
+    Difficulty: 0
+  - Title: "심사할 업체에서 식탁을 선물받은 위원"
     Agency: "군부대"
     Name: "선물 수수 위험도"
     HighlightWords:
@@ -375,6 +404,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "배낭 무게 시험 검토"
     Agency: "군부대"
     Name: "시험 결과 검증 정확도"
@@ -386,7 +416,8 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "업체 매출로 수당 받는 위원"
+    Difficulty: 0
+  - Title: "심사할 업체 매출에 따라 수당을 받는 위원"
     Agency: "군부대"
     Name: "보수 관계 위험도"
     HighlightWords:
@@ -397,6 +428,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "생활관 자재 인증 검토"
     Agency: "군부대"
     Name: "인증자료 판단 전문성"
@@ -408,6 +440,7 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
+    Difficulty: 0
   - Title: "말하는 벤치 내구성 심사"
     Agency: "시청·구청"
     Name: "내구 시험 해석 오류율"
@@ -419,7 +452,8 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "가로등 업체와 동업한 위원"
+    Difficulty: 0
+  - Title: "심사할 가로등 업체와 공동 사업을 하는 위원"
     Agency: "시청·구청"
     Name: "공동 사업 위험도"
     HighlightWords:
@@ -430,6 +464,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "도로 자재 시험 구간 검토"
     Agency: "시청·구청"
     Name: "시험 조건 확인 정확도"
@@ -441,7 +476,8 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "업체 자문료로 화분 산 위원"
+    Difficulty: 0
+  - Title: "업체 자문료로 화분까지 산 위원"
     Agency: "시청·구청"
     Name: "자문 관계 위험도"
     HighlightWords:
@@ -452,6 +488,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "제설 장비 성능 심사"
     Agency: "시청·구청"
     Name: "제설 성능 평가 전문성"
@@ -464,6 +501,7 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
+    Difficulty: 0
   - Title: "물맛 자랑하는 필터 검증"
     Agency: "환경·상하수도 기관"
     Name: "수질 장비 평가 전문성"
@@ -475,7 +513,8 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "배관 업체와 특허 가진 위원"
+    Difficulty: 0
+  - Title: "심사할 배관 업체와 특허를 공동 보유한 위원"
     Agency: "환경·상하수도 기관"
     Name: "권리 관계 위험도"
     HighlightWords:
@@ -486,6 +525,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "센서 측정 오차 검토"
     Agency: "환경·상하수도 기관"
     Name: "측정 결과 해석 정확도"
@@ -497,7 +537,8 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "업체 가족 행사 사회 본 위원"
+    Difficulty: 0
+  - Title: "업체 가족 행사 사회까지 봐준 위원"
     Agency: "환경·상하수도 기관"
     Name: "친분 관계 위험도"
     HighlightWords:
@@ -508,6 +549,7 @@ MonoBehaviour:
     Min: 5
     Max: 95
     ScaleMax: 100
+    Difficulty: 0
   - Title: "저장통 시험 온도 확인"
     Agency: "환경·상하수도 기관"
     Name: "재료 시험 평가 전문성"
@@ -519,3 +561,4 @@ MonoBehaviour:
     Min: 1
     Max: 5
     ScaleMax: 5
+    Difficulty: 0

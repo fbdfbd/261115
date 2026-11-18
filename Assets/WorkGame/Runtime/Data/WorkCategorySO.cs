@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace WorkGame
 {
+    public enum WorkDifficulty { Normal, Easy }
+
     [Serializable]
     public sealed class WorkMetric
     {
@@ -11,6 +13,8 @@ namespace WorkGame
         public string Title;
         [Tooltip("요청 기관. 비워두면 기존 공통 업무입니다.")]
         public string Agency;
+        [Tooltip("쉬움은 1~3월부터, 보통은 4월부터 출제됩니다.")]
+        public WorkDifficulty Difficulty = WorkDifficulty.Normal;
         [Tooltip("비교 항목. 예: 에너지 소비량")]
         public string Name;
         [Tooltip("비교 항목 Name에 포함된 단어. 검토 강조 1단계에서 색상을 적용합니다.")]

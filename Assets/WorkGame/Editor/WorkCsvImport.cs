@@ -122,6 +122,8 @@ namespace WorkGame.Editor
             category.Metrics = values.Select(x => new WorkMetric {
                 Title = x.TryGetValue("PaperTitle", out string title) ? title : "",
                 Agency = x.TryGetValue("Agency", out string agency) ? agency : "",
+                Difficulty = x.TryGetValue("Difficulty", out string difficulty) && !string.IsNullOrWhiteSpace(difficulty)
+                    ? ReadEnum<WorkDifficulty>(difficulty) : WorkDifficulty.Normal,
                 HighlightWords = x.TryGetValue("HighlightWords", out string words)
                     ? words.Split('|').Where(w => !string.IsNullOrWhiteSpace(w)).Select(w => w.Trim()).ToList()
                     : new List<string>(),
@@ -160,6 +162,7 @@ namespace WorkGame.Editor
             if (WorkCsv.HasColumn(text, "ScaleMax")) headers.Add("ScaleMax");
             if (WorkCsv.HasColumn(text, "HighlightWords")) headers.Add("HighlightWords");
             if (WorkCsv.HasColumn(text, "Agency")) headers.Add("Agency");
+            if (WorkCsv.HasColumn(text, "Difficulty")) headers.Add("Difficulty");
             return WorkCsv.Read(text, headers.ToArray());
         }
 
