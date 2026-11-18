@@ -17,6 +17,8 @@ namespace WorkGame
     {
         public string Id;
         public string Name;
+        [Tooltip("엔딩 선택 카드 설명입니다. 이름을 모르는 상태에서도 보이므로 직업명 노출을 피합니다.")]
+        [TextArea(2, 4)] public string ChoiceText;
         [Tooltip("복수 조건 충족 시 큰 값 우선. 같으면 ID 순으로 결정합니다.")]
         public int Priority;
         [Tooltip("대표 스탯의 최소 등급. 모든 조건을 충족해야 합니다.")]
@@ -31,6 +33,8 @@ namespace WorkGame
         public List<CareEndingPage> Pages = new List<CareEndingPage>();
         [Tooltip("선택된 친밀도 후일담을 마지막 편지 페이지로 덧붙입니다.")]
         public bool AppendFriendshipText = true;
+        [Header("모음집 — 비워 두면 엔딩 Pages의 첫 이미지를 사용")]
+        public Sprite CollectionImage;
         public CareEnding CreateEnding() => new CareEnding(Id, Name, Priority, Needs,
             Text, LowText, NormalText, HighText, MainNeeds);
     }

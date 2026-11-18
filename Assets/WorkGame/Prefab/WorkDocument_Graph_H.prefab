@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a9a6ef734e7e34187c91dae1ee3c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: WorkGame.Presentation::WorkGame.WorkBarGraphView
+  documentStyle: {fileID: 11400000, guid: d54811bf29544a6586ee2d453d30b185, type: 2}
   metricTitle: {fileID: 6161897292501709741}
   unitText: {fileID: 8823447308857210494}
   items:

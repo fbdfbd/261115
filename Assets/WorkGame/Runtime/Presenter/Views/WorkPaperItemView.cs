@@ -15,6 +15,8 @@ namespace WorkGame
         [SerializeField] private Button clickButton;
         [SerializeField] private CanvasGroup paperGroup;
         [SerializeField] private Outline hoverOutline;
+        [Tooltip("호버하지 않을 때의 아웃라인 거리. (0, 0)이면 숨깁니다. 호버/드래그 중에는 Outline 컴포넌트의 기존 거리를 사용합니다.")]
+        [SerializeField] private Vector2 idleOutlineDistance = new Vector2(1, -1);
         [Tooltip("정렬 해금 후에만 표시할 카테고리 이름. 선택 사항입니다.")]
         [SerializeField] private TMP_Text sortedCategoryText;
         [Header("호버 꿈틀")]
@@ -37,6 +39,7 @@ namespace WorkGame
         private Vector3 dragOffset;
         private bool dragging;
         private bool hoverAllowed = true;
+        private Vector2? hoverOutlineDistance;
         private bool dragEnabled;
         private bool suppressClick;
         private int dragPaperId = -1;
@@ -64,6 +67,8 @@ namespace WorkGame
             if (clickButton == null) clickButton = GetComponent<Button>();
             if (paperGroup == null) paperGroup = GetComponent<CanvasGroup>();
             if (hoverOutline == null) hoverOutline = GetComponent<Outline>();
+            if (hoverOutline != null && !hoverOutlineDistance.HasValue)
+                hoverOutlineDistance = hoverOutline.effectDistance;
         }
 
         private void OnEnable()
@@ -91,6 +96,7 @@ namespace WorkGame
             gameObject.SetActive(true);
             WorkUi.Show(paperGroup, true);
             clickButton.interactable = true;
+            SetHover(false);
         }
 
         public void PlayShow() => onShow?.Invoke();
@@ -156,7 +162,10 @@ namespace WorkGame
 
         private void SetHover(bool hover)
         {
-            if (hoverOutline != null) hoverOutline.enabled = ((hover && hoverAllowed) || dragging) && IsBound && !IsLeaving;
+            if (hoverOutline == null) return;
+            bool highlighted = (hover && hoverAllowed) || dragging;
+            hoverOutline.effectDistance = highlighted ? hoverOutlineDistance.GetValueOrDefault() : idleOutlineDistance;
+            hoverOutline.enabled = (highlighted || idleOutlineDistance != Vector2.zero) && IsBound && !IsLeaving;
         }
 
         public void SetHoverAllowed(bool allowed)

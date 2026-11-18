@@ -167,7 +167,7 @@ namespace WorkGame
         }
     }
 
-    public sealed class CareRun
+    public sealed partial class CareRun
     {
         private readonly int[] stats = new int[12];
         private readonly List<string> gifts = new List<string>();

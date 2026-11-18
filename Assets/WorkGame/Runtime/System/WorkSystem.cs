@@ -4,11 +4,13 @@ using System.Linq;
 
 namespace WorkGame
 {
-    public sealed class WorkSystem : IDisposable
+    public sealed partial class WorkSystem : IDisposable
     {
         private readonly WorkSettings settings;
         private readonly WorkPaper[] plannedPapers;
-        private readonly Random random;
+        private Random random;
+        private int randomSeed;
+        private int randomCalls;
         private WorkPaper heldPaper;
         private WorkPaper selectedPaper;
         private readonly List<WorkPaper> monthPapers = new List<WorkPaper>();
@@ -50,6 +52,7 @@ namespace WorkGame
             this.settings = settings?.Copy() ?? throw new ArgumentNullException(nameof(settings));
             this.settings.Check();
             SkillPointsPerPaper = this.settings.SkillPointsPerPaper;
+            randomSeed = seed;
             random = new Random(seed);
             Fax = new WorkFaxSystem(this);
             MonthPapers = monthPapers.AsReadOnly();
@@ -68,6 +71,15 @@ namespace WorkGame
             BeginMonth(1);
             Notify();
             return true;
+        }
+
+        // 새 회차는 구매한 스킬만 가져옵니다. 포인트와 현금은 가져오지 않습니다.
+        public void InheritUpgrades(IEnumerable<string> ids)
+        {
+            if (disposed || Run.Phase != WorkPhase.Ready) throw new InvalidOperationException("새 게임 시작 전에만 스킬을 계승할 수 있습니다.");
+            var copy = ids?.ToArray() ?? throw new ArgumentNullException(nameof(ids));
+            if (copy.Any(string.IsNullOrWhiteSpace)) throw new ArgumentException("계승 스킬 ID가 비어 있습니다.");
+            foreach (string id in copy.Distinct()) if (!Run.BoughtUpgrades.Contains(id)) Run.AddUpgrade(id);
         }
 
         public void AddTime(double seconds)
@@ -130,7 +142,7 @@ namespace WorkGame
 
         public void SetPaused(bool paused)
         {
-            if (disposed || Run.Phase != WorkPhase.Working || IsPaused == paused) return;
+            if (disposed || Run.Phase == WorkPhase.Ready || IsPaused == paused) return;
             ClearHold();
             IsPaused = paused;
             Notify();
@@ -209,7 +221,7 @@ namespace WorkGame
         {
             var paper = GetPendingPaper(id);
             if (!IsWorking || paper == null || paper.IsInFax || Upgrades.InstantChance <= 0) return false;
-            return random.NextDouble() < Upgrades.InstantChance && ProcessPaper(id);
+            return NextRandom() < Upgrades.InstantChance && ProcessPaper(id);
         }
 
         internal bool ProcessPaper(int id)
@@ -244,7 +256,7 @@ namespace WorkGame
 
         public bool StartNextMonth()
         {
-            if (disposed || Run.Phase != WorkPhase.AfterWork) return false;
+            if (disposed || IsPaused || Run.Phase != WorkPhase.AfterWork) return false;
             BeginMonth(Run.Month + 1);
             Notify();
             return true;
@@ -304,7 +316,7 @@ namespace WorkGame
 
         private int GetPointReward(out bool boosted)
         {
-            double multiplier = Upgrades.PointChance > 0 && random.NextDouble() < Upgrades.PointChance
+            double multiplier = Upgrades.PointChance > 0 && NextRandom() < Upgrades.PointChance
                 ? Upgrades.PointMultiplier : 1;
             boosted = multiplier > 1;
             decimal points = (SkillPointsPerPaper + (decimal)Upgrades.PointFlat) * (1 + (decimal)Upgrades.PointBonus) * (decimal)multiplier;
@@ -342,6 +354,8 @@ namespace WorkGame
         }
 
         internal void Notify() => Changed?.Invoke();
+
+        private double NextRandom() { randomCalls++; return random.NextDouble(); }
 
         public void Dispose()
         {

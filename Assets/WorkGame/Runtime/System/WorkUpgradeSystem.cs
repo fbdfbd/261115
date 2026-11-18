@@ -25,7 +25,7 @@ namespace WorkGame
             return node.Required.All(work.Run.BoughtUpgrades.Contains) ? WorkUpgradeState.Available : WorkUpgradeState.Locked;
         }
 
-        public bool CanBuy(string id) => GetState(id) == WorkUpgradeState.Available && work.Run.SkillPoints >= nodes[id].Cost;
+        public bool CanBuy(string id) => !work.IsPaused && GetState(id) == WorkUpgradeState.Available && work.Run.SkillPoints >= nodes[id].Cost;
 
         public WorkUpgradeSwitch GetSwitchKind(string id)
         {

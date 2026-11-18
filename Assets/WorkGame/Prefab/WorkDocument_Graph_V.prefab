@@ -625,8 +625,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a9a6ef734e7e34187c91dae1ee3c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: WorkGame.Presentation::WorkGame.WorkBarGraphView
+  documentStyle: {fileID: 11400000, guid: d54811bf29544a6586ee2d453d30b185, type: 2}
   metricTitle: {fileID: 6276703229031652450}
   unitText: {fileID: 566848652312144811}
+  highValueColor: {r: 0.15, g: 0.4, b: 0.95, a: 1}
+  lowValueColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
   items:
   - Root: {fileID: 8054921058480264878}
     NameText: {fileID: 3490333995541587153}
@@ -1554,6 +1557,9 @@ MonoBehaviour:
   - {fileID: 7759007378420654595}
   - {fileID: 1862741298118638702}
   - {fileID: 7036036545999509048}
+  shakeTarget: {fileID: 0}
+  bumpPixels: 3
+  bumpSeconds: 0.1
 --- !u!114 &2708877911482096688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,6 +1592,9 @@ MonoBehaviour:
   button: {fileID: 7443018934703897957}
   nameText: {fileID: 1063716136826174098}
   fill: {fileID: 4424089122703617833}
+  hintImage: {fileID: 0}
+  hintColor: {r: 1, g: 0.85, b: 0.25, a: 1}
+  hintSeconds: 0.45
 --- !u!114 &830813473357548602 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8090615406039319051, guid: 1058d2a778578824b846e123be12743a, type: 3}
@@ -1672,6 +1681,9 @@ MonoBehaviour:
   button: {fileID: 1982134662069856163}
   nameText: {fileID: 1799228409334685936}
   fill: {fileID: 1578064410023852485}
+  hintImage: {fileID: 0}
+  hintColor: {r: 1, g: 0.85, b: 0.25, a: 1}
+  hintSeconds: 0.45
 --- !u!114 &4424089122703617833 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5090618119235838232, guid: 1058d2a778578824b846e123be12743a, type: 3}
@@ -1725,6 +1737,9 @@ MonoBehaviour:
   button: {fileID: 3777713966554586960}
   nameText: {fileID: 6603750022447093537}
   fill: {fileID: 5528567541228805268}
+  hintImage: {fileID: 0}
+  hintColor: {r: 1, g: 0.85, b: 0.25, a: 1}
+  hintSeconds: 0.45
 --- !u!114 &6603750022447093537 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2334337965582244112, guid: 1058d2a778578824b846e123be12743a, type: 3}

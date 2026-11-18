@@ -14,6 +14,7 @@ namespace WorkGame
         private CareEndingResult shown;
         private int page;
         private bool connected, paused, finished;
+        public event Action<string> ReadCompleted;
 
         public CareEndingPresenter(CareSystem care, WorkSystem work, CareEndingView view, CareConfigSO config)
         {
@@ -25,6 +26,7 @@ namespace WorkGame
             connected = true;
             care.EndingReady += Open; work.Changed += RefreshPause;
             view.NextRequested += Next;
+            view.Completed += FinishReading;
             if (care.Run.Ending != null) Open(care.Run.Ending);
             else view.Hide();
         }
@@ -68,12 +70,14 @@ namespace WorkGame
             if (paused == work.IsPaused) return;
             paused = work.IsPaused; view.SetPaused(paused);
         }
+        private void FinishReading() { if (shown != null) ReadCompleted?.Invoke(shown.Ending.Id); }
         public void Disconnect()
         {
             if (!connected) return;
             connected = false;
             care.EndingReady -= Open; work.Changed -= RefreshPause;
             view.NextRequested -= Next;
+            view.Completed -= FinishReading;
             view.Hide();
         }
         public void Dispose() => Disconnect();

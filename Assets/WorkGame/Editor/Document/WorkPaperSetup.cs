@@ -84,6 +84,9 @@ namespace WorkGame.Editor
             var graphData = new SerializedObject(graph);
             graphData.FindProperty("metricTitle").objectReferenceValue = metric;
             graphData.FindProperty("unitText").objectReferenceValue = unit;
+            var style = graphData.FindProperty("documentStyle");
+            if (style != null && style.objectReferenceValue == null)
+                style.objectReferenceValue = AssetDatabase.LoadAssetAtPath<WorkDocumentStyleSO>("Assets/WorkGame/Data/WorkDocumentStyle.asset");
             var items = graphData.FindProperty("items");
             items.arraySize = 3;
             for (int i = 0; i < 3; i++)

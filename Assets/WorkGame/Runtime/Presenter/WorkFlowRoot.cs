@@ -63,7 +63,9 @@ namespace WorkGame
             if (work != null) work.Changed -= Refresh;
             work = system;
             lastMonth = -1;
-            finishedReportMonth = -1;
+            finishedReportMonth = work != null && work.Run.Month == workRoot.LoadedMonth
+                && workRoot.LoadedPoint.HasValue && workRoot.LoadedPoint != SavePoint.WorkStart
+                ? work.Run.Month : -1;
             if (work == null) { ShowEmpty(); return; }
             work.Changed += Refresh;
             Refresh();
@@ -76,23 +78,29 @@ namespace WorkGame
             lastMonth = work.Run.Month;
             bool working = lastPhase == WorkPhase.Working;
             bool afterWork = lastPhase == WorkPhase.AfterWork || lastPhase == WorkPhase.Finished;
-            bool showReport = afterWork && monthReport != null && finishedReportMonth != lastMonth;
+            bool ending = workRoot.CareFlow?.Phase == CareFlowPhase.EndingChoice || workRoot.CareFlow?.Phase == CareFlowPhase.Ended;
+            bool showReport = afterWork && !ending && monthReport != null && finishedReportMonth != lastMonth;
             workRoot.CloseUpgrades();
             // 정산서가 업무 그룹 안에 있어도 확인할 때까지 부모를 표시합니다.
             ShowGroups(workGroups, working || showReport);
-            ShowGroups(afterWorkGroups, afterWork && !showReport);
+            ShowGroups(afterWorkGroups, afterWork && !showReport && !ending);
             if (monthReport != null)
             {
                 if (showReport) monthReport.Open(work.Run.LastResult);
                 else monthReport.Hide();
             }
-            if (afterWork && !showReport) workRoot.EnterCare();
+            if (afterWork && !showReport && !ending) workRoot.EnterCare();
             RefreshCareButtons();
         }
 
         private void RefreshCareButtons()
         {
             if (work == null) return;
+            if (workRoot.CareFlow?.Phase == CareFlowPhase.EndingChoice || workRoot.CareFlow?.Phase == CareFlowPhase.Ended)
+            {
+                ShowGroups(workGroups, false);
+                ShowGroups(afterWorkGroups, false);
+            }
             bool afterWork = work.Run.Phase == WorkPhase.AfterWork || work.Run.Phase == WorkPhase.Finished;
             bool reportDone = monthReport == null || finishedReportMonth == work.Run.Month;
             var flow = workRoot.CareFlow;

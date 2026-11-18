@@ -26,7 +26,10 @@ namespace WorkGame
         public event Action LeaveClicked;
         public event Action PauseClicked;
         public event Action ResumeClicked;
+        public event Action HelpClicked;
+        public bool SharedMenuConnected { get; private set; }
         public GameObject HelpPanel => helpPanel;
+        public void SetSharedMenu(bool connected) => SharedMenuConnected = connected;
 
         private void Awake()
         {
@@ -39,6 +42,7 @@ namespace WorkGame
             if (leaveButton != null) leaveButton.onClick.AddListener(ClickLeave);
             if (pauseButton != null) pauseButton.onClick.AddListener(ClickPause);
             if (resumeButton != null) resumeButton.onClick.AddListener(ClickResume);
+            if (helpButton != null) helpButton.onClick.AddListener(ClickHelp);
         }
 
         private void OnDisable()
@@ -46,6 +50,7 @@ namespace WorkGame
             if (leaveButton != null) leaveButton.onClick.RemoveListener(ClickLeave);
             if (pauseButton != null) pauseButton.onClick.RemoveListener(ClickPause);
             if (resumeButton != null) resumeButton.onClick.RemoveListener(ClickResume);
+            if (helpButton != null) helpButton.onClick.RemoveListener(ClickHelp);
         }
 
         public void ShowState(bool canLeave, bool paused, bool working)
@@ -60,9 +65,10 @@ namespace WorkGame
             }
             if (leaveButton != null) leaveButton.interactable = showLeave && canLeave;
             WorkUi.Show(pauseButton != null ? pauseButton.gameObject : null, showPause);
-            if (pauseButton != null) pauseButton.interactable = working && !paused;
-            WorkUi.Show(pausePanel, working && paused);
+            if (pauseButton != null) pauseButton.interactable = !paused;
+            WorkUi.Show(pausePanel, !SharedMenuConnected && working && paused);
             WorkUi.Show(helpButton != null ? helpButton.gameObject : null, showHelp);
+            if (helpButton != null) helpButton.interactable = !paused;
         }
 
         // Keep visibility in one place so a fade can be added here later.
@@ -70,5 +76,6 @@ namespace WorkGame
         private void ClickLeave() => LeaveClicked?.Invoke();
         private void ClickPause() => PauseClicked?.Invoke();
         private void ClickResume() => ResumeClicked?.Invoke();
+        private void ClickHelp() => HelpClicked?.Invoke();
     }
 }

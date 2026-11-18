@@ -22,6 +22,8 @@ namespace WorkGame
         [Header("처리 진행도")]
         [SerializeField] private TMP_Text progressText;
         [SerializeField] private Slider progressSlider;
+        [Tooltip("Optional full-size flowing fill. Leave the Slider Fill Rect empty when using this.")]
+        [SerializeField] private WorkProgressFlow progressFlow;
         [Header("숙련 포인트 / 남은 시간")]
         [SerializeField] private TMP_Text skillPointsText;
         [SerializeField] private TMP_Text timeText;
@@ -276,9 +278,9 @@ namespace WorkGame
                 timeFill.fillAmount = totalSeconds > 0 ? Mathf.Clamp01((float)(remainingSeconds / totalSeconds)) : 0;
         }
 
-        // Replace/override this method when adding progress animation.
         public virtual void SetProgress(float progress)
         {
+            if (progressFlow != null) progressFlow.SetProgress(progress);
             if (progressSlider == null) return;
             progressSlider.minValue = 0;
             progressSlider.maxValue = 1;

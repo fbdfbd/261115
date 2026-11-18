@@ -68,7 +68,7 @@ namespace WorkGame
         }
         private void Confirm()
         {
-            if (shown == null || flow.Phase != CareFlowPhase.Result) return;
+            if (shown == null || flow.IsPaused || flow.Phase != CareFlowPhase.Result) return;
             if (weekIndex + 1 < shown.Weeks.Count)
             {
                 weekIndex++;

@@ -200,8 +200,8 @@ namespace WorkGame
                 int definition = Array.FindIndex(synergies, x => x.Id == preview.Synergies[i]);
                 var synergy = synergies[definition];
                 string classes = string.Join(" + ", FindWeeks(synergy).Select(index => "[" + (index + 1) + "] " + GetLessonName(care.Plan[index])));
-                string gains = string.Join(" · ", synergy.Gains.GroupBy(gain => CareStats.GetMain(gain.Stat))
-                    .OrderBy(group => group.Key).Select(group => CareStatNames.GetName(group.Key) + " +" + group.Sum(gain => gain.Amount)));
+                string gains = string.Join(" · ", synergy.Gains.Where(gain => gain.Amount > 0)
+                    .Select(gain => CareStatNames.GetName(gain.Stat) + "(" + CareStatNames.GetName(CareStats.GetMain(gain.Stat)) + ") +" + gain.Amount));
                 row.Show(synergy.Id, classes + " | <b>" + synergy.Name + "</b> | " + gains, view.GetSynergyColor(definition));
             }
         }

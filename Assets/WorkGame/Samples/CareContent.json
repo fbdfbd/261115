@@ -678,7 +678,8 @@
       "normalText": "나르미는 가끔 그래프가 잔뜩 붙은 안부를 받습니다. 마지막 줄의 보고 싶다는 문장만큼은 이상하게 늘 손글씨입니다.",
       "mainNeeds": {
         "Knowledge": "A"
-      }
+      },
+      "choiceText": "흩어진 숫자 사이에서 남들이 놓친 답을 찾아내는 길."
     },
     {
       "id": "ending_researcher",
@@ -693,7 +694,8 @@
       "normalText": "달이가 보낸 화분에는 먹지 말고 관찰만 해 달라는 메모가 붙었습니다. 나르미는 화분보다 볼주머니를 채우고 설명하던 옛 발표 영상이 더 떠올라 함께 답장으로 보냈습니다.",
       "mainNeeds": {
         "Knowledge": "A"
-      }
+      },
+      "choiceText": "아직 아무도 모르는 생명과 마주하는 길. 간식 취향부터 알아볼까요?"
     },
     {
       "id": "ending_controller",
@@ -708,7 +710,8 @@
       "lowText": "나르미가 전화를 걸면 달이는 통화 가능한 시간을 먼저 잡습니다. 달력에 적힌 약속을 지키며 둘은 천천히 대화를 다시 늘려 갑니다.",
       "mainNeeds": {
         "Knowledge": "A"
-      }
+      },
+      "choiceText": "수많은 움직임 사이에서 모두의 안전한 도착을 책임지는 길."
     },
     {
       "id": "ending_rescuer",
@@ -723,7 +726,8 @@
       "normalText": "달이는 쉬는 날마다 나르미 집의 무거운 물건을 옮겨 줍니다. 냉장고 위치를 세 번 바꾼 뒤에는 다음 방문엔 차만 마시겠다고 선언했습니다.",
       "mainNeeds": {
         "Fitness": "A"
-      }
+      },
+      "choiceText": "누군가의 가장 급한 순간에 제일 먼저 달려가는 길."
     },
     {
       "id": "ending_astronaut",
@@ -738,7 +742,8 @@
       "lowText": "지구로 돌아온 달이는 나르미에게 엽서 한 장을 보냈습니다. 안부는 짧았지만, 대기권 진입 때도 구겨지지 않게 따로 보관한 흔적이 있었습니다.",
       "mainNeeds": {
         "Fitness": "A"
-      }
+      },
+      "choiceText": "나무 꼭대기보다 훨씬 먼 곳으로 올라가는 길."
     },
     {
       "id": "ending_drone",
@@ -753,7 +758,8 @@
       "highText": "나르미 생일에 드론들이 짧은 축하 문장을 만들었습니다. 마지막 한 대가 늦자 달이가 아래에서 손으로 하트를 완성했습니다.",
       "mainNeeds": {
         "Fitness": "A"
-      }
+      },
+      "choiceText": "작은 날개로 먼 풍경을 담는 길. 앞발 조작 실력이 빛나요."
     },
     {
       "id": "ending_writer",
@@ -768,7 +774,8 @@
       "normalText": "나르미는 달이의 원고를 먼저 읽습니다. 도토리 수가 앞뒤로 다르다는 지적에 달이는 고쳐 쓰고, 나르미는 수 세기 입문반 비용이 아깝지 않았다며 웃습니다.",
       "mainNeeds": {
         "Emotion": "A"
-      }
+      },
+      "choiceText": "작은 상상이 누군가의 잠들기 전 이야기가 되는 길."
     },
     {
       "id": "ending_actor",
@@ -783,7 +790,8 @@
       "normalText": "달이는 나르미를 발견하면 커튼콜 때 아주 작게 손을 흔듭니다. 나르미는 매번 자신에게 한 것이 맞는지 주변을 한 번 둘러봅니다.",
       "mainNeeds": {
         "Emotion": "A"
-      }
+      },
+      "choiceText": "목소리와 몸짓으로 객석 끝까지 마음을 전하는 길."
     },
     {
       "id": "ending_counselor",
@@ -798,7 +806,8 @@
       "highText": "많은 사람의 이야기를 듣는 달이도 나르미 앞에서는 먼저 자기 마음을 말합니다. 나르미는 휴대전화를 뒤집고 앉았고, 달이의 꼬리도 그제야 의자 위에 편하게 놓였습니다.",
       "mainNeeds": {
         "Emotion": "A"
-      }
+      },
+      "choiceText": "말하지 못한 마음까지 기다려 주는 다정한 길."
     },
     {
       "id": "ending_host",
@@ -813,7 +822,8 @@
       "normalText": "나르미가 보낸 도토리 간식이 방송국에 도착했습니다. 달이가 출처를 자랑한 뒤로 방송국에는 작은 앞발에 잘 맞는 포장법을 묻는 문의가 늘었습니다.",
       "mainNeeds": {
         "Social": "A"
-      }
+      },
+      "choiceText": "낯선 사람도 편하게 웃으며 이야기를 나누는 길."
     },
     {
       "id": "ending_festival",
@@ -828,7 +838,8 @@
       "normalText": "나르미는 매년 축제에서 달이를 잠깐 만납니다. 대화는 늘 무전으로 끊기지만, 돌아가는 길에는 간식 봉투가 손에 들려 있습니다.",
       "mainNeeds": {
         "Social": "A"
-      }
+      },
+      "choiceText": "모두가 기다리는 하루를 처음부터 준비하는 길."
     },
     {
       "id": "ending_coach",
@@ -843,7 +854,8 @@
       "lowText": "우승 인터뷰에서 달이는 많은 분 덕분이라고 말했습니다. 나르미는 그 말에 자신도 들어가는지 묻지 못했고, 며칠 뒤 작은 기념 메달을 받았습니다.",
       "mainNeeds": {
         "Social": "A"
-      }
+      },
+      "choiceText": "혼자 빠르게 달리는 것보다 함께 이기는 법을 찾는 길."
     },
     {
       "id": "ending_engineer",
@@ -859,7 +871,8 @@
       "normalText": "나르미는 신제품 시험 사용자가 됐습니다. 달이는 칭찬보다 고장난 부분을 알려 달라고 하지만, 칭찬 메시지는 따로 저장합니다.",
       "mainNeeds": {
         "Knowledge": "S"
-      }
+      },
+      "choiceText": "머릿속 설계를 현실에서 움직이게 만드는 길."
     },
     {
       "id": "ending_athlete",
@@ -875,7 +888,8 @@
       "normalText": "나르미의 응원 도구는 해마다 커집니다. 달이는 카메라에 잘 잡힌다며 난처해하지만 경기가 끝나면 가장 먼저 그쪽을 찾습니다.",
       "mainNeeds": {
         "Fitness": "S"
-      }
+      },
+      "choiceText": "작은 몸으로 아주 큰 기록에 도전하는 길."
     },
     {
       "id": "ending_director",
@@ -891,7 +905,8 @@
       "normalText": "나르미는 촬영장에 가끔 간식을 보냅니다. 엔딩 크레디트에 간식 담당이 생긴 뒤로 양이 조금씩 늘었습니다.",
       "mainNeeds": {
         "Emotion": "S"
-      }
+      },
+      "choiceText": "상상 속 장면이 많은 사람의 눈앞에 펼쳐지는 길."
     },
     {
       "id": "ending_diplomat",
@@ -907,7 +922,8 @@
       "lowText": "나르미에게는 귀국 일정이 적힌 정중한 메시지가 옵니다. 짧게라도 만나자는 문장은 보내기 전에 두 번 고친 흔적이 남아 있습니다.",
       "mainNeeds": {
         "Social": "S"
-      }
+      },
+      "choiceText": "서로 다른 말과 생각 사이에 다리를 놓는 길."
     },
     {
       "id": "ending_doctor",
@@ -924,7 +940,8 @@
       "mainNeeds": {
         "Knowledge": "A",
         "Fitness": "A"
-      }
+      },
+      "choiceText": "빠른 판단과 따뜻한 손길로 누군가의 내일을 지키는 길."
     },
     {
       "id": "ending_game",
@@ -941,7 +958,8 @@
       "mainNeeds": {
         "Knowledge": "A",
         "Emotion": "A"
-      }
+      },
+      "choiceText": "재미있는 규칙 하나로 수많은 도전을 만들어 내는 길."
     },
     {
       "id": "ending_lawyer",
@@ -958,7 +976,8 @@
       "mainNeeds": {
         "Knowledge": "A",
         "Social": "A"
-      }
+      },
+      "choiceText": "복잡한 사연 속에서 지켜야 할 약속을 찾아내는 길."
     },
     {
       "id": "ending_dancer",
@@ -975,7 +994,8 @@
       "mainNeeds": {
         "Fitness": "A",
         "Emotion": "A"
-      }
+      },
+      "choiceText": "말보다 몸짓으로 더 많은 이야기를 전하는 길."
     },
     {
       "id": "ending_teacher",
@@ -992,7 +1012,8 @@
       "mainNeeds": {
         "Fitness": "A",
         "Social": "A"
-      }
+      },
+      "choiceText": "뛰는 즐거움과 함께하는 법을 다음 세대에 전하는 길."
     },
     {
       "id": "ending_advertiser",
@@ -1009,7 +1030,8 @@
       "mainNeeds": {
         "Emotion": "A",
         "Social": "A"
-      }
+      },
+      "choiceText": "짧은 한마디로 사람들의 마음을 움직이는 길."
     },
     {
       "id": "ending_procurement",
@@ -1029,7 +1051,8 @@
         "Fitness": "B",
         "Emotion": "B",
         "Social": "B"
-      }
+      },
+      "choiceText": "필요한 물건이 제때 도착하도록 공공의 약속을 지키는 길."
     },
     {
       "id": "ending_president",
@@ -1058,7 +1081,8 @@
         "Fitness": "A",
         "Emotion": "A",
         "Social": "A"
-      }
+      },
+      "choiceText": "작은 앞발로 아주 큰 결정을 내리는 자리."
     },
     {
       "id": "ending_unemployed",
@@ -1070,7 +1094,8 @@
       "lowText": "나르미와 마주치면 달이는 괜히 채용 화면을 크게 띄웁니다. 어느 날 식탁에 말없이 놓인 도토리 간식을 보고, 달이는 오늘 지원한 곳을 먼저 이야기했습니다.",
       "highText": "나르미는 달이와 매일 작은 계획 하나를 정합니다. 오늘 지원서를 보냈다는 말에 둘은 도토리 과자를 반으로 나눴고, 달이는 내일 결과가 없어도 이 자리는 비워 두지 말라고 했습니다.",
       "normalText": "나르미가 이력서를 봐 주다가 장점 칸에 도토리를 잘 숨김이 적힌 걸 발견했습니다. 둘은 한참 웃고 나서 꼼꼼한 재고 관리로 고쳤고, 달이는 실제로 자신 있는 부분이라고 덧붙였습니다.",
-      "mainNeeds": {}
+      "mainNeeds": {},
+      "choiceText": "오늘의 할 일은 비어 있어도 내일의 가능성까지 빈 건 아니에요."
     }
   ],
   "grades": {

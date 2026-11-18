@@ -106,6 +106,7 @@ def main():
     for item in data["endings"]:
         body = (f"  Id: {item['id']}\n  Name: {quoted(item['name'])}\n  Priority: {item['priority']}\n"
                 + gains("Needs", item["needs"]))
+        body += f"  ChoiceText: {quoted(item.get('choiceText', '달이가 새로운 길을 선택합니다.'))}\n"
         body += "  MainNeeds:" + ("\n" if item['mainNeeds'] else " []\n")
         for stat, grade in item['mainNeeds'].items():
             body += f"  - Stat: {STATS.index(stat)}\n    Grade: {['None','B','A','S'].index(grade)}\n"
@@ -116,7 +117,7 @@ def main():
         # Page images and letter staging are edited in Unity, separately from JSON story text.
         if ending_path.exists():
             previous = ending_path.read_text(encoding="utf-8-sig")
-            for match in re.finditer(r"^  (?:Pages|AppendFriendshipText):[^\n]*(?:\n(?!  [A-Za-z_]\w*:|---)[^\n]+)*", previous, re.M):
+            for match in re.finditer(r"^  (?:Pages|AppendFriendshipText|CollectionImage):[^\n]*(?:\n(?!  [A-Za-z_]\w*:|---)[^\n]+)*", previous, re.M):
                 body += match.group(0) + "\n"
         write_asset(ending_path, "CareEndingSO", body)
     fallback = next(x for x in data["endings"] if x.get("fallback"))

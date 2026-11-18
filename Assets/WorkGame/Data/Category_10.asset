@@ -16,560 +16,504 @@ MonoBehaviour:
   Title: "\uC870\uB2EC\uD3C9\uAC00 \uACF5\uC815\uC131 \uAC15\uD654"
   ShortName: "\uACF5\uC815 \uD3C9\uAC00"
   HudColor: {r: 1, g: 1, b: 1, a: 1}
-  Target: "\uD3C9\uAC00\uC704\uC6D0 \uD6C4\uBCF4"
+  Target: "후보"
   Metrics:
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uB9D0\uD558\uB294 \uC815\uC218\uAE30\uC758
-      \uC8FC\uC7A5\uACFC \uC2DC\uD5D8\uC131\uC801\uC11C\uB97C \uAD6C\uBD84\uD558\uB294
-      \uD3C9\uAC00\uC704\uC6D0"
-    Agency: 
-    Name: "\uC815\uC218\uAE30 \uC131\uB2A5 \uAC80\uC99D \uC804\uBB38\uC131"
+  - Title: "정수기 성능을 검증할 위원"
+    Agency: ""
+    Name: "정수기 검증 전문성"
     HighlightWords:
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uC81C\uC548\uC11C\uBCF4\uB2E4
-      \uC5C5\uCCB4 \uB300\uD45C\uC758 \uB3CC\uC794\uCE58 \uC0AC\uC9C4\uC774 \uC775\uC219\uD55C
-      \uD3C9\uAC00\uC704\uC6D0"
-    Agency: 
-    Name: "\uC5C5\uCCB4 \uB300\uD45C\uC640\uC758 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체 대표와 친한 위원"
+    Agency: ""
+    Name: "이해충돌 위험도"
     HighlightWords:
-    - "\uC704\uD5D8\uB3C4"
-    Unit: '%'
+    - "위험도"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uC2A4\uC2A4\uB85C\uB97C \uCC9C\uC7AC\uB77C\uACE0
-      \uC18C\uAC1C\uD558\uB294 \uACC4\uC0B0\uAE30\uB97C \uC9C1\uC811 \uAC80\uC99D\uD558\uB294
-      \uC704\uC6D0"
-    Agency: 
-    Name: "\uACFC\uC7A5\uB41C \uC131\uB2A5\uC5D0 \uC18D\uC744 \uD655\uB960"
+  - Title: "천재 계산기를 검증할 위원"
+    Agency: ""
+    Name: "성능 과장 오판 확률"
     HighlightWords:
-    - "\uD655\uB960"
-    Unit: '%'
+    - "확률"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uC2EC\uC0AC\uD560 \uB85C\uBD07\uC758
-      \uC774\uB984\uC744 \uAC00\uC871 \uB2E8\uCCB4 \uCC44\uD305\uBC29\uC5D0\uC11C
-      \uC815\uD574\uC900 \uC704\uC6D0"
-    Agency: 
-    Name: "\uD3C9\uAC00 \uAE30\uC900 \uC774\uD574\uB3C4"
+  - Title: "가족이 이름 지은 로봇 심사"
+    Agency: ""
+    Name: "평가 기준 이해도"
     HighlightWords:
-    - "\uD3C9\uAC00 \uAE30\uC900 \uC774\uD574\uB3C4"
-    Unit: 
+    - "이해도"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uBB34\uC911\uB825 \uCCAD\uC18C\uAE30\uC758
-      \uC9C0\uC0C1 \uC2DC\uD5D8 \uACB0\uACFC\uB97C \uAD6C\uBD84\uD558\uB294 \uC704\uC6D0"
-    Agency: 
-    Name: "\uC2DC\uD5D8 \uC870\uAC74 \uCC28\uC774 \uBC1C\uACAC\uB960"
+  - Title: "무중력 청소기 시험 검토"
+    Agency: ""
+    Name: "시험 조건 차이 발견률"
     HighlightWords:
-    - "\uC2DC\uD5D8 \uC870\uAC74 \uCC28\uC774 \uBC1C\uACAC\uB960"
-    Unit: '%'
+    - "발견률"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uC5C5\uCCB4 \uD64D\uBCF4
-      \uC601\uC0C1 \uB05D\uC5D0 \uBCF8\uC778 \uBAA9\uC18C\uB9AC\uAC00 \uB4F1\uC7A5\uD558\uB294
-      \uC704\uC6D0"
-    Agency: 
-    Name: "\uD6C4\uBCF4 \uC5C5\uCCB4 \uD64D\uBCF4 \uCC38\uC5EC \uD69F\uC218"
+  - Title: "업체 광고에 출연한 위원"
+    Agency: ""
+    Name: "업체 홍보 참여 횟수"
     HighlightWords:
-    - "\uD69F\uC218"
-    Unit: "\uD68C"
+    - "횟수"
+    Unit: "회"
     Rule: 1
     Display: 0
     Min: 0
     Max: 12
     ScaleMax: 0
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uD1B5\uC5ED \uC774\uC5B4\uD3F0\uC774
-      \uBAB0\uB798 \uB9D0\uC744 \uC21C\uD654\uD558\uB294\uC9C0 \uD655\uC778\uD558\uB294
-      \uC704\uC6D0"
-    Agency: 
-    Name: "\uD6C4\uBCF4 \uC5C5\uCCB4 \uD22C\uC790 \uAD00\uACC4 \uC704\uD5D8\uB3C4"
+  - Title: "로봇에게 업체 주식을 맡긴 위원"
+    Agency: ""
+    Name: "투자 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8\uB3C4"
-    Unit: '%'
+    - "위험도"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uD6C4\uBCF4 \uC5C5\uCCB4
-      \uC8FC\uC2DD\uC744 \uBC18\uB824 \uB85C\uBD07\uC5D0\uAC8C \uB9E1\uACA8 \uAD00\uB9AC\uD558\uB294
-      \uC704\uC6D0"
-    Agency: 
-    Name: "\uD1B5\uC5ED \uC624\uB958 \uBC1C\uACAC \uC815\uD655\uB3C4"
+  - Title: "말을 순화하는 통역기 검증"
+    Agency: ""
+    Name: "통역 오류 발견 정확도"
     HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uCE5C\uD658\uACBD \uD3EC\uC7A5\uC7AC\uB97C
-      \uD3EC\uC7A5\uC9C0\uB9CC \uBCF4\uACE0 \uD310\uB2E8\uD558\uC9C0 \uC54A\uB294
-      \uC704\uC6D0"
-    Agency: 
-    Name: "\uD3EC\uC7A5\uC7AC \uD3C9\uAC00 \uAE30\uC900 \uC624\uD574\uC728"
+  - Title: "친환경 포장재 성능 검토"
+    Agency: ""
+    Name: "포장재 기준 오해율"
     HighlightWords:
-    - "\uC624\uD574\uC728"
-    Unit: '%'
+    - "오해율"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD3C9\uAC00\uC704\uC6D0 \uC120\uC815 \xB7 \uB0A9\uD488\uC5C5\uCCB4 \uB300\uD45C\uC640
-      \uC8FC\uB9D0\uB9C8\uB2E4 \uB2EC \uB09A\uC2DC\uB97C \uB2E4\uB2C8\uB294 \uC704\uC6D0"
-    Agency: 
-    Name: "\uC0AC\uC801 \uCE5C\uBD84 \uC5C6\uC774 \uD3C9\uAC00\uD560 \uC218 \uC788\uB294
-      \uC815\uB3C4"
+  - Title: "업체 대표와 달 낚시 간 위원"
+    Agency: ""
+    Name: "평가 독립성"
     HighlightWords:
-    - "\uC0AC\uC801 \uCE5C\uBD84 \uC5C6\uC774 \uD3C9\uAC00\uD560 \uC218 \uC788\uB294
-      \uC815\uB3C4"
-    Unit: 
+    - "독립성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uC2A4\uC2A4\uB85C \uB9CC\uC810\uC774\uB77C \uB9D0\uD558\uB294 \uAD50\uAD6C\uB97C
-      \uAC80\uC99D\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uAD50\uAD6C \uC131\uB2A5 \uD3C9\uAC00 \uC804\uBB38\uC131"
+  - Title: "만점 주장하는 교구 검증"
+    Agency: "교육청·학교"
+    Name: "교구 평가 전문성"
     HighlightWords:
-    - "\uC131\uB2A5"
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uAD50\uAD6C \uC5C5\uCCB4\uC758 \uC0AC\uB0B4 \uB3D9\uC694\uB97C \uC791\uACE1\uD55C
-      \uC704\uC6D0"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC5C5\uCCB4\uC640\uC758 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체 동요를 작곡한 위원"
+    Agency: "교육청·학교"
+    Name: "업체 이해충돌 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC790\uB77C\uB294 \uCC45\uC0C1\uC758 \uC2DC\uD5D8 \uC870\uAC74\uC744
-      \uC77D\uB294 \uC704\uC6D0"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC2DC\uD5D8\uC790\uB8CC \uD574\uC11D \uC815\uD655\uB3C4"
+  - Title: "자라는 책상 시험 검토"
+    Agency: "교육청·학교"
+    Name: "시험자료 해석 정확도"
     HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD6C4\uBCF4 \uC5C5\uCCB4 \uB300\uD45C\uC640 \uC878\uC5C5 \uC568\uBC94\uC744
-      \uD568\uAED8 \uB9CC\uB4E0 \uC704\uC6D0"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC0AC\uC801 \uCE5C\uBD84 \uC704\uD5D8\uB3C4"
+  - Title: "업체 대표와 앨범 만든 위원"
+    Agency: "교육청·학교"
+    Name: "사적 친분 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAD50\uC2E4 \uC18C\uC74C \uC7A5\uBE44\uB97C \uADC0 \uB9C9\uC9C0 \uC54A\uACE0
-      \uD3C9\uAC00\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
-    Name: "\uC18C\uC74C \uD3C9\uAC00 \uAE30\uC900 \uC774\uD574\uB3C4"
+  - Title: "교실 소음 장비 심사"
+    Agency: "교육청·학교"
+    Name: "소음 기준 이해도"
     HighlightWords:
-    - "\uC774\uD574\uB3C4"
-    Unit: 
+    - "이해도"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uBCD1\uC6D0 \uCE74\uD2B8\uC758 \uC790\uB791\uBCF4\uB2E4 \uC2DC\uD5D8\uD45C\uB97C
-      \uC77D\uB294 \uC704\uC6D0"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uAC80\uC218\uC790\uB8CC \uC624\uD574\uC728"
+  - Title: "병원 카트 시험표 검토"
+    Agency: "국공립병원"
+    Name: "검수자료 오해율"
     HighlightWords:
-    - "\uC624\uD574"
-    Unit: '%'
+    - "오해"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC18C\uB3C5 \uC7A5\uBE44 \uC5C5\uCCB4 \uAD11\uACE0\uC5D0 \uC190\uB9CC
-      \uB098\uC628 \uC704\uC6D0"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uAD11\uACE0 \uCC38\uC5EC \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "소독 장비 광고에 나온 위원"
+    Agency: "국공립병원"
+    Name: "광고 참여 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    - "\uCC38\uC5EC"
-    Unit: '%'
+    - "위험"
+    - "참여"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBA78\uADE0\uD568 \uC2DC\uD5D8 \uACB0\uACFC\uC758 \uC870\uAC74\uC744
-      \uD655\uC778\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uAC80\uC99D \uC870\uAC74 \uD310\uB2E8 \uC815\uD655\uB3C4"
+  - Title: "멸균함 시험 조건 검토"
+    Agency: "국공립병원"
+    Name: "검증 조건 판단 정확도"
     HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uCE68\uB300 \uC5C5\uCCB4 \uC8FC\uC2DD\uC5D0 \uCE68\uB300\uB97C \uAC78\uC5B4\uB454
-      \uC704\uC6D0"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uAE08\uC804 \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "침대 업체에 투자한 위원"
+    Agency: "국공립병원"
+    Name: "금전 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC815\uC804 \uB54C \uC7A5\uBE44\uAC00 \uBA48\uCD94\uB294 \uC21C\uC11C\uB97C
-      \uC77D\uB294 \uC704\uC6D0"
-    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
-    Name: "\uBE44\uC0C1 \uC131\uB2A5 \uD3C9\uAC00 \uC804\uBB38\uC131"
+  - Title: "정전 시 장비 성능 검토"
+    Agency: "국공립병원"
+    Name: "비상 성능 평가 전문성"
     HighlightWords:
-    - "\uC131\uB2A5"
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "성능"
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uBD88\uAF43 \uC7A5\uC2DD\uACFC \uBC29\uD638 \uC131\uB2A5\uC744 \uAD6C\uBD84\uD558\uB294
-      \uC704\uC6D0"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uBC29\uD638 \uC131\uB2A5 \uAC80\uC99D \uC804\uBB38\uC131"
+  - Title: "불꽃 장식 방호복 검증"
+    Agency: "소방서"
+    Name: "방호 성능 검증 전문성"
     HighlightWords:
-    - "\uC131\uB2A5"
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "성능"
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uD6C4\uBCF4 \uC5C5\uCCB4\uC758 \uB9C8\uC2A4\uCF54\uD2B8\uC5D0\uAC8C
-      \uC774\uB984\uC744 \uC900 \uC704\uC6D0"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uD64D\uBCF4 \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체 마스코트 이름 지은 위원"
+    Agency: "소방서"
+    Name: "홍보 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAD6C\uC870 \uC904\uC758 \uC2DC\uD5D8 \uD558\uC911\uC744 \uC9C1\uC811
-      \uD655\uC778\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uD558\uC911 \uC2DC\uD5D8 \uD574\uC11D \uC815\uD655\uB3C4"
+  - Title: "구조 줄 하중 시험 검토"
+    Agency: "소방서"
+    Name: "하중 시험 해석 정확도"
     HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD638\uC2A4 \uC5C5\uCCB4 \uB300\uD45C\uC640 \uC18C\uBC29 \uC6A9\uD488\uC810\uC744
-      \uD568\uAED8 \uB0B8 \uC704\uC6D0"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uC0AC\uC5C5 \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "호스 업체와 동업한 위원"
+    Agency: "소방서"
+    Name: "사업 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAD6C\uBA85\uB300\uC758 \uB5A0\uB2E4\uB2C8\uB294 \uBCC0\uBA85\uC5D0
-      \uD754\uB4E4\uB9AC\uC9C0 \uC54A\uB294 \uC704\uC6D0"
-    Agency: "\uC18C\uBC29\uC11C"
-    Name: "\uAD6C\uC870 \uC7A5\uBE44 \uD3C9\uAC00 \uAE30\uC900 \uC774\uD574\uB3C4"
+  - Title: "말하는 구명대 성능 심사"
+    Agency: "소방서"
+    Name: "구조 장비 기준 이해도"
     HighlightWords:
-    - "\uC774\uD574\uB3C4"
-    Unit: 
+    - "이해도"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uC57C\uAD11 \uB3C4\uC7A5\uC758 \uBC1D\uAE30\uC640 \uC131\uB2A5\uC744
-      \uAD6C\uBD84\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uAD50\uD1B5 \uC7A5\uBE44 \uD3C9\uAC00 \uC624\uB958\uC728"
+  - Title: "야광 교통 장비 성능 심사"
+    Agency: "경찰서"
+    Name: "교통 장비 평가 오류율"
     HighlightWords:
-    - "\uC624\uB958"
-    Unit: '%'
+    - "오류"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBB34\uC804\uAE30 \uC5C5\uCCB4\uC640 \uD1B5\uC5ED \uB85C\uBD07\uC744
-      \uACF5\uB3D9 \uC18C\uC720\uD55C \uC704\uC6D0"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uACF5\uB3D9 \uC18C\uC720 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "무전기 업체와 로봇 공동 소유"
+    Agency: "경찰서"
+    Name: "공동 소유 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAE30\uB85D\uC7A5\uCE58\uAC00 \uBE7C\uBA39\uC740 \uC2DC\uD5D8 \uC870\uAC74\uC744
-      \uCC3E\uB294 \uC704\uC6D0"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC2DC\uD5D8 \uB204\uB77D \uBC1C\uACAC \uC815\uD655\uB3C4"
+  - Title: "기록장치 시험 누락 확인"
+    Agency: "경찰서"
+    Name: "시험 누락 발견 정확도"
     HighlightWords:
-    - "\uB204\uB77D"
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "누락"
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD6C4\uBCF4 \uC5C5\uCCB4 \uB300\uD45C\uC640 \uC8FC\uC18C\uB97C \uACF5\uC720\uD558\uB294
-      \uC704\uC6D0"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uC0AC\uC801 \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체 대표와 주소 같은 위원"
+    Agency: "경찰서"
+    Name: "사적 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uCC28\uB7C9 \uAC70\uCE58\uB300\uC758 \uC9C4\uB3D9 \uC2DC\uD5D8\uC744
-      \uC77D\uB294 \uC704\uC6D0"
-    Agency: "\uACBD\uCC30\uC11C"
-    Name: "\uB0B4\uAD6C \uC2DC\uD5D8 \uD3C9\uAC00 \uC804\uBB38\uC131"
+  - Title: "차량 거치대 진동 시험 검토"
+    Agency: "경찰서"
+    Name: "내구 시험 평가 전문성"
     HighlightWords:
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uBC29\uD55C\uBCF5\uC758 \uD138 \uAE38\uC774\uBCF4\uB2E4 \uBCF4\uC628
-      \uACB0\uACFC\uB97C \uBCF4\uB294 \uC704\uC6D0"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uBCF4\uC628 \uC131\uB2A5 \uD3C9\uAC00 \uC804\uBB38\uC131"
+  - Title: "털 많은 방한복 성능 심사"
+    Agency: "군부대"
+    Name: "보온 성능 평가 전문성"
     HighlightWords:
-    - "\uC131\uB2A5"
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "성능"
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uCDE8\uC0AC \uC7A5\uBE44 \uC5C5\uCCB4\uB85C\uBD80\uD130 \uC2DD\uD0C1\uC744
-      \uBC1B\uC740 \uC704\uC6D0"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC120\uBB3C \uC218\uC218 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체에게 식탁 받은 위원"
+    Agency: "군부대"
+    Name: "선물 수수 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uBC30\uB0AD \uBB34\uAC8C \uC2DC\uD5D8\uC5D0\uC11C \uACF5\uAE30 \uBB34\uAC8C\uB97C
-      \uAD6C\uBD84\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC2DC\uD5D8 \uACB0\uACFC \uAC80\uC99D \uC815\uD655\uB3C4"
+  - Title: "배낭 무게 시험 검토"
+    Agency: "군부대"
+    Name: "시험 결과 검증 정확도"
     HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD6C4\uBCF4 \uC5C5\uCCB4\uC758 \uB9E4\uCD9C\uC5D0 \uC218\uB2F9\uC774
-      \uC5F0\uACB0\uB41C \uC704\uC6D0"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uBCF4\uC218 \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체 매출로 수당 받는 위원"
+    Agency: "군부대"
+    Name: "보수 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC0DD\uD65C\uAD00 \uC790\uC7AC\uC758 \uC778\uC99D \uBC94\uC704\uB97C
-      \uD655\uC778\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uAD70\uBD80\uB300"
-    Name: "\uC778\uC99D\uC790\uB8CC \uD310\uB2E8 \uC804\uBB38\uC131"
+  - Title: "생활관 자재 인증 검토"
+    Agency: "군부대"
+    Name: "인증자료 판단 전문성"
     HighlightWords:
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uB9D0\uD558\uB294 \uBCA4\uCE58\uC758 \uC778\uAE30\uC640 \uB0B4\uAD6C\uC131\uC744
-      \uAD6C\uBD84\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uB0B4\uAD6C \uC2DC\uD5D8 \uD574\uC11D \uC624\uB958\uC728"
+  - Title: "말하는 벤치 내구성 심사"
+    Agency: "시청·구청"
+    Name: "내구 시험 해석 오류율"
     HighlightWords:
-    - "\uC624\uB958"
-    Unit: '%'
+    - "오류"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uAC00\uB85C\uB4F1 \uC5C5\uCCB4 \uB300\uD45C\uC640 \uB2EC\uBE5B \uC0AC\uC5C5\uC744
-      \uD558\uB294 \uC704\uC6D0"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uACF5\uB3D9 \uC0AC\uC5C5 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "가로등 업체와 동업한 위원"
+    Agency: "시청·구청"
+    Name: "공동 사업 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uB3C4\uB85C \uC790\uC7AC\uC758 \uC2E4\uC81C \uC2DC\uD5D8 \uAD6C\uAC04\uC744
-      \uCC3E\uB294 \uC704\uC6D0"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC2DC\uD5D8 \uC870\uAC74 \uD655\uC778 \uC815\uD655\uB3C4"
+  - Title: "도로 자재 시험 구간 검토"
+    Agency: "시청·구청"
+    Name: "시험 조건 확인 정확도"
     HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC870\uACBD \uC5C5\uCCB4\uC758 \uC790\uBB38\uB8CC\uB85C \uD654\uBD84\uC744
-      \uC0B0 \uC704\uC6D0"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC790\uBB38 \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체 자문료로 화분 산 위원"
+    Agency: "시청·구청"
+    Name: "자문 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC81C\uC124 \uC7A5\uBE44\uC758 \uBA74\uC801\uB2F9 \uC131\uB2A5\uC744
-      \uC77D\uB294 \uC704\uC6D0"
-    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
-    Name: "\uC81C\uC124 \uC131\uB2A5 \uD3C9\uAC00 \uC804\uBB38\uC131"
+  - Title: "제설 장비 성능 심사"
+    Agency: "시청·구청"
+    Name: "제설 성능 평가 전문성"
     HighlightWords:
-    - "\uC131\uB2A5"
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "성능"
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uD544\uD130\uC758 \uBB3C\uB9DB \uC790\uB791\uBCF4\uB2E4 \uAC80\uC0AC\uD45C\uB97C
-      \uBCF4\uB294 \uC704\uC6D0"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC218\uC9C8 \uC7A5\uBE44 \uD3C9\uAC00 \uC804\uBB38\uC131"
+  - Title: "물맛 자랑하는 필터 검증"
+    Agency: "환경·상하수도 기관"
+    Name: "수질 장비 평가 전문성"
     HighlightWords:
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
-  - Title: "\uBC30\uAD00 \uC5C5\uCCB4\uC640 \uAC19\uC740 \uBC1C\uBA85 \uD2B9\uD5C8\uB97C
-      \uAC00\uC9C4 \uC704\uC6D0"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uAD8C\uB9AC \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "배관 업체와 특허 가진 위원"
+    Agency: "환경·상하수도 기관"
+    Name: "권리 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC13C\uC11C \uB208\uAE08\uACFC \uCE21\uC815 \uC624\uCC28\uB97C \uB530\uB85C
-      \uBCF4\uB294 \uC704\uC6D0"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uCE21\uC815 \uACB0\uACFC \uD574\uC11D \uC815\uD655\uB3C4"
+  - Title: "센서 측정 오차 검토"
+    Agency: "환경·상하수도 기관"
+    Name: "측정 결과 해석 정확도"
     HighlightWords:
-    - "\uC815\uD655\uB3C4"
-    Unit: '%'
+    - "정확도"
+    Unit: "%"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uD6C4\uBCF4 \uC5C5\uCCB4\uC758 \uAC00\uC871 \uD589\uC0AC \uC804\uB2F4
-      \uC0AC\uD68C\uC790\uC778 \uC704\uC6D0"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uCE5C\uBD84 \uAD00\uACC4 \uC774\uD574\uCDA9\uB3CC \uC704\uD5D8\uB3C4"
+  - Title: "업체 가족 행사 사회 본 위원"
+    Agency: "환경·상하수도 기관"
+    Name: "친분 관계 위험도"
     HighlightWords:
-    - "\uC704\uD5D8"
-    Unit: '%'
+    - "위험"
+    Unit: "%"
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
-  - Title: "\uC800\uC7A5\uD1B5 \uC2DC\uD5D8 \uC870\uAC74\uC758 \uC628\uB3C4\uB97C
-      \uD655\uC778\uD558\uB294 \uC704\uC6D0"
-    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
-    Name: "\uC7AC\uB8CC \uC2DC\uD5D8 \uD3C9\uAC00 \uC804\uBB38\uC131"
+  - Title: "저장통 시험 온도 확인"
+    Agency: "환경·상하수도 기관"
+    Name: "재료 시험 평가 전문성"
     HighlightWords:
-    - "\uC804\uBB38\uC131"
-    Unit: 
+    - "전문성"
+    Unit: ""
     Rule: 0
     Display: 4
     Min: 1

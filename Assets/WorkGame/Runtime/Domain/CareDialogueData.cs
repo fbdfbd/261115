@@ -4,7 +4,7 @@ namespace WorkGame
 {
     public enum CareLeaveKind { Early, SlightlyEarly, OnTime, Overtime }
     public enum CarePromiseState { Offered, Accepted, Declined, Succeeded, Failed }
-    public enum CareFlowPhase { Working, Report, Dialogue, Free, Panel, Result, Ended }
+    public enum CareFlowPhase { Working, Report, Dialogue, Free, Panel, Result, Ended, EndingChoice }
     public enum CarePanel { None, Skills, Stats, Schedule, Shop, Furniture }
 
     [Serializable]

@@ -1,6 +1,6 @@
 {
     "name": "WorkGame.DocumentEditor",
     "rootNamespace": "WorkGame.Editor",
-    "references": ["WorkGame", "WorkGame.Presentation", "UnityEngine.UI", "Unity.TextMeshPro"],
+    "references": ["WorkGame", "WorkGame.Presentation", "UnityEngine.UI", "Unity.TextMeshPro", "Unity.InputSystem"],
     "includePlatforms": ["Editor"]
 }

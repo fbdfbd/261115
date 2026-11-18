@@ -29,6 +29,7 @@ namespace WorkGame
         public bool InputBlocked { get; private set; }
         public bool IsWriting => writing != null;
         public event Action NextRequested;
+        public event Action Completed;
 
         private void Awake() => Hide();
         private void OnEnable()
@@ -119,7 +120,7 @@ namespace WorkGame
             FinishWriting(); complete = true;
             if (hintText != null) WorkUi.Show(hintText.gameObject, false);
             if (titleButton != null) WorkUi.Show(titleButton.gameObject, true);
-            if (notify) onCompleted.Invoke();
+            if (notify) { Completed?.Invoke(); onCompleted.Invoke(); }
         }
         public void SetInputBlocked(bool blocked)
         {

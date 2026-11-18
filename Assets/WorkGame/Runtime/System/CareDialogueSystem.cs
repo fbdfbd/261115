@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WorkGame
 {
-    public sealed class CareDialogueSystem
+    public sealed partial class CareDialogueSystem
     {
         private readonly Dictionary<string, CareDialogueData> dialogues;
         private readonly Action<int> addFriendship;

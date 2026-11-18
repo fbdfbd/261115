@@ -18,6 +18,7 @@ namespace WorkGame
         }
 
         [SerializeField] private List<BarItem> items = new List<BarItem>();
+        [SerializeField] private WorkDocumentStyleSO documentStyle;
 
         protected override void ShowValues(WorkPaper paper)
         {
@@ -36,6 +37,11 @@ namespace WorkGame
                 item.Bar.wholeNumbers = true;
                 item.Bar.interactable = false;
                 item.Bar.SetValueWithoutNotify(paper.Choices[i].Value);
+                if (documentStyle != null && item.Bar.fillRect != null)
+                {
+                    var fill = item.Bar.fillRect.GetComponent<Graphic>();
+                    if (fill != null) fill.color = documentStyle.GetBarColor(paper, i);
+                }
             }
         }
     }

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace WorkGame
 {
-    public sealed class CarePromiseSystem
+    public sealed partial class CarePromiseSystem
     {
         private readonly CarePromiseData[] definitions;
         private readonly List<CarePromiseRecord> records = new List<CarePromiseRecord>();

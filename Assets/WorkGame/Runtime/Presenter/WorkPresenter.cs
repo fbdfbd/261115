@@ -53,8 +53,8 @@ namespace WorkGame
             if (menuView != null)
             {
                 menuView.LeaveClicked += LeaveWork;
-                menuView.PauseClicked += Pause;
-                menuView.ResumeClicked += Resume;
+                menuView.PauseClicked += PauseFromMenu;
+                menuView.ResumeClicked += ResumeFromMenu;
             }
             if (deskView != null) deskView.PaperClicked += OpenPaper;
             if (paperView != null)
@@ -77,8 +77,8 @@ namespace WorkGame
             if (menuView != null)
             {
                 menuView.LeaveClicked -= LeaveWork;
-                menuView.PauseClicked -= Pause;
-                menuView.ResumeClicked -= Resume;
+                menuView.PauseClicked -= PauseFromMenu;
+                menuView.ResumeClicked -= ResumeFromMenu;
             }
             if (deskView != null) deskView.PaperClicked -= OpenPaper;
             if (paperView != null)
@@ -120,6 +120,8 @@ namespace WorkGame
         public void StartNextMonth() { if (connected) System.StartNextMonth(); }
         public void Pause() { if (connected) System.SetPaused(true); }
         public void Resume() { if (connected) System.SetPaused(false); }
+        private void PauseFromMenu() { if (!menuView.SharedMenuConnected) Pause(); }
+        private void ResumeFromMenu() { if (!menuView.SharedMenuConnected) Resume(); }
         private void SendFax(int paperId)
         {
             if (connected) System.Fax.TrySend(paperId, faxView != null && faxView.ForceEnabled);

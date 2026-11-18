@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace WorkGame
 {
-    public sealed class CareSystem : IDisposable
+    public sealed partial class CareSystem : IDisposable
     {
         public const int SlotCount = 4;
         public const string HomeId = "home";
@@ -21,6 +21,7 @@ namespace WorkGame
         private int shownMonth;
         private WorkPhase shownPhase;
         private bool disposed;
+        private IReadOnlyList<CareEnding> endingChoices;
 
         public CareRun Run { get; }
         public int StatMax => Run.StatMax;
@@ -30,9 +31,10 @@ namespace WorkGame
         public IReadOnlyList<CareSynergy> Synergies { get; }
         public long Money => work.Run.Money;
         public int Month => work.Run.Month;
-        public bool CanPlan => !disposed && Run.FinishedMonth != Month && Month > 0
+        public bool CanPlan => !disposed && !work.IsPaused && Run.FinishedMonth != Month && Month > 0
             && (work.Run.Phase == WorkPhase.AfterWork || work.Run.Phase == WorkPhase.Finished);
-        public bool HasResult => Run.LastResult != null && Run.FinishedMonth == Month;
+        // 엔딩 선택으로 복원할 때는 이미 확인한 결과창을 다시 만들지 않습니다.
+        public bool HasResult => Month > 0 && Run.FinishedMonth == Month;
         public bool IsPlanFull => plan.All(id => !string.IsNullOrEmpty(id));
         public event Action Changed;
         public event Action<CareMonthResult> MonthFinished;
@@ -208,18 +210,36 @@ namespace WorkGame
             Changed?.Invoke();
         }
 
+        public IReadOnlyList<CareEnding> GetEndingChoices()
+        {
+            if (disposed || Month != 12 || !HasResult || work.Run.Phase != WorkPhase.Finished) return Array.Empty<CareEnding>();
+            if (endingChoices != null) return endingChoices;
+            var choices = endings.Where(ending => ending.MainNeeds.All(need => (int)GetGrade(need.Stat) >= (int)need.Grade)
+                && ending.Needs.All(need => Run.GetStat(need.Stat) >= need.Amount)).Take(5).ToArray();
+            endingChoices = Array.AsReadOnly(choices.Length > 0 ? choices : new[] { fallbackEnding });
+            return endingChoices;
+        }
+
         public CareEndingResult ResolveEnding()
         {
-            if (disposed || Month != 12 || !HasResult || work.Run.Phase != WorkPhase.Finished) return null;
+            if (disposed) return null;
             if (Run.Ending != null) return Run.Ending;
-            var ending = endings.FirstOrDefault(x => x.MainNeeds.All(need => (int)GetGrade(need.Stat) >= (int)need.Grade)
-                && x.Needs.All(need => Run.GetStat(need.Stat) >= need.Amount)) ?? fallbackEnding;
+            var choices = GetEndingChoices();
+            if (choices.Count == 1) ChooseEnding(choices[0].Id);
+            return Run.Ending;
+        }
+
+        public bool ChooseEnding(string id)
+        {
+            if (disposed || Run.Ending != null || string.IsNullOrEmpty(id)) return false;
+            var ending = GetEndingChoices().FirstOrDefault(choice => choice.Id == id);
+            if (ending == null) return false;
             var friendship = Run.Friendship <= lowFriendshipMax ? CareFriendship.Low
                 : Run.Friendship >= highFriendshipMin ? CareFriendship.High : CareFriendship.Normal;
             Run.Ending = new CareEndingResult(ending, friendship);
             Changed?.Invoke();
             EndingReady?.Invoke(Run.Ending);
-            return Run.Ending;
+            return true;
         }
 
         private void ChangeFriendship(int amount) => Run.Friendship =

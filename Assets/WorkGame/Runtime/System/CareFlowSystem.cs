@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace WorkGame
 {
-    public sealed class CareFlowSystem : IDisposable
+    public sealed partial class CareFlowSystem : IDisposable
     {
         private readonly WorkSystem work;
         private readonly CareSystem care;
@@ -19,8 +19,9 @@ namespace WorkGame
         public CareFlowPhase Phase { get; private set; } = CareFlowPhase.Working;
         public CarePanel Panel { get; private set; }
         public CareLeaveKind LeaveKind { get; private set; }
+        public bool IsPaused => work.IsPaused;
         public bool CanGoNext => !disposed && Phase == CareFlowPhase.Free && care.CanPlan && care.IsPlanFull;
-        public bool CanTalk => !disposed && Phase == CareFlowPhase.Free && monthTalks.ContainsKey(care.Month)
+        public bool CanTalk => !disposed && !IsPaused && Phase == CareFlowPhase.Free && monthTalks.ContainsKey(care.Month)
             && !Dialogue.WasCompleted("talk/" + care.Month);
         public bool CanEditSchedule => Phase == CareFlowPhase.Panel && Panel == CarePanel.Schedule;
         public bool CanBuyGifts => Phase == CareFlowPhase.Panel && (Panel == CarePanel.Shop || Panel == CarePanel.Furniture);
@@ -28,6 +29,8 @@ namespace WorkGame
         public event Action Changed;
         public event Action Finished;
         public event Action<string> Blocked;
+        public event Action CareStarting;
+        public event Action EndingStarting;
 
         public CareFlowSystem(WorkSystem work, CareSystem care, CareDialogueFile data)
         {
@@ -46,6 +49,7 @@ namespace WorkGame
         public void EnterCare()
         {
             if (disposed || Phase != CareFlowPhase.Report || work.Run.LastResult == null) return;
+            CareStarting?.Invoke(); // 약속 결과·친밀도를 바꾸기 전에 시작 상태를 저장합니다.
             var result = work.Run.LastResult;
             LeaveKind = leave.GetKind(result.LeaveDifference);
             var promise = Promises.Resolve(result.Month, LeaveKind);
@@ -57,7 +61,7 @@ namespace WorkGame
         public bool OpenPanel(CarePanel panel)
         {
             bool fromStats = Phase == CareFlowPhase.Panel && Panel == CarePanel.Stats && panel == CarePanel.Furniture;
-            if (disposed || (Phase != CareFlowPhase.Free && !fromStats)
+            if (disposed || IsPaused || (Phase != CareFlowPhase.Free && !fromStats)
                 || panel == CarePanel.None || !Enum.IsDefined(typeof(CarePanel), panel)) return false;
             Panel = panel;
             SetPhase(CareFlowPhase.Panel);
@@ -89,7 +93,7 @@ namespace WorkGame
 
         public void ConfirmResult()
         {
-            if (disposed || Phase != CareFlowPhase.Result || !care.HasResult) return;
+            if (disposed || IsPaused || Phase != CareFlowPhase.Result || !care.HasResult) return;
             var promise = Promises.Offer(care.Month);
             if (promise != null)
             {
@@ -98,6 +102,14 @@ namespace WorkGame
                 offeredPromise = null;
             }
             AdvanceMonth();
+        }
+
+        public bool ChooseEnding(string id)
+        {
+            if (disposed || IsPaused || Phase != CareFlowPhase.EndingChoice || !care.ChooseEnding(id)) return false;
+            SetPhase(CareFlowPhase.Ended);
+            Finished?.Invoke();
+            return true;
         }
 
         private bool Play(string id, string key)
@@ -127,9 +139,9 @@ namespace WorkGame
             }
             else if (work.Run.Phase == WorkPhase.Finished)
             {
-                SetPhase(CareFlowPhase.Ended);
-                care.ResolveEnding();
-                Finished?.Invoke();
+                care.GetEndingChoices();
+                EndingStarting?.Invoke(); // 후보가 하나여도 선택 전 상태가 체크포인트입니다.
+                ResumeEndingChoice();
             }
         }
 
@@ -153,6 +165,7 @@ namespace WorkGame
             Dialogue.Finished -= FinishDialogue;
             Dialogue.Clear();
             Changed = null; Finished = null; Blocked = null;
+            CareStarting = null; EndingStarting = null;
         }
     }
 }

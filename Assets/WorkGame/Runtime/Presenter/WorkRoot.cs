@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,7 @@ namespace WorkGame
         [SerializeField] private CareMonthReportView careMonthReportView;
         [Header("엔딩 — 다른 전환 그룹 바깥에 배치한 전용 View")]
         [SerializeField] private CareEndingView careEndingView;
+        [SerializeField] private CareEndingChoiceView careEndingChoiceView;
         private WorkUpgradePresenter upgradePresenter;
         private CareStatusPresenter careStatusPresenter;
         private CareFurniturePresenter careFurniturePresenter;
@@ -48,10 +50,20 @@ namespace WorkGame
         private CareSchedulePresenter careSchedulePresenter;
         private CareEndingPresenter careEndingPresenter;
         private CareMonthReportPresenter careMonthReportPresenter;
+        private CareEndingChoicePresenter careEndingChoicePresenter;
         private Func<string, bool> dialogueReadCheck;
+        private Func<string, bool> endingReadCheck;
+        private readonly HashSet<string> readEndings = new HashSet<string>();
+        private WorkSaveSystem saves;
+        private WorkSaveSession saveSession;
+        public WorkSaveSystem Saves => saves ?? (saves = new WorkSaveSystem(new PlayerPrefsSaveStore()));
+        public SavePoint? LoadedPoint { get; private set; }
+        public int LoadedMonth { get; private set; }
+        public string SaveError { get; private set; }
 
         public WorkSystem System { get; private set; }
         public WorkPresenter Presenter { get; private set; }
+        public WorkMenuView MenuView => menuView;
         public WorkUpgradeSystem Upgrades { get; private set; }
         public CareSystem Care { get; private set; }
         public CarePresenter CarePresenter { get; private set; }
@@ -64,8 +76,18 @@ namespace WorkGame
         public event Action CareFlowChanged;
         public event Action FurnitureRequested;
         public event Action<string> CareDialogueReadCompleted;
+        public event Action<string> EndingReadCompleted;
 
-        private void Start() => StartRun();
+        private void Start()
+        {
+            var requested = WorkStartRequest.Take();
+            if (System != null) return;
+            if (requested.HasValue)
+            {
+                if (!LoadSave(requested.Value)) Debug.LogError("이어하기 실패: " + SaveError, this);
+            }
+            else StartRun();
+        }
         private void OnEnable()
         {
             Presenter?.Connect(); upgradePresenter?.Connect();
@@ -75,6 +97,7 @@ namespace WorkGame
             careSchedulePresenter?.Connect();
             careEndingPresenter?.Connect();
             careMonthReportPresenter?.Connect();
+            careEndingChoicePresenter?.Connect();
             if (upgradeView != null) upgradeView.Closed += OnUpgradeClosed;
         }
         private void Update() => System?.AddTime(Time.unscaledDeltaTime);
@@ -87,6 +110,7 @@ namespace WorkGame
             careSchedulePresenter?.Disconnect();
             careEndingPresenter?.Disconnect();
             careMonthReportPresenter?.Disconnect();
+            careEndingChoicePresenter?.Disconnect();
             upgradePresenter?.Disconnect(); Presenter?.Disconnect();
         }
         private void OnDestroy() => DisposeRun();
@@ -95,38 +119,73 @@ namespace WorkGame
 
         public void StartRun()
         {
-            if (config == null) { Debug.LogError("WorkConfig is missing.", this); return; }
+            BuildRun(null);
+        }
+
+        private bool BuildRun(GameSaveData saved)
+        {
+            if (config == null) { Debug.LogError("WorkConfig is missing.", this); return false; }
             WorkSystem next = null;
             CareSystem nextCare = null;
             CareFlowSystem nextCareFlow = null;
-            int runSeed = useFixedSeed ? seed : UnityEngine.Random.Range(0, int.MaxValue);
+            WorkUpgradeSystem nextUpgrades = null;
+            int runSeed = saved != null ? saved.Seed : useFixedSeed ? seed : UnityEngine.Random.Range(0, int.MaxValue);
             try
             {
                 next = config.CreateSystem(runSeed);
+                if (saved != null) next.RestoreSave(saved.Work);
+                if (upgradeTree != null)
+                {
+                    var nodes = upgradeTree.CreateNodes().ToArray();
+                    if (saved == null)
+                    {
+                        var knownIds = nodes.Select(node => node.Id).ToHashSet();
+                        next.InheritUpgrades(Saves.GetInheritedUpgrades().Where(knownIds.Contains));
+                    }
+                    if (next.Run.BoughtUpgrades.Any(id => !nodes.Any(node => node.Id == id)))
+                        throw new ArgumentException("저장된 강화 노드를 찾을 수 없습니다.");
+                    next.Fax.SetSecondsPerPaper(upgradeTree.FaxSeconds);
+                    nextUpgrades = new WorkUpgradeSystem(next, nodes);
+                }
+                else if (next.Run.BoughtUpgrades.Count > 0) throw new ArgumentException("강화 트리 SO가 필요합니다.");
+                if (saved != null && (saved.Care != null) != (careConfig != null))
+                    throw new ArgumentException("저장 당시와 육성 설정이 다릅니다.");
                 if (careConfig != null)
                 {
                     nextCare = careConfig.CreateSystem(next);
                     nextCareFlow = new CareFlowSystem(next, nextCare, careConfig.CreateDialogues());
+                    if (saved != null)
+                    {
+                        nextCare.RestoreSave(saved.Care);
+                        nextCareFlow.RestoreSave(saved.Flow, saved.Point);
+                    }
                 }
+                if (saved != null) Saves.UseCheckpoint(saved);
             }
             catch (Exception e)
             {
                 nextCareFlow?.Dispose();
                 nextCare?.Dispose();
                 next?.Dispose();
-                Debug.LogError(e.Message, this);
-                return;
+                ReportSaveError(e);
+                return false;
             }
             DisposeRun();
             System = next;
             Care = nextCare;
             CareFlow = nextCareFlow;
+            Upgrades = nextUpgrades;
+            LoadedPoint = saved?.Point;
+            LoadedMonth = saved?.Work.Month ?? 0;
+            SaveError = null;
+            saveSession = new WorkSaveSession(Saves, runSeed, System, Care, CareFlow, saved != null);
+            saveSession.Failed += ReportSaveError;
             if (Care != null)
             {
                 CareFlow.Changed += OnCareFlowChanged;
                 CareFlow.Finished += OnGameFinished;
                 CareFlow.Blocked += OnCareBlocked;
-                CareFlow.Dialogue.SetReadCheck(dialogueReadCheck);
+                CareFlow.Dialogue.SetReadCheck(WasDialogueRead);
                 CareFlow.Dialogue.ReadCompleted += OnDialogueRead;
                 CarePresenter = new CarePresenter(Care, CareFlow);
                 CarePresenter.MonthFinished += ShowCareMonth;
@@ -143,11 +202,13 @@ namespace WorkGame
                     careScheduleView, scheduleButton, careConfig);
                 careSchedulePresenter.Connect();
                 careEndingPresenter = new CareEndingPresenter(Care, System, careEndingView, careConfig);
+                careEndingPresenter.ReadCompleted += OnEndingRead;
                 careEndingPresenter.Connect();
+                careEndingChoicePresenter = new CareEndingChoicePresenter(Care, CareFlow, careEndingChoiceView, careConfig, WasEndingRead);
+                careEndingChoicePresenter.Connect();
                 careMonthReportPresenter = new CareMonthReportPresenter(Care, CareFlow, careMonthReportView, careConfig);
                 careMonthReportPresenter.Connect();
             }
-            Upgrades = CreateUpgrades();
             var categories = config.Plan.Batches.Select(x => x.Category).Distinct();
             Presenter = new WorkPresenter(System, menuView, hudView, deskView, paperView, categories,
                 CreateFeedback(runSeed), feedbackView, faxView);
@@ -157,21 +218,29 @@ namespace WorkGame
                 upgradePresenter = new WorkUpgradePresenter(System, Upgrades, upgradeView);
                 upgradePresenter.Connect();
             }
-            System.StartRun();
+            if (saved == null) System.StartRun();
             RunStarted?.Invoke(System);
+            if (saved?.Point == SavePoint.CareStart) EnterCare();
+            else if (saved?.Point == SavePoint.EndingChoice) CareFlow.ResumeEndingChoice();
+            return true;
         }
 
-        private WorkUpgradeSystem CreateUpgrades()
+        // 수동 슬롯 번호는 1~4입니다. 자동 슬롯을 포함해 총 5칸입니다.
+        public bool SaveManual(int slot)
         {
-            if (upgradeTree == null) return null;
-            try
-            {
-                var nodes = upgradeTree.CreateNodes();
-                System.Fax.SetSecondsPerPaper(upgradeTree.FaxSeconds);
-                return new WorkUpgradeSystem(System, nodes);
-            }
-            catch (Exception e) { Debug.LogError("강화 트리: " + e.Message, this); return null; }
+            if (slot < 1 || slot > 4) return false;
+            try { return Saves.SaveManual((SaveSlot)slot); }
+            catch (Exception e) { ReportSaveError(e); return false; }
         }
+
+        public bool LoadAuto() => LoadSave(SaveSlot.Auto);
+        public bool LoadManual(int slot) => slot >= 1 && slot <= 4 && LoadSave((SaveSlot)slot);
+        private bool LoadSave(SaveSlot slot)
+        {
+            if (!Saves.TryLoad(slot, out var data, out var error)) { SaveError = error; return false; }
+            return BuildRun(data);
+        }
+        private void ReportSaveError(Exception error) { SaveError = error.Message; Debug.LogError("저장/시작: " + SaveError, this); }
 
         private WorkFeedback CreateFeedback(int runSeed)
         {
@@ -222,9 +291,29 @@ namespace WorkGame
         public void SetDialogueReadCheck(Func<string, bool> check)
         {
             dialogueReadCheck = check;
-            CareFlow?.Dialogue.SetReadCheck(check);
+            CareFlow?.Dialogue.SetReadCheck(WasDialogueRead);
         }
-        private void OnDialogueRead(string id) => CareDialogueReadCompleted?.Invoke(id);
+        private bool WasDialogueRead(string id) => Saves.WasDialogueRead(id) || (dialogueReadCheck?.Invoke(id) ?? false);
+        private void OnDialogueRead(string id)
+        {
+            try { Saves.MarkDialogueRead(id); }
+            catch (Exception e) { ReportSaveError(e); }
+            CareDialogueReadCompleted?.Invoke(id);
+        }
+        public void ChooseEnding(string id) => CareFlow?.ChooseEnding(id);
+        public void SetEndingReadCheck(Func<string, bool> check)
+        {
+            endingReadCheck = check;
+            careEndingChoicePresenter?.Refresh();
+        }
+        private bool WasEndingRead(string id) => readEndings.Contains(id) || Saves.WasEndingRead(id) || (endingReadCheck?.Invoke(id) ?? false);
+        private void OnEndingRead(string id)
+        {
+            readEndings.Add(id);
+            try { Saves.MarkEndingRead(id); }
+            catch (Exception e) { ReportSaveError(e); }
+            EndingReadCompleted?.Invoke(id);
+        }
         public void SetCareDialogueBlocked(bool blocked) => careDialogueView?.SetInputBlocked(blocked);
         public void ClearCareLesson(int slot) => CarePresenter?.ClearLesson(slot);
         public void OpenSchedule() => careSchedulePresenter?.Open();
@@ -267,8 +356,13 @@ namespace WorkGame
 
         private void DisposeRun()
         {
+            saveSession?.Dispose();
+            saveSession = null;
+            careEndingChoicePresenter?.Dispose();
+            careEndingChoicePresenter = null;
             careMonthReportPresenter?.Dispose();
             careMonthReportPresenter = null;
+            if (careEndingPresenter != null) careEndingPresenter.ReadCompleted -= OnEndingRead;
             careEndingPresenter?.Dispose();
             careEndingPresenter = null;
             careSchedulePresenter?.Dispose();
