@@ -12,6 +12,8 @@ namespace WorkGame
         [SerializeField] private AudioMixerGroup sfxGroup;
         [SerializeField] private string musicParameter = "MusicVol";
         [SerializeField] private string sfxParameter = "SFXVol";
+        [Tooltip("SFX 전체 출력 보정(dB). 옵션 슬라이더의 비율과 음소거는 유지합니다.")]
+        [SerializeField, Range(0f, 12f)] private float sfxBoostDb = 3f;
         private static GameAudioRoot instance;
         private AudioSource source;
         private float gain, from, to;
@@ -77,6 +79,8 @@ namespace WorkGame
             if (ReferenceEquals(session, sender)) requestDirty = true;
         }
 
+        private void OnValidate() => volumesDirty = true;
+
         private void LateUpdate()
         {
             // Start/OnEnable ordering cannot apply mixer parameters in Awake accidentally.
@@ -84,7 +88,7 @@ namespace WorkGame
             {
                 volumesDirty = false;
                 musicOnMixer = ApplyMixer(musicGroup, musicParameter, musicVolume, ref warnedMusic);
-                bool sfxOnMixer = ApplyMixer(sfxGroup, sfxParameter, soundVolume, ref warnedSound);
+                bool sfxOnMixer = ApplyMixer(sfxGroup, sfxParameter, soundVolume, ref warnedSound, sfxBoostDb);
                 effects.SetVolume(soundVolume, sfxOnMixer);
             }
             if (requestDirty)
@@ -159,10 +163,11 @@ namespace WorkGame
             fadingOut = false;
         }
 
-        private bool ApplyMixer(AudioMixerGroup group, string parameter, float value, ref bool warned)
+        private bool ApplyMixer(AudioMixerGroup group, string parameter, float value, ref bool warned, float boostDb = 0f)
         {
             if (group != null && !string.IsNullOrEmpty(parameter)
-                && group.audioMixer.SetFloat(parameter, value > 0f ? Mathf.Max(-80f, 20f * Mathf.Log10(value)) : -80f))
+                && group.audioMixer.SetFloat(parameter, value > 0f
+                    ? Mathf.Max(-80f, 20f * Mathf.Log10(value) + SafeGain(boostDb, 0f, 12f)) : -80f))
                 return true;
             if (!warned)
             {

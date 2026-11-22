@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace WorkGame
 {
-    public sealed class CareMonthReportView : MonoBehaviour
+    public sealed class CareMonthReportView : MonoBehaviour, ICareSfxSource
     {
         [SerializeField] private CanvasGroup panelGroup, pictureGroup, lineGroup;
         [SerializeField] private CareDialogueClickArea clickArea;
@@ -32,11 +32,12 @@ namespace WorkGame
         [SerializeField] private UnityEvent onReady = new UnityEvent();
         public IReadOnlyList<CareMonthStatView> Stats => stats;
         public event Action Confirmed;
+        public event Action<CareSfxCue> SoundRequested;
         private Sequence sequence;
         private Tween iconSway;
         private Quaternion pictureRotation;
         private bool rotationSaved;
-        private bool visible, ready;
+        private bool visible, ready, paused;
         private Coroutine closeRoutine;
         private UnityAction coveredHandler;
         private bool ownsTransition;
@@ -60,6 +61,7 @@ namespace WorkGame
             sequence?.Kill();
             StopIconMotion();
             visible = true; ready = false;
+            SoundRequested?.Invoke(CareSfxCue.WeekOpen);
             WorkUi.Show(panelGroup, true);
             if (firstOpen) SetAlpha(panelGroup, 0);
             SetAlpha(pictureGroup, 0); SetAlpha(lineGroup, 0);
@@ -94,19 +96,29 @@ namespace WorkGame
                 int count = 0;
                 sequence.Append(DOTween.To(() => count, value =>
                 {
+                    bool speak = CareTextSound.HasLetter(lineText, count, value);
                     count = value;
                     if (lineText != null) lineText.maxVisibleCharacters = value;
+                    if (speak) SoundRequested?.Invoke(CareSfxCue.DialogueBlip);
                 }, letters, letters * letterSeconds).SetEase(Ease.Linear));
             }
             float start = sequence.Duration();
             int index = 0;
             foreach (var row in stats)
-                if (row != null) sequence.Insert(start + index++ * statGap, row.CreateAnimation(statSeconds));
-            sequence.OnComplete(MarkReady);
+                if (row != null)
+                {
+                    float at = start + index++ * statGap;
+                    sequence.InsertCallback(at, () => SoundRequested?.Invoke(CareSfxCue.StatRise));
+                    sequence.Insert(at, row.CreateAnimation(statSeconds));
+                    if (row.GainedGrade) sequence.InsertCallback(at + statSeconds,
+                        () => SoundRequested?.Invoke(CareSfxCue.GradeUp));
+                }
+            sequence.OnComplete(() => MarkReady());
+            if (paused) sequence.Pause();
         }
         private void Click()
         {
-            if (!visible || IsClosing) return;
+            if (!visible || IsClosing || paused) return;
             if (!ready) { FinishAnimation(); return; }
             // 같은 클릭으로 연출 생략과 다음 단계 진행이 함께 일어나지 않습니다.
             ready = false;
@@ -118,9 +130,9 @@ namespace WorkGame
             SetAlpha(panelGroup, 1); SetAlpha(pictureGroup, 1); SetAlpha(lineGroup, 1);
             if (lineText != null) lineText.maxVisibleCharacters = int.MaxValue;
             foreach (var row in stats) if (row != null) row.ShowFinal();
-            MarkReady();
+            MarkReady(false);
         }
-        private void MarkReady()
+        private void MarkReady(bool playSound = true)
         {
             sequence = null; ready = true;
             if (lineText != null) lineText.maxVisibleCharacters = int.MaxValue;
@@ -130,6 +142,13 @@ namespace WorkGame
                 WorkUi.Show(hintText.gameObject, true);
             }
             onReady.Invoke();
+            if (playSound) SoundRequested?.Invoke(CareSfxCue.WeekComplete);
+        }
+        public void SetPaused(bool value)
+        {
+            paused = value;
+            if (value) { sequence?.Pause(); iconSway?.Pause(); }
+            else { sequence?.Play(); iconSway?.Play(); }
         }
         public void CloseWithTransition(Action covered)
         {

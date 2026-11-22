@@ -7,13 +7,15 @@ using UnityEngine.UI;
 
 namespace WorkGame
 {
-    public sealed class CareDialogueView : MonoBehaviour, ICanvasRaycastFilter
+    public sealed class CareDialogueView : MonoBehaviour, ICanvasRaycastFilter, ICareSfxSource
     {
         [SerializeField] private CanvasGroup panelGroup;
         [SerializeField] private CareDialogueClickArea clickArea;
         [SerializeField] private TMP_Text speakerText;
         [SerializeField] private GameObject namePlate;
         [SerializeField] private TMP_Text bodyText;
+        [Header("대사 글자 출력 — 클릭하면 현재 줄 즉시 표시")]
+        [SerializeField, Min(0.001f)] private float characterSeconds = 0.035f;
         [SerializeField] private GameObject continueHint;
         [SerializeField] private Button logButton;
         [SerializeField] private Button skipButton;
@@ -41,6 +43,12 @@ namespace WorkGame
         private readonly List<UnityAction> choiceActions = new List<UnityAction>();
         private bool visible, hasChoices, canSkip;
         private string lastImageKey;
+        private CareDialogueData shownDialogue;
+        private int shownLine = -1, letterCount, shownLetters;
+        private float letterClock;
+        private bool narrationLine;
+        public bool IsWriting => shownLetters < letterCount;
+        public event Action<CareSfxCue> SoundRequested;
         private float choiceStep;
         private int choiceCount = -1;
         public bool LogOpen { get; private set; }
@@ -81,6 +89,8 @@ namespace WorkGame
         public void Show(CareDialogueData dialogue, int lineIndex, bool allowSkip, string rewardText = "")
         {
             if (dialogue == null) { Hide(); return; }
+            bool newLine = shownDialogue != dialogue || shownLine != lineIndex;
+            bool advancing = visible && newLine;
             visible = true; canSkip = allowSkip;
             WorkUi.Show(panelGroup, true);
             var line = dialogue.Lines[lineIndex];
@@ -93,6 +103,19 @@ namespace WorkGame
                 speakerText.text = narration ? "" : string.IsNullOrEmpty(line.Speaker) ? "달이" : line.Speaker;
             }
             if (bodyText != null && bodyText.text != line.Text) bodyText.text = line.Text;
+            if (newLine)
+            {
+                shownDialogue = dialogue; shownLine = lineIndex; narrationLine = narration;
+                letterClock = 0; shownLetters = 0; letterCount = 0;
+                if (bodyText != null)
+                {
+                    bodyText.maxVisibleCharacters = int.MaxValue;
+                    bodyText.ForceMeshUpdate(true);
+                    letterCount = bodyText.textInfo.characterCount;
+                    bodyText.maxVisibleCharacters = 0;
+                }
+                if (advancing) SoundRequested?.Invoke(CareSfxCue.DialogueNext);
+            }
             if (storyRewardText != null)
             {
                 storyRewardText.text = rewardText;
@@ -119,6 +142,8 @@ namespace WorkGame
         {
             if (visible && character != null) character.Normal();
             visible = false; LogOpen = false; lastImageKey = null;
+            shownDialogue = null; shownLine = -1; shownLetters = letterCount = 0;
+            if (bodyText != null) bodyText.maxVisibleCharacters = int.MaxValue;
             WorkUi.Show(logGroup, false); WorkUi.Show(panelGroup, false);
         }
         private void ArrangeChoices(int count)
@@ -146,17 +171,54 @@ namespace WorkGame
             bool allowed = visible && !InputBlocked && !LogOpen && !presentationPlaying && !paused;
             if (skipButton != null) skipButton.interactable = allowed && canSkip;
             if (logButton != null) logButton.interactable = allowed;
-            foreach (var button in choiceButtons) if (button != null) button.interactable = allowed;
+            foreach (var button in choiceButtons) if (button != null) button.interactable = allowed && !IsWriting;
+            if (continueHint != null) WorkUi.Show(continueHint, visible && !hasChoices && !IsWriting);
         }
-        private void Next() { if (visible && !InputBlocked && !LogOpen && !hasChoices) NextRequested?.Invoke(); }
-        private void Choose(int index) { if (visible && !InputBlocked && !LogOpen && hasChoices) ChoiceRequested?.Invoke(index); }
+        private void Update()
+        {
+            if (!visible || paused || InputBlocked || LogOpen || presentationPlaying || !IsWriting) return;
+            letterClock += Time.unscaledDeltaTime;
+            int count = Mathf.Min(letterCount, shownLetters + Mathf.FloorToInt(letterClock / Mathf.Max(0.001f, characterSeconds)));
+            if (count == shownLetters) return;
+            letterClock -= (count - shownLetters) * Mathf.Max(0.001f, characterSeconds);
+            bool speak = !narrationLine && CareTextSound.HasLetter(bodyText, shownLetters, count);
+            shownLetters = count;
+            if (bodyText != null) bodyText.maxVisibleCharacters = count;
+            if (speak) SoundRequested?.Invoke(CareSfxCue.DialogueBlip);
+            if (!IsWriting) UpdateInput();
+        }
+        private void Next()
+        {
+            if (!visible || paused || InputBlocked || LogOpen || presentationPlaying) return;
+            if (IsWriting)
+            {
+                shownLetters = letterCount;
+                if (bodyText != null) bodyText.maxVisibleCharacters = int.MaxValue;
+                UpdateInput();
+                return;
+            }
+            if (!hasChoices) NextRequested?.Invoke();
+        }
+        private void Choose(int index)
+        {
+            if (!visible || paused || InputBlocked || LogOpen || presentationPlaying || IsWriting || !hasChoices
+                || index < 0 || shownDialogue == null || index >= shownDialogue.Choices.Length) return;
+            SoundRequested?.Invoke(CareSfxCue.DialogueChoice);
+            ChoiceRequested?.Invoke(index);
+        }
         private void Skip() { if (visible && !InputBlocked && !LogOpen && canSkip) SkipRequested?.Invoke(); }
         private void OpenLog()
         {
             if (!visible || InputBlocked) return;
             LogOpen = true; WorkUi.Show(logGroup, true); UpdateInput(); LogRequested?.Invoke();
+            SoundRequested?.Invoke(CareSfxCue.PanelOpen);
         }
-        private void CloseLog() { LogOpen = false; WorkUi.Show(logGroup, false); UpdateInput(); }
+        private void CloseLog()
+        {
+            if (!LogOpen) return;
+            LogOpen = false; WorkUi.Show(logGroup, false); UpdateInput();
+            SoundRequested?.Invoke(CareSfxCue.PanelClose);
+        }
         public void ShowLog(string text)
         {
             if (logText == null || logContent == null || logViewport == null) return;

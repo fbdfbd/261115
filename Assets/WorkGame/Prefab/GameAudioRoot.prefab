@@ -48,3 +48,4 @@ MonoBehaviour:
   sfxGroup: {fileID: 3627535372348521540, guid: 646adf846bf44574f9874c05e2dcb49b, type: 2}
   musicParameter: MusicVol
   sfxParameter: SFXVol
+  sfxBoostDb: 3

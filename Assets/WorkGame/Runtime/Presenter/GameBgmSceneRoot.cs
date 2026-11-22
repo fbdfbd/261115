@@ -25,6 +25,7 @@ namespace WorkGame
         private GameBgmTrack eventTrack;
         private bool eventOverrideActive;
         private WorkSfxPresenter workSounds;
+        private CareSfxPresenter careSounds;
         private CharacterSfxPresenter characterSounds;
         private bool started, connected, dirty, tutorial;
 
@@ -102,6 +103,9 @@ namespace WorkGame
                     FindSceneView<WorkHudView>(), FindSceneView<WorkFaxView>(), FindSceneView<WorkMonthReportView>());
             if (work != null && music.CharacterSounds != null && audioRoot != null)
                 characterSounds = new CharacterSfxPresenter(FindSceneView<CharacterPettingView>(), music.CharacterSounds, audioRoot.Effects);
+            if (work != null && boundRoot.Care != null && careFlow != null && music.CareSounds != null && audioRoot != null)
+                careSounds = new CareSfxPresenter(work, boundRoot.Care, careFlow, music.CareSounds, audioRoot.Effects,
+                    FindSceneView<CareDialogueView>(), FindSceneView<CareMonthReportView>(), FindSceneView<CareEndingView>());
             dirty = true;
         }
 
@@ -117,6 +121,8 @@ namespace WorkGame
 
         private void UnbindRun()
         {
+            careSounds?.Dispose();
+            careSounds = null;
             characterSounds?.Dispose();
             characterSounds = null;
             workSounds?.Dispose();
@@ -132,6 +138,7 @@ namespace WorkGame
         private void LateUpdate()
         {
             workSounds?.Tick();
+            careSounds?.Tick();
             characterSounds?.Tick();
             if (!connected || !dirty || session == null || session.IsDisposed) return;
             dirty = false;

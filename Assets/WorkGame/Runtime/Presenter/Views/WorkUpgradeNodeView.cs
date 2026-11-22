@@ -25,7 +25,6 @@ namespace WorkGame
         [SerializeField] private Color lockedBackgroundColor = new Color(0.88f, 0.86f, 0.82f);
         private Color normalBackgroundColor;
         private bool backgroundSaved;
-        private bool selectable;
         public string NodeId => node != null ? node.Id : "";
         public event Action<string> BuyClicked;
         public event Action<WorkUpgradeSO> Selected;
@@ -45,13 +44,12 @@ namespace WorkGame
             holdButton.Completed -= Buy;
         }
         private void Buy() => BuyClicked?.Invoke(NodeId);
-        private void SelectNode() { if (node != null && selectable) Selected?.Invoke(node); }
+        private void SelectNode() { if (node != null) Selected?.Invoke(node); }
         public void SetSelected(bool selected) => WorkUi.Show(selectedMark, selected);
         public void CancelHold() => holdButton?.CancelHold();
 
         public void Show(WorkUpgradeState state, bool canBuy, bool featureEnabled = false)
         {
-            selectable = state == WorkUpgradeState.Bought;
             if (node == null) { if (buyButton != null) buyButton.interactable = false; return; }
             ShowBackground(state);
             if (nameText != null) nameText.text = node.Name;

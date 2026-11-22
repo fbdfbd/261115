@@ -22,6 +22,7 @@ namespace WorkGame
         private CareGradeSettings grades;
         private CareGrade startGrade, shownGrade = (CareGrade)(-1);
         public CareStat Stat => stat;
+        public bool GainedGrade => grades != null && after > before && grades.GetGrade(after) > startGrade;
 
         public void Prepare(int before, int after, int change, CareGradeSettings grades)
         {
@@ -73,7 +74,7 @@ namespace WorkGame
         private void ShowBar(float value)
         {
             var progress = grades.GetProgress(value);
-            if (slider != null) slider.SetValueWithoutNotify((float)progress.Ratio);
+            if (slider != null) slider.SetValueWithoutNotify(progress.Ratio > 0 ? Mathf.Max(0.1f, (float)progress.Ratio) : 0);
             if (shownGrade == progress.Grade) return;
             shownGrade = progress.Grade;
             if (gradeText == null) return;

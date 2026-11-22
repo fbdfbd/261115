@@ -43,6 +43,8 @@ namespace WorkGame
         public GameMonthBgm[] Months = CreateMonths();
         [Header("Work 효과음 — Work SFX SO를 한 번 연결하면 자동 적용")]
         public WorkSfxSO WorkSounds;
+        [Header("Care 효과음 — Care SFX SO를 한 번 연결하면 자동 적용")]
+        public CareSfxSO CareSounds;
         [Header("캐릭터 효과음 — Character SFX SO를 한 번 연결하면 자동 적용")]
         public CharacterSfxSO CharacterSounds;
         [Tooltip("대화 시작 ID로 지정합니다. 선택지 후속 대화에도 같은 설정을 유지하며, 미등록 이벤트는 기본 BGM을 사용합니다.")]

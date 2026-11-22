@@ -59,6 +59,7 @@ namespace WorkGame
         private void Select(string id)
         {
             if (!Visible || !lessons.ContainsKey(id)) return;
+            if (lessons[id].UnlockMonth > care.Month) return;
             selected = id; focusedSynergy = null;
             if (lessons[id].UnlockMonth <= care.Month)
             {

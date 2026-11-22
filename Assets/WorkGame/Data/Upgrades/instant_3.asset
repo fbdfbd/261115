@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: instant_3
   Name: "\uC989\uC2DC \uCC98\uB9AC III"
-  Description: "서류를 누르면 80% 확률로\n즉시 정답 처리합니다."
+  Description: "서류를 누르면 99% 확률로\n즉시 정답 처리합니다."
   Icon: {fileID: 21300000, guid: 4176a23286b0c25408cd2a61c71fd1d8, type: 3}
   Cost: 50000
   Required:
   - {fileID: 11400000, guid: aaba933ec30f97248affd9bd5d9fa9c5, type: 2}
   Effects:
   - Kind: 5
-    Value: 55
+    Value: 59

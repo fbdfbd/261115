@@ -45,8 +45,8 @@ namespace WorkGame
             var current = grades.GetProgress(lastCurrent);
             var preview = grades.GetProgress(value);
             // 다른 등급의 예측 막대가 시작되면 현재 막대가 앞을 가리지 않게 합니다.
-            if (currentSlider != null) currentSlider.SetValueWithoutNotify(current.Grade == preview.Grade ? (float)current.Ratio : 0);
-            if (previewSlider != null) previewSlider.SetValueWithoutNotify((float)preview.Ratio);
+            if (currentSlider != null) currentSlider.SetValueWithoutNotify(current.Grade == preview.Grade && current.Ratio > 0 ? Mathf.Max(0.1f, (float)current.Ratio) : 0);
+            if (previewSlider != null) previewSlider.SetValueWithoutNotify(preview.Ratio > 0 ? Mathf.Max(0.1f, (float)preview.Ratio) : 0);
             bool gradeUp = (int)preview.Grade > (int)current.Grade;
             if (shownGrade == preview.Grade && shownGradeUp == gradeUp) return;
             shownGrade = preview.Grade; shownGradeUp = gradeUp;

@@ -1,6 +1,6 @@
 {
     "name": "WorkGame.Tests",
-    "references": ["WorkGame", "WorkGame.Editor", "WorkGame.Presentation", "UnityEngine.UI"],
+    "references": ["WorkGame", "WorkGame.Editor", "WorkGame.Presentation", "UnityEngine.UI", "Unity.TextMeshPro"],
     "overrideReferences": true,
     "precompiledReferences": ["nunit.framework.dll", "DOTween.dll"],
     "includePlatforms": ["Editor"],

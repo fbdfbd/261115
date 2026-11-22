@@ -46,9 +46,10 @@ namespace WorkGame
             if (lastGrade != grade && gradeText != null) gradeText.text = CareGradeNames.GetName(grade);
             if (slider != null && (lastValue != value || lastMax != max))
             {
-                slider.minValue = 0; slider.maxValue = max;
-                slider.wholeNumbers = true; slider.interactable = false;
-                slider.SetValueWithoutNotify(value);
+                slider.minValue = 0; slider.maxValue = 1;
+                slider.wholeNumbers = false; slider.interactable = false;
+                float ratio = max > 0 ? (float)value / max : 0;
+                slider.SetValueWithoutNotify(ratio > 0 ? Mathf.Max(0.1f, ratio) : 0);
             }
             lastValue = value; lastGrade = grade; lastMax = max;
         }
@@ -56,7 +57,7 @@ namespace WorkGame
         {
             shownValue = value;
             var progress = grades.GetProgress(value);
-            if (slider != null) slider.SetValueWithoutNotify((float)progress.Ratio);
+            if (slider != null) slider.SetValueWithoutNotify(progress.Ratio > 0 ? Mathf.Max(0.1f, (float)progress.Ratio) : 0);
             if (shownGrade != progress.Grade && gradeText != null) gradeText.text = CareGradeNames.GetName(progress.Grade);
             shownGrade = progress.Grade;
             int number = Mathf.FloorToInt(value);

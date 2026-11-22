@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace WorkGame
 {
-    public sealed class CareEndingView : MonoBehaviour
+    public sealed class CareEndingView : MonoBehaviour, ICareSfxSource
     {
         [SerializeField] private CanvasGroup panelGroup;
         [SerializeField] private CareDialogueClickArea clickArea;
@@ -35,6 +35,7 @@ namespace WorkGame
         public event Action NextRequested;
         public event Action Completed;
         public event Action TitleRequested;
+        public event Action<CareSfxCue> SoundRequested;
 
         private void Awake() => Hide();
         private void OnEnable()
@@ -65,6 +66,7 @@ namespace WorkGame
         }
         public void ShowPage(Sprite sprite, string text, int number, int count)
         {
+            SoundRequested?.Invoke(CareSfxCue.EndingPage);
             StopWriting();
             if (pageText != null) pageText.text = number + " / " + count;
             ShowImage(sprite);
@@ -164,10 +166,12 @@ namespace WorkGame
         }
         public void ShowComplete(bool notify = true)
         {
+            bool firstComplete = !complete;
             FinishWriting(); complete = true;
             if (hintText != null) WorkUi.Show(hintText.gameObject, false);
             if (titleButton != null) WorkUi.Show(titleButton.gameObject, true);
             if (notify) { Completed?.Invoke(); onCompleted.Invoke(); }
+            if (notify && firstComplete) SoundRequested?.Invoke(CareSfxCue.EndingComplete);
         }
         public void SetInputBlocked(bool blocked)
         {

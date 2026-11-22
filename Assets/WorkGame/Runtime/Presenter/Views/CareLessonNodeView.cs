@@ -30,11 +30,12 @@ namespace WorkGame
         private bool isUnlocked;
         private void OnEnable() { if (button != null) button.onClick.AddListener(Click); }
         private void OnDisable() { if (button != null) button.onClick.RemoveListener(Click); ClearHint(); }
-        private void Click() => Clicked?.Invoke(LessonId);
+        private void Click() { if (isUnlocked) Clicked?.Invoke(LessonId); }
         public void Show(bool unlocked, bool selected, bool partner, Color color)
         {
             if (lesson == null) return;
             isUnlocked = unlocked;
+            if (button != null) button.interactable = unlocked;
             if (lockImage != null) lockImage.enabled = lockImage.sprite != null;
             if (lockPlaceholder != null) WorkUi.Show(lockPlaceholder, lockImage == null || lockImage.sprite == null);
             if (nameText != null && nameText.text != lesson.DisplayName) nameText.text = lesson.DisplayName;
