@@ -213,6 +213,8 @@ MonoBehaviour:
   lineDelaySeconds: 0.08
   showFinalCareerImage: 1
   titleFadeSeconds: 0.6
+  useDiagonalTitleTransition: 1
+  titleTransitionPrefab: {fileID: 1006, guid: 6c7c4789d01e46568100c6868bb5b542, type: 3}
   onCompleted:
     m_PersistentCalls:
       m_Calls: []

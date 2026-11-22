@@ -49,7 +49,7 @@ namespace WorkGame
                 careerImage = asset?.Pages?.FirstOrDefault(page => page?.Image != null)?.Image ?? asset?.CollectionImage;
                 string careerText = asset?.Pages == null ? null : string.Join("\n", asset.Pages
                     .Where(page => page != null && !string.IsNullOrWhiteSpace(page.Text)).Select(page => page.Text));
-                lines = CareEndingScript.Build(result, flow?.BuildEndingMemories(), careerText,
+                lines = CareEndingScript.Build(result, flow?.BuildEndingOpening(), careerText,
                     asset == null || asset.AppendFriendshipText);
                 script = new CareDialogueData
                 {

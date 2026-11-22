@@ -158,11 +158,20 @@ namespace WorkGame
             // One recollection per event month. Prefer the actual final choice/result over its setup.
             var pages = memories.GroupBy(memory => memory.Month)
                 .Select(month => month.OrderBy(memory => memory.Priority).Last())
-                .OrderByDescending(memory => memory.Priority).ThenByDescending(memory => memory.Month).Take(3)
+                .OrderByDescending(memory => memory.Priority).ThenByDescending(memory => memory.Month).Take(1)
                 .OrderBy(memory => memory.Month).Select(memory => memory.Text).ToList();
             if (pages.Count > 0 && !string.IsNullOrWhiteSpace(dialogueData.EndingIntroText))
                 pages.Insert(0, dialogueData.EndingIntroText);
             return pages.ToArray();
+        }
+
+        public string[] BuildEndingOpening()
+        {
+            string intro = string.IsNullOrWhiteSpace(dialogueData.EndingIntroText)
+                ? "그로부터 5년이 지났다." : dialogueData.EndingIntroText;
+            var growth = CareGrowthNarration.Build(care.Run, care.CopyGrades().B, dialogueData.EndingGrowth);
+            return new[] { intro }.Concat(growth)
+                .Concat(BuildEndingMemories().Where(text => text != intro)).ToArray();
         }
 
         private bool Play(string id, string key)

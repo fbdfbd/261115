@@ -18,543 +18,561 @@ MonoBehaviour:
   HudColor: {r: 1, g: 1, b: 1, a: 1}
   Target: "\uC81C\uD488"
   Metrics:
-  - Title: "자동 복귀 의자 선정"
-    Agency: ""
-    Name: "의자 복귀 성공률"
+  - Title: "\uC790\uB3D9 \uBCF5\uADC0 \uC758\uC790 \uC120\uC815"
+    Agency: 
+    Difficulty: 1
+    Name: "\uC758\uC790 \uBCF5\uADC0 \uC131\uACF5\uB960"
     HighlightWords:
-    - "의자 복귀 성공률"
-    Unit: "%"
+    - "\uC758\uC790 \uBCF5\uADC0 \uC131\uACF5\uB960"
+    Unit: '%'
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC808\uC804 \uC804\uB3D9 \uCC45\uC0C1 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "절전 전동 책상 선정"
-    Agency: ""
-    Name: "서류 처리 소비 전력"
+    Name: "\uC11C\uB958 \uCC98\uB9AC \uC18C\uBE44 \uC804\uB825"
     HighlightWords:
-    - "서류 처리 소비 전력"
-    Unit: "Wh"
+    - "\uC11C\uB958 \uCC98\uB9AC \uC18C\uBE44 \uC804\uB825"
+    Unit: Wh
     Rule: 1
     Display: 0
     Min: 10
     Max: 90
     ScaleMax: 100
+  - Title: "\uC790\uC138 \uAC10\uC9C0 \uC758\uC790 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "자세 감지 의자 선정"
-    Agency: ""
-    Name: "자세 감지 오작동률"
+    Name: "\uC790\uC138 \uAC10\uC9C0 \uC624\uC791\uB3D9\uB960"
     HighlightWords:
-    - "자세 감지 오작동률"
-    Unit: "%"
+    - "\uC790\uC138 \uAC10\uC9C0 \uC624\uC791\uB3D9\uB960"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC624\uB798 \uC4F0\uB294 \uB85C\uBD07 \uD314 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "오래 쓰는 로봇 팔 선정"
-    Agency: ""
-    Name: "완충 후 사용 시간"
+    Name: "\uC644\uCDA9 \uD6C4 \uC0AC\uC6A9 \uC2DC\uAC04"
     HighlightWords:
-    - "완충 후 사용 시간"
-    Unit: "시간"
+    - "\uC644\uCDA9 \uD6C4 \uC0AC\uC6A9 \uC2DC\uAC04"
+    Unit: "\uC2DC\uAC04"
     Rule: 0
     Display: 0
     Min: 1
     Max: 20
     ScaleMax: 20
+  - Title: "\uC811\uC774\uC2DD \uD0C1\uC790 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "접이식 탁자 선정"
-    Agency: ""
-    Name: "끼임 감지 정확도"
+    Name: "\uB07C\uC784 \uAC10\uC9C0 \uC815\uD655\uB3C4"
     HighlightWords:
-    - "끼임 감지 정확도"
-    Unit: "%"
+    - "\uB07C\uC784 \uAC10\uC9C0 \uC815\uD655\uB3C4"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC808\uC804 \uCCAD\uC18C\uAE30 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "절전 청소기 선정"
-    Agency: ""
-    Name: "청소 소비 전력"
+    Name: "\uCCAD\uC18C \uC18C\uBE44 \uC804\uB825"
     HighlightWords:
-    - "청소 소비 전력"
-    Unit: "Wh"
+    - "\uCCAD\uC18C \uC18C\uBE44 \uC804\uB825"
+    Unit: Wh
     Rule: 1
     Display: 0
     Min: 10
     Max: 90
     ScaleMax: 100
+  - Title: "\uC704\uC870 \uBC29\uC9C0 \uC778\uC8FC \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "위조 방지 인주 선정"
-    Agency: ""
-    Name: "위조 차단 성공률"
+    Name: "\uC704\uC870 \uCC28\uB2E8 \uC131\uACF5\uB960"
     HighlightWords:
-    - "위조 차단 성공률"
-    Unit: "%"
+    - "\uC704\uC870 \uCC28\uB2E8 \uC131\uACF5\uB960"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uCC3B\uC794 \uB0C9\uAC01 \uBC1B\uCE68 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "찻잔 냉각 받침 선정"
-    Agency: ""
-    Name: "냉각 성능"
+    Name: "\uB0C9\uAC01 \uC131\uB2A5"
     HighlightWords:
-    - "냉각 성능"
-    Unit: ""
+    - "\uB0C9\uAC01 \uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uC8FC\uC778 \uCC3E\uB294 \uC6B0\uC0B0 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "주인 찾는 우산 선정"
-    Agency: ""
-    Name: "주인 확인 정확도"
+    Name: "\uC8FC\uC778 \uD655\uC778 \uC815\uD655\uB3C4"
     HighlightWords:
-    - "주인 확인 정확도"
-    Unit: "%"
+    - "\uC8FC\uC778 \uD655\uC778 \uC815\uD655\uB3C4"
+    Unit: '%'
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC0C1\uC790 \uC6B4\uBC18 \uCE74\uD2B8 \uC120\uC815"
+    Agency: 
     Difficulty: 1
-  - Title: "상자 운반 카트 선정"
-    Agency: ""
-    Name: "한 번 충전 운반량"
+    Name: "\uD55C \uBC88 \uCDA9\uC804 \uC6B4\uBC18\uB7C9"
     HighlightWords:
-    - "한 번 충전 운반량"
-    Unit: "개"
+    - "\uD55C \uBC88 \uCDA9\uC804 \uC6B4\uBC18\uB7C9"
+    Unit: "\uAC1C"
     Rule: 0
     Display: 0
     Min: 1
     Max: 20
     ScaleMax: 20
+  - Title: "\uBD84\uD544 \uAC00\uB8E8 \uC218\uAC70 \uCE60\uD310 \uC120\uC815"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
     Difficulty: 1
-  - Title: "분필 가루 수거 칠판 선정"
-    Agency: "교육청·학교"
-    Name: "분필 가루 회수율"
+    Name: "\uBD84\uD544 \uAC00\uB8E8 \uD68C\uC218\uC728"
     HighlightWords:
-    - "분필 가루 회수율"
-    Unit: "%"
+    - "\uBD84\uD544 \uAC00\uB8E8 \uD68C\uC218\uC728"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC808\uC804 \uBD80\uC720 \uC758\uC790 \uC120\uC815"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
     Difficulty: 1
-  - Title: "절전 부유 의자 선정"
-    Agency: "교육청·학교"
-    Name: "부유 유지 소비 전력"
+    Name: "\uBD80\uC720 \uC720\uC9C0 \uC18C\uBE44 \uC804\uB825"
     HighlightWords:
-    - "부유 유지 소비 전력"
-    Unit: "Wh"
+    - "\uBD80\uC720 \uC720\uC9C0 \uC18C\uBE44 \uC804\uB825"
+    Unit: Wh
     Rule: 1
     Display: 0
     Min: 10
     Max: 90
     ScaleMax: 100
+  - Title: "\uB192\uC774 \uC870\uC808 \uCC45\uC0C1 \uC120\uC815"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
     Difficulty: 1
-  - Title: "높이 조절 책상 선정"
-    Agency: "교육청·학교"
-    Name: "높이 조절 성능"
+    Name: "\uB192\uC774 \uC870\uC808 \uC131\uB2A5"
     HighlightWords:
-    - "높이 조절 성능"
-    Unit: ""
+    - "\uB192\uC774 \uC870\uC808 \uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uBC29\uC74C \uAD50\uC2E4 \uBCBD \uC120\uC815"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
     Difficulty: 1
-  - Title: "방음 교실 벽 선정"
-    Agency: "교육청·학교"
-    Name: "복도 소음 누출률"
+    Name: "\uBCF5\uB3C4 \uC18C\uC74C \uB204\uCD9C\uB960"
     HighlightWords:
-    - "복도 소음 누출률"
-    Unit: "%"
+    - "\uBCF5\uB3C4 \uC18C\uC74C \uB204\uCD9C\uB960"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uD1B5\uD559\uB85C \uB9E4\uD2B8 \uC120\uC815"
+    Agency: "\uAD50\uC721\uCCAD\xB7\uD559\uAD50"
     Difficulty: 1
-  - Title: "통학로 매트 선정"
-    Agency: "교육청·학교"
-    Name: "빗물 차단 성능"
+    Name: "\uBE57\uBB3C \uCC28\uB2E8 \uC131\uB2A5"
     HighlightWords:
-    - "빗물 차단 성능"
-    Unit: "점"
+    - "\uBE57\uBB3C \uCC28\uB2E8 \uC131\uB2A5"
+    Unit: "\uC810"
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uD658\uC790 \uC774\uC1A1 \uCE68\uB300 \uC120\uC815"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
     Difficulty: 1
-  - Title: "환자 이송 침대 선정"
-    Agency: "국공립병원"
-    Name: "문턱 충돌 발생률"
+    Name: "\uBB38\uD131 \uCDA9\uB3CC \uBC1C\uC0DD\uB960"
     HighlightWords:
-    - "문턱 충돌 발생률"
-    Unit: "%"
+    - "\uBB38\uD131 \uCDA9\uB3CC \uBC1C\uC0DD\uB960"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC758\uB8CC \uC0C1\uC790 \uC190\uC7A1\uC774 \uC120\uC815"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
     Difficulty: 1
-  - Title: "의료 상자 손잡이 선정"
-    Agency: "국공립병원"
-    Name: "상자 개방 성공률"
+    Name: "\uC0C1\uC790 \uAC1C\uBC29 \uC131\uACF5\uB960"
     HighlightWords:
-    - "상자 개방 성공률"
-    Unit: "%"
+    - "\uC0C1\uC790 \uAC1C\uBC29 \uC131\uACF5\uB960"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uBCD1\uC0C1\uC6A9 \uAC70\uC6B8 \uC120\uC815"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
     Difficulty: 1
-  - Title: "병상용 거울 선정"
-    Agency: "국공립병원"
-    Name: "거울 각도 조절 성능"
+    Name: "\uAC70\uC6B8 \uAC01\uB3C4 \uC870\uC808 \uC131\uB2A5"
     HighlightWords:
-    - "거울 각도 조절 성능"
-    Unit: ""
+    - "\uAC70\uC6B8 \uAC01\uB3C4 \uC870\uC808 \uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uD720\uCCB4\uC5B4 \uBCF4\uAD00\uB300 \uC120\uC815"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
     Difficulty: 1
-  - Title: "휠체어 보관대 선정"
-    Agency: "국공립병원"
-    Name: "보관에 필요한 면적"
+    Name: "\uBCF4\uAD00\uC5D0 \uD544\uC694\uD55C \uBA74\uC801"
     HighlightWords:
-    - "보관에 필요한 면적"
-    Unit: "㎡"
+    - "\uBCF4\uAD00\uC5D0 \uD544\uC694\uD55C \uBA74\uC801"
+    Unit: m2
     Rule: 1
     Display: 1
     Min: 1
     Max: 20
     ScaleMax: 20
+  - Title: "\uB2F4\uC694 \uC138\uCC99\uAE30 \uC120\uC815"
+    Agency: "\uAD6D\uACF5\uB9BD\uBCD1\uC6D0"
     Difficulty: 1
-  - Title: "담요 세척기 선정"
-    Agency: "국공립병원"
-    Name: "오염 제거 성능"
+    Name: "\uC624\uC5FC \uC81C\uAC70 \uC131\uB2A5"
     HighlightWords:
-    - "오염 제거 성능"
-    Unit: ""
+    - "\uC624\uC5FC \uC81C\uAC70 \uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
-    Difficulty: 1
-  - Title: "계단을 만나면 발이 생기는 들것"
-    Agency: "소방서"
-    Name: "계단 이동 성공률"
+  - Title: "\uACC4\uB2E8\uC744 \uB9CC\uB098\uBA74 \uBC1C\uC774 \uC0DD\uAE30\uB294
+      \uB4E4\uAC83"
+    Agency: "\uC18C\uBC29\uC11C"
+    Difficulty: 0
+    Name: "\uACC4\uB2E8 \uC774\uB3D9 \uC131\uACF5\uB960"
     HighlightWords:
-    - "성공률"
-    Unit: "%"
+    - "\uC131\uACF5\uB960"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uBB3C\uBC29\uC6B8\uC744 \uBD99\uC5EC \uAD75\uAC8C \uB9CC\uB4DC\uB294
+      \uB178\uC990"
+    Agency: "\uC18C\uBC29\uC11C"
     Difficulty: 0
-  - Title: "물방울을 붙여 굵게 만드는 노즐"
-    Agency: "소방서"
-    Name: "물 분사 손실률"
+    Name: "\uBB3C \uBD84\uC0AC \uC190\uC2E4\uB960"
     HighlightWords:
-    - "손실"
-    Unit: "%"
+    - "\uC190\uC2E4"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC881\uC740 \uBB38\uD2C8\uC744 \uD1B5\uACFC\uD560 \uB54C \uC885\uC787\uC7A5\uCC98\uB7FC
+      \uC587\uC544\uC9C0\uB294 \uBC29\uD328"
+    Agency: "\uC18C\uBC29\uC11C"
     Difficulty: 0
-  - Title: "좁은 문틈을 통과할 때 종잇장처럼 얇아지는 방패"
-    Agency: "소방서"
-    Name: "좁은 공간 진입 성능"
+    Name: "\uC881\uC740 \uACF5\uAC04 \uC9C4\uC785 \uC131\uB2A5"
     HighlightWords:
-    - "성능"
-    Unit: ""
+    - "\uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uBE5B\uC744 \uC3D8\uBA74 \uAD6C\uC870\uC6A9 \uC904\uC774 \uC0DD\uAE30\uB294
+      \uC190\uC7A1\uC774"
+    Agency: "\uC18C\uBC29\uC11C"
     Difficulty: 0
-  - Title: "빛을 쏘면 구조용 줄이 생기는 손잡이"
-    Agency: "소방서"
-    Name: "구조 줄 생성 전력"
+    Name: "\uAD6C\uC870 \uC904 \uC0DD\uC131 \uC804\uB825"
     HighlightWords:
-    - "구조 줄 생성 전력"
-    Unit: "kWh"
+    - "\uAD6C\uC870 \uC904 \uC0DD\uC131 \uC804\uB825"
+    Unit: kWh
     Rule: 1
     Display: 0
     Min: 30
     Max: 300
     ScaleMax: 0
+  - Title: "\uBCBD \uB108\uBA38\uC758 \uC791\uC740 \uC9C4\uB3D9\uAE4C\uC9C0 \uC190\uB05D\uC5D0
+      \uC804\uD558\uB294 \uC7A5\uAC11"
+    Agency: "\uC18C\uBC29\uC11C"
     Difficulty: 0
-  - Title: "벽 너머의 작은 진동까지 손끝에 전하는 장갑"
-    Agency: "소방서"
-    Name: "진동 전달 민감도"
+    Name: "\uC9C4\uB3D9 \uC804\uB2EC \uBBFC\uAC10\uB3C4"
     HighlightWords:
-    - "진동 전달 민감도"
-    Unit: ""
+    - "\uC9C4\uB3D9 \uC804\uB2EC \uBBFC\uAC10\uB3C4"
+    Unit: 
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uD45C\uC9C0\uD310\uC774 \uC811\uD600 \uC8FC\uBA38\uB2C8\uC5D0 \uB4DC\uB294
+      \uC7A5\uCE58"
+    Agency: "\uACBD\uCC30\uC11C"
     Difficulty: 0
-  - Title: "표지판이 접혀 주머니에 드는 장치"
-    Agency: "경찰서"
-    Name: "표지판 전개 실패율"
+    Name: "\uD45C\uC9C0\uD310 \uC804\uAC1C \uC2E4\uD328\uC728"
     HighlightWords:
-    - "실패"
-    Unit: "%"
+    - "\uC2E4\uD328"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uBC14\uB78C\uC73C\uB85C \uD22C\uBA85\uD55C \uBCBD\uC744 \uC138\uC6B0\uB294
+      \uC548\uC804 \uC6B8\uD0C0\uB9AC"
+    Agency: "\uACBD\uCC30\uC11C"
     Difficulty: 0
-  - Title: "바람으로 투명한 벽을 세우는 안전 울타리"
-    Agency: "경찰서"
-    Name: "울타리 유지 전력"
+    Name: "\uC6B8\uD0C0\uB9AC \uC720\uC9C0 \uC804\uB825"
     HighlightWords:
-    - "울타리 유지 전력"
-    Unit: "kWh"
+    - "\uC6B8\uD0C0\uB9AC \uC720\uC9C0 \uC804\uB825"
+    Unit: kWh
     Rule: 1
     Display: 0
     Min: 30
     Max: 300
     ScaleMax: 0
+  - Title: "\uB3C4\uB85C\uC758 \uAC08\uB77C\uC9C4 \uD2C8\uC744 \uD53C\uD574 \uAD74\uB7EC\uAC00\uB294
+      \uBC14\uD034"
+    Agency: "\uACBD\uCC30\uC11C"
     Difficulty: 0
-  - Title: "도로의 갈라진 틈을 피해 굴러가는 바퀴"
-    Agency: "경찰서"
-    Name: "노면 적응 성능"
+    Name: "\uB178\uBA74 \uC801\uC751 \uC131\uB2A5"
     HighlightWords:
-    - "성능"
-    Unit: ""
+    - "\uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uBE5B\uC73C\uB85C\uB9CC \uB0A8\uB294 \uC784\uC2DC \uCC28\uC120"
+    Agency: "\uACBD\uCC30\uC11C"
     Difficulty: 0
-  - Title: "빛으로만 남는 임시 차선"
-    Agency: "경찰서"
-    Name: "차선 표시 번짐률"
+    Name: "\uCC28\uC120 \uD45C\uC2DC \uBC88\uC9D0\uB960"
     HighlightWords:
-    - "차선 표시 번짐률"
-    Unit: "%"
+    - "\uCC28\uC120 \uD45C\uC2DC \uBC88\uC9D0\uB960"
+    Unit: '%'
     Rule: 1
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC7A1\uC73C\uBA74 \uC190 \uD06C\uAE30\uC5D0 \uB9DE\uB294 \uBB34\uC804\uAE30"
+    Agency: "\uACBD\uCC30\uC11C"
     Difficulty: 0
-  - Title: "잡으면 손 크기에 맞는 무전기"
-    Agency: "경찰서"
-    Name: "손 크기 대응 성능"
+    Name: "\uC190 \uD06C\uAE30 \uB300\uC751 \uC131\uB2A5"
     HighlightWords:
-    - "성능"
-    Unit: ""
+    - "\uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uBE48 \uBC30\uB0AD\uC744 \uC190\uC218\uAC74 \uD06C\uAE30\uB85C \uC811\uC5B4\uC8FC\uB294
+      \uC7A5\uBE44"
+    Agency: "\uAD70\uBD80\uB300"
     Difficulty: 0
-  - Title: "빈 배낭을 손수건 크기로 접어주는 장비"
-    Agency: "군부대"
-    Name: "빈 배낭 압축 성능"
+    Name: "\uBE48 \uBC30\uB0AD \uC555\uCD95 \uC131\uB2A5"
     HighlightWords:
-    - "성능"
-    Unit: ""
+    - "\uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uD587\uBE5B\uC744 \uAD6D\uC790\uB85C \uB5A0\uC11C \uBC25\uC744 \uC9D3\uB294
+      \uCDE8\uC0AC\uAE30"
+    Agency: "\uAD70\uBD80\uB300"
     Difficulty: 0
-  - Title: "햇빛을 국자로 떠서 밥을 짓는 취사기"
-    Agency: "군부대"
-    Name: "식사 조리 전력"
+    Name: "\uC2DD\uC0AC \uC870\uB9AC \uC804\uB825"
     HighlightWords:
-    - "식사 조리 전력"
-    Unit: "kWh"
+    - "\uC2DD\uC0AC \uC870\uB9AC \uC804\uB825"
+    Unit: kWh
     Rule: 1
     Display: 0
     Min: 30
     Max: 300
     ScaleMax: 0
+  - Title: "\uBAB8\uC5D0 \uB9DE\uCDB0 \uB298\uC5B4\uB098\uB294 \uBC29\uD55C\uBCF5"
+    Agency: "\uAD70\uBD80\uB300"
     Difficulty: 0
-  - Title: "몸에 맞춰 늘어나는 방한복"
-    Agency: "군부대"
-    Name: "체형 적응 성능"
+    Name: "\uCCB4\uD615 \uC801\uC751 \uC131\uB2A5"
     HighlightWords:
-    - "성능"
-    Unit: ""
+    - "\uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uD55C\uC228\uC744 \uC26C\uBA74 \uBC1C\uC774 \uB530\uB73B\uD574\uC9C0\uB294
+      \uAD70\uD654 \uAE54\uCC3D"
+    Agency: "\uAD70\uBD80\uB300"
     Difficulty: 0
-  - Title: "한숨을 쉬면 발이 따뜻해지는 군화 깔창"
-    Agency: "군부대"
-    Name: "발열 유지 전력"
+    Name: "\uBC1C\uC5F4 \uC720\uC9C0 \uC804\uB825"
     HighlightWords:
-    - "발열 유지 전력"
-    Unit: "kWh"
+    - "\uBC1C\uC5F4 \uC720\uC9C0 \uC804\uB825"
+    Unit: kWh
     Rule: 1
     Display: 0
     Min: 30
     Max: 300
     ScaleMax: 0
+  - Title: "\uBAA8\uB798\uB97C \uC2A4\uC2A4\uB85C \uD138\uC5B4\uB0B4\uB294 \uCC9C\uB9C9"
+    Agency: "\uAD70\uBD80\uB300"
     Difficulty: 0
-  - Title: "모래를 스스로 털어내는 천막"
-    Agency: "군부대"
-    Name: "모래 제거 성공률"
+    Name: "\uBAA8\uB798 \uC81C\uAC70 \uC131\uACF5\uB960"
     HighlightWords:
-    - "성공률"
-    Unit: "%"
+    - "\uC131\uACF5\uB960"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uBE44\uAC00 \uC624\uBA74 \uBE57\uBB3C\uC744 \uC800\uC7A5\uD558\uB294
+      \uBCF4\uB3C4\uBE14\uB85D"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
     Difficulty: 0
-  - Title: "비가 오면 빗물을 저장하는 보도블록"
-    Agency: "시청·구청"
-    Name: "빗물 저장 손실률"
+    Name: "\uBE57\uBB3C \uC800\uC7A5 \uC190\uC2E4\uB960"
     HighlightWords:
-    - "손실"
-    Unit: "%"
+    - "\uC190\uC2E4"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uC4F0\uB808\uAE30\uD1B5\uC774 \uB0A9\uC791\uD574\uC9C0\uB294 \uC555\uCD95
+      \uC7A5\uCE58"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
     Difficulty: 0
-  - Title: "쓰레기통이 납작해지는 압축 장치"
-    Agency: "시청·구청"
-    Name: "쓰레기 압축 전력"
+    Name: "\uC4F0\uB808\uAE30 \uC555\uCD95 \uC804\uB825"
     HighlightWords:
-    - "쓰레기 압축 전력"
-    Unit: "kWh"
+    - "\uC4F0\uB808\uAE30 \uC555\uCD95 \uC804\uB825"
+    Unit: kWh
     Rule: 1
     Display: 0
     Min: 30
     Max: 300
     ScaleMax: 0
+  - Title: "\uB098\uBB34\uBFCC\uB9AC\uB97C \uBC1F\uC9C0 \uC54A\uC73C\uB824\uACE0
+      \uB2E4\uB9AC\uB97C \uB4E4\uC5B4 \uC62C\uB9AC\uB294 \uCCAD\uC18C\uCC28"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
     Difficulty: 0
-  - Title: "나무뿌리를 밟지 않으려고 다리를 들어 올리는 청소차"
-    Agency: "시청·구청"
-    Name: "뿌리 회피 성공률"
+    Name: "\uBFCC\uB9AC \uD68C\uD53C \uC131\uACF5\uB960"
     HighlightWords:
-    - "성공률"
-    Unit: "%"
+    - "\uC131\uACF5\uB960"
+    Unit: '%'
     Rule: 0
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uD55C\uB0AE\uC758 \uD587\uBE5B\uC744 \uC811\uC5B4\uC11C \uADF8\uB298\uC744
+      \uB9CC\uB4DC\uB294 \uACF5\uC6D0 \uC9C0\uBD95"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
     Difficulty: 0
-  - Title: "한낮의 햇빛을 접어서 그늘을 만드는 공원 지붕"
-    Agency: "시청·구청"
-    Name: "그늘 생성 전력"
+    Name: "\uADF8\uB298 \uC0DD\uC131 \uC804\uB825"
     HighlightWords:
-    - "그늘 생성 전력"
-    Unit: "kWh"
+    - "\uADF8\uB298 \uC0DD\uC131 \uC804\uB825"
+    Unit: kWh
     Rule: 1
     Display: 0
     Min: 30
     Max: 300
     ScaleMax: 0
+  - Title: "\uD30C\uC190 \uBD80\uBD84\uB9CC \uAC08\uC544 \uB07C\uC6B0\uB294 \uBCA4\uCE58"
+    Agency: "\uC2DC\uCCAD\xB7\uAD6C\uCCAD"
     Difficulty: 0
-  - Title: "파손 부분만 갈아 끼우는 벤치"
-    Agency: "시청·구청"
-    Name: "부분 교체 편의성"
+    Name: "\uBD80\uBD84 \uAD50\uCCB4 \uD3B8\uC758\uC131"
     HighlightWords:
-    - "부분 교체 편의성"
-    Unit: ""
+    - "\uBD80\uBD84 \uAD50\uCCB4 \uD3B8\uC758\uC131"
+    Unit: 
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uC881\uC740 \uBC30\uAD00\uC5D0\uC11C\uB294 \uC885\uC774\uCC98\uB7FC
+      \uC811\uD788\uB294 \uBC14\uD034"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
     Difficulty: 0
-  - Title: "좁은 배관에서는 종이처럼 접히는 바퀴"
-    Agency: "환경·상하수도 기관"
-    Name: "좁은 배관 통과율"
+    Name: "\uC881\uC740 \uBC30\uAD00 \uD1B5\uACFC\uC728"
     HighlightWords:
-    - "좁은 배관 통과율"
-    Unit: "%"
+    - "\uC881\uC740 \uBC30\uAD00 \uD1B5\uACFC\uC728"
+    Unit: '%'
     Rule: 0
     Display: 1
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uBB3C\uC758 \uBB34\uAC8C\uB85C \uC2A4\uC2A4\uB85C \uB2EB\uD788\uB294
+      \uBC38\uBE0C"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
     Difficulty: 0
-  - Title: "물의 무게로 스스로 닫히는 밸브"
-    Agency: "환경·상하수도 기관"
-    Name: "밸브 작동 실패율"
+    Name: "\uBC38\uBE0C \uC791\uB3D9 \uC2E4\uD328\uC728"
     HighlightWords:
-    - "실패"
-    Unit: "%"
+    - "\uC2E4\uD328"
+    Unit: '%'
     Rule: 1
     Display: 2
     Min: 5
     Max: 95
     ScaleMax: 100
+  - Title: "\uB0C4\uC0C8 \uBD84\uC790\uB9CC \uBD99\uC7A1\uB294 \uD544\uD130"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
     Difficulty: 0
-  - Title: "냄새 분자만 붙잡는 필터"
-    Agency: "환경·상하수도 기관"
-    Name: "악취 분리 성능"
+    Name: "\uC545\uCDE8 \uBD84\uB9AC \uC131\uB2A5"
     HighlightWords:
-    - "성능"
-    Unit: ""
+    - "\uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 4
     Min: 1
     Max: 5
     ScaleMax: 5
+  - Title: "\uC9C4\uD759\uC744 \uD754\uB4E4\uC5B4 \uBB3C\uAE30\uB97C \uBE7C\uB294
+      \uD0C8\uC218\uAE30"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
     Difficulty: 0
-  - Title: "진흙을 흔들어 물기를 빼는 탈수기"
-    Agency: "환경·상하수도 기관"
-    Name: "진흙 처리 전력"
+    Name: "\uC9C4\uD759 \uCC98\uB9AC \uC804\uB825"
     HighlightWords:
-    - "진흙 처리 전력"
-    Unit: "kWh"
+    - "\uC9C4\uD759 \uCC98\uB9AC \uC804\uB825"
+    Unit: kWh
     Rule: 1
     Display: 0
     Min: 30
     Max: 300
     ScaleMax: 0
+  - Title: "\uBB3C\uB54C\uB97C \uB9D0\uC544\uC11C \uBC97\uAE30\uB294 \uC194"
+    Agency: "\uD658\uACBD\xB7\uC0C1\uD558\uC218\uB3C4 \uAE30\uAD00"
     Difficulty: 0
-  - Title: "물때를 말아서 벗기는 솔"
-    Agency: "환경·상하수도 기관"
-    Name: "물때 제거 성능"
+    Name: "\uBB3C\uB54C \uC81C\uAC70 \uC131\uB2A5"
     HighlightWords:
-    - "성능"
-    Unit: ""
+    - "\uC131\uB2A5"
+    Unit: 
     Rule: 0
     Display: 3
     Min: 1
     Max: 5
     ScaleMax: 5
-    Difficulty: 0

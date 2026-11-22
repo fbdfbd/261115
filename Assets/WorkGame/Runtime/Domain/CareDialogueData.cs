@@ -152,6 +152,7 @@ namespace WorkGame
     {
         public string IntroDialogue;
         public string EndingIntroText;
+        public CareEndingGrowthText EndingGrowth;
         public CareLeaveSettings Leave = new CareLeaveSettings();
         public CareDialogueData[] Dialogues = Array.Empty<CareDialogueData>();
         public CareMonthTalk[] MonthTalks = Array.Empty<CareMonthTalk>();

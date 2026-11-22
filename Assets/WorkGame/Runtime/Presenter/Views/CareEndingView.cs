@@ -21,6 +21,9 @@ namespace WorkGame
         [Header("마지막 직업 이미지 - 끄면 대화 종료 후 바로 타이틀로 전환")]
         [SerializeField] private bool showFinalCareerImage = true;
         [SerializeField, Min(0)] private float titleFadeSeconds = 0.6f;
+        [Header("타이틀 대각선 전환 - 끄거나 참조를 빼면 기존 검은 페이드 사용")]
+        [SerializeField] private bool useDiagonalTitleTransition = true;
+        [SerializeField] private DiagonalTransitionView titleTransitionPrefab;
         [SerializeField] private UnityEvent onCompleted = new UnityEvent();
         [SerializeField] private UnityEvent onTitleRequested = new UnityEvent();
         private Tween imageTween, titleTween;
@@ -175,6 +178,15 @@ namespace WorkGame
         private void ReturnToTitle()
         {
             if (returning) return;
+            if (useDiagonalTitleTransition && titleTransitionPrefab != null)
+            {
+                returning = true;
+                EndingTitleTransition.Play(titleTransitionPrefab, () =>
+                {
+                    TitleRequested?.Invoke(); onTitleRequested.Invoke();
+                });
+                return;
+            }
             if (RoomVisible)
             {
                 var matte = GetComponent<Image>();
