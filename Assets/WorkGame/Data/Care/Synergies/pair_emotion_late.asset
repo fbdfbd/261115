@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: pair_emotion_late
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: pair_emotion_late
-  Name: "내 작품을 관객의 눈으로"
+  Name: "작품 데뷔"
   Description: "작품을 고르고 무대에 올리며 보는 사람의 마음을 생각합니다. 달이는 나르미의 박수도 조금 이해하게 됐습니다."
   Lessons:
   - {fileID: 11400000, guid: db1c107192955661af0b5b04af2d5caf, type: 2}

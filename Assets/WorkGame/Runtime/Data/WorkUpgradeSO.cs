@@ -16,6 +16,7 @@ namespace WorkGame
         public List<WorkUpgradeEffect> Effects = new List<WorkUpgradeEffect>();
         public WorkUpgradeSwitch SwitchKind => Effects.Any(x => x != null && x.Kind == WorkUpgradeEffectKind.FaxUnlock)
             ? WorkUpgradeSwitch.Fax : Effects.Any(x => x != null && x.Kind == WorkUpgradeEffectKind.SortUnlock)
-                ? WorkUpgradeSwitch.Sort : WorkUpgradeSwitch.None;
+                ? WorkUpgradeSwitch.Sort : Effects.Any(x => x != null && x.Kind == WorkUpgradeEffectKind.DoNotDisturbUnlock)
+                    ? WorkUpgradeSwitch.DoNotDisturb : WorkUpgradeSwitch.None;
     }
 }

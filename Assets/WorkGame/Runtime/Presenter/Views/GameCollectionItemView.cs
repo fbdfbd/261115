@@ -11,8 +11,8 @@ namespace WorkGame
         [SerializeField] private Image picture;
         [SerializeField] private GameObject lockedDim;
         [SerializeField] private TMP_Text nameText;
-        [SerializeField] private Color nameColor = Color.white;
-        [SerializeField] private Color noImageNameColor = new Color(0.17f, 0.21f, 0.19f);
+        [SerializeField] private Color nameColor = new Color(60f / 255f, 24f / 255f, 11f / 255f);
+        [SerializeField] private Color noImageNameColor = new Color(60f / 255f, 24f / 255f, 11f / 255f);
         private string endingId;
         public event Action<string> Selected;
         private void OnEnable() { if (button != null) button.onClick.AddListener(Select); }

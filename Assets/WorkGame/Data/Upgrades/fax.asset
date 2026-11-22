@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: fax
   Name: "\uD329\uC2A4\uAE30"
-  Description: "\uC11C\uB958\uB97C \uB04C\uC5B4 \uB123\uC73C\uBA74 \uB2E4\uB978 \uC9C1\uC6D0\uC5D0\uAC8C
-    \uCC98\uB9AC\uB97C \uB9E1\uAE41\uB2C8\uB2E4."
-  Icon: {fileID: 0}
-  Cost: 500
+  Description: "서류를 팩스에 넣으면\n다른 직원이 대신 처리합니다."
+  Icon: {fileID: 21300000, guid: 15384cd9510c24a4a86ff3cb7d5b9145, type: 3}
+  Cost: 2000
   Required: []
   Effects:
   - Kind: 0

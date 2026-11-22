@@ -1,0 +1,1014 @@
+fileFormatVersion: 2
+guid: 4a9804d0a34517d4c9fea98e39e30a31
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5611576890342148824
+    second: tuition_2_0
+  - first:
+      213: 6414919240810926782
+    second: tuition_2_1
+  - first:
+      213: 4977843425501729685
+    second: tuition_2_2
+  - first:
+      213: 7339167516703341246
+    second: tuition_2_3
+  - first:
+      213: 6082758303995341474
+    second: tuition_2_4
+  - first:
+      213: -6191670337042273716
+    second: tuition_2_5
+  - first:
+      213: -3301238329542812964
+    second: tuition_2_6
+  - first:
+      213: -4662056782194794570
+    second: tuition_2_7
+  - first:
+      213: -5099527344154459449
+    second: tuition_2_8
+  - first:
+      213: 1071578962298298855
+    second: tuition_2_9
+  - first:
+      213: -329030778379364310
+    second: tuition_2_10
+  - first:
+      213: 8794785482378285934
+    second: tuition_2_11
+  - first:
+      213: -6944330950921062748
+    second: tuition_2_12
+  - first:
+      213: 7994436291530234477
+    second: tuition_2_13
+  - first:
+      213: -6077821832770161274
+    second: tuition_2_14
+  - first:
+      213: -1767482595404078921
+    second: tuition_2_15
+  - first:
+      213: 8275301051624702871
+    second: tuition_2_16
+  - first:
+      213: 8925788741979868728
+    second: tuition_2_17
+  - first:
+      213: 4247294255454297544
+    second: tuition_2_18
+  - first:
+      213: -33682514644962145
+    second: tuition_2_19
+  - first:
+      213: 8991066801921537268
+    second: tuition_2_20
+  - first:
+      213: -573004602189653782
+    second: tuition_2_21
+  - first:
+      213: -5402300280967477551
+    second: tuition_2_22
+  - first:
+      213: 5798972461579117735
+    second: tuition_2_23
+  - first:
+      213: 8869276726770018350
+    second: tuition_2_24
+  - first:
+      213: -6806640938723395593
+    second: tuition_2_25
+  - first:
+      213: -2951995137307088186
+    second: tuition_2_26
+  - first:
+      213: -9043334177174262457
+    second: tuition_2_27
+  - first:
+      213: 1142840171002097962
+    second: tuition_2_28
+  - first:
+      213: 7110551849010630663
+    second: tuition_2_29
+  - first:
+      213: -3157617228837561643
+    second: tuition_2_30
+  - first:
+      213: -87660600751993148
+    second: tuition_2_31
+  - first:
+      213: 8881754794079647897
+    second: tuition_2_32
+  - first:
+      213: 8131862787369614715
+    second: tuition_2_icon
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tuition_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 440
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da82aa437350ed40800000000000000
+      internalID: 5611576890342148824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 447
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb29a53df0f560950800000000000000
+      internalID: 6414919240810926782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 465
+        width: 39
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5935b84c83ad41540800000000000000
+      internalID: 4977843425501729685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 414
+        width: 56
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eba303cc8f5f9d560800000000000000
+      internalID: 7339167516703341246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_4
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 483
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aa233c137c4a6450800000000000000
+      internalID: 6082758303995341474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_5
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 444
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4aa54222a4c21aa0800000000000000
+      internalID: -6191670337042273716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_6
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 411
+        width: 70
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cda52b0ea35af22d0800000000000000
+      internalID: -3301238329542812964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_7
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 418
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bf1496ae0c0d4fb0800000000000000
+      internalID: -4662056782194794570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_8
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 445
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c2484126e6da39b0800000000000000
+      internalID: -5099527344154459449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 434
+        width: 51
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e1629483630fde00800000000000000
+      internalID: 1071578962298298855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_10
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 435
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a281786104c0f6bf0800000000000000
+      internalID: -329030778379364310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_11
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 434
+        width: 94
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e639be8acca5d0a70800000000000000
+      internalID: 8794785482378285934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_12
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 442
+        width: 17
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a67993fac7c0af90800000000000000
+      internalID: -6944330950921062748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6a96286371f1fe60800000000000000
+      internalID: 7994436291530234477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_14
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 399
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 685fe99ae3d37aba0800000000000000
+      internalID: -6077821832770161274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_15
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 410
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b0214aa1f3a877e0800000000000000
+      internalID: -1767482595404078921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_16
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 407
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 793c1874676c7d270800000000000000
+      internalID: 8275301051624702871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_17
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 410
+        width: 18
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83e04e9e195cedb70800000000000000
+      internalID: 8925788741979868728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_18
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 389
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cd19e84f9b61fa30800000000000000
+      internalID: 4247294255454297544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_19
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 112
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f94f17f6ee5588ff0800000000000000
+      internalID: -33682514644962145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 78
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f43750ae9fa6cc70800000000000000
+      internalID: 8991066801921537268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 77
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae852d7a9574c08f0800000000000000
+      internalID: -573004602189653782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_22
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 55
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d6c0fe548c2705b0800000000000000
+      internalID: -5402300280967477551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_23
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 65
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a422b2cab61a7050800000000000000
+      internalID: 5798972461579117735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_24
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 79
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2824c90130061b70800000000000000
+      internalID: 8869276726770018350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_25
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 67
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f7b2cd1124f981a0800000000000000
+      internalID: -6806640938723395593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_26
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 79
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ca612e10186807d0800000000000000
+      internalID: -2951995137307088186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_27
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 24
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74de060ca7f9f7280800000000000000
+      internalID: -9043334177174262457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_28
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 32
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2170ab941f2cdf00800000000000000
+      internalID: 1142840171002097962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_29
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 34
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700964dbb31cda260800000000000000
+      internalID: 7110551849010630663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_30
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 34
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dadb723cd3ed24d0800000000000000
+      internalID: -3157617228837561643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_31
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 39
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ce4167e52198cef0800000000000000
+      internalID: -87660600751993148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 29
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9987d3b7de4524b70800000000000000
+      internalID: 8881754794079647897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tuition_2_icon
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0da2e1ee3623d7b5adc1d7d5ce583bc
+      internalID: 8131862787369614715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      tuition_2_0: 5611576890342148824
+      tuition_2_1: 6414919240810926782
+      tuition_2_10: -329030778379364310
+      tuition_2_11: 8794785482378285934
+      tuition_2_12: -6944330950921062748
+      tuition_2_13: 7994436291530234477
+      tuition_2_14: -6077821832770161274
+      tuition_2_15: -1767482595404078921
+      tuition_2_16: 8275301051624702871
+      tuition_2_17: 8925788741979868728
+      tuition_2_18: 4247294255454297544
+      tuition_2_19: -33682514644962145
+      tuition_2_2: 4977843425501729685
+      tuition_2_20: 8991066801921537268
+      tuition_2_21: -573004602189653782
+      tuition_2_22: -5402300280967477551
+      tuition_2_23: 5798972461579117735
+      tuition_2_24: 8869276726770018350
+      tuition_2_25: -6806640938723395593
+      tuition_2_26: -2951995137307088186
+      tuition_2_27: -9043334177174262457
+      tuition_2_28: 1142840171002097962
+      tuition_2_29: 7110551849010630663
+      tuition_2_3: 7339167516703341246
+      tuition_2_30: -3157617228837561643
+      tuition_2_31: -87660600751993148
+      tuition_2_32: 8881754794079647897
+      tuition_2_4: 6082758303995341474
+      tuition_2_5: -6191670337042273716
+      tuition_2_6: -3301238329542812964
+      tuition_2_7: -4662056782194794570
+      tuition_2_8: -5099527344154459449
+      tuition_2_9: 1071578962298298855
+      tuition_2_icon: 8131862787369614715
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "가지 건너뛰기 심화반"
   ShortName: "가지 뛰기"
   Description: "안전 매트 위에서 간격이 다른 가지를 건넙니다. 옆 반 진도보다 중요한 건 자기 발이 닿는 거리라고 배웁니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: ca055d7fb79cb0b4aadf9f645241e8c1, type: 3}
   UnlockMonth: 3
   Cost: 180
   Gains:

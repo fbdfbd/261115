@@ -160,6 +160,7 @@ namespace WorkGame.Editor
 
             var fields = new SerializedObject(view);
             Set(fields, "panelGroup", group); Set(fields, "clickArea", click); Set(fields, "speakerText", speaker);
+            Set(fields, "namePlate", namePlate.gameObject);
             Set(fields, "bodyText", body); Set(fields, "continueHint", hint.gameObject);
             Set(fields, "logButton", logButton); Set(fields, "skipButton", skip);
             SetList(fields, "choiceButtons", choiceButtons.ToArray()); SetList(fields, "choiceTexts", choiceTexts.ToArray());

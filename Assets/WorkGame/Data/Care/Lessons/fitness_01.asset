@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "앞발 악력 입문반"
   ShortName: "앞발 악력"
   Description: "말랑한 공을 쥐며 앞발 힘을 기릅니다. 손이 작아도 할 수 있다는 설명에 나르미가 체대 진학 안내까지 챙겨 왔습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: f995f85dacb738a4a8dba468f216e106, type: 3}
   UnlockMonth: 1
   Cost: 100
   Gains:

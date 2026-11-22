@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_boardtable
   Name: "보드게임 놀이 탁자"
   Description: "친구들과 마주 앉아 놀 수 있는 탁자입니다. 차례와 규칙을 정하는 시간도 달이에게는 제법 중요한 수업입니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: edeaf25d80d5d9140b93dbaafff1bedf, type: 3}
+  RoomSprite: {fileID: 21300000, guid: af5b5c8e0f3344941901a5a710119f2d, type: 3}
   Cost: 600
   Kind: 0
   Friendship: 6

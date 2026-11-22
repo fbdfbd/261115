@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: pair_fitness_late
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: pair_fitness_late
-  Name: "실기장에서 침착한 착지"
+  Name: "착지 성공"
   Description: "도약의 힘과 달리기의 체력을 묶어 실기 동작을 마칩니다. 마지막 균형은 꼬리까지 함께 잡습니다."
   Lessons:
   - {fileID: 11400000, guid: f02b582a2840515698a770936f04c3ec, type: 2}

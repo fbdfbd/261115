@@ -7,7 +7,9 @@ namespace WorkGame
     {
         public CareFlowSaveData CaptureSave() => new CareFlowSaveData
         {
-            Completed = Dialogue.Completed.ToArray(), History = Dialogue.CaptureHistory(), Promises = Promises.CaptureSave()
+            HistoryVersion = 1,
+            Completed = Dialogue.Completed.ToArray(), History = Dialogue.CaptureHistory(), Promises = Promises.CaptureSave(),
+            StoryUnlocks = storyUnlocks.OrderBy(x => x, StringComparer.Ordinal).ToArray()
         };
 
         public void RestoreSave(CareFlowSaveData data, SavePoint point)
@@ -17,6 +19,13 @@ namespace WorkGame
                 throw new ArgumentException("대화 및 약속 저장 데이터가 없습니다.");
             Dialogue.RestoreSave(data);
             Promises.RestoreSave(data.Promises);
+            var unlocks = data.StoryUnlocks ?? Array.Empty<string>();
+            if (unlocks.Any(string.IsNullOrWhiteSpace) || unlocks.Distinct().Count() != unlocks.Length
+                || unlocks.Any(key => !stories.Any(story => story.Unlock == key && Dialogue.WasCompleted("story/" + story.Id))))
+                throw new ArgumentException("스토리 해금 기록을 확인하세요.");
+            storyUnlocks.Clear();
+            foreach (var key in unlocks) storyUnlocks.Add(key);
+            activeStory = null; storyGains.Clear(); StoryRewardText = "";
             shownMonth = care.Month; shownPhase = work.Run.Phase;
             offeredPromise = null; Panel = CarePanel.None;
             Phase = point == SavePoint.WorkStart ? CareFlowPhase.Working
@@ -41,10 +50,12 @@ namespace WorkGame
         internal SavedDialogueLog[] CaptureHistory() => history.Select(log =>
         {
             var data = dialogues[log.DialogueId];
+            var lines = log.IsLegacy ? data.LegacyLines : data.Lines;
             int index = log.IsChoice ? Array.FindIndex(data.Choices, choice => choice.Text == log.Text)
-                : Array.FindIndex(data.Lines, line => line.Text == log.Text && line.ImageKey == log.ImageKey
+                : Array.FindIndex(lines, line => line.Text == log.Text && line.ImageKey == log.ImageKey
                     && (string.IsNullOrEmpty(line.Speaker) ? "달이" : line.Speaker) == log.Speaker);
-            return new SavedDialogueLog { Month = log.Month, Dialogue = log.DialogueId, Index = index, IsChoice = log.IsChoice };
+            return new SavedDialogueLog { Month = log.Month, Dialogue = log.DialogueId, Index = index,
+                IsChoice = log.IsChoice, Legacy = log.IsLegacy };
         }).ToArray();
 
         internal void RestoreSave(CareFlowSaveData data)
@@ -54,12 +65,17 @@ namespace WorkGame
             var logs = data.History.Select(log =>
             {
                 if (log == null || log.Month < 1 || log.Month > 12 || log.Dialogue == null
-                    || !dialogues.TryGetValue(log.Dialogue, out var dialogue) || log.Index < 0
-                    || log.Index >= (log.IsChoice ? dialogue.Choices.Length : dialogue.Lines.Length))
+                    || !dialogues.TryGetValue(log.Dialogue, out var dialogue) || log.Index < 0)
+                    throw new ArgumentException("대화 로그의 원본을 찾을 수 없습니다.");
+                bool legacy = !log.IsChoice && (log.Legacy || data.HistoryVersion == 0)
+                    && dialogue.LegacyLines != null && dialogue.LegacyLines.Length > 0;
+                var lines = legacy ? dialogue.LegacyLines : dialogue.Lines;
+                if (log.Index >= (log.IsChoice ? dialogue.Choices.Length : lines.Length))
                     throw new ArgumentException("대화 로그의 원본을 찾을 수 없습니다.");
                 if (log.IsChoice) return new CareDialogueLog(log.Month, log.Dialogue, "나르미", dialogue.Choices[log.Index].Text, null, true);
-                var line = dialogue.Lines[log.Index];
-                return new CareDialogueLog(log.Month, log.Dialogue, string.IsNullOrEmpty(line.Speaker) ? "달이" : line.Speaker, line.Text, line.ImageKey);
+                var line = lines[log.Index];
+                return new CareDialogueLog(log.Month, log.Dialogue, string.IsNullOrEmpty(line.Speaker) ? "달이" : line.Speaker,
+                    line.Text, line.ImageKey, isLegacy: legacy);
             }).ToArray();
             Clear(); completed.Clear(); completed.AddRange(data.Completed);
             history.Clear(); history.AddRange(logs);

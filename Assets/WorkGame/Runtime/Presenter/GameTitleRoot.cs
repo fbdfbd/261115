@@ -64,7 +64,7 @@ namespace WorkGame
         }
         public void OpenCollection()
         {
-            if (leaving) return;
+            if (leaving || presenter == null || !presenter.CanOpenCollection) return;
             if (collectionRoot == null) { view?.ShowError("모음집 패널을 연결해 주세요."); return; }
             view?.ShowError(null); collectionRoot.Open();
             view?.SetMenuInteractable(!collectionRoot.IsOpen); onCollectionRequested.Invoke();

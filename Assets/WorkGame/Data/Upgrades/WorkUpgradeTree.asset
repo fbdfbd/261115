@@ -41,4 +41,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dbb10f67921efcf4ca897db4a5579223, type: 2}
   - {fileID: 11400000, guid: 9a751dc84505b984bb90093f452cc1f3, type: 2}
   - {fileID: 11400000, guid: f3d0040346a36364a94768f92d4a027f, type: 2}
+  - {fileID: 11400000, guid: 9a2d6e1f01ac5884ebceaf3165a16a10, type: 2}
+  - {fileID: 11400000, guid: 827ac99dfd20de7479c2df76af1a4a63, type: 2}
+  - {fileID: 11400000, guid: ca9e790df7fd71742a61dbfea09e12bb, type: 2}
+  - {fileID: 11400000, guid: 222d500af5d340a44a6b933bdac23e95, type: 2}
+  - {fileID: 11400000, guid: d3ab92b282b205048b5f76a10e7f07cb, type: 2}
+  - {fileID: 11400000, guid: c2f31cfd6e6da8f41a70a6dbf5d189b7, type: 2}
   FaxSeconds: 5

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: point_percent_2
   Name: "\uC219\uB828 \uD6A8\uC728 II"
-  Description: "\uC219\uB828 \uD3EC\uC778\uD2B8 \uD68D\uB4DD\uB7C9 +20% \uCD94\uAC00"
-  Icon: {fileID: 0}
-  Cost: 700
+  Description: "정답 숙련 포인트 획득량이\n총 30% 증가합니다."
+  Icon: {fileID: 21300000, guid: 11f6b6b8673d29c4eb31f6aea81f430c, type: 3}
+  Cost: 4000
   Required:
   - {fileID: 11400000, guid: f6e9ceaea2fe25a4fa8fc0bb74524bd3, type: 2}
   Effects:

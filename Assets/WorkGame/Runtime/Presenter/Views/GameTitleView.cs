@@ -19,6 +19,7 @@ namespace WorkGame
         public event Action CollectionRequested;
         public event Action SettingsRequested;
         public event Action QuitRequested;
+        private bool collectionAvailable;
         private void OnEnable()
         {
             if (newGameButton != null) newGameButton.onClick.AddListener(NewGame);
@@ -36,6 +37,11 @@ namespace WorkGame
             if (quitButton != null) quitButton.onClick.RemoveListener(Quit);
         }
         public void SetContinueAvailable(bool available) { if (continueButton != null) continueButton.interactable = available; }
+        public void SetCollectionAvailable(bool available)
+        {
+            collectionAvailable = available;
+            if (collectionButton != null) collectionButton.interactable = available;
+        }
         public void SetQuitAvailable(bool available) { if (quitButton != null) quitButton.interactable = available; }
         public void SetMenuInteractable(bool interactable) { if (menuGroup != null) menuGroup.interactable = interactable; }
         public void ShowError(string message)
@@ -45,7 +51,7 @@ namespace WorkGame
         }
         private void NewGame() => NewGameRequested?.Invoke();
         private void Continue() => ContinueRequested?.Invoke();
-        private void Collection() => CollectionRequested?.Invoke();
+        private void Collection() { if (collectionAvailable) CollectionRequested?.Invoke(); }
         private void Settings() => SettingsRequested?.Invoke();
         private void Quit() => QuitRequested?.Invoke();
     }

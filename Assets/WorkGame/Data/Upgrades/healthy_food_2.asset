@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06482c79cd24bef46ba0913cf361a206, type: 3}
+  m_Name: healthy_food_2
+  m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
+  Id: healthy_food_2
+  Name: "\uAC74\uAC15\uC2DD II"
+  Description: "수업·시너지의\n스탯 성장 보정이\n총 10% 증가합니다."
+  Icon: {fileID: 21300000, guid: bb14170fb8f9add4ebd88994dab536e2, type: 3}
+  Cost: 4000
+  Required:
+  - {fileID: 11400000, guid: 222d500af5d340a44a6b933bdac23e95, type: 2}
+  Effects:
+  - Kind: 15
+    Value: 10

@@ -54,6 +54,7 @@ namespace WorkGame
         public int PoolCount => pool.Count;
         public int MaxVisible { get; private set; }
         public event Action<int> PaperClicked;
+        public event Action<WorkSfxCue> SoundRequested;
         public WorkPaperItemView FindPaper(int paperId)
         {
             foreach (var view in pool)
@@ -134,6 +135,7 @@ namespace WorkGame
                 old.Returned -= RequestRefill;
                 old.DragStarted -= OnDragStarted;
                 old.DragEnded -= OnDragEnded;
+                old.SoundRequested -= ForwardSound;
                 old.ResetPaper();
             }
             pool.Clear();
@@ -157,6 +159,7 @@ namespace WorkGame
             view.SetHoverAllowed(true);
             view.DragStarted += OnDragStarted;
             view.DragEnded += OnDragEnded;
+            view.SoundRequested += ForwardSound;
             pool.Add(view);
         }
 
@@ -205,6 +208,8 @@ namespace WorkGame
             for (int i = 0; i < pool.Count; i++)
             {
                 var view = pool[i];
+                // 정렬 모드/화면 크기가 바뀌면 퇴장을 정리하고 새 컨테이너로 재배치합니다.
+                if (view.IsLeaving) view.ResetPaper();
                 view.CancelDrag();
                 if (i >= MaxVisible) { view.ResetPaper(); continue; }
                 var rect = view.Rect;
@@ -323,6 +328,7 @@ namespace WorkGame
             RequestRefill();
         }
         private void ClickPaper(int paperId) => PaperClicked?.Invoke(paperId);
+        private void ForwardSound(WorkSfxCue cue) => SoundRequested?.Invoke(cue);
         private void OnValidate() { poolReady = false; layoutDirty = true; refill = true; sortedReady = false; }
         private void OnDestroy()
         {
@@ -332,6 +338,7 @@ namespace WorkGame
                 view.Returned -= RequestRefill;
                 view.DragStarted -= OnDragStarted;
                 view.DragEnded -= OnDragEnded;
+                view.SoundRequested -= ForwardSound;
             }
             pool.Clear();
             boundIds.Clear();

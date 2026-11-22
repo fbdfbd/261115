@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: highlight_2
   Name: "\uAC80\uD1A0 \uAC15\uC870 II"
-  Description: "\uC11C\uB958\uB97C \uC5F0 \uB4A4 1\uCD08 \uD6C4 \uC815\uB2F5 \uD6C4\uBCF4\uB97C
-    \uD45C\uC2DC\uD569\uB2C8\uB2E4."
-  Icon: {fileID: 0}
-  Cost: 800
+  Description: "핵심 단어를 강조합니다.\n서류를 연 1초 뒤 정답 후보를 표시합니다."
+  Icon: {fileID: 21300000, guid: 07e2bcce4daa1c34a89b84b6084d49d1, type: 3}
+  Cost: 2000
   Required:
   - {fileID: 11400000, guid: e6846926338b2514395f3377c2c2bb66, type: 2}
   Effects:

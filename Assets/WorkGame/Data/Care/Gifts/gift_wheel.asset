@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_wheel
   Name: "나무 쳇바퀴"
   Description: "방 한쪽에 놓는 조용한 쳇바퀴입니다. 달이는 산책 숙제도 여기서 인정되는지 진지하게 물어봅니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 3b831e454d2b5ef489dfdf4e4432b699, type: 3}
+  RoomSprite: {fileID: 21300000, guid: bfd949eaa7814804eaf4d56eb596f055, type: 3}
   Cost: 250
   Kind: 1
   Friendship: 5

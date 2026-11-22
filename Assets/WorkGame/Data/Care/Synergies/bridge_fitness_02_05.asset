@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: bridge_fitness_02_05
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: bridge_fitness_02_05
+  Name: "지치지 않는 발"
+  Description: "통나무에서 기른 지구력으로 돌아오는 길까지 달립니다."
+  Lessons:
+  - {fileID: 11400000, guid: f786191a9b1251c795814e4179739a71, type: 2}
+  - {fileID: 11400000, guid: eefe12332eff5b2c975c1e34d2b5f73f, type: 2}
+  Gains:
+  - Stat: 8
+    Amount: 10

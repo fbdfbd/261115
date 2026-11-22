@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: newbie_protection
   Name: "\uC2E0\uC785 \uBCF4\uD638"
-  Description: "모든 오답의 숙련·근태 감점이 50% 감소합니다. 소수점은 버리며 오답 기록과 평가는 유지됩니다."
-  Icon: {fileID: 0}
-  Cost: 300
+  Description: "오답으로 잃는 숙련·근태가 50% 감소합니다.\n오답 기록과 평가에는 그대로 반영됩니다."
+  Icon: {fileID: 21300000, guid: 191ee4e97337c0e40a831ccd774294df, type: 3}
+  Cost: 1000
   Required: []
   Effects:
   - Kind: 12

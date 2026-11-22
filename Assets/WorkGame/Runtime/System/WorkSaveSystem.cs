@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -55,7 +56,6 @@ namespace WorkGame
             string json = JsonUtility.ToJson(data);
             store.Write(Key(SaveSlot.Auto), json);
             checkpoint = json;
-            RememberUpgrades(data.Work.Upgrades);
         }
 
         public bool SaveManual(SaveSlot slot)
@@ -82,6 +82,8 @@ namespace WorkGame
                 if (string.IsNullOrEmpty(json)) { error = "비어 있는 저장 슬롯입니다."; return false; }
                 var loaded = JsonUtility.FromJson<GameSaveData>(json);
                 Check(loaded);
+                // 슬롯의 포인트 등은 그대로 두고 구매 스킬만 최신 공용 상태로 복원합니다.
+                loaded.Work.Upgrades = GetInheritedUpgrades();
                 data = loaded;
                 return true;
             }
@@ -101,14 +103,12 @@ namespace WorkGame
         }
         public void Delete(SaveSlot slot) => store.Delete(Key(slot));
         public bool WasEndingRead(string id) => profile.Endings.Contains(id);
+        public bool HasReadEnding => profile.Endings.Any(id => !string.IsNullOrWhiteSpace(id));
         public bool WasDialogueRead(string id) => profile.Dialogues.Contains(id);
         public string[] GetInheritedUpgrades()
         {
-            // 기존 버전의 저장 파일에도 구매 기록이 있으므로 함께 읽습니다.
-            var result = profile.Upgrades.ToHashSet();
-            foreach (SaveSlot slot in Enum.GetValues(typeof(SaveSlot)))
-                if (TryLoad(slot, out var data, out _)) result.UnionWith(data.Work.Upgrades);
-            return result.OrderBy(id => id, StringComparer.Ordinal).ToArray();
+            if (!profile.SharedUpgradesReady) MigrateUpgrades();
+            return profile.Upgrades.ToArray();
         }
         public void MarkEndingRead(string id) => MarkRead(id, true);
         public void MarkDialogueRead(string id) => MarkRead(id, false);
@@ -121,17 +121,44 @@ namespace WorkGame
                 Version = Version,
                 Endings = ending ? profile.Endings.Append(id).ToArray() : profile.Endings,
                 Dialogues = ending ? profile.Dialogues : profile.Dialogues.Append(id).ToArray(),
-                Upgrades = profile.Upgrades
+                Upgrades = profile.Upgrades,
+                SharedUpgradesReady = profile.SharedUpgradesReady
             };
             store.Write(prefix + ".Profile", JsonUtility.ToJson(next));
             profile = next;
         }
 
-        private void RememberUpgrades(string[] bought)
+        public void SaveUpgrades(IEnumerable<string> bought)
         {
-            var merged = profile.Upgrades.Union(bought).OrderBy(id => id, StringComparer.Ordinal).ToArray();
-            if (merged.Length == profile.Upgrades.Length) return;
-            var next = new GameProfileData { Version = Version, Endings = profile.Endings, Dialogues = profile.Dialogues, Upgrades = merged };
+            if (!profile.SharedUpgradesReady) MigrateUpgrades();
+            WriteUpgrades(bought);
+        }
+
+        private void MigrateUpgrades()
+        {
+            var merged = profile.Upgrades.ToHashSet();
+            // 이전 버전의 슬롯에서 한 번만 이전합니다. 이후에는 공용 기록만 사용합니다.
+            foreach (SaveSlot slot in Enum.GetValues(typeof(SaveSlot)))
+            {
+                string json = store.Read(Key(slot));
+                if (string.IsNullOrEmpty(json)) continue;
+                GameSaveData data;
+                try { data = JsonUtility.FromJson<GameSaveData>(json); Check(data); }
+                catch (Exception) { continue; }
+                merged.UnionWith(data.Work.Upgrades.Where(id => !string.IsNullOrWhiteSpace(id)));
+            }
+            WriteUpgrades(merged);
+        }
+
+        private void WriteUpgrades(IEnumerable<string> bought)
+        {
+            var ids = bought.Where(id => !string.IsNullOrWhiteSpace(id)).Distinct().OrderBy(id => id, StringComparer.Ordinal).ToArray();
+            if (profile.SharedUpgradesReady && profile.Upgrades.SequenceEqual(ids)) return;
+            var next = new GameProfileData
+            {
+                Version = Version, Endings = profile.Endings, Dialogues = profile.Dialogues,
+                Upgrades = ids, SharedUpgradesReady = true
+            };
             store.Write(prefix + ".Profile", JsonUtility.ToJson(next));
             profile = next;
         }

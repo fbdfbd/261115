@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "동화 속 마음 읽기 실전반"
   ShortName: "마음 읽기"
   Description: "인물의 말과 행동에서 속마음을 찾습니다. 도토리를 안 나눠 준 장면도 무조건 악역이라고 쓰면 점수를 잃습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 607974bfa0a44d743a822e04d571ed18, type: 3}
   UnlockMonth: 6
   Cost: 260
   Gains:

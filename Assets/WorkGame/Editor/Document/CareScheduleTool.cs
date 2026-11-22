@@ -97,7 +97,7 @@ namespace WorkGame.Editor
             var rect = Rect("CareLessonNode", parent); rect.sizeDelta = Vector2.one * nodeSize;
             var image = Image(rect, Color.white, true);
             var button = rect.gameObject.AddComponent<Button>(); button.targetGraphic = image; button.transition = Selectable.Transition.None;
-            var highlight = Highlight(rect);
+            var highlight = ConfigureHighlight(rect, true);
             var iconRect = Rect("Icon", rect); Area(iconRect, 0.18f, 0.2f, 0.82f, 0.84f);
             var icon = Image(iconRect, Color.white); icon.preserveAspect = true; icon.enabled = false;
             var name = Text("ShortName", rect, "수업 이름", fontSize - 8);
@@ -132,6 +132,7 @@ namespace WorkGame.Editor
             Set(fields,"lockImage",lockImage); Set(fields,"lockPlaceholder",placeholder.gameObject);
             Set(fields,"icon",icon); Set(fields,"background",image); Set(fields,"highlight",highlight);
             fields.ApplyModifiedPropertiesWithoutUndo();
+            ConfigureHighlight(rect, true);
             return rect;
         }
 
@@ -324,7 +325,7 @@ namespace WorkGame.Editor
         }
         private CareScheduleWeekView BuildWeek(Transform parent,int index)
         {
-            var button=Button("Week_"+(index+1),parent,""); var root=(RectTransform)button.transform; var highlight=Highlight(root);
+            var button=Button("Week_"+(index+1),parent,""); var root=(RectTransform)button.transform; var highlight=ConfigureHighlight(root, false);
             var title=Text("WeekLabel",root,(index+1)+"주차",fontSize-8); Area(title.rectTransform,0.05f,0.78f,0.6f,1);
             var iconRect=Rect("Icon",root); Area(iconRect,0.36f,0.38f,0.64f,0.78f);
             var icon=Image(iconRect,Color.white); icon.preserveAspect=true; icon.enabled=false;
@@ -336,10 +337,39 @@ namespace WorkGame.Editor
             Set(data,"costText",cost); Set(data,"synergyText",tags); Set(data,"icon",icon); Set(data,"highlight",highlight); data.ApplyModifiedPropertiesWithoutUndo();
             return view;
         }
-        private CareScheduleHighlight Highlight(RectTransform rect)
+        public static CareScheduleHighlight ConfigureHighlight(RectTransform rect, bool lessonBadge)
         {
-            var outline=rect.gameObject.AddComponent<Outline>(); outline.effectDistance=new Vector2(2,-2); outline.enabled=false;
-            var hint=rect.gameObject.AddComponent<CareScheduleHighlight>(); var data=new SerializedObject(hint); Set(data,"outline",outline); data.ApplyModifiedPropertiesWithoutUndo(); return hint;
+            var outline = rect.GetComponent<Outline>();
+            if (outline == null) outline = rect.gameObject.AddComponent<Outline>();
+            outline.effectDistance = new Vector2(3, -3);
+            outline.useGraphicAlpha = false;
+            outline.enabled = false;
+            var hint = rect.GetComponent<CareScheduleHighlight>();
+            if (hint == null) hint = rect.gameObject.AddComponent<CareScheduleHighlight>();
+            var frameRect = rect.Find("SynergyFrame") as RectTransform;
+            if (frameRect != null) DestroyImmediate(frameRect.gameObject);
+            var data = new SerializedObject(hint);
+            Set(data, "outline", outline);
+            if (lessonBadge)
+            {
+                var badgeRect = rect.Find("SynergyStar") as RectTransform;
+                if (badgeRect == null)
+                {
+                    badgeRect = new GameObject("SynergyStar", typeof(RectTransform), typeof(UnityEngine.UI.Image)).GetComponent<RectTransform>();
+                    badgeRect.SetParent(rect, false);
+                }
+                badgeRect.anchorMin = badgeRect.anchorMax = Vector2.one;
+                badgeRect.pivot = new Vector2(0.5f, 0.5f);
+                badgeRect.sizeDelta = new Vector2(24, 24); badgeRect.anchoredPosition = new Vector2(-15, -15);
+                badgeRect.SetAsLastSibling();
+                var star = badgeRect.GetComponent<UnityEngine.UI.Image>();
+                star.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/WorkGame/Art/UI/Icon/Star.png");
+                star.preserveAspect = true; star.raycastTarget = false;
+                badgeRect.gameObject.SetActive(false);
+                Set(data, "starBadge", star);
+            }
+            data.ApplyModifiedPropertiesWithoutUndo();
+            return hint;
         }
         private static LayoutElement Size(RectTransform rect,float width=-1,float height=-1,float flexWidth=0,float flexHeight=0)
         {

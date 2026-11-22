@@ -12,6 +12,7 @@ namespace WorkGame
         private int lastBought = -1;
         private bool lastSort;
         private bool lastFax;
+        private bool lastDoNotDisturb;
 
         public WorkUpgradePresenter(WorkSystem work, WorkUpgradeSystem upgrades, WorkUpgradeTreeView view)
         { this.work = work; this.upgrades = upgrades; this.view = view; }
@@ -24,6 +25,7 @@ namespace WorkGame
             view.BuyClicked += Buy;
             view.SortChanged += work.SetSortEnabled;
             view.FaxChanged += work.SetFaxVisible;
+            view.DoNotDisturbChanged += work.SetDoNotDisturbEnabled;
             view.SelectionChanged += RefreshSelection;
             lastPoints = lastBought = -1;
             Refresh();
@@ -37,6 +39,7 @@ namespace WorkGame
             view.BuyClicked -= Buy;
             view.SortChanged -= work.SetSortEnabled;
             view.FaxChanged -= work.SetFaxVisible;
+            view.DoNotDisturbChanged -= work.SetDoNotDisturbEnabled;
             view.SelectionChanged -= RefreshSelection;
         }
 
@@ -45,15 +48,18 @@ namespace WorkGame
         private void Refresh()
         {
             if (lastPoints == work.Run.SkillPoints && lastBought == work.Run.BoughtUpgrades.Count
-                && lastSort == work.Run.SortEnabled && lastFax == work.Run.FaxVisible) return;
+                && lastSort == work.Run.SortEnabled && lastFax == work.Run.FaxVisible
+                && lastDoNotDisturb == work.Run.DoNotDisturbEnabled) return;
             lastPoints = work.Run.SkillPoints;
             lastBought = work.Run.BoughtUpgrades.Count;
             lastSort = work.Run.SortEnabled;
             lastFax = work.Run.FaxVisible;
+            lastDoNotDisturb = work.Run.DoNotDisturbEnabled;
             foreach (var node in view.Nodes)
                 if (node != null) node.Show(upgrades.GetState(node.NodeId), upgrades.CanBuy(node.NodeId),
                     IsFeatureEnabled(node.NodeId));
-            view.ShowState(lastPoints, upgrades.Stats.SortUnlocked, lastSort, upgrades.Stats.FaxUnlocked, lastFax);
+            view.ShowState(lastPoints, upgrades.Stats.SortUnlocked, lastSort, upgrades.Stats.FaxUnlocked, lastFax,
+                upgrades.Stats.DoNotDisturbUnlocked, lastDoNotDisturb);
             RefreshSelection();
         }
 
@@ -61,7 +67,8 @@ namespace WorkGame
         {
             var node = upgrades.GetSwitchKind(id);
             return node == WorkUpgradeSwitch.Sort ? work.Run.SortEnabled
-                : node == WorkUpgradeSwitch.Fax && work.Run.FaxVisible;
+                : node == WorkUpgradeSwitch.Fax ? work.Run.FaxVisible
+                : node == WorkUpgradeSwitch.DoNotDisturb && work.Run.DoNotDisturbEnabled;
         }
 
         private void RefreshSelection() => view.ShowSelectionState(upgrades.GetState(view.SelectedNodeId), upgrades.CanBuy(view.SelectedNodeId));

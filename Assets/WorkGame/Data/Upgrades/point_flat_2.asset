@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: point_flat_2
   Name: "\uC219\uB828 \uBCF4\uC0C1 II"
-  Description: "\uC815\uB2F5 \uAE30\uBCF8 \uBCF4\uC0C1 +30 \uCD94\uAC00"
-  Icon: {fileID: 0}
-  Cost: 500
+  Description: "정답 기본 보상이\n150포인트로 증가합니다."
+  Icon: {fileID: 21300000, guid: 8394623b637b458428d4df0020d367d3, type: 3}
+  Cost: 3000
   Required:
   - {fileID: 11400000, guid: beeb12b11a59da84e9fdc4ee8722009f, type: 2}
   Effects:

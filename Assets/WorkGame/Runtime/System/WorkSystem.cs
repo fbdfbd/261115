@@ -8,12 +8,15 @@ namespace WorkGame
     {
         private readonly WorkSettings settings;
         private readonly WorkPaper[] plannedPapers;
+        private readonly WorkPaper[] reservePapers;
+        private readonly int[] monthlyExtraCounts = new int[12];
         private Random random;
         private int randomSeed;
         private int randomCalls;
         private WorkPaper heldPaper;
         private WorkPaper selectedPaper;
         private readonly List<WorkPaper> monthPapers = new List<WorkPaper>();
+        private readonly Dictionary<int, double> instantRolls = new Dictionary<int, double>();
         private int heldChoice = -1;
         private double heldSeconds;
         private int rightThisMonth;
@@ -27,6 +30,7 @@ namespace WorkGame
         public bool IsPaused { get; private set; }
         public bool IsWorking => !disposed && !IsPaused && Run.Phase == WorkPhase.Working;
         public WorkUpgradeStats Upgrades { get; private set; } = new WorkUpgradeStats();
+        public bool NotificationsMuted => Upgrades.DoNotDisturbUnlocked && Run.DoNotDisturbEnabled;
         public WorkFaxSystem Fax { get; }
         public IReadOnlyList<WorkPaper> MonthPapers { get; }
         public int MonthTotal => monthPapers.Count;
@@ -47,7 +51,8 @@ namespace WorkGame
         public long SkillPointPenaltyThisMonth { get; private set; }
 
         // The plan is copied and validated once; ScriptableObjects stay untouched during play.
-        public WorkSystem(WorkSettings settings, IEnumerable<WorkPaper> plannedPapers, int seed = 1)
+        public WorkSystem(WorkSettings settings, IEnumerable<WorkPaper> plannedPapers, int seed = 1,
+            IEnumerable<WorkPaper> reservePapers = null)
         {
             this.settings = settings?.Copy() ?? throw new ArgumentNullException(nameof(settings));
             this.settings.Check();
@@ -62,6 +67,12 @@ namespace WorkGame
             if (this.plannedPapers.Select(x => x.Id).Distinct().Count() != this.plannedPapers.Length)
                 throw new ArgumentException("Paper IDs must be unique.");
             this.plannedPapers = this.plannedPapers.Select(x => x.Copy()).ToArray();
+            this.reservePapers = (reservePapers ?? Array.Empty<WorkPaper>()).ToArray();
+            if (this.reservePapers.Any(x => x == null || x.Month < 1 || x.Month > 12 || x.State != PaperState.Pending)
+                || this.plannedPapers.Concat(this.reservePapers).Select(x => x.Id).Distinct().Count()
+                    != this.plannedPapers.Length + this.reservePapers.Length)
+                throw new ArgumentException("Reserve papers need fresh, unique IDs for months 1 to 12.");
+            this.reservePapers = this.reservePapers.Select(x => x.Copy()).ToArray();
         }
 
         public bool StartRun()
@@ -208,6 +219,11 @@ namespace WorkGame
 
         public void SetSortEnabled(bool enabled) { if (!disposed) { Run.SortEnabled = enabled; Notify(); } }
         public void SetFaxVisible(bool visible) { if (!disposed) { Run.FaxVisible = visible; Notify(); } }
+        public void SetDoNotDisturbEnabled(bool enabled)
+        {
+            if (disposed || !Upgrades.DoNotDisturbUnlocked || Run.DoNotDisturbEnabled == enabled) return;
+            Run.DoNotDisturbEnabled = enabled; Notify();
+        }
 
         public WorkPaper GetPendingPaper(int id) => Run.Papers.FirstOrDefault(x => x.Id == id && x.State == PaperState.Pending);
 
@@ -221,14 +237,14 @@ namespace WorkGame
         {
             var paper = GetPendingPaper(id);
             if (!IsWorking || paper == null || paper.IsInFax || Upgrades.InstantChance <= 0) return false;
-            return NextRandom() < Upgrades.InstantChance && ProcessPaper(id);
+            return instantRolls.TryGetValue(id, out double roll) && roll < Upgrades.InstantChance && ProcessPaper(id, true);
         }
 
-        internal bool ProcessPaper(int id)
+        internal bool ProcessPaper(int id, bool isInstant = false)
         {
             var paper = GetPendingPaper(id);
             if (!IsWorking || paper == null || paper.IsInFax) return false;
-            bool done = CompletePaper(paper, WorkRules.GetRightIndex(paper));
+            bool done = CompletePaper(paper, WorkRules.GetRightIndex(paper), isInstant);
             if (done) Notify();
             return done;
         }
@@ -274,9 +290,29 @@ namespace WorkGame
             SkillPointPenaltyThisMonth = 0;
             IsPaused = false;
             selectedPaper = null;
-            foreach (var paper in plannedPapers.Where(x => x.Month == month)) Run.AddPaper(paper);
+            var newlyAssigned = plannedPapers.Where(x => x.Month == month).ToArray();
+            foreach (var paper in newlyAssigned) Run.AddPaper(paper);
+            // Only this month's new allocation is enlarged. Carried papers are never multiplied again.
+            int extraCount = (int)Math.Floor(newlyAssigned.Length * (decimal)Upgrades.WorkloadBonus);
+            var extras = reservePapers.Where(x => x.Month == month).Take(extraCount).ToArray();
+            if (extras.Length != extraCount) throw new InvalidOperationException("추가 업무를 배정할 고유 항목이 부족합니다.");
+            monthlyExtraCounts[month - 1] = extraCount;
+            foreach (var paper in extras) Run.AddPaper(paper);
             monthPapers.Clear();
             monthPapers.AddRange(Run.Papers.Where(x => x.State == PaperState.Pending));
+            PrepareInstantRolls();
+        }
+
+        private void PrepareInstantRolls()
+        {
+            instantRolls.Clear();
+            // 월·서류별로 고정해 다시 열거나 이어하기로 재추첨할 수 없게 합니다.
+            // 보상 배수 추첨과는 별도 난수를 사용합니다.
+            foreach (var paper in monthPapers)
+            {
+                int seed = unchecked(((randomSeed * 397) ^ Run.Month) * 397 ^ paper.Id);
+                instantRolls.Add(paper.Id, new Random(seed).NextDouble());
+            }
         }
 
         private void FinishHold()
@@ -287,7 +323,7 @@ namespace WorkGame
             CompletePaper(paper, choice);
         }
 
-        private bool CompletePaper(WorkPaper paper, int choice)
+        private bool CompletePaper(WorkPaper paper, int choice, bool isInstant = false)
         {
             if (!IsWorking || paper == null || paper.IsInFax || !paper.Submit(choice)) return false;
             ReleasePaper(paper.Id);
@@ -307,7 +343,7 @@ namespace WorkGame
             if (gained > 0) SkillPointsEarnedThisMonth += gained;
             if (gained < 0) SkillPointPenaltyThisMonth -= gained;
             PaperSubmitted?.Invoke(new WorkSubmitResult(paper.Id, paper.State == PaperState.Right,
-                rightThisMonth, wrongThisMonth, gained, protectedMistake, pointBoosted));
+                rightThisMonth, wrongThisMonth, gained, protectedMistake, pointBoosted, isInstant));
             return true;
         }
 

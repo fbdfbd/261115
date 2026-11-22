@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "창작 포트폴리오 특강"
   ShortName: "작품집"
   Description: "그동안 만든 작품을 고르고 자기 이야기를 붙입니다. 전부 도토리 그림이지만 달이는 전부 다른 시기라고 설명합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: d8ae6a1e54dfc974f869446c920684e4, type: 3}
   UnlockMonth: 9
   Cost: 340
   Gains:

@@ -13,6 +13,9 @@ namespace WorkGame
             PlanKey = GetPlanKey(), Month = Run.Month, Phase = Run.Phase, Seconds = Run.Seconds,
             Attendance = Run.Attendance, Bonus = Run.Bonus, Money = Run.Money, SkillPoints = Run.SkillPoints,
             Upgrades = Run.BoughtUpgrades.ToArray(), SortEnabled = Run.SortEnabled, FaxVisible = Run.FaxVisible,
+            DoNotDisturbEnabled = Run.DoNotDisturbEnabled,
+            ReservePlanKey = reservePapers.Length == 0 ? null : GetPlanKey(true),
+            MonthlyExtraCounts = (int[])monthlyExtraCounts.Clone(),
             RandomSeed = randomSeed, RandomCalls = randomCalls, WorkSpeed = WorkSpeed, PointsPerPaper = SkillPointsPerPaper,
             Right = rightThisMonth, Wrong = wrongThisMonth, ProtectionUsed = newbieProtectionUsed,
             PointsEarned = SkillPointsEarnedThisMonth, PointPenalty = SkillPointPenaltyThisMonth,
@@ -26,7 +29,7 @@ namespace WorkGame
         {
             if (disposed || Run.Phase != WorkPhase.Ready) throw new InvalidOperationException("새 업무 시스템에만 복원할 수 있습니다.");
             CheckSave(data);
-            var papers = plannedPapers.ToDictionary(paper => paper.Id);
+            var papers = plannedPapers.Concat(reservePapers).ToDictionary(paper => paper.Id);
             foreach (var saved in data.Papers)
             {
                 var paper = papers[saved.Id];
@@ -39,17 +42,22 @@ namespace WorkGame
             Run.Month = data.Month; Run.Phase = data.Phase; Run.Seconds = data.Seconds;
             Run.Attendance = data.Attendance; Run.Bonus = data.Bonus; Run.Money = data.Money;
             Run.SkillPoints = data.SkillPoints; Run.SortEnabled = data.SortEnabled; Run.FaxVisible = data.FaxVisible;
+            Run.DoNotDisturbEnabled = data.DoNotDisturbEnabled;
+            if (data.MonthlyExtraCounts != null) Array.Copy(data.MonthlyExtraCounts, monthlyExtraCounts, 12);
             rightThisMonth = data.Right; wrongThisMonth = data.Wrong; newbieProtectionUsed = data.ProtectionUsed;
             SkillPointsEarnedThisMonth = data.PointsEarned; SkillPointPenaltyThisMonth = data.PointPenalty;
             WorkSpeed = data.WorkSpeed; SkillPointsPerPaper = data.PointsPerPaper;
             randomSeed = data.RandomSeed; randomCalls = data.RandomCalls;
             random = new System.Random(randomSeed);
             for (int i = 0; i < randomCalls; i++) random.NextDouble();
+            PrepareInstantRolls();
         }
 
         private void CheckSave(WorkSaveData data)
         {
             if (data == null || data.PlanKey != GetPlanKey()) throw new ArgumentException("업무 데이터가 저장 당시와 다릅니다.");
+            if (!string.IsNullOrEmpty(data.ReservePlanKey) && data.ReservePlanKey != GetPlanKey(true))
+                throw new ArgumentException("추가 업무 데이터가 저장 당시와 다릅니다.");
             if (data.Month < 1 || data.Month > 12 || data.Papers == null || data.MonthPapers == null || data.Months == null
                 || data.Upgrades == null || data.Upgrades.Any(string.IsNullOrWhiteSpace)
                 || data.Upgrades.Distinct().Count() != data.Upgrades.Length
@@ -60,7 +68,16 @@ namespace WorkGame
                 throw new ArgumentException("업무 저장 값이 올바르지 않습니다.");
             if (data.Phase != WorkPhase.Working && data.Phase != (data.Month == 12 ? WorkPhase.Finished : WorkPhase.AfterWork))
                 throw new ArgumentException("업무 진행 단계가 올바르지 않습니다.");
-            var expected = plannedPapers.Where(paper => paper.Month <= data.Month).ToDictionary(paper => paper.Id);
+            var extraCounts = data.MonthlyExtraCounts ?? new int[12];
+            if (extraCounts.Length != 12 || extraCounts.Where((count, index) => count < 0
+                || (index >= data.Month && count != 0)
+                || count > Math.Floor(plannedPapers.Count(x => x.Month == index + 1) * 0.3m)
+                || count > reservePapers.Count(x => x.Month == index + 1)).Any())
+                throw new ArgumentException("추가 업무 배정 수량이 올바르지 않습니다.");
+            var assignedExtras = Enumerable.Range(1, data.Month).SelectMany(month =>
+                reservePapers.Where(x => x.Month == month).Take(extraCounts[month - 1]));
+            var expected = plannedPapers.Where(paper => paper.Month <= data.Month).Concat(assignedExtras)
+                .ToDictionary(paper => paper.Id);
             if (data.Papers.Length != expected.Count || data.Papers.Any(saved => saved == null
                 || !expected.TryGetValue(saved.Id, out var paper) || saved.Choice < -1 || saved.Choice >= paper.Choices.Count)
                 || data.Papers.Select(saved => saved.Id).Distinct().Count() != data.Papers.Length)
@@ -73,11 +90,11 @@ namespace WorkGame
                 throw new ArgumentException("월별 실적 또는 서류 목록이 올바르지 않습니다.");
         }
 
-        private string GetPlanKey()
+        private string GetPlanKey(bool includeReserve = false)
         {
             // 같은 Seed라도 SO 내용이 달라졌으면 잘못된 서류로 조용히 복원하지 않습니다.
             var text = new StringBuilder(JsonUtility.ToJson(settings));
-            foreach (var paper in plannedPapers)
+            foreach (var paper in includeReserve ? plannedPapers.Concat(reservePapers) : plannedPapers)
             {
                 text.Append('|').Append(paper.Id).Append(':').Append(paper.Month).Append(':').Append(paper.CategoryId)
                     .Append(':').Append((int)paper.Rule).Append(':').Append((int)paper.Display).Append(':').Append(paper.Metric)

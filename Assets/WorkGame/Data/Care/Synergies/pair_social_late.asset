@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: pair_social_late
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: pair_social_late
-  Name: "말 잘하는 대표보다 듣는 대표"
+  Name: "경청 대표"
   Description: "면접에서 익힌 말하기로 친구들의 공약을 설명합니다. 마지막 답변에는 자기 이야기보다 친구 이름이 많이 나옵니다."
   Lessons:
   - {fileID: 11400000, guid: 4161e91061ac5c259df41917e4716596, type: 2}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: repeat_social_01
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: repeat_social_01
+  Name: "또박또박"
+  Description: "두 번째 인사는 끝까지 또박또박 전합니다. 친구들도 달이의 이름을 기억합니다."
+  Lessons:
+  - {fileID: 11400000, guid: b70dee51cb56579ca63fcbbcf160522e, type: 2}
+  - {fileID: 11400000, guid: b70dee51cb56579ca63fcbbcf160522e, type: 2}
+  Gains:
+  - Stat: 13
+    Amount: 5

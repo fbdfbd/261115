@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: tuition_2
   Name: "\uC778\uB9E5 II"
-  Description: "\uC218\uC5C5\uB8CC \uD560\uC778\uC728 +10%p"
-  Icon: {fileID: 0}
-  Cost: 600
+  Description: "달이의 수업료가\n총 20% 할인됩니다."
+  Icon: {fileID: 21300000, guid: 4a9804d0a34517d4c9fea98e39e30a31, type: 3}
+  Cost: 2500
   Required:
   - {fileID: 11400000, guid: 03cc251470b3f804c8ed08057241cb3b, type: 2}
   Effects:

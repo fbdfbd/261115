@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: mix_knowledge_02_emotion_03
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: mix_knowledge_02_emotion_03
+  Name: "꼬마 작가"
+  Description: "그림책에서 만난 이야기에 달이만의 다음 장을 붙입니다."
+  Lessons:
+  - {fileID: 11400000, guid: 065c81577d4655c3a1d3a50c4676ad1e, type: 2}
+  - {fileID: 11400000, guid: 4c77ef88f9b25a14b3733dd63adc8241, type: 2}
+  Gains:
+  - Stat: 10
+    Amount: 8

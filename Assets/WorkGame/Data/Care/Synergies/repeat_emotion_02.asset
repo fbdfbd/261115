@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: repeat_emotion_02
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: repeat_emotion_02
-  Name: "작은 앞발의 첫 앙코르"
+  Name: "앙코르"
   Description: "같은 곡을 두 번 치자 빠지는 음이 줄었습니다. 달이는 간식도 앙코르가 되는지 묻습니다."
   Lessons:
   - {fileID: 11400000, guid: 72bafcece1a95d5699c356bd5bc39226, type: 2}

@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "꼬마 반장 심화반"
   ShortName: "꼬마 반장"
   Description: "친구들의 의견을 듣고 할 일을 나눕니다. 반장이라고 간식을 먼저 받는 건 아니라는 설명부터 시작합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b717a1b9115b303458c8d9cee99982e7, type: 3}
   UnlockMonth: 3
   Cost: 180
   Gains:

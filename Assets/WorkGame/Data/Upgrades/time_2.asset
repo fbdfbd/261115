@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: time_2
   Name: "\uBE60\uB978 \uC190 II"
-  Description: "\uC815\uC2DC \uADFC\uBB34\uC2DC\uAC04 +10\uCD08 \uCD94\uAC00"
-  Icon: {fileID: 0}
-  Cost: 600
+  Description: "정시 근무시간이\n총 20초 늘어납니다."
+  Icon: {fileID: 21300000, guid: 0712df96442b07744863fd0915d508fd, type: 3}
+  Cost: 2500
   Required:
   - {fileID: 11400000, guid: d4b9623fb7390714ebc6c6e634cb2dc3, type: 2}
   Effects:

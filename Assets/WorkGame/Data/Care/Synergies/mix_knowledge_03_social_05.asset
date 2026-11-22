@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: mix_knowledge_03_social_05
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: mix_knowledge_03_social_05
+  Name: "논리 소개"
+  Description: "문장제를 풀듯 차근차근 자신의 이야기를 소개합니다."
+  Lessons:
+  - {fileID: 11400000, guid: f7adf56e3fc1547aa863e72d35fa6b5e, type: 2}
+  - {fileID: 11400000, guid: 788b4ce0895e51b6ba248fb8b894897a, type: 2}
+  Gains:
+  - Stat: 13
+    Amount: 10

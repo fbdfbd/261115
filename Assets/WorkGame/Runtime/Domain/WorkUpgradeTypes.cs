@@ -5,14 +5,15 @@ using System.Linq;
 namespace WorkGame
 {
     public enum WorkUpgradeState { Locked, Available, Bought }
-    public enum WorkUpgradeSwitch { None, Fax, Sort }
+    public enum WorkUpgradeSwitch { None, Fax, Sort, DoNotDisturb }
 
     public enum WorkUpgradeEffectKind
     {
         FaxUnlock, FaxSpeedPercent, FaxSlots, SortUnlock, HighlightLevel,
         InstantChancePercent, PointFlat, PointPercent, PointChancePercent,
         PointMultiplier, TuitionDiscountPercent, ExtraSeconds,
-        NewbieProtection, EarlyLeaveBonusPercent
+        NewbieProtection, EarlyLeaveBonusPercent,
+        WorkloadPercent, CareGrowthPercent, DoNotDisturbUnlock
     }
 
     [Serializable]
@@ -54,6 +55,9 @@ namespace WorkGame
         public int ExtraSeconds { get; internal set; }
         public double WrongPenaltyReduction { get; internal set; }
         public double EarlyLeaveBonus { get; internal set; }
+        public double WorkloadBonus { get; internal set; }
+        public double CareGrowthBonus { get; internal set; }
+        public bool DoNotDisturbUnlocked { get; internal set; }
 
         public int GetTuitionCost(int originalCost)
         {

@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_artdesk
   Name: "달이의 창작 작업대"
   Description: "그림 도구와 이야기책을 함께 놓는 작은 작업대입니다. 작품 보관함에는 나르미가 버리지 못한 첫 낙서도 들어갑니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b4d401cfa324cb64e85392af75687933, type: 3}
+  RoomSprite: {fileID: 21300000, guid: 2e0bb5f38b8369c459b8c385da9309c2, type: 3}
   Cost: 600
   Kind: 0
   Friendship: 6

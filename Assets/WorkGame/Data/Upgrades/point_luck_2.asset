@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: point_luck_2
   Name: "\uD589\uC6B4 \uD655\uB960 I"
-  Description: "\uBC30\uC218 \uD68D\uB4DD \uD655\uB960 +10%p"
-  Icon: {fileID: 0}
-  Cost: 900
+  Description: "정답 시 20% 확률로\n숙련 2배 획득."
+  Icon: {fileID: 21300000, guid: e6e2a31ca5db0c140a897a0646e3cb00, type: 3}
+  Cost: 5000
   Required:
   - {fileID: 11400000, guid: a5d7f49424b9ccc4189a65b690b15df5, type: 2}
   Effects:

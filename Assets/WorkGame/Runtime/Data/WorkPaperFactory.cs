@@ -32,6 +32,41 @@ namespace WorkGame
 
         public static int CategoryCountForMonth(int month) => month <= 3 ? 1 : month <= 6 ? 2 : 3;
 
+        // Keep the original draw and IDs unchanged for old saves. Extra papers use a separate draw.
+        // The system assigns only the purchased percentage at the start of each month.
+        public static List<WorkPaper> CreateReserve(WorkPlanSO plan, int choiceCount, int seed,
+            IReadOnlyList<WorkPaper> originals)
+        {
+            var result = new List<WorkPaper>();
+            var categories = plan.Batches.Select(x => x.Category).Distinct().ToArray();
+            int nextId = originals.Count == 0 ? 1 : originals.Max(x => x.Id) + 1;
+            foreach (var month in originals.GroupBy(x => x.Month).OrderBy(x => x.Key))
+            {
+                int count = (int)Math.Floor(month.Count() * 0.3m);
+                var random = new Random(unchecked(seed * 397 ^ month.Key * 7919 ^ 104729));
+                var selected = month.Select(x => x.CategoryId).ToHashSet();
+                var used = month.Select(x => x.CategoryId + "\n" + x.Metric).ToHashSet();
+                var available = categories.ToDictionary(x => x,
+                    x => GetAvailableMetrics(x, month.Key).Where(m => !used.Contains(x.Id + "\n" + m.Name)).ToList());
+                for (int i = 0; i < count; i++)
+                {
+                    var pool = categories.Where(x => selected.Contains(x.Id) && available[x].Count > 0).ToArray();
+                    if (pool.Length == 0) pool = categories.Where(x => available[x].Count > 0).ToArray();
+                    if (pool.Length == 0)
+                        throw new InvalidOperationException($"Month {month.Key}: 추가 업무에 사용할 고유 항목이 부족합니다.");
+                    var category = pool[random.Next(pool.Length)];
+                    var metrics = available[category];
+                    int index = random.Next(metrics.Count);
+                    var metric = metrics[index]; metrics.RemoveAt(index);
+                    result.Add(new WorkPaper(nextId++, month.Key, category.Id, category.Title, category.Target,
+                        metric.Name, metric.Unit, metric.Rule, metric.Display,
+                        MakeChoices(random, metric, choiceCount, category.Target), category.ShortName,
+                        metric.ScaleMax > 0 ? metric.ScaleMax : metric.Max, metric.Title, metric.HighlightWords, metric.Agency));
+                }
+            }
+            return result;
+        }
+
         internal static IEnumerable<WorkMetric> GetAvailableMetrics(WorkCategorySO category, int month) =>
             (category.Metrics ?? Enumerable.Empty<WorkMetric>())
                 .Where(metric => metric != null && (month > 3 || metric.Difficulty == WorkDifficulty.Easy));

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mix_fitness_social
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: mix_fitness_social
-  Name: "큰 간식 접시는 같이 들기"
+  Name: "간식 운반대"
   Description: "튼튼한 앞발로 접시를 들고 친구들과 나눌 순서를 정합니다. 힘이 센 친구가 더 먹는 규칙은 만들지 않았습니다."
   Lessons:
   - {fileID: 11400000, guid: 58a3fbf7c258571abcd717d4b0fc1029, type: 2}

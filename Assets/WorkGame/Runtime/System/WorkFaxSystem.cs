@@ -37,21 +37,17 @@ namespace WorkGame
 
         internal void AddTime(double seconds)
         {
-            if (!work.IsWorking) return;
+            if (!work.IsWorking || jobs.Count == 0) return;
             double progress = seconds * (1 + work.Upgrades.FaxSpeedBonus) / SecondsPerPaper;
-            for (int i = jobs.Count - 1; i >= 0; i--)
-            {
-                if (!work.IsWorking) return;
-                if (i >= jobs.Count) continue;
-                var job = jobs[i];
-                job.Progress = Math.Min(1, job.Progress + progress);
-                if (job.Progress < 1) continue;
-                jobs.RemoveAt(i);
-                var paper = work.GetPendingPaper(job.PaperId);
-                if (paper == null) continue;
-                paper.IsInFax = false;
-                work.ProcessPaper(paper.Id);
-            }
+            // 맨 앞 한 장만 처리하고, 대기 중인 서류는 0%를 유지합니다.
+            var job = jobs[0];
+            job.Progress = Math.Min(1, job.Progress + progress);
+            if (job.Progress < 1) return;
+            jobs.RemoveAt(0);
+            var paper = work.GetPendingPaper(job.PaperId);
+            if (paper == null) return;
+            paper.IsInFax = false;
+            work.ProcessPaper(paper.Id);
         }
 
         internal void Clear()

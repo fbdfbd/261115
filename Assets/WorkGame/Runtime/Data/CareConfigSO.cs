@@ -22,6 +22,8 @@ namespace WorkGame
         [Tooltip("월별 대화·퇴근 반응·약속 JSON입니다. 이미지는 ImageKey로 View에 전달합니다.")]
         public TextAsset Dialogues;
         [Header("무료 기본 수업 — 항상 4칸 편성 가능")]
+        public Sprite HomeIcon;
+        public Sprite RestIcon;
         public List<CareGain> HomeGains = new List<CareGain>
         {
             new CareGain(CareStat.Focus, 1), new CareGain(CareStat.Endurance, 1),

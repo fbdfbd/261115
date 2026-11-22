@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "나무 타기 심화반"
   ShortName: "나무 타기"
   Description: "앞발과 뒷발을 함께 쓰며 조금 높은 코스를 오릅니다. 달이는 아직 도토리까지의 거리로 높이를 설명합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 89067f72f2cdb3b4093d2fe8e1abb0a6, type: 3}
   UnlockMonth: 3
   Cost: 180
   Gains:

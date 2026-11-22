@@ -10,15 +10,17 @@ namespace WorkGame
         private readonly WorkSystem work;
         private readonly CareEndingView view;
         private readonly CareConfigSO config;
+        private readonly CareFlowSystem flow;
         private readonly List<CareEndingPage> pages = new List<CareEndingPage>();
         private CareEndingResult shown;
         private int page;
         private bool connected, paused, finished;
         public event Action<string> ReadCompleted;
 
-        public CareEndingPresenter(CareSystem care, WorkSystem work, CareEndingView view, CareConfigSO config)
+        public CareEndingPresenter(CareSystem care, WorkSystem work, CareEndingView view, CareConfigSO config,
+            CareFlowSystem flow = null)
         {
-            this.care = care; this.work = work; this.view = view; this.config = config;
+            this.care = care; this.work = work; this.view = view; this.config = config; this.flow = flow;
         }
         public void Connect()
         {
@@ -47,13 +49,16 @@ namespace WorkGame
         private void BuildPages(CareEndingResult result)
         {
             pages.Clear();
+            var memories = flow?.BuildEndingMemories() ?? Array.Empty<string>();
+            pages.AddRange(memories.Select(text => new CareEndingPage { Text = text }));
+            int narrativePages = pages.Count;
             var asset = config.Endings.FirstOrDefault(x => x != null && x.Id == result.Ending.Id);
             if (asset == null && config.FallbackEnding != null && config.FallbackEnding.Id == result.Ending.Id)
                 asset = config.FallbackEnding;
             if (asset != null && asset.Pages != null)
                 pages.AddRange(asset.Pages.Where(x => x != null)
                     .Select(x => new CareEndingPage { Image = x.Image, Text = x.Text }));
-            if (pages.Count == 0) pages.Add(new CareEndingPage { Text = result.Ending.Text });
+            if (pages.Count == narrativePages) pages.Add(new CareEndingPage { Text = result.Ending.Text });
             if ((asset == null || asset.AppendFriendshipText) && !string.IsNullOrWhiteSpace(result.FriendshipText))
                 pages.Add(new CareEndingPage { Text = result.FriendshipText });
         }
@@ -61,7 +66,8 @@ namespace WorkGame
         private void Next()
         {
             if (shown == null || finished || work.IsPaused || view.InputBlocked) return;
-            if (view.IsWriting) { view.FinishWriting(); return; }
+            if (view.IsWriting) { view.FinishLine(); return; }
+            if (view.HasNextLine) { view.ShowNextLine(); return; }
             if (page + 1 < pages.Count) { page++; ShowPage(); }
             else { finished = true; view.ShowComplete(); }
         }

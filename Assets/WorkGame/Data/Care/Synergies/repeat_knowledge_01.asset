@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: repeat_knowledge_01
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: repeat_knowledge_01
-  Name: "간식은 계산 후에"
+  Name: "간식 정산"
   Description: "두 번 연습하니 먹은 도토리까지 빼서 셉니다. 나르미는 벌써 문장제를 알아보고 있습니다."
   Lessons:
   - {fileID: 11400000, guid: 47351dd9f3b5546fbe65bc8a9f52a11e, type: 2}

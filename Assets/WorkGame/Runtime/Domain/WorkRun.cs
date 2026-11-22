@@ -17,6 +17,7 @@ namespace WorkGame
         public IReadOnlyList<string> BoughtUpgrades { get; }
         public bool SortEnabled { get; internal set; } = true;
         public bool FaxVisible { get; internal set; } = true;
+        public bool DoNotDisturbEnabled { get; internal set; } = true;
         public WorkPhase Phase { get; internal set; } = WorkPhase.Ready;
         public IReadOnlyList<WorkPaper> Papers { get; }
         public IReadOnlyList<MonthResult> Months { get; }

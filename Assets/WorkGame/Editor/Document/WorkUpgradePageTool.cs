@@ -21,6 +21,7 @@ namespace WorkGame.Editor
         [SerializeField] private int fontSize = 24;
         [SerializeField] private float boxGap = 16;
         [SerializeField] private float detailWidth = 280;
+        [SerializeField] private float strokeWidth = 3;
         [SerializeField] private int layoutVersion;
         [SerializeField] private Color pageColor = new Color(0.97f, 0.96f, 0.93f);
         [SerializeField] private Color boxColor = new Color(0.91f, 0.92f, 0.89f);
@@ -83,9 +84,12 @@ namespace WorkGame.Editor
             pageColor = EditorGUILayout.ColorField("페이지 색상", pageColor);
             boxColor = EditorGUILayout.ColorField("트리 박스 색상", boxColor);
             lineColor = EditorGUILayout.ColorField("연결선 색상", lineColor);
-            EditorGUILayout.HelpBox("왼쪽: 선택한 강화의 아이콘·제목·설명·클릭으로 전환하는 ON/OFF. 오른쪽 위: 가로 ScrollRect 안의 트리 박스. 오른쪽 아래: 독립 노드 한 줄. LayoutGroup 없이 앵커로 배치합니다.", MessageType.Info);
+            strokeWidth = EditorGUILayout.Slider("공통 선 두께", strokeWidth, 1, 5);
+            EditorGUILayout.HelpBox("왼쪽: 선택한 강화의 아이콘·제목·설명·클릭으로 전환하는 ON/OFF. 오른쪽 위: 트리 가로 스크롤. 오른쪽 아래: 단일 기능 가로 스크롤. LayoutGroup 없이 앵커로 배치합니다.", MessageType.Info);
             using (new EditorGUI.DisabledScope(EditorApplication.isPlaying || tree == null || nodePrefab == null || font == null))
                 if (GUILayout.Button("노드 프리팹으로 페이지 생성", GUILayout.Height(32))) Run(SavePage);
+            using (new EditorGUI.DisabledScope(EditorApplication.isPlaying))
+                if (GUILayout.Button("선택한 페이지·노드에 기본 꾸미기 적용")) Run(StyleSelected);
             using (new EditorGUI.DisabledScope(EditorApplication.isPlaying))
                 if (GUILayout.Button("선택한 페이지 UI·연결선 보정")) Run(RepairSelectedLinks);
             if (!string.IsNullOrEmpty(message)) EditorGUILayout.HelpBox(message, error ? MessageType.Error : MessageType.Info);
@@ -231,6 +235,7 @@ namespace WorkGame.Editor
             Ref(data, "holdButton", hold); Ref(data, "selectedMark", selected.gameObject); Ref(data, "onOffText", onOff);
             Ref(data, "background", background);
             data.ApplyModifiedPropertiesWithoutUndo();
+            ApplyVisualStyle(root.gameObject, strokeWidth);
             return root.gameObject;
         }
 
@@ -274,7 +279,7 @@ namespace WorkGame.Editor
                 Place((RectTransform)pointsLabel.transform, Vector2.one, new Vector2(150, 36), new Vector2(-310, -28));
                 var points = Text("Points", root, "0", fontSize + 4, TextAlignmentOptions.MidlineRight);
                 Place((RectTransform)points.transform, Vector2.one, new Vector2(150, 36), new Vector2(-155, -28));
-                var close = Button(root, "Close", "닫기");
+                var close = Button(root, "Close", "X");
                 Place((RectTransform)close.transform, Vector2.one, new Vector2(64, 38), new Vector2(-48, -28));
                 UnityEventTools.AddPersistentListener(close.onClick, view.Close);
 
@@ -296,7 +301,7 @@ namespace WorkGame.Editor
                 Band((RectTransform)cost.transform, false, 34, 178, 16, 16);
                 var status = Text("Status", detail, "", fontSize - 4, TextAlignmentOptions.TopLeft);
                 Band((RectTransform)status.transform, false, 44, 126, 16, 16);
-                var hint = Text("Hint", detail, "노드를 꾹 눌러 구매", fontSize - 4, TextAlignmentOptions.Center);
+                var hint = Text("Hint", detail, "스킬을 꾹 눌러 구매", fontSize - 4, TextAlignmentOptions.Center);
                 Band((RectTransform)hint.transform, false, 32, 88, 8, 8);
                 var featureSwitch = HoldSwitch(detail, out var switchText);
                 Band((RectTransform)featureSwitch.transform, false, 60, 18, 16, 16);
@@ -333,8 +338,20 @@ namespace WorkGame.Editor
                 Image(bottom, boxColor, false);
                 var singleTitle = Text("Title", bottom, "단일 기능", fontSize - 4, TextAlignmentOptions.MidlineLeft);
                 Band((RectTransform)singleTitle.transform, true, 22, 0, 10, 10);
-                var singleArea = Make("Nodes", bottom);
-                Stretch(singleArea, new Vector2(6, 2), new Vector2(-6, -26));
+                var singleViewport = Make("Viewport", bottom);
+                Stretch(singleViewport, new Vector2(6, 2), new Vector2(-6, -26));
+                Image(singleViewport, Color.clear, true);
+                singleViewport.gameObject.AddComponent<RectMask2D>();
+                var singleArea = Make("Nodes", singleViewport);
+                singleArea.anchorMin = Vector2.zero; singleArea.anchorMax = Vector2.one;
+                singleArea.pivot = new Vector2(0, 0.5f);
+                // Fill the live viewport, including scene-level page size overrides.
+                // Only add width when the nodes actually need horizontal overflow.
+                singleArea.sizeDelta = new Vector2(Mathf.Max(0, singles.Count * (nodeSize.x + 12) - (visibleWidth - 12)), 0);
+                var singleScroll = singleViewport.gameObject.AddComponent<ScrollRect>();
+                singleScroll.viewport = singleViewport; singleScroll.content = singleArea;
+                singleScroll.horizontal = true; singleScroll.vertical = false;
+                singleScroll.movementType = ScrollRect.MovementType.Clamped; singleScroll.scrollSensitivity = 40;
                 var nodeViews = new List<WorkUpgradeNodeView>();
                 for (int i = 0; i < singles.Count; i++)
                     nodeViews.Add(AddNode(singleArea, singles[i], new Vector2((i + 0.5f) / singles.Count, 0.5f)));
@@ -382,6 +399,7 @@ namespace WorkGame.Editor
                 list.arraySize = nodeViews.Count;
                 for (int i = 0; i < nodeViews.Count; i++) list.GetArrayElementAtIndex(i).objectReferenceValue = nodeViews[i];
                 data.ApplyModifiedPropertiesWithoutUndo();
+                ApplyVisualStyle(root.gameObject, strokeWidth);
                 return root.gameObject;
             }
             catch { PrepareUiCleanup(root.gameObject); DestroyImmediate(root.gameObject); throw; }
@@ -403,6 +421,208 @@ namespace WorkGame.Editor
             foreach (var child in instance.GetComponentsInChildren<Transform>(true))
                 PrefabUtility.RecordPrefabInstancePropertyModifications(child.gameObject);
             return view;
+        }
+
+        private void StyleSelected()
+        {
+            var selected = Selection.activeGameObject;
+            if (selected == null || (selected.GetComponent<WorkUpgradeTreeView>() == null
+                && selected.GetComponent<WorkUpgradeNodeView>() == null))
+                throw new InvalidOperationException("강화 페이지 또는 노드 루트를 선택하세요.");
+            if (EditorUtility.IsPersistent(selected))
+            {
+                string path = AssetDatabase.GetAssetPath(selected);
+                var root = PrefabUtility.LoadPrefabContents(path);
+                try { ApplyVisualStyle(root, strokeWidth); PrefabUtility.SaveAsPrefabAsset(root, path); }
+                finally { PrepareUiCleanup(root); PrefabUtility.UnloadPrefabContents(root); }
+            }
+            else
+            {
+                Undo.RegisterFullObjectHierarchyUndo(selected, "Style Upgrade UI");
+                ApplyVisualStyle(selected, strokeWidth);
+                foreach (var component in selected.GetComponentsInChildren<Component>(true))
+                    if (component != null) PrefabUtility.RecordPrefabInstancePropertyModifications(component);
+            }
+            message = "기본 꾸미기 적용 완료. 배치·스킬 연결·구매 방식은 유지합니다.";
+        }
+
+        // Shared by generation and in-place styling, so regenerating keeps the same look.
+        public static void ApplyVisualStyle(GameObject root, float strokeWidth = 3)
+        {
+            var ink = new Color(0.25f, 0.12f, 0.07f);
+            var muted = new Color(0.47f, 0.34f, 0.26f);
+            var card = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/WorkGame/Art/UI/Button_Default_x2.png");
+            var yellow = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/WorkGame/Art/UI/Button_Yellow_x2.png");
+            var ribbon = GetTitleRibbon();
+            if (card == null || yellow == null || ribbon == null)
+                throw new InvalidOperationException("기본 꾸미기에 필요한 UI 이미지를 찾을 수 없습니다.");
+            foreach (var text in root.GetComponentsInChildren<TMP_Text>(true)) text.color = ink;
+            foreach (var node in root.GetComponentsInChildren<WorkUpgradeNodeView>(true))
+            {
+                Skin(node.GetComponent<Image>(), card, Color.white, strokeWidth);
+                var button = node.GetComponent<Button>();
+                if (button != null)
+                {
+                    var colors = button.colors;
+                    colors.normalColor = Color.white;
+                    colors.highlightedColor = new Color(1, 0.96f, 0.86f);
+                    colors.selectedColor = colors.highlightedColor;
+                    colors.pressedColor = new Color(0.93f, 0.85f, 0.68f);
+                    button.colors = colors;
+                }
+                var data = new SerializedObject(node);
+                data.FindProperty("boughtBackgroundColor").colorValue = new Color(1, 0.91f, 0.69f);
+                var definition = data.FindProperty("node").objectReferenceValue as WorkUpgradeSO;
+                data.ApplyModifiedPropertiesWithoutUndo();
+                var name = node.transform.Find("Name") as RectTransform;
+                if (name != null)
+                    Stretch(name, new Vector2(12, 48), new Vector2(-12, definition != null && definition.Icon != null ? -54 : -28));
+                var cost = node.transform.Find("Cost")?.GetComponent<TMP_Text>();
+                if (cost != null) { cost.fontSize = 18; cost.color = muted; }
+                var onOff = node.transform.Find("OnOff")?.GetComponent<TMP_Text>();
+                if (onOff != null) { onOff.fontSize = 15; onOff.color = muted; }
+                var fill = node.transform.Find("HoldFill") as RectTransform;
+                if (fill != null)
+                {
+                    Stretch(fill, new Vector2(9, 9), new Vector2(-9, -9));
+                    fill.GetComponent<Image>().color = new Color(0.98f, 0.72f, 0.22f, 0.28f);
+                }
+                var selected = node.transform.Find("Selected") as RectTransform;
+                if (selected != null)
+                {
+                    Place(selected, new Vector2(0, 1), new Vector2(20, 20), new Vector2(20, -20));
+                    var image = selected.GetComponent<Image>();
+                    Skin(image, AssetDatabase.LoadAssetAtPath<Sprite>("Assets/WorkGame/Art/UI/Icon/Star.png"), Color.white, 1, false);
+                    image.fillCenter = true;
+                    image.raycastTarget = false;
+                }
+                foreach (string mark in new[] { "Locked", "Bought" })
+                {
+                    var text = node.transform.Find(mark)?.GetComponent<TMP_Text>();
+                    if (text == null) continue;
+                    text.fontSize = 12;
+                    text.color = mark == "Bought" ? new Color(0.27f, 0.45f, 0.24f) : muted;
+                    Place(text.rectTransform, Vector2.one, new Vector2(40, 18), new Vector2(-28, -18));
+                }
+            }
+            if (root.GetComponent<WorkUpgradeTreeView>() == null) return;
+            Skin(root.GetComponent<Image>(), card, new Color(1, 0.98f, 0.93f), strokeWidth);
+            var detail = root.transform.Find("Body/Detail");
+            if (detail != null)
+            {
+                Skin(detail.GetComponent<Image>(), card, new Color(1, 0.97f, 0.88f), strokeWidth);
+                var banner = detail.Find("DetailRibbon") as RectTransform;
+                if (banner == null) banner = NewDecoration("DetailRibbon", detail);
+                Band(banner, true, 42, 12, 18, 18);
+                Skin(banner.GetComponent<Image>(), ribbon, new Color(1, 0.92f, 0.73f), strokeWidth);
+                var label = banner.GetComponentInChildren<TMP_Text>();
+                if (label == null)
+                {
+                    var rect = new GameObject("Text", typeof(RectTransform)).GetComponent<RectTransform>();
+                    rect.SetParent(banner, false); Stretch(rect, Vector2.zero, Vector2.zero);
+                    label = rect.gameObject.AddComponent<TextMeshProUGUI>();
+                }
+                label.font = detail.Find("Title").GetComponent<TMP_Text>().font;
+                label.text = "스킬 상세"; label.fontSize = 22; label.color = ink;
+                label.alignment = TextAlignmentOptions.Center; label.raycastTarget = false;
+                var icon = detail.Find("Icon") as RectTransform;
+                if (icon != null) Place(icon, new Vector2(0.5f, 1), new Vector2(64, 64), new Vector2(0, -100));
+            }
+            var singles = root.transform.Find("Body/UpgradeArea/Singles");
+            if (singles != null)
+            {
+                Skin(singles.GetComponent<Image>(), card, new Color(1, 0.97f, 0.88f), strokeWidth);
+                var label = singles.Find("Title")?.GetComponent<TMP_Text>();
+                if (label != null) { label.fontSize = 16; Band(label.rectTransform, true, 22, 4, 14, 14); }
+            }
+            var content = root.transform.Find("Body/UpgradeArea/TreeScroll/Viewport/Content");
+            if (content != null)
+                foreach (Transform family in content)
+                {
+                    Skin(family.GetComponent<Image>(), card, new Color(0.96f, 0.94f, 0.87f), strokeWidth);
+                    var title = family.Find("Title")?.GetComponent<TMP_Text>();
+                    if (title != null)
+                    {
+                        title.fontSize = 20;
+                        Band(title.rectTransform, true, 34, 3, 12, 12);
+                        var backing = family.Find("TitleRibbon") as RectTransform;
+                        if (backing == null) backing = NewDecoration("TitleRibbon", family);
+                        Band(backing, true, 34, 3, 8, 8);
+                        backing.SetAsFirstSibling();
+                        Skin(backing.GetComponent<Image>(), ribbon, new Color(1, 0.92f, 0.73f), strokeWidth);
+                    }
+                }
+            foreach (var links in root.GetComponentsInChildren<WorkUpgradeLinksGraphic>(true))
+            { links.color = new Color(0.50f, 0.32f, 0.19f); links.Thickness = strokeWidth; links.SetVerticesDirty(); }
+            var close = root.transform.Find("Close");
+            if (close != null)
+            {
+                Place((RectTransform)close, Vector2.one, new Vector2(44, 38), new Vector2(-42, -29));
+                var image = close.GetComponent<Image>();
+                Skin(image, card, new Color(0.70f, 0.25f, 0.063f), strokeWidth);
+                var text = close.GetComponentInChildren<TMP_Text>(true);
+                if (text != null) { text.text = "X"; text.color = Color.white; text.fontSize = 24; }
+            }
+            var feature = detail != null ? detail.Find("FeatureSwitch") : null;
+            if (feature != null)
+            {
+                Skin(feature.GetComponent<Image>(), yellow, Color.white, strokeWidth);
+                var fill = feature.Find("HoldFill") as RectTransform;
+                if (fill != null)
+                {
+                    Stretch(fill, new Vector2(8, 8), new Vector2(-8, -8));
+                    var image = fill.GetComponent<Image>();
+                    image.type = UnityEngine.UI.Image.Type.Filled;
+                    image.fillMethod = UnityEngine.UI.Image.FillMethod.Horizontal;
+                    image.fillAmount = 0;
+                }
+            }
+            var points = root.transform.Find("Points") as RectTransform;
+            var pointsLabel = root.transform.Find("PointsLabel") as RectTransform;
+            if (points != null) Place(points, Vector2.one, new Vector2(118, 36), new Vector2(-132, -28));
+            if (pointsLabel != null) Place(pointsLabel, Vector2.one, new Vector2(136, 36), new Vector2(-268, -28));
+            var star = root.transform.Find("PointsStar") as RectTransform;
+            if (star == null) star = NewDecoration("PointsStar", root.transform);
+            Place(star, Vector2.one, new Vector2(28, 28), new Vector2(-350, -28));
+            Skin(star.GetComponent<Image>(), AssetDatabase.LoadAssetAtPath<Sprite>("Assets/WorkGame/Art/UI/Icon/Star.png"), Color.white, 1, false);
+            var heading = root.transform.Find("Title")?.GetComponent<TMP_Text>();
+            if (heading != null) { heading.fontSize = 28; Band(heading.rectTransform, true, 38, 8, 28, 420); }
+        }
+
+        private static Sprite GetTitleRibbon()
+        {
+            // A separate Sprite shares the existing texture; other screens keep their import settings.
+            const string path = "Assets/WorkGame/Art/UI/UpgradeTitleRibbon.asset";
+            var ribbon = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+            if (ribbon != null) return ribbon;
+            var source = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/WorkGame/Art/UI/Panel_Whip.png");
+            if (source == null) return null;
+            ribbon = Sprite.Create(source.texture, source.rect, new Vector2(0.5f, 0.5f),
+                source.pixelsPerUnit, 0, SpriteMeshType.FullRect, new Vector4(44, 32, 44, 32));
+            ribbon.name = "UpgradeTitleRibbon";
+            AssetDatabase.CreateAsset(ribbon, path);
+            return ribbon;
+        }
+
+        private static RectTransform NewDecoration(string name, Transform parent)
+        {
+            var rect = new GameObject(name, typeof(RectTransform), typeof(Image)).GetComponent<RectTransform>();
+            rect.SetParent(parent, false);
+            rect.GetComponent<Image>().raycastTarget = false;
+            return rect;
+        }
+
+        private static void Skin(Image image, Sprite sprite, Color color, float strokeWidth, bool sliced = true)
+        {
+            if (image == null) return;
+            image.sprite = sprite; image.color = color;
+            image.type = sliced ? UnityEngine.UI.Image.Type.Sliced : UnityEngine.UI.Image.Type.Simple;
+            // Source outlines: x2 buttons = 10 px, ribbon = 7 px. Convert to Canvas units.
+            float sourceStroke = sprite != null && sprite.name == "UpgradeTitleRibbon" ? 7 : 10;
+            float referencePpu = image.canvas != null ? image.canvas.referencePixelsPerUnit : 100;
+            image.pixelsPerUnitMultiplier = sliced && sprite != null
+                ? sourceStroke / Mathf.Max(1, strokeWidth) * referencePpu / sprite.pixelsPerUnit : 1;
+            image.preserveAspect = !sliced;
         }
 
         private List<Family> GetFamilies(out List<WorkUpgradeSO> singles)
@@ -465,7 +685,7 @@ namespace WorkGame.Editor
         {
             if (nodeSize.x < 120 || nodeSize.y < 144 || pageSize.x <= 0 || pageSize.y <= 0)
                 throw new InvalidOperationException("페이지 크기와 노드 크기를 확인하세요. 노드는 최소 120 × 144입니다.");
-            float rightWidth = Mathf.Max(nodeSize.x + 24, singles * (nodeSize.x + 8) + 12);
+            float rightWidth = nodeSize.x + 24;
             float minWidth = Mathf.Max(960, detailWidth + 16 + rightWidth + Margin * 2);
             float topHeight = families.Count == 0 ? 0 : families.Max(x => x.Rows * nodeSize.y + (x.Rows - 1) * 12 + 46);
             float bodyHeight = Mathf.Max((topHeight + 8) / topShare, (nodeSize.y + 28) / (1 - topShare));

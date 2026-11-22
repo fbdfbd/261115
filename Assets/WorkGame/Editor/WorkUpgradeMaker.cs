@@ -65,6 +65,18 @@ namespace WorkGame.Editor
             Add("time_1", "빠른 손 I", "정시 근무시간 +10초. 업무를 끝내면 조기퇴근 가능.", 300, WorkUpgradeEffectKind.ExtraSeconds, 10);
             Add("time_2", "빠른 손 II", "정시 근무시간 +10초 추가", 600, WorkUpgradeEffectKind.ExtraSeconds, 10, "time_1");
             Add("time_3", "빠른 손 III", "정시 근무시간 +10초 추가. 총 +30초.", 900, WorkUpgradeEffectKind.ExtraSeconds, 10, "time_2");
+            Add("passion_1", "열정 페이 I", "다음 달 신규 업무량 +10%. 기본 배정량 기준이며 소수점은 버립니다.",
+                300, WorkUpgradeEffectKind.WorkloadPercent, 10);
+            Add("passion_2", "열정 페이 II", "다음 달 신규 업무량 총 +20%. 미처리 업무에는 중복 적용하지 않습니다.",
+                600, WorkUpgradeEffectKind.WorkloadPercent, 20, "passion_1");
+            Add("passion_3", "열정 페이 III", "다음 달 신규 업무량 총 +30%. 선택된 카테고리의 항목이 모자라면 다른 카테고리에서 보충합니다.",
+                900, WorkUpgradeEffectKind.WorkloadPercent, 30, "passion_2");
+            Add("healthy_food_1", "건강식 I", "달이의 수업·시너지 스탯 성장 보정 +5%. 가구 보정률에 합산됩니다.",
+                400, WorkUpgradeEffectKind.CareGrowthPercent, 5);
+            Add("healthy_food_2", "건강식 II", "달이의 수업·시너지 스탯 성장 보정 총 +10%. 이미 획득한 스탯에는 소급하지 않습니다.",
+                800, WorkUpgradeEffectKind.CareGrowthPercent, 10, "healthy_food_1");
+            Add("do_not_disturb", "방해금지모드", "ON이면 업무 중 메신저 말풍선 알림을 숨깁니다. OFF로 바꾸면 이후 알림부터 표시합니다. 판정과 보상은 유지됩니다.",
+                300, WorkUpgradeEffectKind.DoNotDisturbUnlock, 1);
 
             EditorUtility.SetDirty(tree);
             tree.Check();

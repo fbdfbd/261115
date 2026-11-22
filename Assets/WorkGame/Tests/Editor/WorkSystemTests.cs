@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
 using System;
 using System.Linq;
 using NUnit.Framework;
@@ -43,6 +47,80 @@ namespace WorkGame.Tests
             Assert.That(result, Is.Not.Null);
             Assert.That(result.IsPointBoosted, Is.EqualTo(boosted));
             Assert.That(result.SkillPointsGained, Is.EqualTo(gained));
+        }
+
+        [TestCase("instant", true)]
+        [TestCase("hold", false)]
+        [TestCase("fax", false)]
+        public void OnlyInstantSkillMarksSubmissionAsInstant(string source, bool expected)
+        {
+            using var system = Create(Paper());
+            var upgrades = new WorkUpgradeSystem(system, new[]
+            {
+                new WorkUpgradeNode("instant", 0, Array.Empty<string>(), new[]
+                {
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.InstantChancePercent, Value = 100 },
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.PointChancePercent, Value = 100 },
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.PointMultiplier, Value = 2 }
+                })
+            });
+            Assert.That(upgrades.Buy("instant"), Is.True);
+            WorkSubmitResult result = null;
+            int submissions = 0;
+            system.PaperSubmitted += value => { result = value; submissions++; };
+            if (source == "instant") Assert.That(system.TryInstantPaper(1), Is.True);
+            else if (source == "fax")
+            {
+                Assert.That(system.Fax.TrySend(1, true), Is.True);
+                system.AddTime(system.Fax.SecondsPerPaper);
+            }
+            else
+            {
+                system.StartHold(1, 0);
+                system.AddTime(0.5);
+            }
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.IsInstant, Is.EqualTo(expected));
+            Assert.That(result.IsPointBoosted, Is.True);
+            Assert.That(submissions, Is.EqualTo(1));
+            Assert.That(system.MonthDone, Is.EqualTo(1));
+            Assert.That(system.TryInstantPaper(1), Is.False);
+        }
+
+        [TestCase(0)]
+        [TestCase(25)]
+        [TestCase(75)]
+        public void FaxProcessesInOrderAndWaitingPapersStartAtZero(int speedPercent)
+        {
+            using var system = Create(Paper(), Paper(2), Paper(3));
+            var upgrades = new WorkUpgradeSystem(system, new[]
+            {
+                new WorkUpgradeNode("fax_queue", 0, Array.Empty<string>(), new[]
+                {
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.FaxSlots, Value = 2 },
+                    new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.FaxSpeedPercent, Value = speedPercent }
+                })
+            });
+            Assert.That(upgrades.Buy("fax_queue"), Is.True);
+            var submitted = new List<int>();
+            system.PaperSubmitted += result => submitted.Add(result.PaperId);
+            for (int id = 1; id <= 3; id++)
+                Assert.That(system.Fax.TrySend(id, true), Is.True);
+
+            double duration = system.Fax.SecondsPerPaper / (1 + speedPercent / 100d);
+            for (int id = 1; id <= 3; id++)
+            {
+                Assert.That(system.Fax.Jobs[0].PaperId, Is.EqualTo(id));
+                Assert.That(system.Fax.Jobs.All(job => job.Progress == 0), Is.True);
+                system.AddTime(duration / 2);
+                Assert.That(system.Fax.Jobs[0].Progress, Is.EqualTo(0.5).Within(0.000001));
+                Assert.That(system.Fax.Jobs.Skip(1).All(job => job.Progress == 0), Is.True);
+                // 완료 프레임에 시간이 남아도 다음 장은 0%에서 시작합니다.
+                system.AddTime(duration);
+                Assert.That(submitted.Count, Is.EqualTo(id));
+                Assert.That(system.Fax.Jobs.Count, Is.EqualTo(3 - id));
+            }
+            Assert.That(submitted, Is.EqualTo(new[] { 1, 2, 3 }));
         }
 
         [TestCase(PaperDisplay.Stars, 0, "★☆☆☆☆")]
@@ -465,6 +543,194 @@ namespace WorkGame.Tests
             Assert.Throws<ArgumentException>(() => new WorkSettings { MonthSeconds = double.NaN }.Check());
             Assert.Throws<ArgumentOutOfRangeException>(() => new WorkSettings { APercent = 85 }.Check());
             Assert.Throws<ArgumentException>(() => new WorkSystem(new WorkSettings(), new[] { Paper(), Paper() }));
+        }
+    }
+}
+
+namespace WorkGame.Tests
+{
+    public sealed class WorkSkillExpansionTests
+    {
+        private static WorkPaper Paper(int id, int month, string category = "A", string metric = "metric") =>
+            new WorkPaper(id, month, category, category, "target", metric, "", PickRule.Highest,
+                PaperDisplay.Number, new[] { new WorkChoice("A", 2), new WorkChoice("B", 1) });
+
+        private static WorkUpgradeNode Node(string id, WorkUpgradeEffectKind kind, int value, string parent = null) =>
+            new WorkUpgradeNode(id, 0, parent == null ? Array.Empty<string>() : new[] { parent },
+                new[] { new WorkUpgradeEffect { Kind = kind, Value = value } });
+
+        private static WorkUpgradeNode[] Nodes() => new[]
+        {
+            Node("p1", WorkUpgradeEffectKind.WorkloadPercent, 10),
+            Node("p2", WorkUpgradeEffectKind.WorkloadPercent, 20, "p1"),
+            Node("p3", WorkUpgradeEffectKind.WorkloadPercent, 30, "p2"),
+            Node("h1", WorkUpgradeEffectKind.CareGrowthPercent, 5),
+            Node("h2", WorkUpgradeEffectKind.CareGrowthPercent, 10, "h1"),
+            Node("quiet", WorkUpgradeEffectKind.DoNotDisturbUnlock, 1)
+        };
+
+        [Test]
+        public void HigherStagesReplaceEarlierPercentagesAndRebuildIsIdempotent()
+        {
+            using var work = new WorkSystem(new WorkSettings(), Array.Empty<WorkPaper>());
+            var upgrades = new WorkUpgradeSystem(work, Nodes());
+            Assert.That(upgrades.Buy("p2"), Is.False);
+            foreach (var id in new[] { "p1", "p2", "p3", "h1", "h2" }) Assert.That(upgrades.Buy(id), Is.True);
+            upgrades.RebuildStats(); upgrades.RebuildStats();
+            Assert.That(work.Upgrades.WorkloadBonus, Is.EqualTo(0.3).Within(0.00001));
+            Assert.That(work.Upgrades.CareGrowthBonus, Is.EqualTo(0.1).Within(0.00001));
+        }
+
+        [TestCase("p1", 27)]
+        [TestCase("p2", 30)]
+        [TestCase("p3", 32)]
+        public void InheritedStageAppliesToFirstMonthWithFloorRounding(string stage, int count)
+        {
+            using var work = new WorkSystem(new WorkSettings(), Enumerable.Range(1, 25).Select(i => Paper(i, 1)),
+                7, Enumerable.Range(100, 7).Select(i => Paper(i, 1)));
+            var ids = stage == "p1" ? new[] { "p1" } : stage == "p2" ? new[] { "p1", "p2" } : new[] { "p1", "p2", "p3" };
+            work.InheritUpgrades(ids);
+            _ = new WorkUpgradeSystem(work, Nodes());
+            work.StartRun();
+            Assert.That(work.MonthTotal, Is.EqualTo(count));
+        }
+
+        [Test]
+        public void PurchaseChangesNextAllocationOnlyAndCarryoverAndSaveStayStable()
+        {
+            var papers = Enumerable.Range(1, 2).SelectMany(m => Enumerable.Range(1, 10).Select(i => Paper(m * 100 + i, m))).ToArray();
+            var reserves = Enumerable.Range(1, 2).SelectMany(m => Enumerable.Range(1, 3).Select(i => Paper(m * 1000 + i, m))).ToArray();
+            using var work = new WorkSystem(new WorkSettings(), papers, 7, reserves);
+            var upgrades = new WorkUpgradeSystem(work, Nodes());
+            upgrades.Buy("p1"); work.StartRun();
+            Assert.That(work.MonthTotal, Is.EqualTo(11));
+            upgrades.Buy("p2");
+            Assert.That(work.MonthTotal, Is.EqualTo(11));
+            work.StartHold(101, 0); work.AddTime(0.5); work.AddTime(90);
+            Assert.That(work.LeaveWork(), Is.True);
+            Assert.That(work.StartNextMonth(), Is.True);
+            Assert.That(work.MonthTotal, Is.EqualTo(22)); // 10 carried + 10 base + 2 new extras.
+            var saved = JsonUtility.FromJson<WorkSaveData>(JsonUtility.ToJson(work.CaptureSave()));
+            using var restored = new WorkSystem(new WorkSettings(), papers, 7, reserves);
+            restored.RestoreSave(saved);
+            var restoredUpgrades = new WorkUpgradeSystem(restored, Nodes());
+            restoredUpgrades.Buy("p3");
+            Assert.That(restored.MonthPapers.Select(x => x.Id), Is.EqualTo(work.MonthPapers.Select(x => x.Id)));
+            Assert.That(restored.MonthTotal, Is.EqualTo(22));
+            saved.MonthlyExtraCounts[1] = 3;
+            using var invalid = new WorkSystem(new WorkSettings(), papers, 7, reserves);
+            Assert.Throws<ArgumentException>(() => invalid.RestoreSave(saved));
+        }
+
+        [Test]
+        public void OldSaveWithoutNewFieldsRestoresExistingPapersAndNotificationsStayOn()
+        {
+            var papers = Enumerable.Range(1, 10).Select(i => Paper(i, 1)).ToArray();
+            using var old = new WorkSystem(new WorkSettings(), papers, 7);
+            old.StartRun();
+            var saved = old.CaptureSave(); saved.ReservePlanKey = null; saved.MonthlyExtraCounts = null;
+            saved.DoNotDisturbEnabled = false;
+            using var restored = new WorkSystem(new WorkSettings(), papers, 7, Enumerable.Range(100, 3).Select(i => Paper(i, 1)));
+            restored.RestoreSave(saved);
+            _ = new WorkUpgradeSystem(restored, Nodes());
+            Assert.That(restored.MonthTotal, Is.EqualTo(10));
+            Assert.That(restored.NotificationsMuted, Is.False);
+        }
+
+        [TestCase(10, "B")]
+        [TestCase(14, "A")]
+        public void ReserveUsesSelectedCategoriesFirstAndFallsBackOnlyWhenExhausted(int available, string expected)
+        {
+            var a = ScriptableObject.CreateInstance<WorkCategorySO>();
+            var b = ScriptableObject.CreateInstance<WorkCategorySO>();
+            var plan = ScriptableObject.CreateInstance<WorkPlanSO>();
+            try
+            {
+                a.Id = "A"; a.Title = "A"; a.Target = "target";
+                b.Id = "B"; b.Title = "B"; b.Target = "target";
+                a.Metrics = Enumerable.Range(0, available).Select(i => new WorkMetric { Name = "m" + i }).ToList();
+                b.Metrics = Enumerable.Range(0, 4).Select(i => new WorkMetric { Name = "b" + i }).ToList();
+                plan.Batches = new List<WorkBatch> { new WorkBatch { Month = 1, Category = a, Count = 10 }, new WorkBatch { Month = 1, Category = b, Count = 0 } };
+                var originals = Enumerable.Range(0, 10).Select(i => Paper(i + 1, 1, "A", "m" + i)).ToArray();
+                var reserve = WorkPaperFactory.CreateReserve(plan, 3, 42, originals);
+                var same = WorkPaperFactory.CreateReserve(plan, 3, 42, originals);
+                Assert.That(reserve.Count, Is.EqualTo(3));
+                Assert.That(reserve.All(x => x.CategoryId == expected), Is.True);
+                Assert.That(reserve.Select(x => x.Metric).Distinct().Count(), Is.EqualTo(3));
+                Assert.That(reserve.Select(x => x.Metric), Is.EqualTo(same.Select(x => x.Metric)));
+            }
+            finally { UnityEngine.Object.DestroyImmediate(plan); UnityEngine.Object.DestroyImmediate(a); UnityEngine.Object.DestroyImmediate(b); }
+        }
+
+        [TestCase(0, 52)]
+        [TestCase(95, 5)]
+        public void HealthyFoodAddsToFurnitureForLessonsAndSynergyAndRespectsCapAndWeeklyTotals(int initial, int gain)
+        {
+            using var work = new WorkSystem(new WorkSettings(), Array.Empty<WorkPaper>());
+            var upgrades = new WorkUpgradeSystem(work, Nodes()); work.StartRun(); work.LeaveWork();
+            var fallback = new CareEnding("fallback", "Fallback", 0, Array.Empty<CareGain>(), "", "", "", "");
+            using var care = new CareSystem(work, new[]
+            {
+                new CareLesson("home", "Home", 1, 0, Array.Empty<CareGain>()),
+                new CareLesson("rest", "Rest", 1, 0, Array.Empty<CareGain>()),
+                new CareLesson("math", "Math", 1, 0, new[] { new CareGain(CareStat.Logic, 5) })
+            }, new[] { new CareSynergy("pair", "Pair", new[] { "math", "math" }, new[] { new CareGain(CareStat.Logic, 20) }) },
+                new[] { new CareGift("desk", "Desk", CareGiftKind.Desk, 0, 0, new[] { new CareGiftBonus { Stat = CareStat.Knowledge, Percent = 20 } }) },
+                Array.Empty<CareEnding>(), fallback, new[] { new CareGain(CareStat.Logic, initial) }, statMax: 100);
+            care.BuyGift("desk");
+            for (int i = 0; i < 4; i++) care.SetLesson(i, "math");
+            upgrades.Buy("h1"); upgrades.Buy("h2");
+            Assert.That(care.Run.GetStat(CareStat.Logic), Is.EqualTo(initial));
+            Assert.That(care.Preview().GetGain(CareStat.Logic), Is.EqualTo(gain));
+            Assert.That(care.FinishMonth(), Is.True);
+            Assert.That(care.Run.GetStat(CareStat.Logic), Is.EqualTo(initial + gain));
+            Assert.That(care.Run.LastResult.Weeks.Sum(w => w.Gains.Where(g => g.Stat == CareStat.Logic).Sum(g => g.Amount)), Is.EqualTo(gain));
+        }
+
+        [Test]
+        public void DoNotDisturbRequiresUnlockDefaultsOnAndToggleSurvivesSave()
+        {
+            using var work = new WorkSystem(new WorkSettings(), new[] { Paper(1, 1) });
+            var upgrades = new WorkUpgradeSystem(work, Nodes()); work.StartRun();
+            Assert.That(work.NotificationsMuted, Is.False);
+            work.SetDoNotDisturbEnabled(false); upgrades.Buy("quiet");
+            Assert.That(work.NotificationsMuted, Is.True);
+            work.SetDoNotDisturbEnabled(false);
+            using var restored = new WorkSystem(new WorkSettings(), new[] { Paper(1, 1) });
+            restored.RestoreSave(JsonUtility.FromJson<WorkSaveData>(JsonUtility.ToJson(work.CaptureSave())));
+            _ = new WorkUpgradeSystem(restored, Nodes());
+            Assert.That(restored.NotificationsMuted, Is.False);
+            restored.SetDoNotDisturbEnabled(true);
+            Assert.That(restored.NotificationsMuted, Is.True);
+            restored.StartHold(1, 0); restored.AddTime(0.5);
+            Assert.That(restored.Run.SkillPoints, Is.EqualTo(100));
+        }
+
+        [Test]
+        public void MutingClearsVisibleAndQueuedBubblesAndUnmutingDoesNotReplayThem()
+        {
+            var root = new GameObject("Feedback"); root.SetActive(false);
+            try
+            {
+                var bubbleObject = new GameObject("Bubble", typeof(RectTransform), typeof(CanvasGroup), typeof(WorkFeedbackBubbleView));
+                bubbleObject.transform.SetParent(root.transform, false);
+                var bubble = bubbleObject.GetComponent<WorkFeedbackBubbleView>();
+                var view = root.AddComponent<WorkFeedbackView>();
+                const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+                typeof(WorkFeedbackView).GetField("bubbles", flags).SetValue(view, new List<WorkFeedbackBubbleView> { bubble });
+                root.SetActive(true);
+                var message = new WorkFeedbackMessage(FeedbackResult.Success, "Test");
+                view.Show(message); view.Show(message);
+                var waiting = (ICollection)typeof(WorkFeedbackView).GetField("waiting", flags).GetValue(view);
+                Assert.That(bubble.IsShowing, Is.True); Assert.That(waiting.Count, Is.EqualTo(1));
+                view.SetSuppressed(true);
+                Assert.That(bubble.IsShowing, Is.False); Assert.That(waiting.Count, Is.Zero);
+                view.Show(message); Assert.That(waiting.Count, Is.Zero);
+                view.SetSuppressed(false); Assert.That(bubble.IsShowing, Is.False);
+                view.Show(message); Assert.That(bubble.IsShowing, Is.True);
+                view.Clear();
+            }
+            finally { UnityEngine.Object.DestroyImmediate(root); }
         }
     }
 }

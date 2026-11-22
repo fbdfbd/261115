@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: mix_fitness_03_emotion_05
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: mix_fitness_03_emotion_05
+  Name: "나무 위 연주회"
+  Description: "나무 타기로 기른 버티는 힘이 긴 연주의 끝까지 이어집니다."
+  Lessons:
+  - {fileID: 11400000, guid: a6f3c77f33ba5d958b192eec52e56948, type: 2}
+  - {fileID: 11400000, guid: dba39409006e5811a1985ac966fb1e0a, type: 2}
+  Gains:
+  - Stat: 8
+    Amount: 10

@@ -18,6 +18,7 @@ namespace WorkGame
         private int shownMonth = -1;
         private int shownPending = -1;
         private int shownFaxCount = -1;
+        private int shownUpgradeCount = -1;
         private bool shownSorted;
         private bool connected;
         private bool disposed;
@@ -47,6 +48,7 @@ namespace WorkGame
         {
             if (disposed || connected) return;
             connected = true;
+            shownUpgradeCount = -1;
             System.Changed += Refresh;
             System.PaperSubmitted += OnPaperSubmitted;
             if (faxView != null) faxView.PaperDropped += SendFax;
@@ -131,6 +133,7 @@ namespace WorkGame
 
         private void OnPaperSubmitted(WorkSubmitResult result)
         {
+            if (result.IsInstant) deskView?.FindPaper(result.PaperId)?.PlayInstantComplete();
             float shineDelay = 0;
             if (openedPaper != null && openedPaper.Id == result.PaperId)
             {
@@ -140,11 +143,21 @@ namespace WorkGame
                 if (paperView != null) shineDelay = paperView.CompletionShineDelay;
             }
             hudView?.ShowSkillPointResult(System.Run.SkillPoints, result.IsRight, result.IsPointBoosted, shineDelay);
-            if (feedback != null && feedbackView != null) feedbackView.Show(feedback.Pick(result));
+            if (!System.NotificationsMuted && feedback != null && feedbackView != null)
+                feedbackView.Show(feedback.Pick(result), result.IsInstant, result.IsRight && result.IsPointBoosted);
         }
 
         private void Refresh()
         {
+            feedbackView?.SetSuppressed(System.NotificationsMuted);
+            if (shownUpgradeCount != System.Run.BoughtUpgrades.Count)
+            {
+                shownUpgradeCount = System.Run.BoughtUpgrades.Count;
+                faxView?.ShowUpgrade(GetUpgradeLevel("fax_speed", 2));
+                hudView?.ShowUpgrades(GetUpgradeLevel("highlight", 3), GetUpgradeLevel("instant", 3),
+                    GetUpgradeLevel("point_flat", 2), GetUpgradeLevel("point_percent", 2),
+                    GetUpgradeLevel("point_luck", 3), GetUpgradeLevel("time", 3));
+            }
             bool newMonth = shownMonth != System.Run.Month;
             bool working = System.Run.Phase == WorkPhase.Working;
             if (newMonth || !working) paperView?.Hide();
@@ -182,13 +195,20 @@ namespace WorkGame
                 paperView?.ShowHold(System.HeldChoiceIndex, (float)System.HoldProgress, !System.IsPaused);
             }
             int faxCount = System.Fax.Jobs.Count;
-            faxView?.ShowState(working && faxEnabled,
-                !System.IsPaused && faxCount < System.Upgrades.FaxSlots, faxCount, System.Upgrades.FaxSlots,
+            faxView?.ShowState(faxEnabled,
+                working && !System.IsPaused && faxCount < System.Upgrades.FaxSlots, faxCount, System.Upgrades.FaxSlots,
                 faxCount == 0 ? 0 : (float)System.Fax.Jobs[0].Progress, System.IsWorking);
             hudView?.ShowProgress(System.MonthDone, System.MonthTotal);
             hudView?.ShowSkillPoints(System.Run.SkillPoints);
             hudView?.ShowTime(System.RemainingSeconds, System.MonthSeconds);
             menuView?.ShowState(System.CanLeave, System.IsPaused, working);
+        }
+
+        private int GetUpgradeLevel(string prefix, int maxLevel)
+        {
+            for (int level = maxLevel; level > 0; level--)
+                if (System.Run.BoughtUpgrades.Contains(prefix + "_" + level)) return level;
+            return 0;
         }
 
         public void Dispose()

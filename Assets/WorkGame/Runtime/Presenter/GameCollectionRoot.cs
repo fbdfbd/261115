@@ -10,6 +10,7 @@ namespace WorkGame
         private GameCollectionPresenter presenter;
         public bool IsOpen => view != null && view.IsOpen;
         public event Action Closed;
+        public event Action Changed;
         private void OnEnable()
         {
             if (config == null || view == null) { Debug.LogError("모음집의 Care Config / View를 연결하세요.", this); return; }
@@ -20,13 +21,22 @@ namespace WorkGame
         {
             if (view != null) { view.CloseRequested -= Close; view.Hide(); }
             presenter?.Dispose(); presenter = null;
+            Changed?.Invoke();
         }
         public void Open()
         {
+            bool wasOpen = IsOpen;
             transform.SetAsLastSibling();
             try { presenter?.Open(); }
             catch (Exception error) { Debug.LogException(error, this); }
+            if (wasOpen != IsOpen) Changed?.Invoke();
         }
-        public void Close() { view?.Hide(); Closed?.Invoke(); }
+        public void Close()
+        {
+            bool wasOpen = IsOpen;
+            view?.Hide();
+            if (wasOpen != IsOpen) Changed?.Invoke();
+            Closed?.Invoke();
+        }
     }
 }

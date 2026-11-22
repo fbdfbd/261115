@@ -3900,8 +3900,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 2, y: -2}
-  m_UseGraphicAlpha: 1
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 0
 --- !u!114 &1469293463783729076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3915,7 +3915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: WorkGame.Presentation::WorkGame.CareScheduleHighlight
   outline: {fileID: 133758417011259674}
-  pulseSeconds: 0.6
+  starBadge: {fileID: 0}
 --- !u!114 &4253123139255675621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6233,8 +6233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 2, y: -2}
-  m_UseGraphicAlpha: 1
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 0
 --- !u!114 &5807822186732006234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6248,7 +6248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: WorkGame.Presentation::WorkGame.CareScheduleHighlight
   outline: {fileID: 5776175445236404861}
-  pulseSeconds: 0.6
+  starBadge: {fileID: 0}
 --- !u!114 &7979661510370652621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11356,8 +11356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 2, y: -2}
-  m_UseGraphicAlpha: 1
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 0
 --- !u!114 &7833699506240965676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11371,7 +11371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: WorkGame.Presentation::WorkGame.CareScheduleHighlight
   outline: {fileID: 8314757613168041040}
-  pulseSeconds: 0.6
+  starBadge: {fileID: 0}
 --- !u!114 &6212069746107653007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13940,8 +13940,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 2, y: -2}
-  m_UseGraphicAlpha: 1
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 0
 --- !u!114 &5283432263979718575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13955,7 +13955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: WorkGame.Presentation::WorkGame.CareScheduleHighlight
   outline: {fileID: 7035153307063160138}
-  pulseSeconds: 0.6
+  starBadge: {fileID: 0}
 --- !u!114 &6269950276941939065
 MonoBehaviour:
   m_ObjectHideFlags: 0

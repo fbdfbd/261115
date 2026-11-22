@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cac3a37f0ea19409d8628ba6b6cc49, type: 3}
+  m_Name: mix_knowledge_08_fitness_06
+  m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
+  Id: mix_knowledge_08_fitness_06
+  Name: "현장 검증"
+  Description: "장애물 코스를 직접 지나며 보고서의 가설을 끝까지 확인합니다."
+  Lessons:
+  - {fileID: 11400000, guid: 82e66eb0bd4854aeb7dc037764016e39, type: 2}
+  - {fileID: 11400000, guid: 0f1e48cb5265527b8103f1aaf5b67657, type: 2}
+  Gains:
+  - Stat: 6
+    Amount: 16

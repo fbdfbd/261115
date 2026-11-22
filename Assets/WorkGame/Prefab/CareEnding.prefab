@@ -110,7 +110,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -950,7 +950,7 @@ MonoBehaviour:
   hintText: {fileID: 5974624740209418395}
   letterScroll: {fileID: 9019293946300762997}
   titleButton: {fileID: 5599904472208032042}
-  lineSeconds: 0.3
+  characterSeconds: 0.035
   imageSeconds: 0.3
   onCompleted:
     m_PersistentCalls:

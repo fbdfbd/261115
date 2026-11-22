@@ -27,6 +27,7 @@ namespace WorkGame
         private WorkUpgradeSO selectedNode;
         private bool selectedBought;
         private bool sortUnlocked, sortEnabled, faxUnlocked, faxVisible;
+        private bool doNotDisturbUnlocked, doNotDisturbEnabled;
         private bool isOpen;
         public event Action Closed;
         public IReadOnlyList<WorkUpgradeNodeView> Nodes => nodes;
@@ -34,6 +35,7 @@ namespace WorkGame
         public event Action<string> BuyClicked;
         public event Action<bool> SortChanged;
         public event Action<bool> FaxChanged;
+        public event Action<bool> DoNotDisturbChanged;
         public event Action SelectionChanged;
 
         private void Awake() { if (hideOnStart) Close(); }
@@ -98,11 +100,13 @@ namespace WorkGame
             SelectionChanged?.Invoke();
         }
 
-        public void ShowState(int points, bool sortUnlocked, bool sortEnabled, bool faxUnlocked, bool faxVisible)
+        public void ShowState(int points, bool sortUnlocked, bool sortEnabled, bool faxUnlocked, bool faxVisible,
+            bool doNotDisturbUnlocked = false, bool doNotDisturbEnabled = false)
         {
             if (pointsText != null) pointsText.text = points.ToString();
             this.sortUnlocked = sortUnlocked; this.sortEnabled = sortEnabled;
             this.faxUnlocked = faxUnlocked; this.faxVisible = faxVisible;
+            this.doNotDisturbUnlocked = doNotDisturbUnlocked; this.doNotDisturbEnabled = doNotDisturbEnabled;
             UpdateSwitch();
         }
 
@@ -111,9 +115,9 @@ namespace WorkGame
             if (selectedNode == null) return;
             selectedBought = state == WorkUpgradeState.Bought;
             if (selectionCost != null) selectionCost.text = selectedBought ? "구매 완료" : "필요 숙련 " + selectedNode.Cost;
-            if (selectionStatus != null) selectionStatus.text = selectedBought ? "구매한 강화입니다."
+            if (selectionStatus != null) selectionStatus.text = selectedBought ? "구매한 스킬입니다."
                 : state == WorkUpgradeState.Locked ? "선행 강화가 필요합니다."
-                : canBuy ? "노드를 꾹 눌러 구매하세요." : "숙련 포인트가 부족합니다.";
+                : canBuy ? "스킬을 꾹 눌러 구매" : "숙련 포인트가 부족합니다.";
             UpdateSwitch();
         }
 
@@ -122,8 +126,10 @@ namespace WorkGame
             if (featureSwitch == null) return;
             var kind = selectedNode != null ? selectedNode.SwitchKind : WorkUpgradeSwitch.None;
             WorkUi.Show(featureSwitch.gameObject, kind != WorkUpgradeSwitch.None);
-            bool unlocked = selectedBought && (kind == WorkUpgradeSwitch.Sort ? sortUnlocked : faxUnlocked);
-            bool enabled = kind == WorkUpgradeSwitch.Sort ? sortEnabled : faxVisible;
+            bool unlocked = selectedBought && (kind == WorkUpgradeSwitch.Sort ? sortUnlocked
+                : kind == WorkUpgradeSwitch.Fax ? faxUnlocked : kind == WorkUpgradeSwitch.DoNotDisturb && doNotDisturbUnlocked);
+            bool enabled = kind == WorkUpgradeSwitch.Sort ? sortEnabled
+                : kind == WorkUpgradeSwitch.Fax ? faxVisible : kind == WorkUpgradeSwitch.DoNotDisturb && doNotDisturbEnabled;
             // 기존 프리팹 참조는 유지하고, 기능 전환은 클릭으로만 처리합니다.
             featureSwitch.SetAllowed(false);
             featureSwitch.GetComponent<Button>().interactable = unlocked;
@@ -136,6 +142,8 @@ namespace WorkGame
             if (!selectedBought || selectedNode == null) return;
             if (selectedNode.SwitchKind == WorkUpgradeSwitch.Sort && sortUnlocked) SortChanged?.Invoke(!sortEnabled);
             if (selectedNode.SwitchKind == WorkUpgradeSwitch.Fax && faxUnlocked) FaxChanged?.Invoke(!faxVisible);
+            if (selectedNode.SwitchKind == WorkUpgradeSwitch.DoNotDisturb && doNotDisturbUnlocked)
+                DoNotDisturbChanged?.Invoke(!doNotDisturbEnabled);
         }
 
         private void CancelHolds()

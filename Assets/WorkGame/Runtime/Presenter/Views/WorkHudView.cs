@@ -8,6 +8,7 @@ namespace WorkGame
 {
     public class WorkHudView : MonoBehaviour
     {
+        public event System.Action<WorkSfxCue> SoundRequested;
         [Header("기능 표시")]
         [SerializeField] private bool showMonth = true;
         [SerializeField] private bool showCategories = true;
@@ -28,6 +29,21 @@ namespace WorkGame
         [SerializeField] private TMP_Text skillPointsText;
         [SerializeField] private TMP_Text timeText;
         [SerializeField] private Image timeFill;
+        [Header("강화 장식 — I, II, III 순서")]
+        [Tooltip("구매한 단계까지 누적 활성화")]
+        [SerializeField] private GameObject[] highlightObjects = new GameObject[3];
+        [Tooltip("구매한 단계까지 누적 활성화")]
+        [SerializeField] private GameObject[] instantObjects = new GameObject[3];
+        [Tooltip("현재 단계 하나만 활성화. 미구매 시 모두 숨김")]
+        [SerializeField] private GameObject[] pointFlatObjects = new GameObject[2];
+        [Tooltip("현재 단계 하나만 활성화. 미구매 시 모두 숨김")]
+        [SerializeField] private GameObject[] pointPercentObjects = new GameObject[2];
+        [Tooltip("행운의 숙련, 행운 확률 I, II 순서. 현재 단계 하나만 활성화")]
+        [SerializeField] private GameObject[] pointLuckObjects = new GameObject[3];
+        [Header("빠른 손 — 줄어들지 않는 시계 테두리")]
+        [SerializeField] private Image timerFrame;
+        [Tooltip("빠른 손 I, II, III 순서. 기본 외형은 Image의 시작 Sprite 사용")]
+        [SerializeField] private Sprite[] timerFrameSprites = new Sprite[3];
         [Header("숙련 포인트 카운트업")]
         [SerializeField, Min(0.01f)] private float pointCountSeconds = 0.35f;
         [SerializeField, Min(0)] private float pointWaveHeight = 4;
@@ -60,6 +76,31 @@ namespace WorkGame
         private Quaternion pointStarRotation;
         private bool pointTransformsActive;
         private bool pointBoosted;
+        private Sprite defaultTimerFrame;
+        private bool timerFrameSaved;
+
+        public void ShowUpgrades(int highlight, int instant, int pointFlat, int pointPercent, int pointLuck, int time)
+        {
+            ShowUpgradeObjects(highlightObjects, highlight, true);
+            ShowUpgradeObjects(instantObjects, instant, true);
+            ShowUpgradeObjects(pointFlatObjects, pointFlat, false);
+            ShowUpgradeObjects(pointPercentObjects, pointPercent, false);
+            ShowUpgradeObjects(pointLuckObjects, pointLuck, false);
+            if (timerFrame == null) return;
+            if (!timerFrameSaved)
+            {
+                defaultTimerFrame = timerFrame.sprite;
+                timerFrameSaved = true;
+            }
+            var sprite = time > 0 && time <= timerFrameSprites.Length ? timerFrameSprites[time - 1] : null;
+            timerFrame.sprite = sprite != null ? sprite : defaultTimerFrame;
+        }
+
+        private static void ShowUpgradeObjects(GameObject[] objects, int level, bool cumulative)
+        {
+            for (int i = 0; i < objects.Length; i++)
+                WorkUi.Show(objects[i], cumulative ? i < level : i == level - 1);
+        }
 
         private void OnEnable()
         {
@@ -132,6 +173,8 @@ namespace WorkGame
             WorkUi.Show(progressText != null ? progressText.gameObject : null, showProgressText);
             WorkUi.Show(progressSlider != null ? progressSlider.gameObject : null, showProgressSlider);
             if (lastDone == done && lastTotal == total) return;
+            if (lastDone >= 0 && lastTotal == total && done > lastDone)
+                SoundRequested?.Invoke(WorkSfxCue.Progress);
             lastDone = done;
             lastTotal = total;
             if (progressText != null) progressText.text = done + "/" + total;
@@ -156,7 +199,9 @@ namespace WorkGame
             bool boosted = false, float shineDelay = 0)
         {
             SavePointColor();
+            bool gainedPoints = animate && lastSkillPoints >= 0 && points > lastSkillPoints;
             lastSkillPoints = points;
+            if (gainedPoints) SoundRequested?.Invoke(WorkSfxCue.SkillPointsGain);
             pointTween?.Kill();
             pointTween = null;
             StopPointShine();

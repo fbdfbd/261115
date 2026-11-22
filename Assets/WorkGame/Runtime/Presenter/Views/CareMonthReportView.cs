@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
@@ -16,18 +17,30 @@ namespace WorkGame
         [SerializeField] private Sprite defaultPicture;
         [SerializeField] private TMP_Text titleText, lineText, hintText;
         [SerializeField] private List<CareMonthStatView> stats = new List<CareMonthStatView>();
+        [Header("마지막 주차 확인 후 기존 대각선 전환")]
+        [SerializeField] private DiagonalTransitionView closeTransition;
         [Header("등장 순서 — 이미지 → 글자 → 스텟")]
         [SerializeField, Min(0.01f)] private float openSeconds = 0.2f;
         [SerializeField, Min(0.01f)] private float pictureSeconds = 0.3f;
         [SerializeField, Min(0.001f)] private float letterSeconds = 0.035f;
         [SerializeField, Min(0)] private float statGap = 0.12f;
         [SerializeField, Min(0.01f)] private float statSeconds = 0.35f;
+        [Header("수업 아이콘 — 가볍게 좌우로 살랑임")]
+        [SerializeField, Range(0, 5)] private float iconSwayDegrees = 1.5f;
+        [SerializeField, Min(0.1f)] private float iconSwaySeconds = 1.6f;
         [SerializeField] private UnityEvent onOpen = new UnityEvent();
         [SerializeField] private UnityEvent onReady = new UnityEvent();
         public IReadOnlyList<CareMonthStatView> Stats => stats;
         public event Action Confirmed;
         private Sequence sequence;
+        private Tween iconSway;
+        private Quaternion pictureRotation;
+        private bool rotationSaved;
         private bool visible, ready;
+        private Coroutine closeRoutine;
+        private UnityAction coveredHandler;
+        private bool ownsTransition;
+        public bool IsClosing { get; private set; }
 
         private void Awake()
         {
@@ -37,13 +50,15 @@ namespace WorkGame
         private void OnEnable() { if (clickArea != null) clickArea.Clicked += Click; }
         private void OnDisable()
         {
+            CancelCloseTransition();
             if (clickArea != null) clickArea.Clicked -= Click;
             Hide();
         }
-        public void Open(int month, string line, Sprite sprite, int week = 0)
+        public void Open(int month, string line, Sprite sprite, int week = 0, bool animateIcon = false)
         {
             bool firstOpen = !visible;
             sequence?.Kill();
+            StopIconMotion();
             visible = true; ready = false;
             WorkUi.Show(panelGroup, true);
             if (firstOpen) SetAlpha(panelGroup, 0);
@@ -62,6 +77,8 @@ namespace WorkGame
             {
                 picture.sprite = sprite != null ? sprite : defaultPicture;
                 picture.enabled = picture.sprite != null;
+                picture.preserveAspect = true;
+                if (animateIcon && picture.enabled) StartIconMotion();
             }
             if (hintText != null) WorkUi.Show(hintText.gameObject, false);
             sequence = DOTween.Sequence().SetUpdate(true);
@@ -89,7 +106,7 @@ namespace WorkGame
         }
         private void Click()
         {
-            if (!visible) return;
+            if (!visible || IsClosing) return;
             if (!ready) { FinishAnimation(); return; }
             // 같은 클릭으로 연출 생략과 다음 단계 진행이 함께 일어나지 않습니다.
             ready = false;
@@ -114,8 +131,87 @@ namespace WorkGame
             }
             onReady.Invoke();
         }
+        public void CloseWithTransition(Action covered)
+        {
+            if (IsClosing) return;
+            if (closeTransition == null || !closeTransition.isActiveAndEnabled)
+            {
+                covered?.Invoke();
+                return;
+            }
+            IsClosing = true;
+            closeRoutine = StartCoroutine(CloseRoutine(covered));
+        }
+
+        private IEnumerator CloseRoutine(Action covered)
+        {
+            yield return null;
+            while (closeTransition != null && closeTransition.isActiveAndEnabled && closeTransition.IsPlaying)
+                yield return null;
+            bool committed = false;
+            Action commit = () =>
+            {
+                if (committed) return;
+                committed = true;
+                covered?.Invoke();
+            };
+            if (closeTransition != null && closeTransition.isActiveAndEnabled)
+            {
+                coveredHandler = () => commit();
+                closeTransition.Covered.AddListener(coveredHandler);
+                ownsTransition = true;
+                closeTransition.Play();
+                yield return null;
+                while (closeTransition != null && closeTransition.isActiveAndEnabled && closeTransition.IsPlaying)
+                    yield return null;
+            }
+            RemoveCoveredHandler();
+            ownsTransition = false;
+            commit(); // Recover if the transition was interrupted before full cover.
+            closeRoutine = null;
+            IsClosing = false;
+            if (visible) ready = true; // A pause or cancelled result commit can be confirmed again.
+        }
+
+        private void RemoveCoveredHandler()
+        {
+            if (closeTransition != null && coveredHandler != null)
+                closeTransition.Covered.RemoveListener(coveredHandler);
+            coveredHandler = null;
+        }
+
+        public void CancelCloseTransition()
+        {
+            if (closeRoutine != null) StopCoroutine(closeRoutine);
+            closeRoutine = null;
+            RemoveCoveredHandler();
+            if (ownsTransition && closeTransition != null) closeTransition.HideImmediate();
+            ownsTransition = false;
+            IsClosing = false;
+        }
+
+        private void StartIconMotion()
+        {
+            if (!rotationSaved)
+            {
+                pictureRotation = picture.rectTransform.localRotation;
+                rotationSaved = true;
+            }
+            var target = picture.rectTransform;
+            target.localRotation = pictureRotation * Quaternion.Euler(0, 0, -iconSwayDegrees);
+            iconSway = target.DOLocalRotateQuaternion(pictureRotation * Quaternion.Euler(0, 0, iconSwayDegrees), iconSwaySeconds)
+                .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
+        }
+
+        private void StopIconMotion()
+        {
+            iconSway?.Kill(); iconSway = null;
+            if (picture != null && rotationSaved) picture.rectTransform.localRotation = pictureRotation;
+        }
+
         public void Hide()
         {
+            StopIconMotion();
             sequence?.Kill(); sequence = null;
             visible = false; ready = false;
             WorkUi.Show(panelGroup, false);

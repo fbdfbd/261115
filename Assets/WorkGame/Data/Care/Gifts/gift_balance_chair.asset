@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_balance_chair
   Name: "흔들흔들 균형 의자"
   Description: "작은 앞발과 꼬리로 균형을 잡는 의자입니다. 나르미가 처음 앉았다가 달이가 가르쳐 주는 입장이 됐습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: ce3a000358c56a341b6df56fc80dfce3, type: 3}
+  RoomSprite: {fileID: 21300000, guid: 03cfb893dd13b934d95c0bdb1f7ea0f6, type: 3}
   Cost: 600
   Kind: 2
   Friendship: 6

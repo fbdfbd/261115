@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "탐구보고서 발표 특강"
   ShortName: "탐구보고서"
   Description: "직접 세운 질문을 관찰과 자료로 설명합니다. 도토리가 어디서 잘 자라는지 묻던 앞발이 이제 출처까지 적습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c41a5910e5cba17429914310ecfccfdc, type: 3}
   UnlockMonth: 9
   Cost: 340
   Gains:

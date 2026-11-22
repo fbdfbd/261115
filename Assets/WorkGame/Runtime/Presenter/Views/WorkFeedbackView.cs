@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ namespace WorkGame
 {
     public sealed class WorkFeedbackView : MonoBehaviour
     {
+        public event Action<WorkSfxCue> SoundRequested;
         [Header("씬에 배치한 말풍선 3개 — 같은 부모 / 아래쪽 앵커·피벗")]
         [SerializeField] private List<WorkFeedbackBubbleView> bubbles = new List<WorkFeedbackBubbleView>();
         [Header("색상")]
@@ -22,7 +24,9 @@ namespace WorkGame
         [SerializeField, Min(0)] private float risePixels = 45;
         private readonly List<WorkFeedbackBubbleView> pool = new List<WorkFeedbackBubbleView>();
         private readonly List<WorkFeedbackBubbleView> active = new List<WorkFeedbackBubbleView>();
-        private readonly Queue<WorkFeedbackMessage> waiting = new Queue<WorkFeedbackMessage>();
+        private bool suppressed;
+        private readonly Queue<(WorkFeedbackMessage message, bool instant, bool pointBoosted)> waiting
+            = new Queue<(WorkFeedbackMessage message, bool instant, bool pointBoosted)>();
 
         private void OnEnable()
         {
@@ -44,11 +48,18 @@ namespace WorkGame
             pool.Clear();
         }
 
-        public void Show(WorkFeedbackMessage message)
+        public void Show(WorkFeedbackMessage message, bool instant = false, bool pointBoosted = false)
         {
-            if (!isActiveAndEnabled || message == null || pool.Count == 0) return;
-            waiting.Enqueue(message);
+            if (suppressed || !isActiveAndEnabled || message == null || pool.Count == 0) return;
+            waiting.Enqueue((message, instant, pointBoosted));
             ShowWaiting();
+        }
+
+        public void SetSuppressed(bool value)
+        {
+            if (suppressed == value) return;
+            suppressed = value;
+            if (value) Clear();
         }
 
         private void ShowWaiting()
@@ -57,11 +68,13 @@ namespace WorkGame
             {
                 var bubble = pool.Find(x => !x.IsShowing);
                 if (bubble == null) break;
-                var message = waiting.Dequeue();
+                var entry = waiting.Dequeue();
+                var message = entry.message;
                 bubble.transform.SetAsLastSibling();
                 bubble.Show(message.Text, message.Result == FeedbackResult.Success ? successColor : failureColor,
-                    bottomSpace, staySeconds, riseSeconds, risePixels, appearSeconds);
+                    bottomSpace, staySeconds, riseSeconds, risePixels, appearSeconds, entry.instant, entry.pointBoosted);
                 active.Add(bubble);
+                SoundRequested?.Invoke(WorkSfxSO.BubbleCue(message.Result == FeedbackResult.Failure, entry.instant, entry.pointBoosted));
                 MoveBubbles();
             }
             if (waiting.Count > 0 && active.Count > 0) active[0].FinishSoon(fastExitSeconds);
@@ -69,7 +82,8 @@ namespace WorkGame
 
         private void OnFinished(WorkFeedbackBubbleView bubble)
         {
-            active.Remove(bubble);
+            if (!active.Remove(bubble)) return;
+            if (!suppressed && isActiveAndEnabled) SoundRequested?.Invoke(WorkSfxCue.BubbleDisappear);
             MoveBubbles();
             ShowWaiting();
         }

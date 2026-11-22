@@ -22,8 +22,10 @@ namespace WorkGame
         [Header("구매 완료 배경")]
         [SerializeField] private Image background;
         [SerializeField] private Color boughtBackgroundColor = new Color(0.72f, 0.79f, 0.84f);
+        [SerializeField] private Color lockedBackgroundColor = new Color(0.88f, 0.86f, 0.82f);
         private Color normalBackgroundColor;
         private bool backgroundSaved;
+        private bool selectable;
         public string NodeId => node != null ? node.Id : "";
         public event Action<string> BuyClicked;
         public event Action<WorkUpgradeSO> Selected;
@@ -43,14 +45,15 @@ namespace WorkGame
             holdButton.Completed -= Buy;
         }
         private void Buy() => BuyClicked?.Invoke(NodeId);
-        private void SelectNode() { if (node != null) Selected?.Invoke(node); }
+        private void SelectNode() { if (node != null && selectable) Selected?.Invoke(node); }
         public void SetSelected(bool selected) => WorkUi.Show(selectedMark, selected);
         public void CancelHold() => holdButton?.CancelHold();
 
         public void Show(WorkUpgradeState state, bool canBuy, bool featureEnabled = false)
         {
+            selectable = state == WorkUpgradeState.Bought;
             if (node == null) { if (buyButton != null) buyButton.interactable = false; return; }
-            ShowBackground(state == WorkUpgradeState.Bought);
+            ShowBackground(state);
             if (nameText != null) nameText.text = node.Name;
             if (descriptionText != null) descriptionText.text = node.Description;
             if (costText != null) costText.text = state == WorkUpgradeState.Bought ? "구매 완료" : node.Cost.ToString();
@@ -67,7 +70,7 @@ namespace WorkGame
             }
         }
 
-        private void ShowBackground(bool bought)
+        private void ShowBackground(WorkUpgradeState state)
         {
             if (background == null && buyButton != null) background = buyButton.targetGraphic as Image;
             if (background == null) background = GetComponent<Image>();
@@ -77,7 +80,8 @@ namespace WorkGame
                 normalBackgroundColor = background.color;
                 backgroundSaved = true;
             }
-            background.color = bought ? boughtBackgroundColor : normalBackgroundColor;
+            background.color = state == WorkUpgradeState.Bought ? boughtBackgroundColor
+                : state == WorkUpgradeState.Locked ? lockedBackgroundColor : normalBackgroundColor;
         }
     }
 }

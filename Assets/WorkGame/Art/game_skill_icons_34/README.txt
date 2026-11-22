@@ -1,0 +1,1 @@
+34 game skill icons: icons/ has 34 canonical PNGs named per the provided list. Each icon is 512x512 RGBA PNG. alternatives/ contains older and updated candidates of instant_1/2/3 and point_triple, numbered _1 and _2. For point_triple, _2 is the revised three-clover-and-sparkles design.

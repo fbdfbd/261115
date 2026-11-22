@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "예술학교 오디션 특강"
   ShortName: "오디션"
   Description: "준비한 연기와 연주를 낯선 심사위원 앞에서 펼칩니다. 대기실에서는 꼬리도 의자 안으로 넣고 순서를 기다립니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c6109a1060ca7724286c17d0e84d49b8, type: 3}
   UnlockMonth: 9
   Cost: 340
   Gains:

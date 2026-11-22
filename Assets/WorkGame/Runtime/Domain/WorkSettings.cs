@@ -5,7 +5,7 @@ namespace WorkGame
     [Serializable]
     public sealed class WorkSettings
     {
-        public double MonthSeconds = 90;
+        public double MonthSeconds = 60;
         public double HoldSeconds = 0.5;
         public int StartAttendance = 100;
         public int WrongPenalty = 1;

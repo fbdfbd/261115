@@ -54,6 +54,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e8045a98084a517ba451101d9e5ac44d, type: 2}
   - {fileID: 11400000, guid: 0e0cc520821452f19366be30492e2fa2, type: 2}
   - {fileID: 11400000, guid: c57755a8ff42516fbbedb5fdc7b198ef, type: 2}
+  - {fileID: 11400000, guid: 2b1280eede5b4605a3a7112d3fa253c7, type: 2}
+  - {fileID: 11400000, guid: 6e02b7c4e69c447188d3e3b01de93fcf, type: 2}
+  - {fileID: 11400000, guid: 5ba9a511188a4edbbf048d83099f01b0, type: 2}
+  - {fileID: 11400000, guid: c1394c450024420bb81e9a6bd339d4ae, type: 2}
+  - {fileID: 11400000, guid: 23b2096b9f9c4b17886ce9374d037e0a, type: 2}
+  - {fileID: 11400000, guid: 6017c90b940e4d729857e6e4ac2fd676, type: 2}
+  - {fileID: 11400000, guid: 66571c32bc00411596b45bc5417dd982, type: 2}
+  - {fileID: 11400000, guid: bf18a0b7c2d24f64b384dbc8c78a50ec, type: 2}
+  - {fileID: 11400000, guid: aa632d7dec4140b8a17fa679f9e1476e, type: 2}
+  - {fileID: 11400000, guid: 90c3e40e1db9410cbce0251735e083d5, type: 2}
+  - {fileID: 11400000, guid: 32f5ef180e0849bcb257d1fb4be4d9ec, type: 2}
+  - {fileID: 11400000, guid: 93edb65881954df590565ce7545a0610, type: 2}
+  - {fileID: 11400000, guid: c0f17c13433e4d24b94e79c09c836774, type: 2}
+  - {fileID: 11400000, guid: 8bccfe127854490297aaada2cfa69bb0, type: 2}
+  - {fileID: 11400000, guid: c5305b647ce741d988956faf63426fad, type: 2}
+  - {fileID: 11400000, guid: c84c11d169f54e1482a1cb0296e24731, type: 2}
+  - {fileID: 11400000, guid: 67abe304c74b4316af6416a4308ef225, type: 2}
+  - {fileID: 11400000, guid: ed83ffed06d841a793350b3d936975e8, type: 2}
+  - {fileID: 11400000, guid: b4bad513e6f2440faae19727d0cd43e4, type: 2}
+  - {fileID: 11400000, guid: d1d48529cab341cc881c41343fbbaf2a, type: 2}
+  - {fileID: 11400000, guid: ca0b49d5dc3640b6ae522d1e932ab460, type: 2}
+  - {fileID: 11400000, guid: 92707ac8c8eb482184270b406a1bdc49, type: 2}
   Gifts:
   - {fileID: 11400000, guid: e5ecfa202ace5e728022415057c57405, type: 2}
   - {fileID: 11400000, guid: ba7c610d07c65f8990bb406e553f00ad, type: 2}
@@ -113,3 +135,5 @@ MonoBehaviour:
   RestGains: []
   Dialogues: {fileID: 4900000, guid: d7c80702930de39429d3b6b0e7c2d0fd, type: 3}
   StatMax: 300
+  HomeIcon: {fileID: 21300000, guid: ab0abe32b7878714f9cd9f70813615ef, type: 3}
+  RestIcon: {fileID: 21300000, guid: 67dfb88f928ace14ea4ee9ebcaf145b5, type: 3}

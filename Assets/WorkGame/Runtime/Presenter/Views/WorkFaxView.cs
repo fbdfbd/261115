@@ -19,12 +19,18 @@ namespace WorkGame
         [SerializeField] private Slider progressSlider;
         [Tooltip("실제 진행률이 0일 때 슬라이더에 표시할 시작 비율입니다.")]
         [SerializeField, Range(0, 1)] private float progressStart = 0.1f;
+        [Header("강화 외형 — 기본 외형은 Image의 시작 Sprite 사용")]
+        [SerializeField] private Image faxImage;
+        [Tooltip("팩스 속도 I, II 순서")]
+        [SerializeField] private Sprite[] speedSprites = new Sprite[2];
         [Header("작동 중 외형 진동 — 판정 영역과 UI는 고정")]
         [SerializeField] private RectTransform faxVisual;
         [SerializeField, Min(0)] private float vibrationPixels = 1.5f;
         [SerializeField, Range(0, 2)] private float vibrationAngle = 0.3f;
         [SerializeField, Min(0.04f)] private float vibrationSeconds = 0.12f;
         public event Action<int> PaperDropped;
+        public event Action<bool> OperatingChanged;
+        public bool IsOperating => operating;
         public bool ForceEnabled => forceEnabled;
         private int lastCount = -1;
         private int lastSlots = -1;
@@ -33,6 +39,20 @@ namespace WorkGame
         private Vector2 visualHome;
         private Quaternion visualRotation;
         private bool operating;
+        private Sprite defaultSprite;
+        private bool spriteSaved;
+
+        public void ShowUpgrade(int level)
+        {
+            if (faxImage == null) return;
+            if (!spriteSaved)
+            {
+                defaultSprite = faxImage.sprite;
+                spriteSaved = true;
+            }
+            var sprite = level > 0 && level <= speedSprites.Length ? speedSprites[level - 1] : null;
+            faxImage.sprite = sprite != null ? sprite : defaultSprite;
+        }
 
         private void OnDisable() => SetOperating(false);
         private void OnDestroy() => vibration?.Kill();
@@ -42,7 +62,11 @@ namespace WorkGame
             if (group == null) group = GetComponent<CanvasGroup>();
             if (!group.interactable || !group.blocksRaycasts || data.pointerDrag == null) return;
             var paper = data.pointerDrag.GetComponent<WorkPaperItemView>();
-            if (paper != null && paper.DraggedPaperId >= 0) PaperDropped?.Invoke(paper.DraggedPaperId);
+            if (paper != null && paper.DraggedPaperId >= 0)
+            {
+                paper.NotifyDrop();
+                PaperDropped?.Invoke(paper.DraggedPaperId);
+            }
         }
 
         public void ShowState(bool visible, bool canDrop, int count, int slots, float progress, bool processing = true)
@@ -70,8 +94,10 @@ namespace WorkGame
 
         private void SetOperating(bool value)
         {
-            if (faxVisual == null || operating == value) return;
+            if (operating == value) return;
             operating = value;
+            OperatingChanged?.Invoke(value);
+            if (faxVisual == null) return;
             if (operating)
             {
                 if (vibration == null)

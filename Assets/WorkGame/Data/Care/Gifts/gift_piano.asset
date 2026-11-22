@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_piano
   Name: "콩알 건반 피아노"
   Description: "앞발에 맞는 작은 피아노입니다. 첫 연주는 세 음뿐이었지만 나르미의 촬영 파일은 열 개가 생겼습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: fcccc1fe1c2d26d4aab5eed850a3408b, type: 3}
+  RoomSprite: {fileID: 21300000, guid: 8033f147088210547b3b9af7eb5c27b6, type: 3}
   Cost: 250
   Kind: 1
   Friendship: 5

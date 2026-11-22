@@ -46,6 +46,7 @@ namespace WorkGame.Tests
                         new WorkUpgradeEffect { Kind = WorkUpgradeEffectKind.PointMultiplier, Value = 3 }
                     })
                 });
+                Upgrades.Changed += () => saves.SaveUpgrades(Work.Run.BoughtUpgrades);
                 Care = new CareSystem(Work, new[]
                 {
                     new CareLesson("home", "홈스쿨링", 1, 0, new[] { new CareGain(CareStat.Logic, 1) }),
@@ -246,7 +247,7 @@ namespace WorkGame.Tests
             Assert.That(Load(saves, SaveSlot.Manual2).Point, Is.EqualTo(SavePoint.CareStart));
             Assert.That(Load(saves, SaveSlot.Manual3).Work.Month, Is.EqualTo(2));
             Assert.That(Load(saves, SaveSlot.Manual4).Work.Month, Is.EqualTo(2));
-            Assert.That(store.Data.Count, Is.EqualTo(5));
+            Assert.That(store.Data.Count, Is.EqualTo(6)); // 자동 1 + 수동 4 + 공용 프로필
             using var loaded = new TestRun(saves, Load(saves, SaveSlot.Manual2));
             Assert.That(Load(saves).Point, Is.EqualTo(SavePoint.CareStart));
             Assert.That(Load(saves, SaveSlot.Manual3).Work.Month, Is.EqualTo(2));
@@ -294,6 +295,22 @@ namespace WorkGame.Tests
             newRun.Flow.Dialogue.SetReadCheck(reopened.WasDialogueRead);
             newRun.Work.AddTime(90); newRun.Work.LeaveWork(); newRun.Flow.EnterCare();
             Assert.That(newRun.Flow.Dialogue.CanSkip, Is.True);
+        }
+
+        [Test]
+        public void CollectionUnlockRequiresAnEndingReadAndSurvivesReload()
+        {
+            var store = new MemoryStore();
+            var saves = new WorkSaveSystem(store);
+            Assert.That(saves.HasReadEnding, Is.False);
+            saves.MarkDialogueRead("entry");
+            Assert.That(saves.HasReadEnding, Is.False);
+            saves.MarkEndingRead("job1");
+            Assert.That(saves.HasReadEnding, Is.True);
+            var reloaded = new WorkSaveSystem(store);
+            Assert.That(reloaded.HasReadEnding, Is.True);
+            Assert.That(reloaded.WasEndingRead("job1"), Is.True);
+            Assert.That(new WorkSaveSystem(new MemoryStore()).HasReadEnding, Is.False);
         }
 
         [Test]
@@ -553,14 +570,14 @@ namespace WorkGame.Tests
         }
 
         [Test]
-        public void NewRunInheritsCommittedSkillsButResetsFurnitureMoneyPointsAndCare()
+        public void NewRunInheritsSkillsButResetsFurnitureMoneyPointsAndCare()
         {
             var store = new MemoryStore(); var saves = new WorkSaveSystem(store);
             using var run = new TestRun(saves);
             run.Submit(); run.EnterCare();
             Assert.That(run.Upgrades.Buy("hands"), Is.True);
             Assert.That(run.Care.BuyGift("desk"), Is.True);
-            run.FinishCare("math"); // 다음 업무 시작 체크포인트에서 구매 스킬이 확정됩니다.
+            run.FinishCare("math");
             saves.MarkEndingRead("job1"); saves.MarkDialogueRead("entry");
             var reopened = new WorkSaveSystem(store);
             using var next = new TestRun(reopened);
@@ -603,28 +620,49 @@ namespace WorkGame.Tests
         }
 
         [Test]
-        public void LoadingAnOlderSlotRestoresItsExactSkillsWhileNewRunsKeepInheritance()
+        public void LoadingAnOlderSlotKeepsLatestSkillsAndRestoresSlotPoints()
         {
             var saves = new WorkSaveSystem(new MemoryStore());
             using var run = new TestRun(saves);
             saves.SaveManual(SaveSlot.Manual1);
             run.Submit(); run.EnterCare(); run.Upgrades.Buy("hands"); run.FinishCare();
             using var oldRun = new TestRun(saves, Load(saves, SaveSlot.Manual1));
-            Assert.That(oldRun.Work.Run.BoughtUpgrades, Is.Empty);
+            Assert.That(oldRun.Work.Run.BoughtUpgrades, Is.EqualTo(new[] { "hands" }));
+            Assert.That(oldRun.Work.MonthSeconds, Is.EqualTo(100));
+            Assert.That(oldRun.Work.Run.SkillPoints, Is.Zero);
             Assert.That(saves.GetInheritedUpgrades(), Is.EqualTo(new[] { "hands" }));
             using var next = new TestRun(saves);
             Assert.That(next.Work.Run.BoughtUpgrades, Is.EqualTo(new[] { "hands" }));
         }
 
         [Test]
-        public void UnconfirmedCarePurchasesStillRollBackBeforeInheritance()
+        public void PurchasedSkillsPersistImmediatelyWithoutChangingSlotPoints()
         {
-            var saves = new WorkSaveSystem(new MemoryStore());
+            var store = new MemoryStore();
+            var saves = new WorkSaveSystem(store);
             using var run = new TestRun(saves);
-            run.Submit(); run.EnterCare(); run.Upgrades.Buy("hands");
-            using var next = new TestRun(saves);
-            Assert.That(next.Work.Run.BoughtUpgrades, Is.Empty);
-            Assert.That(next.Work.Run.SkillPoints, Is.Zero);
+            run.Submit(); run.EnterCare();
+            int points = run.Work.Run.SkillPoints;
+            saves.SaveManual(SaveSlot.Manual1);
+            Assert.That(run.Upgrades.Buy("hands"), Is.True);
+            var reopened = new WorkSaveSystem(store);
+            using var loaded = new TestRun(reopened, Load(reopened, SaveSlot.Manual1));
+            Assert.That(loaded.Work.Run.BoughtUpgrades, Is.EqualTo(new[] { "hands" }));
+            Assert.That(loaded.Work.Run.SkillPoints, Is.EqualTo(points));
+            Assert.That(loaded.Upgrades.CanBuy("hands"), Is.False);
+        }
+
+        [Test]
+        public void MigratedSlotsCannotOverwriteTheLatestSharedSkills()
+        {
+            var store = new MemoryStore(); var saves = new WorkSaveSystem(store);
+            using var run = new TestRun(saves);
+            run.Submit(); run.EnterCare(); run.Upgrades.Buy("hands"); run.FinishCare();
+            saves.SaveManual(SaveSlot.Manual1); // 과거 슬롯에 구매 기록이 남아 있습니다.
+            saves.SaveUpgrades(Array.Empty<string>()); // 공용 기록을 덮어씁니다.
+            var reopened = new WorkSaveSystem(store);
+            Assert.That(Load(reopened, SaveSlot.Manual1).Work.Upgrades, Is.Empty);
+            Assert.That(reopened.GetInheritedUpgrades(), Is.Empty);
         }
     }
 }

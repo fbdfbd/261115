@@ -1247,6 +1247,7 @@ MonoBehaviour:
   panelGroup: {fileID: 3633598089409099186}
   clickArea: {fileID: 2959215633997832962}
   speakerText: {fileID: 1264459886926846846}
+  namePlate: {fileID: 3199957225139189352}
   bodyText: {fileID: 7163569204762214702}
   continueHint: {fileID: 6579348500092897480}
   logButton: {fileID: 6963806515114557736}

@@ -6,14 +6,17 @@ namespace WorkGame
     public enum CarePromiseState { Offered, Accepted, Declined, Succeeded, Failed }
     public enum CareFlowPhase { Working, Report, Dialogue, Free, Panel, Result, Ended, EndingChoice }
     public enum CarePanel { None, Skills, Stats, Schedule, Shop, Furniture }
+    public enum CareDialogueEmotion { Normal = 0, Sad = 1, Angry = 2, Happy = 3 }
 
     [Serializable]
     public sealed class CareDialogueLine
     {
         public string Speaker;
         public string Text;
+        public CareDialogueEmotion Emotion;
         // View가 이 키를 이미지로 바꿉니다. 빈 값이면 이전 이미지를 유지합니다.
         public string ImageKey;
+        public CareDialogueCue[] Cues = Array.Empty<CareDialogueCue>();
     }
 
     public sealed class CareDialogueLog
@@ -24,10 +27,13 @@ namespace WorkGame
         public string Text { get; }
         public string ImageKey { get; }
         public bool IsChoice { get; }
-        internal CareDialogueLog(int month, string dialogueId, string speaker, string text, string imageKey, bool isChoice = false)
+        internal bool IsLegacy { get; }
+        internal CareDialogueLog(int month, string dialogueId, string speaker, string text, string imageKey,
+            bool isChoice = false, bool isLegacy = false)
         {
             Month = month; DialogueId = dialogueId; Speaker = speaker;
             Text = text; ImageKey = imageKey; IsChoice = isChoice;
+            IsLegacy = isLegacy;
         }
     }
 
@@ -37,12 +43,18 @@ namespace WorkGame
         public string Key;
         public string Text;
         public int Friendship;
+        public string NextDialogue;
+        public int HighestStatGain;
+        public string EndingText;
     }
 
     [Serializable]
     public sealed class CareDialogueData
     {
         public string Id;
+        // 선택지 전환 전 저장된 대화 이력 복원 전용. 재생에는 사용하지 않습니다.
+        public CareDialogueLine[] LegacyLines = Array.Empty<CareDialogueLine>();
+        public string EndingText;
         public CareDialogueLine[] Lines = Array.Empty<CareDialogueLine>();
         public CareDialogueChoice[] Choices = Array.Empty<CareDialogueChoice>();
         public int Friendship;
@@ -56,6 +68,38 @@ namespace WorkGame
     }
 
     [Serializable]
+    public sealed class CareStoryData
+    {
+        public string Id;
+        public int Month;
+        public string Dialogue;
+        public string PromiseId;
+        public string PromiseSuccessDialogue;
+        public string Unlock;
+    }
+
+    public enum CareDialogueCueKind { ShowImage, HideImage, Wait, Sound, Custom }
+
+    [Serializable]
+    public sealed class CareDialogueCue
+    {
+        public CareDialogueCueKind Kind;
+        public string Layer = "event";
+        public string Key;
+        public float Seconds;
+    }
+
+    [Serializable]
+    public sealed class CareMonthLeave
+    {
+        public int Month;
+        public string EarlyDialogue;
+        public string SlightlyEarlyDialogue;
+        public string OnTimeDialogue;
+        public string OvertimeDialogue;
+    }
+
+    [Serializable]
     public sealed class CareLeaveSettings
     {
         public double EarlySeconds = 30;
@@ -64,11 +108,20 @@ namespace WorkGame
         public string SlightlyEarlyDialogue;
         public string OnTimeDialogue;
         public string OvertimeDialogue;
+        public CareMonthLeave[] Months = Array.Empty<CareMonthLeave>();
         public CareLeaveKind GetKind(double difference) => difference <= -EarlySeconds ? CareLeaveKind.Early
             : difference < -OnTimeSeconds ? CareLeaveKind.SlightlyEarly
             : difference <= OnTimeSeconds ? CareLeaveKind.OnTime : CareLeaveKind.Overtime;
-        public string GetDialogue(CareLeaveKind kind)
+        public string GetDialogue(CareLeaveKind kind, int month = 0)
         {
+            var monthly = Array.Find(Months ?? Array.Empty<CareMonthLeave>(), x => x != null && x.Month == month);
+            if (monthly != null)
+            {
+                string id = kind == CareLeaveKind.Early ? monthly.EarlyDialogue
+                    : kind == CareLeaveKind.SlightlyEarly ? monthly.SlightlyEarlyDialogue
+                    : kind == CareLeaveKind.OnTime ? monthly.OnTimeDialogue : monthly.OvertimeDialogue;
+                if (!string.IsNullOrEmpty(id)) return id;
+            }
             if (kind == CareLeaveKind.Early) return EarlyDialogue;
             if (kind == CareLeaveKind.SlightlyEarly) return SlightlyEarlyDialogue;
             return kind == CareLeaveKind.OnTime ? OnTimeDialogue : OvertimeDialogue;
@@ -87,15 +140,21 @@ namespace WorkGame
         public string SuccessDialogue;
         public string EarlySuccessDialogue;
         public string FailureDialogue;
+        public string SuccessEndingText;
+        public string EarlySuccessEndingText;
+        public string FailureEndingText;
+        public string DeclinedEndingText;
     }
 
     [Serializable]
     public sealed class CareDialogueFile
     {
+        public string EndingIntroText;
         public CareLeaveSettings Leave = new CareLeaveSettings();
         public CareDialogueData[] Dialogues = Array.Empty<CareDialogueData>();
         public CareMonthTalk[] MonthTalks = Array.Empty<CareMonthTalk>();
         public CarePromiseData[] Promises = Array.Empty<CarePromiseData>();
+        public CareStoryData[] Stories = Array.Empty<CareStoryData>();
     }
 
     public sealed class CareDialogueResult

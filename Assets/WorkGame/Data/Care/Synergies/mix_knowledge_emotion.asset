@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mix_knowledge_emotion
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: mix_knowledge_emotion
-  Name: "도토리로 배우는 도형 미술"
+  Name: "도토리 미술"
   Description: "세던 도토리를 줄 세워 그림을 만듭니다. 달이는 숙제를 하다가 작품도 하나 얻었습니다."
   Lessons:
   - {fileID: 11400000, guid: 47351dd9f3b5546fbe65bc8a9f52a11e, type: 2}

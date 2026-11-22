@@ -10,6 +10,8 @@ namespace WorkGame
         public string Name;
         [TextArea] public string Description;
         public Sprite Icon;
+        [Tooltip("Care 방에 장착 가구로 표시하는 이미지입니다. 가구함 아이콘과 별도로 사용합니다.")]
+        public Sprite RoomSprite;
         public CareGiftKind Kind;
         [Min(0)] public int Cost;
         [Tooltip("구매 순간 한 번 적용합니다. 음수도 가능합니다.")]

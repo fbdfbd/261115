@@ -9,6 +9,7 @@ namespace WorkGame
         private readonly GameTitleView view;
         private readonly Action newGame, continueGame, collection, settings, quit;
         private bool connected;
+        public bool CanOpenCollection => saves.HasReadEnding;
         public GameTitlePresenter(WorkSaveSystem saves, GameTitleView view, Action newGame, Action continueGame,
             Action collection, Action settings, Action quit)
         {
@@ -20,19 +21,21 @@ namespace WorkGame
             if (connected || view == null) return;
             connected = true;
             view.NewGameRequested += newGame; view.ContinueRequested += continueGame;
-            view.CollectionRequested += collection; view.SettingsRequested += settings; view.QuitRequested += quit;
+            view.CollectionRequested += OpenCollection; view.SettingsRequested += settings; view.QuitRequested += quit;
             Refresh();
         }
         public void Refresh()
         {
             if (view != null) view.SetContinueAvailable(((SaveSlot[])Enum.GetValues(typeof(SaveSlot))).Any(saves.HasSave));
+            if (view != null) view.SetCollectionAvailable(CanOpenCollection);
         }
+        private void OpenCollection() { if (CanOpenCollection) collection?.Invoke(); }
         public void Dispose()
         {
             if (!connected) return;
             connected = false;
             view.NewGameRequested -= newGame; view.ContinueRequested -= continueGame;
-            view.CollectionRequested -= collection; view.SettingsRequested -= settings; view.QuitRequested -= quit;
+            view.CollectionRequested -= OpenCollection; view.SettingsRequested -= settings; view.QuitRequested -= quit;
         }
     }
 }

@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_tablet
   Name: "달이 전용 태블릿"
   Description: "작은 앞발로 넘기는 학습용 태블릿입니다. 나르미는 교육 앱을 깔고, 달이는 도토리 모양 배경화면부터 골랐습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 329690dc7489c7e458deed67abaa2b00, type: 3}
+  RoomSprite: {fileID: 21300000, guid: 956aeb3d91c5d9242b7c0da033cb4bc2, type: 3}
   Cost: 250
   Kind: 1
   Friendship: 5

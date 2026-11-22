@@ -28,6 +28,19 @@ namespace WorkGame
         [SerializeField] private UnityEvent onComplete;
         [Tooltip("체크하면 완료 연출 끝에 FinishRemove()를 호출해야 종이가 재사용됩니다.")]
         [SerializeField] private bool waitForRemoveAnimation;
+        [Header("즉시완료 — 들어 올린 뒤 오른쪽으로 휘리릭")]
+        [SerializeField, Min(0.01f)] private float instantLiftSeconds = 0.18f;
+        [SerializeField, Min(0.01f)] private float instantFlySeconds = 0.58f;
+        [SerializeField, Min(0)] private float instantLiftPixels = 75f;
+        [Tooltip("오른쪽으로 날아가는 동안 시계 방향으로 회전할 각도입니다.")]
+        [SerializeField, Min(0)] private float instantSpinDegrees = 420f;
+        private Tween instantTween;
+        private RectTransform flightParent;
+        private int flightSibling;
+        private Vector2 flightAnchorMin, flightAnchorMax, flightPivot, flightPosition, flightSize;
+        private Vector3 flightScale;
+        private Color flightOutlineColor;
+        private bool flying;
         private Action<int> clicked;
         private Tween wiggle;
         private Quaternion restRotation = Quaternion.identity;
@@ -38,6 +51,7 @@ namespace WorkGame
         private Vector3 oldScale;
         private Vector3 dragOffset;
         private bool dragging;
+        private bool dropSoundPlayed;
         private bool hoverAllowed = true;
         private Vector2? hoverOutlineDistance;
         private bool dragEnabled;
@@ -53,6 +67,7 @@ namespace WorkGame
         public event Action Returned;
         public event Action DragEnded;
         public event Action DragStarted;
+        public event Action<WorkSfxCue> SoundRequested;
         public bool IsDragging => dragging;
         public int DraggedPaperId => dragging ? dragPaperId : -1;
 
@@ -79,6 +94,7 @@ namespace WorkGame
 
         private void OnDisable()
         {
+            StopInstantFlight();
             RestoreDrag();
             if (clickButton != null) clickButton.onClick.RemoveListener(Click);
             StopWiggle();
@@ -88,6 +104,7 @@ namespace WorkGame
         public void Bind(WorkPaper paper, Action<int> onClick)
         {
             GetParts();
+            StopInstantFlight();
             Paper = paper;
             clicked = onClick;
             IsLeaving = false;
@@ -100,6 +117,90 @@ namespace WorkGame
         }
 
         public void PlayShow() => onShow?.Invoke();
+
+        public void PlayInstantComplete()
+        {
+            if (!IsBound || IsLeaving) return;
+            GetParts();
+            RestoreDrag();
+            StopWiggle();
+            IsLeaving = true;
+            clickButton.interactable = false;
+            paperGroup.interactable = paperGroup.blocksRaycasts = false;
+            flightParent = Rect.parent as RectTransform;
+            flightSibling = Rect.GetSiblingIndex();
+            flightAnchorMin = Rect.anchorMin; flightAnchorMax = Rect.anchorMax;
+            flightPivot = Rect.pivot; flightPosition = Rect.anchoredPosition;
+            flightSize = Rect.sizeDelta; flightScale = Rect.localScale;
+            flying = true;
+            SetHover(false);
+            if (hoverOutline != null) flightOutlineColor = hoverOutline.effectColor;
+
+            // Canvas 최상단에서 날려 책상 마스크/정렬 갱신에 잘리지 않게 합니다.
+            var canvas = GetComponentInParent<Canvas>();
+            var root = canvas != null ? canvas.rootCanvas.transform as RectTransform : flightParent;
+            if (root != null && root != Rect)
+            {
+                Vector3 worldPosition = Rect.position;
+                Vector2 size = Rect.rect.size;
+                Rect.SetParent(root, true);
+                Rect.anchorMin = Rect.anchorMax = new Vector2(0.5f, 0.5f);
+                Rect.sizeDelta = size;
+                Rect.position = worldPosition;
+            }
+            Rect.SetAsLastSibling();
+            Vector2 start = Rect.anchoredPosition;
+            Vector2 lifted = start + new Vector2(-18f, instantLiftPixels);
+            Vector3 scale = Rect.localScale;
+            float angle = Rect.localEulerAngles.z;
+            float distance = root != null ? root.rect.width + Rect.rect.width : 1800f;
+            float lift = Mathf.Max(0.01f, instantLiftSeconds);
+            float fly = Mathf.Max(0.01f, instantFlySeconds);
+            instantTween = DOTween.Sequence().SetUpdate(true)
+                .Append(DOTween.To(() => Rect.anchoredPosition, value => Rect.anchoredPosition = value,
+                    lifted, lift).SetEase(Ease.OutCubic))
+                .Join(Rect.DOScale(scale * 1.18f, lift).SetEase(Ease.OutBack))
+                .Join(Rect.DOLocalRotate(new Vector3(0, 0, angle - 16f), lift))
+                .AppendCallback(() => SoundRequested?.Invoke(WorkSfxCue.PaperFly))
+                .Append(DOTween.To(() => 0f, progress =>
+                {
+                    float travel = Mathf.SmoothStep(0f, 1f, progress);
+                    Rect.anchoredPosition = Vector2.Lerp(lifted, lifted + new Vector2(distance, 100f), travel)
+                        + Vector2.up * (Mathf.Sin(travel * Mathf.PI) * 55f);
+                    Rect.localRotation = Quaternion.Euler(0, 0,
+                        Mathf.Lerp(angle - 16f, angle - 16f - instantSpinDegrees, travel));
+                    Rect.localScale = scale * Mathf.Lerp(1.18f, 0.85f, progress);
+                    // Outline은 종이 뒤에 짙은 사본을 겹쳐 그리므로, 본체가 반투명해지기 전에 알파를 줄입니다.
+                    if (hoverOutline != null)
+                    {
+                        Color outlineColor = flightOutlineColor;
+                        outlineColor.a *= 1f - Mathf.InverseLerp(0.45f, 0.65f, progress);
+                        hoverOutline.effectColor = outlineColor;
+                    }
+                    paperGroup.alpha = 1f - Mathf.InverseLerp(0.65f, 1f, progress);
+                }, 1f, fly).SetEase(Ease.Linear))
+                .OnComplete(FinishRemove);
+        }
+
+        private void StopInstantFlight()
+        {
+            instantTween?.Kill();
+            instantTween = null;
+            if (!flying) return;
+            flying = false;
+            if (hoverOutline != null) hoverOutline.effectColor = flightOutlineColor;
+            if (flightParent != null)
+            {
+                Rect.SetParent(flightParent, false);
+                Rect.SetSiblingIndex(flightSibling);
+                Rect.anchorMin = flightAnchorMin; Rect.anchorMax = flightAnchorMax;
+                Rect.pivot = flightPivot; Rect.sizeDelta = flightSize;
+                Rect.anchoredPosition = flightPosition;
+                Rect.localScale = flightScale;
+                Rect.localRotation = restRotation;
+            }
+            flightParent = null;
+        }
 
         public void PlayComplete()
         {
@@ -130,6 +231,7 @@ namespace WorkGame
             GetParts();
             // 접수된 종이는 먼저 숨겨 원래 자리로 돌아가는 모습이 보이지 않게 합니다.
             WorkUi.Show(paperGroup, false);
+            StopInstantFlight();
             RestoreDrag();
             StopWiggle();
             Paper = null;
@@ -151,6 +253,7 @@ namespace WorkGame
         public void OnPointerEnter(PointerEventData data)
         {
             if (!hoverAllowed || !IsBound || IsLeaving || dragging) return;
+            SoundRequested?.Invoke(WorkSfxCue.PaperHover);
             SetHover(true);
             if (!hoverWiggle || wiggleAngle <= 0 || (wiggle != null && wiggle.IsPlaying())) return;
             if (wiggle == null)
@@ -163,9 +266,9 @@ namespace WorkGame
         private void SetHover(bool hover)
         {
             if (hoverOutline == null) return;
-            bool highlighted = (hover && hoverAllowed) || dragging;
+            bool highlighted = !IsLeaving && ((hover && hoverAllowed) || dragging);
             hoverOutline.effectDistance = highlighted ? hoverOutlineDistance.GetValueOrDefault() : idleOutlineDistance;
-            hoverOutline.enabled = (highlighted || idleOutlineDistance != Vector2.zero) && IsBound && !IsLeaving;
+            hoverOutline.enabled = (highlighted || idleOutlineDistance != Vector2.zero) && IsBound && (!IsLeaving || flying);
         }
 
         public void SetHoverAllowed(bool allowed)
@@ -213,6 +316,7 @@ namespace WorkGame
             oldPosition = Rect.anchoredPosition; oldSize = Rect.sizeDelta;
             oldScale = Rect.localScale;
             dragging = true;
+            dropSoundPlayed = false;
             SetHover(true);
             suppressClick = true;
             dragPaperId = PaperId;
@@ -231,6 +335,7 @@ namespace WorkGame
                 data.position, data.pressEventCamera, out var pointer)) dragOffset = Rect.position - pointer;
             else dragOffset = Vector3.zero;
             paperGroup.blocksRaycasts = false;
+            SoundRequested?.Invoke(WorkSfxCue.PaperPick);
             DragStarted?.Invoke();
         }
 
@@ -241,7 +346,19 @@ namespace WorkGame
                 data.position, data.pressEventCamera, out var pointer)) Rect.position = pointer + dragOffset;
         }
 
-        public void OnEndDrag(PointerEventData data) => RestoreDrag();
+        public void OnEndDrag(PointerEventData data)
+        {
+            NotifyDrop();
+            RestoreDrag();
+        }
+
+        // The fax accepts its OnDrop before OnEndDrag; emit once before the model removes the paper.
+        public void NotifyDrop()
+        {
+            if (!dragging || dropSoundPlayed) return;
+            dropSoundPlayed = true;
+            SoundRequested?.Invoke(WorkSfxCue.PaperDrop);
+        }
 
         private void RestoreDrag()
         {

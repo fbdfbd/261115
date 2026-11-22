@@ -58,6 +58,7 @@ namespace WorkGame
         [SerializeField] private UnityEvent onClose = new UnityEvent();
 
         public event Action Confirmed;
+        public event Action<WorkSfxCue> SoundRequested;
         public bool IsOpen { get; private set; }
         private Sequence sequence;
         private Vector2 home;
@@ -131,6 +132,7 @@ namespace WorkGame
             {
                 if (confirmButton != null) confirmButton.interactable = true;
                 onReady.Invoke();
+                RequestSound(WorkSfxCue.ReportComplete);
             });
         }
 
@@ -241,10 +243,16 @@ namespace WorkGame
                 // 보너스가 없는 달에는 해당 행과 대기 간격도 생략합니다.
                 if (row.Group == null || !row.Group.gameObject.activeInHierarchy) continue;
                 float at = start + index++ * rowGap;
+                sequence.InsertCallback(at, () => RequestSound(WorkSfxCue.ReportRow));
                 sequence.Insert(at, Fade(row.Group, row.Alpha, rowSeconds).SetEase(Ease.OutQuad));
                 sequence.Insert(at, DOTween.To(() => row.Transform.localScale,
                     value => row.Transform.localScale = value, row.Scale, rowSeconds).SetEase(rowEase));
             }
+        }
+
+        private void RequestSound(WorkSfxCue cue)
+        {
+            if (this != null && IsOpen && isActiveAndEnabled) SoundRequested?.Invoke(cue);
         }
 
         private static void RestoreRows(List<ReportRow> rows)

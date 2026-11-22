@@ -64,27 +64,36 @@ namespace WorkGame
                 int after = before + delta;
                 row.Prepare(before, after, delta, grades);
             }
-            view.Open(result.Month, line, lesson != null ? lesson.ResultImage : null, week != null ? week.Week : 0);
+            var resultImage = lesson != null ? lesson.ResultImage : null;
+            var icon = lesson != null ? lesson.Icon
+                : lessonId == CareSystem.HomeId ? config.HomeIcon : config.RestIcon;
+            view.Open(result.Month, line, resultImage != null ? resultImage : icon,
+                week != null ? week.Week : 0, resultImage == null && icon != null);
         }
         private void Confirm()
         {
-            if (shown == null || flow.IsPaused || flow.Phase != CareFlowPhase.Result) return;
+            if (shown == null || flow.IsPaused || flow.Phase != CareFlowPhase.Result || view.IsClosing) return;
             if (weekIndex + 1 < shown.Weeks.Count)
             {
                 weekIndex++;
                 ShowWeek();
                 return;
             }
-            shown = null;
-            view.Hide();
-            flow.ConfirmResult();
+            var result = shown;
+            view.CloseWithTransition(() =>
+            {
+                if (!connected || shown != result || flow.IsPaused || flow.Phase != CareFlowPhase.Result) return;
+                shown = null;
+                view.Hide();
+                flow.ConfirmResult();
+            });
         }
         public void Disconnect()
         {
             if (!connected) return;
             connected = false;
             care.MonthFinished -= Show; flow.Changed -= Refresh;
-            if (view != null) { view.Confirmed -= Confirm; view.Hide(); }
+            if (view != null) { view.Confirmed -= Confirm; view.CancelCloseTransition(); view.Hide(); }
             shown = null;
         }
         public void Dispose() => Disconnect();

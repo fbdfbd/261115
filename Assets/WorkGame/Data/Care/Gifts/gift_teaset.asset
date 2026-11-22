@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_teaset
   Name: "두 자리 도토리 찻상"
   Description: "친구를 초대할 자리가 생겼습니다. 찻잔은 둘인데 달이는 도토리 접시를 하나 더 놓고 싶어 합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 3eaf85a5e8784dd4a912010076277db1, type: 3}
+  RoomSprite: {fileID: 21300000, guid: cf4bcd9ab4e99c64b829cdee2ccf91ff, type: 3}
   Cost: 250
   Kind: 0
   Friendship: 5

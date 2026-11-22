@@ -31,13 +31,16 @@ namespace WorkGame
         {
             if (!nodes.TryGetValue(id ?? "", out var node)) return WorkUpgradeSwitch.None;
             if (node.Effects.Any(x => x.Kind == WorkUpgradeEffectKind.FaxUnlock)) return WorkUpgradeSwitch.Fax;
-            return node.Effects.Any(x => x.Kind == WorkUpgradeEffectKind.SortUnlock) ? WorkUpgradeSwitch.Sort : WorkUpgradeSwitch.None;
+            if (node.Effects.Any(x => x.Kind == WorkUpgradeEffectKind.SortUnlock)) return WorkUpgradeSwitch.Sort;
+            return node.Effects.Any(x => x.Kind == WorkUpgradeEffectKind.DoNotDisturbUnlock)
+                ? WorkUpgradeSwitch.DoNotDisturb : WorkUpgradeSwitch.None;
         }
 
         public bool Buy(string id)
         {
             if (!CanBuy(id) || !work.BuyUpgrade(id, nodes[id].Cost)) return false;
             RebuildStats();
+            if (GetSwitchKind(id) == WorkUpgradeSwitch.DoNotDisturb) work.SetDoNotDisturbEnabled(true);
             Changed?.Invoke();
             return true;
         }
@@ -68,6 +71,9 @@ namespace WorkGame
                         case WorkUpgradeEffectKind.ExtraSeconds: stats.ExtraSeconds += (int)value; break;
                         case WorkUpgradeEffectKind.NewbieProtection: stats.WrongPenaltyReduction += value / 100; break;
                         case WorkUpgradeEffectKind.EarlyLeaveBonusPercent: stats.EarlyLeaveBonus = Math.Max(stats.EarlyLeaveBonus, value / 100); break;
+                        case WorkUpgradeEffectKind.WorkloadPercent: stats.WorkloadBonus = Math.Max(stats.WorkloadBonus, value / 100); break;
+                        case WorkUpgradeEffectKind.CareGrowthPercent: stats.CareGrowthBonus = Math.Max(stats.CareGrowthBonus, value / 100); break;
+                        case WorkUpgradeEffectKind.DoNotDisturbUnlock: stats.DoNotDisturbUnlocked = true; break;
                     }
                 }
             }

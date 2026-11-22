@@ -12,7 +12,7 @@ namespace WorkGame.Editor
         [SerializeField] private Vector2 pageSize = new Vector2(1300, 800);
         [SerializeField, Range(0.3f, 0.6f)] private float imageRatio = 0.44f;
         [SerializeField] private int fontSize = 28;
-        [SerializeField] private float lineSeconds = 0.3f;
+        [SerializeField] private float characterSeconds = 0.035f;
         [SerializeField] private Color paperColor = new Color(0.98f, 0.97f, 0.94f);
         [SerializeField] private Color frameColor = new Color(0.85f, 0.88f, 0.84f);
         private static readonly Color Ink = new Color(0.17f, 0.21f, 0.19f);
@@ -31,10 +31,10 @@ namespace WorkGame.Editor
             pageSize = EditorGUILayout.Vector2Field("페이지 크기", pageSize);
             imageRatio = EditorGUILayout.Slider("좌측 이미지 비율", imageRatio, 0.3f, 0.6f);
             fontSize = EditorGUILayout.IntSlider("편지 글자 크기", fontSize, 24, 36);
-            lineSeconds = EditorGUILayout.Slider("한 줄 표시 간격", lineSeconds, 0.1f, 1);
+            characterSeconds = EditorGUILayout.Slider("한 글자 표시 간격", characterSeconds, 0.01f, 0.1f);
             paperColor = EditorGUILayout.ColorField("편지 배경", paperColor);
             frameColor = EditorGUILayout.ColorField("이미지 틀", frameColor);
-            EditorGUILayout.HelpBox("클릭하면 글 전체 표시 → 다음 페이지. 마지막 편지까지 읽으면 타이틀 버튼을 표시합니다. 엔딩별 이미지·편지는 CareEndingSO.Pages에서 설정합니다. LayoutGroup·LayoutElement 없이 앵커로 배치합니다.", MessageType.Info);
+            EditorGUILayout.HelpBox("한 글자씩 표시하고 줄 끝에서 멈춥니다. 출력 중 클릭하면 현재 줄을 완성하고, 다시 클릭하면 다음 줄을 시작합니다. 페이지 전체 출력 후 클릭하면 다음 페이지로 넘어갑니다. 마지막 편지까지 읽으면 타이틀 버튼을 표시합니다. 엔딩별 이미지·편지는 CareEndingSO.Pages에서 설정합니다. LayoutGroup·LayoutElement 없이 앵커로 배치합니다.", MessageType.Info);
             using (new EditorGUI.DisabledScope(EditorApplication.isPlaying || font == null || pageSize.x < 800 || pageSize.y < 500))
                 if (GUILayout.Button("엔딩 패널 프리팹 생성", GUILayout.Height(34))) Save();
             if (!string.IsNullOrEmpty(message)) EditorGUILayout.HelpBox(message, MessageType.Info);
@@ -53,7 +53,7 @@ namespace WorkGame.Editor
                 if (prefab == null) throw new InvalidOperationException("프리팹 저장에 실패했습니다.");
                 Selection.activeObject = prefab;
                 EditorGUIUtility.PingObject(prefab);
-                message = "생성 완료. 씬의 CareEndingView를 WorkRoot에 연결하고 On Title Requested에 타이틀 이동을 연결하세요.";
+                message = "생성 완료. 씬의 CareEndingView를 WorkRoot에 연결하면 마지막 버튼의 타이틀 이동도 자동 연결됩니다.";
             }
             catch (Exception e) { message = e.Message; Debug.LogException(e); }
             finally
@@ -107,11 +107,12 @@ namespace WorkGame.Editor
             Area(viewport, 0, 0, 1, 1, 24);
             Image(viewport, Color.clear, true);
             viewport.gameObject.AddComponent<RectMask2D>();
-            var text = Text("LetterText", viewport, "나르미에게.\n\n달이의 편지가 한 줄씩 나타납니다.", fontSize);
+            var text = Text("LetterText", viewport, "나르미에게.\n\n달이의 편지가 한 글자씩 나타납니다.", fontSize);
             Area(text.rectTransform, 0, 1, 1, 1);
             text.rectTransform.pivot = new Vector2(0.5f, 1);
             text.rectTransform.sizeDelta = new Vector2(0, 600);
             text.alignment = TextAlignmentOptions.TopLeft;
+            text.textWrappingMode = TextWrappingModes.Normal;
             text.lineSpacing = 12;
             text.overflowMode = TextOverflowModes.Overflow;
             scroll.viewport = viewport; scroll.content = text.rectTransform;
@@ -133,7 +134,7 @@ namespace WorkGame.Editor
             Set(fields, "picture", picture); Set(fields, "pictureGroup", pictureGroup);
             Set(fields, "titleText", title); Set(fields, "letterText", text); Set(fields, "pageText", pageNumber);
             Set(fields, "letterScroll", scroll); Set(fields, "hintText", hint); Set(fields, "titleButton", titleButton);
-            fields.FindProperty("lineSeconds").floatValue = lineSeconds;
+            fields.FindProperty("characterSeconds").floatValue = characterSeconds;
             fields.ApplyModifiedPropertiesWithoutUndo();
             return root;
         }

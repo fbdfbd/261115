@@ -14,12 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: early_leave
   Name: "\uCE7C\uD1F4\uC758 \uC694\uB839"
-  Description: "\uBAA8\uB4E0 \uC5C5\uBB34\uB97C \uB05D\uB0B4\uACE0 \uC870\uAE30\uD1F4\uADFC\uD558\uBA74
-    \uC774\uB2EC \uCD1D \uD68D\uB4DD \uC219\uB828\uC5D0 \uB0A8\uC740 \uC2DC\uAC04
-    \uBE44\uC728\uB9CC\uD07C \uBCF4\uB108\uC2A4\uB97C \uBC1B\uC2B5\uB2C8\uB2E4. \uCD5C\uB300
-    10%."
-  Icon: {fileID: 0}
-  Cost: 400
+  Description: "업무를 모두 끝내고 조기퇴근하면\n남은 시간에 따라 이달 숙련을 최대 10% 더 받습니다."
+  Icon: {fileID: 21300000, guid: 433ff9738d6ca5c48a9f9cbd40acbd10, type: 3}
+  Cost: 1500
   Required: []
   Effects:
   - Kind: 13

@@ -65,6 +65,7 @@ namespace WorkGame
             WorkUi.Show(listPage, true); WorkUi.Show(detailPage, false);
             if (backButton != null) WorkUi.Show(backButton.gameObject, false);
             if (countText != null) WorkUi.Show(countText.gameObject, true);
+            if (countText != null && countText.transform.parent != null) WorkUi.Show(countText.transform.parent.gameObject, true);
             if (titleText != null) titleText.text = "달이의 성장 기록";
         }
         public void ShowDetail(string name, Sprite image, string description, string mainConditions,
@@ -73,6 +74,7 @@ namespace WorkGame
             WorkUi.Show(listPage, false); WorkUi.Show(detailPage, true);
             if (backButton != null) WorkUi.Show(backButton.gameObject, true);
             if (countText != null) WorkUi.Show(countText.gameObject, false);
+            if (countText != null && countText.transform.parent != null) WorkUi.Show(countText.transform.parent.gameObject, false);
             if (titleText != null) titleText.text = unlocked ? name : "???";
             if (detailImage != null)
             {
@@ -82,6 +84,8 @@ namespace WorkGame
             WorkUi.Show(detailDim, !unlocked);
             if (descriptionText != null)
             {
+                descriptionText.textWrappingMode = TextWrappingModes.Normal;
+                descriptionText.overflowMode = TextOverflowModes.Overflow;
                 descriptionText.text = unlocked ? description : "";
                 WorkUi.Show(descriptionText.gameObject, unlocked && !string.IsNullOrWhiteSpace(description));
             }
@@ -92,12 +96,29 @@ namespace WorkGame
             {
                 WorkUi.Show(detailConditionsRow.gameObject, hasDetails);
             }
-            float columnHeight = 0;
+            int columnCount = 0;
             for (int i = 0; i < detailConditions.Length && i < columns.Length; i++)
+                if (detailConditions[i] != null && !string.IsNullOrWhiteSpace(columns[i])) columnCount++;
+            float columnWidth = 1f / Mathf.Max(1, detailConditions.Length);
+            float start = (1 - columnCount * columnWidth) * 0.5f;
+            int columnIndex = 0;
+            float columnHeight = 0;
+            for (int i = 0; i < detailConditions.Length; i++)
                 if (detailConditions[i] != null)
                 {
-                    detailConditions[i].text = columns[i];
-                    columnHeight = Mathf.Max(columnHeight, detailConditions[i].GetPreferredValues(columns[i]).y);
+                    var text = detailConditions[i];
+                    bool show = i < columns.Length && !string.IsNullOrWhiteSpace(columns[i]);
+                    WorkUi.Show(text.gameObject, show);
+                    if (!show) continue;
+                    var rect = text.rectTransform;
+                    float left = start + columnIndex++ * columnWidth;
+                    rect.anchorMin = new Vector2(left, 0);
+                    rect.anchorMax = new Vector2(left + columnWidth, 1);
+                    rect.offsetMin = new Vector2(12, 0);
+                    rect.offsetMax = new Vector2(-12, 0);
+                    text.alignment = TextAlignmentOptions.Top;
+                    text.text = columns[i];
+                    columnHeight = Mathf.Max(columnHeight, text.GetPreferredValues(columns[i]).y);
                 }
             if (detailConditionsRow != null && hasDetails)
                 detailConditionsRow.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Max(60, columnHeight + 16));

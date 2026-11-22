@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_rest_chair
   Name: "푹신한 도토리 안락의자"
   Description: "수업 뒤 편히 앉아 오늘 배운 것을 정리합니다. 달이가 잠깐 눈을 감으면 나르미도 계획표를 조용히 접어 둡니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b68d81940237bbb4697df602a3296dce, type: 3}
+  RoomSprite: {fileID: 21300000, guid: 892588eab88ba8343b3eb5827679c6a8, type: 3}
   Cost: 1400
   Kind: 2
   Friendship: 8

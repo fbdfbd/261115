@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace WorkGame
@@ -56,6 +57,7 @@ namespace WorkGame
         private readonly HashSet<string> readEndings = new HashSet<string>();
         private WorkSaveSystem saves;
         private WorkSaveSession saveSession;
+        private bool returningToTitle;
         public WorkSaveSystem Saves => saves ?? (saves = new WorkSaveSystem(new PlayerPrefsSaveStore()));
         public SavePoint? LoadedPoint { get; private set; }
         public int LoadedMonth { get; private set; }
@@ -90,6 +92,7 @@ namespace WorkGame
         }
         private void OnEnable()
         {
+            if (careEndingView != null) careEndingView.TitleRequested += ReturnToTitle;
             Presenter?.Connect(); upgradePresenter?.Connect();
             careStatusPresenter?.Connect();
             careFurniturePresenter?.Connect();
@@ -103,6 +106,7 @@ namespace WorkGame
         private void Update() => System?.AddTime(Time.unscaledDeltaTime);
         private void OnDisable()
         {
+            if (careEndingView != null) careEndingView.TitleRequested -= ReturnToTitle;
             if (upgradeView != null) upgradeView.Closed -= OnUpgradeClosed;
             careStatusPresenter?.Disconnect();
             careFurniturePresenter?.Disconnect();
@@ -175,6 +179,7 @@ namespace WorkGame
             Care = nextCare;
             CareFlow = nextCareFlow;
             Upgrades = nextUpgrades;
+            if (Upgrades != null) Upgrades.Changed += SaveUpgrades;
             LoadedPoint = saved?.Point;
             LoadedMonth = saved?.Work.Month ?? 0;
             SaveError = null;
@@ -201,7 +206,7 @@ namespace WorkGame
                 careSchedulePresenter = new CareSchedulePresenter(System, CarePresenter, CareFlow,
                     careScheduleView, scheduleButton, careConfig);
                 careSchedulePresenter.Connect();
-                careEndingPresenter = new CareEndingPresenter(Care, System, careEndingView, careConfig);
+                careEndingPresenter = new CareEndingPresenter(Care, System, careEndingView, careConfig, CareFlow);
                 careEndingPresenter.ReadCompleted += OnEndingRead;
                 careEndingPresenter.Connect();
                 careEndingChoicePresenter = new CareEndingChoicePresenter(Care, CareFlow, careEndingChoiceView, careConfig, WasEndingRead);
@@ -234,6 +239,26 @@ namespace WorkGame
         }
 
         public bool LoadAuto() => LoadSave(SaveSlot.Auto);
+        public void ReturnToTitle()
+        {
+            if (returningToTitle) return;
+            try
+            {
+                if (!Application.CanStreamedLevelBeLoaded("01_Title"))
+                    throw new InvalidOperationException("타이틀 씬을 빌드 목록에 추가해 주세요.");
+                // 엔딩 선택 전 체크포인트를 유지해 이어하기에서 다시 선택할 수 있습니다.
+                if (!Saves.SaveAuto())
+                    throw new InvalidOperationException("자동 저장할 시작 상태가 없습니다.");
+                returningToTitle = true;
+                WorkStartRequest.NewRun();
+                SceneManager.LoadScene("01_Title");
+            }
+            catch (Exception error)
+            {
+                returningToTitle = false;
+                ReportSaveError(error);
+            }
+        }
         public bool LoadManual(int slot) => slot >= 1 && slot <= 4 && LoadSave((SaveSlot)slot);
         private bool LoadSave(SaveSlot slot)
         {
@@ -241,6 +266,11 @@ namespace WorkGame
             return BuildRun(data);
         }
         private void ReportSaveError(Exception error) { SaveError = error.Message; Debug.LogError("저장/시작: " + SaveError, this); }
+        private void SaveUpgrades()
+        {
+            try { Saves.SaveUpgrades(System.Run.BoughtUpgrades); }
+            catch (Exception error) { ReportSaveError(error); }
+        }
 
         private WorkFeedback CreateFeedback(int runSeed)
         {
@@ -382,6 +412,7 @@ namespace WorkGame
             Care = null;
             upgradePresenter?.Dispose();
             upgradePresenter = null;
+            if (Upgrades != null) Upgrades.Changed -= SaveUpgrades;
             Upgrades = null;
             Presenter?.Dispose();
             System?.Dispose();

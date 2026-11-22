@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "수리논술 오답 특강"
   ShortName: "수리논술"
   Description: "낯선 문제의 풀이 과정을 끝까지 설명합니다. 유명 강사보다 달이의 볼주머니가 작지만 오답노트 두께는 만만하지 않습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 25a9c1baec3bb864dbba3e4aa7e319ed, type: 3}
   UnlockMonth: 9
   Cost: 340
   Gains:

@@ -1252,6 +1252,7 @@ MonoBehaviour:
   onReady:
     m_PersistentCalls:
       m_Calls: []
+  closeTransition: {fileID: 0}
 --- !u!114 &9700000001
 MonoBehaviour:
   m_ObjectHideFlags: 0

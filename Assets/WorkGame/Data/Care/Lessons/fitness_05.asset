@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "왕복 달리기 실전반"
   ShortName: "왕복 달리기"
   Description: "신호음에 맞춰 정해진 거리를 왕복합니다. 나르미가 싸 준 도토리는 훈련 종료 후 지급이라 달이의 목표가 명확합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: d66808330b553d744b6edce7b39bb7b4, type: 3}
   UnlockMonth: 6
   Cost: 260
   Gains:

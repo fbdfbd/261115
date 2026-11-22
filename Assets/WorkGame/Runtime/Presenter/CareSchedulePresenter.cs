@@ -15,6 +15,7 @@ namespace WorkGame
         private readonly Button openButton;
         private readonly Dictionary<string, CareLesson> lessons;
         private readonly Dictionary<string, CareLessonSO> art;
+        private readonly CareConfigSO config;
         private readonly CareSynergy[] synergies;
         private readonly CareGradeSettings grades;
         private readonly HashSet<string> shownUnlocks;
@@ -24,6 +25,7 @@ namespace WorkGame
         private int shownMonth = -1;
         private long shownMoney;
         private double shownDiscount;
+        private double shownGrowth;
         private bool Visible => flow.Phase == CareFlowPhase.Panel && flow.Panel == CarePanel.Schedule;
 
         public CareSchedulePresenter(WorkSystem work, CarePresenter actions, CareFlowSystem flow,
@@ -33,6 +35,7 @@ namespace WorkGame
             this.flow = flow; this.view = view; this.openButton = openButton;
             lessons = care.Lessons.ToDictionary(x => x.Id);
             art = config.Lessons.Where(x => x != null).ToDictionary(x => x.Id);
+            this.config = config;
             synergies = care.Synergies.ToArray();
             grades = care.CopyGrades();
             shownUnlocks = new HashSet<string>(care.Lessons.Where(x => x.UnlockMonth <= 1).Select(x => x.Id));
@@ -87,13 +90,15 @@ namespace WorkGame
         }
         private void RefreshMoney()
         {
-            if (Visible && (shownMoney != care.Money || shownDiscount != work.Upgrades.TuitionDiscount)) RefreshData();
+            if (Visible && (shownMoney != care.Money || shownDiscount != work.Upgrades.TuitionDiscount
+                || shownGrowth != work.Upgrades.CareGrowthBonus)) RefreshData();
         }
         private void RefreshData()
         {
             if (!Visible || view == null) return;
             if (shownMonth != care.Month) { shownMonth = care.Month; selected = null; focusedSynergy = null; }
             shownMoney = care.Money; shownDiscount = work.Upgrades.TuitionDiscount;
+            shownGrowth = work.Upgrades.CareGrowthBonus;
             preview = care.Preview();
             if (focusedSynergy != null && !preview.Synergies.Contains(focusedSynergy)) focusedSynergy = null;
             view.ShowTotals(shownMoney, care.Plan.Count(id => !string.IsNullOrEmpty(id)), preview.Cost,
@@ -123,7 +128,7 @@ namespace WorkGame
                 ? "집에서 조금씩 복습해요. 집중력·지구력·공감력·협동심이 조금 오릅니다." : "이번 주는 쉬어 가요. 수업료는 들지 않습니다.";
             string cost = lesson.UnlockMonth > care.Month ? "아직 잠긴 수업"
                 : lesson.Cost == 0 ? "무료" : "수업료  " + care.GetLessonCost(selected).ToString("N0");
-            view.ShowSelection(lesson.Name, description, asset != null ? asset.Icon : null, FormatGains(lesson.Gains), cost);
+            view.ShowSelection(lesson.Name, description, GetIcon(selected), FormatGains(lesson.Gains), cost);
         }
         private void ShowCatalog()
         {
@@ -186,7 +191,7 @@ namespace WorkGame
                 CareLesson lesson = id != null && lessons.TryGetValue(id, out var found) ? found : null;
                 CareLessonSO asset = id != null && art.TryGetValue(id, out var foundArt) ? foundArt : null;
                 week.Show(lesson != null ? asset != null ? asset.DisplayName : lesson.Name : null,
-                    asset != null ? asset.Icon : null, care.GetLessonCost(id), marks[week.Week], focused.Contains(week.Week), weekColors[week.Week]);
+                    GetIcon(id), care.GetLessonCost(id), marks[week.Week], focused.Contains(week.Week), weekColors[week.Week]);
             }
         }
         private void ShowSynergies()
@@ -227,5 +232,11 @@ namespace WorkGame
             wasVisible = false;
         }
         public void Dispose() => Disconnect();
+        private UnityEngine.Sprite GetIcon(string id)
+        {
+            if (id == CareSystem.HomeId) return config.HomeIcon;
+            if (id == CareSystem.RestId) return config.RestIcon;
+            return id != null && art.TryGetValue(id, out var asset) ? asset.Icon : null;
+        }
     }
 }

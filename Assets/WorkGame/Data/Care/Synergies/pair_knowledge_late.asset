@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: pair_knowledge_late
   m_EditorClassIdentifier: WorkGame::WorkGame.CareSynergySO
   Id: pair_knowledge_late
-  Name: "논술도 발표도 근거부터"
+  Name: "근거 확보"
   Description: "풀이와 탐구 결과를 끝까지 확인합니다. 나르미가 중간에 칭찬해도 설명은 마지막 문장까지 이어집니다."
   Lessons:
   - {fileID: 11400000, guid: a69be7a40fcc5a86b0f8083e525eb311, type: 2}

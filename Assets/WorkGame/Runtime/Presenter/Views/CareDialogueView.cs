@@ -12,6 +12,7 @@ namespace WorkGame
         [SerializeField] private CanvasGroup panelGroup;
         [SerializeField] private CareDialogueClickArea clickArea;
         [SerializeField] private TMP_Text speakerText;
+        [SerializeField] private GameObject namePlate;
         [SerializeField] private TMP_Text bodyText;
         [SerializeField] private GameObject continueHint;
         [SerializeField] private Button logButton;
@@ -30,6 +31,13 @@ namespace WorkGame
         [SerializeField] private List<RectTransform> ignoredClickAreas = new List<RectTransform>();
         [Header("대사 이미지 변경 — 빈 ImageKey는 유지")]
         [SerializeField] private UnityEvent<string> imageKeyChanged = new UnityEvent<string>();
+        [Header("스토리 이미지·연출 — 미연결이어도 대화 진행 가능")]
+        [SerializeField] private CareDialoguePresentationView presentation;
+        [Header("Care 캐릭터 — 씬에 배치한 Character의 컴포넌트")]
+        [SerializeField] private CharacterExpressionAnimator character;
+        [SerializeField] private TMP_Text storyRewardText;
+        public CareDialoguePresentationView Presentation => presentation != null ? presentation : GetComponent<CareDialoguePresentationView>();
+        private bool presentationPlaying, paused;
         private readonly List<UnityAction> choiceActions = new List<UnityAction>();
         private bool visible, hasChoices, canSkip;
         private string lastImageKey;
@@ -70,14 +78,26 @@ namespace WorkGame
             Hide();
         }
 
-        public void Show(CareDialogueData dialogue, int lineIndex, bool allowSkip)
+        public void Show(CareDialogueData dialogue, int lineIndex, bool allowSkip, string rewardText = "")
         {
             if (dialogue == null) { Hide(); return; }
             visible = true; canSkip = allowSkip;
             WorkUi.Show(panelGroup, true);
             var line = dialogue.Lines[lineIndex];
-            if (speakerText != null) speakerText.text = string.IsNullOrEmpty(line.Speaker) ? "달이" : line.Speaker;
+            if (character != null) character.SetExpression((int)line.Emotion);
+            bool narration = string.Equals(line.Speaker?.Trim(), "나레이션", StringComparison.Ordinal);
+            if (namePlate != null) namePlate.SetActive(!narration);
+            if (speakerText != null)
+            {
+                speakerText.gameObject.SetActive(!narration);
+                speakerText.text = narration ? "" : string.IsNullOrEmpty(line.Speaker) ? "달이" : line.Speaker;
+            }
             if (bodyText != null && bodyText.text != line.Text) bodyText.text = line.Text;
+            if (storyRewardText != null)
+            {
+                storyRewardText.text = rewardText;
+                WorkUi.Show(storyRewardText.gameObject, !string.IsNullOrEmpty(rewardText));
+            }
             hasChoices = lineIndex == dialogue.Lines.Length - 1 && dialogue.Choices.Length > 0;
             ArrangeChoices(hasChoices ? Math.Min(dialogue.Choices.Length, choiceButtons.Count) : 0);
             for (int i = 0; i < choiceButtons.Count; i++)
@@ -97,6 +117,7 @@ namespace WorkGame
 
         public void Hide()
         {
+            if (visible && character != null) character.Normal();
             visible = false; LogOpen = false; lastImageKey = null;
             WorkUi.Show(logGroup, false); WorkUi.Show(panelGroup, false);
         }
@@ -118,11 +139,13 @@ namespace WorkGame
             choiceCount = count;
         }
         public void SetInputBlocked(bool blocked) { InputBlocked = blocked; UpdateInput(); }
+        public void SetPresentationPlaying(bool value) { presentationPlaying = value; UpdateInput(); }
+        public void SetPaused(bool value) { paused = value; UpdateInput(); }
         private void UpdateInput()
         {
-            bool allowed = visible && !InputBlocked && !LogOpen;
+            bool allowed = visible && !InputBlocked && !LogOpen && !presentationPlaying && !paused;
             if (skipButton != null) skipButton.interactable = allowed && canSkip;
-            if (logButton != null) logButton.interactable = visible && !InputBlocked && !LogOpen;
+            if (logButton != null) logButton.interactable = allowed;
             foreach (var button in choiceButtons) if (button != null) button.interactable = allowed;
         }
         private void Next() { if (visible && !InputBlocked && !LogOpen && !hasChoices) NextRequested?.Invoke(); }

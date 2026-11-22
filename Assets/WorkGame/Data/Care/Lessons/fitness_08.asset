@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "셔틀런 기록 단축 특강"
   ShortName: "셔틀런"
   Description: "왕복 달리기의 호흡과 속도를 세밀하게 조절합니다. 나르미는 기록표를 모으고 달이는 완주 도장을 모읍니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 471b4404f3b7c404aa00792b2c6165c6, type: 3}
   UnlockMonth: 9
   Cost: 340
   Gains:

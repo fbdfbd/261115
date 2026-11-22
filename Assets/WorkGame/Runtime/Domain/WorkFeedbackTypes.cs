@@ -14,9 +14,10 @@ namespace WorkGame
         public int SkillPointsGained { get; }
         public bool IsProtected { get; }
         public bool IsPointBoosted { get; }
+        public bool IsInstant { get; }
 
         public WorkSubmitResult(int paperId, bool isRight, int rightCount, int wrongCount, int skillPointsGained = 0,
-            bool isProtected = false, bool isPointBoosted = false)
+            bool isProtected = false, bool isPointBoosted = false, bool isInstant = false)
         {
             PaperId = paperId;
             IsRight = isRight;
@@ -25,6 +26,7 @@ namespace WorkGame
             SkillPointsGained = skillPointsGained;
             IsProtected = isProtected;
             IsPointBoosted = isPointBoosted;
+            IsInstant = isInstant;
         }
     }
 

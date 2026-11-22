@@ -40,6 +40,7 @@ namespace WorkGame
         public event Action CloseClicked;
         public event Action<int> ChoiceStarted;
         public event Action ChoiceStopped;
+        public event Action<WorkSfxCue> SoundRequested;
 
         private void Awake() => Hide();
         private void OnEnable()
@@ -81,6 +82,7 @@ namespace WorkGame
             if (activePanel != null) activePanel.Show(paper, highlightLevel, workSeconds);
             WorkUi.Show(paperGroup, panel != null);
             if (panel == null) return;
+            SoundRequested?.Invoke(WorkSfxCue.PaperPick);
 
             animatedPaper = panel.transform as RectTransform;
             if (animatedPaper == null) return;
@@ -166,11 +168,12 @@ namespace WorkGame
             transition.Join(animatedPaper.DOLocalRotateQuaternion(rotation, closeSeconds));
             transition.Join(FadePanel(0, closeSeconds));
             if (dim != null) transition.Join(FadeDim(0, closeSeconds));
-            transition.OnComplete(Hide);
+            transition.OnComplete(() => { SoundRequested?.Invoke(WorkSfxCue.PaperDrop); Hide(); });
         }
 
         public void PlayComplete()
         {
+            SoundRequested?.Invoke(WorkSfxCue.HoldComplete);
             if (animatedPaper == null) { Hide(); return; }
             transition?.Kill();
             transition = null;
@@ -188,6 +191,7 @@ namespace WorkGame
                 restPosition.y + animatedPaper.rect.height * 0.12f, restPosition.z);
             transition = NewSequence();
             transition.AppendInterval(completePause);
+            transition.AppendCallback(() => SoundRequested?.Invoke(WorkSfxCue.PaperFly));
             transition.Append(animatedPaper.DOLocalMove(destination, flySeconds).SetEase(Ease.InCubic));
             transition.Join(animatedPaper.DOLocalRotateQuaternion(restRotation * Quaternion.Euler(0, 0, -14),
                 flySeconds).SetEase(Ease.InQuad));

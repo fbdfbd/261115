@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "그림책 읽기 입문반"
   ShortName: "그림책"
   Description: "작은 앞발로 책장을 넘기며 끝까지 읽습니다. 다섯 권을 읽으면 독서 도장을 받는데, 달이는 도장부터 확인합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: fc8b1eae81c651b438f4802c78dd476a, type: 3}
   UnlockMonth: 1
   Cost: 100
   Gains:

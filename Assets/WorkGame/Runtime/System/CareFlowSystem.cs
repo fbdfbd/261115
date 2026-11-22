@@ -9,6 +9,7 @@ namespace WorkGame
         private readonly WorkSystem work;
         private readonly CareSystem care;
         private readonly CareLeaveSettings leave;
+        private readonly CareDialogueFile dialogueData;
         private readonly Dictionary<int, string> monthTalks;
         private int shownMonth = -1;
         private WorkPhase shownPhase;
@@ -20,7 +21,8 @@ namespace WorkGame
         public CarePanel Panel { get; private set; }
         public CareLeaveKind LeaveKind { get; private set; }
         public bool IsPaused => work.IsPaused;
-        public bool CanGoNext => !disposed && Phase == CareFlowPhase.Free && care.CanPlan && care.IsPlanFull;
+        public bool CanGoNext => !disposed && !IsPaused && Phase == CareFlowPhase.Free
+            && care.CanPlan && care.IsPlanFull;
         public bool CanTalk => !disposed && !IsPaused && Phase == CareFlowPhase.Free && monthTalks.ContainsKey(care.Month)
             && !Dialogue.WasCompleted("talk/" + care.Month);
         public bool CanEditSchedule => Phase == CareFlowPhase.Panel && Panel == CarePanel.Schedule;
@@ -35,10 +37,11 @@ namespace WorkGame
         public CareFlowSystem(WorkSystem work, CareSystem care, CareDialogueFile data)
         {
             CareDialogueCheck.Check(data);
-            this.work = work; this.care = care; leave = data.Leave;
+            this.work = work; this.care = care; leave = data.Leave; dialogueData = data;
             monthTalks = data.MonthTalks.ToDictionary(x => x.Month, x => x.Dialogue);
             Dialogue = new CareDialogueSystem(data.Dialogues.ToDictionary(x => x.Id), care.AddFriendship);
             Promises = new CarePromiseSystem(data.Promises);
+            InitializeStories(data);
             Dialogue.Changed += Refresh;
             Dialogue.Finished += FinishDialogue;
             care.Changed += Refresh;
@@ -54,7 +57,7 @@ namespace WorkGame
             LeaveKind = leave.GetKind(result.LeaveDifference);
             var promise = Promises.Resolve(result.Month, LeaveKind);
             // 약속 결과가 있으면 일반 반응을 대체해 친밀도 효과를 중복 적용하지 않습니다.
-            string id = promise != null ? promise.ResultDialogue : leave.GetDialogue(LeaveKind);
+            string id = promise != null ? promise.ResultDialogue : leave.GetDialogue(LeaveKind, result.Month);
             if (!Play(id, "entry/" + result.Month)) SetPhase(CareFlowPhase.Free);
         }
 
@@ -94,14 +97,7 @@ namespace WorkGame
         public void ConfirmResult()
         {
             if (disposed || IsPaused || Phase != CareFlowPhase.Result || !care.HasResult) return;
-            var promise = Promises.Offer(care.Month);
-            if (promise != null)
-            {
-                offeredPromise = promise.Promise.Id;
-                if (Play(promise.Promise.OfferDialogue, "offer/" + care.Month)) return;
-                offeredPromise = null;
-            }
-            AdvanceMonth();
+            ContinueMonthEnd();
         }
 
         public bool ChooseEnding(string id)
@@ -110,6 +106,42 @@ namespace WorkGame
             SetPhase(CareFlowPhase.Ended);
             Finished?.Invoke();
             return true;
+        }
+
+        // 저장된 선택·약속 기록으로 재구성하므로 엔딩 선택 체크포인트에서도 같은 회고를 보여 줍니다.
+        public string[] BuildEndingMemories()
+        {
+            var memories = new List<KeyValuePair<int, string>>();
+            var definitions = dialogueData.Dialogues.ToDictionary(x => x.Id);
+            var recalled = new HashSet<string>();
+            foreach (var log in Dialogue.History)
+            {
+                if (!definitions.TryGetValue(log.DialogueId, out var definition)) continue;
+                string text = log.IsChoice
+                    ? definition.Choices.FirstOrDefault(x => x.Text == log.Text)?.EndingText
+                    : definition.EndingText;
+                string key = log.DialogueId + (log.IsChoice ? "/choice" : "/dialogue");
+                if (!string.IsNullOrWhiteSpace(text) && recalled.Add(key))
+                    memories.Add(new KeyValuePair<int, string>(log.Month, text));
+            }
+            foreach (var record in Promises.Records)
+            {
+                var promise = record.Promise;
+                string text = record.State == CarePromiseState.Succeeded
+                    ? !string.IsNullOrEmpty(promise.EarlySuccessDialogue)
+                        && record.ResultDialogue == promise.EarlySuccessDialogue
+                        && !string.IsNullOrWhiteSpace(promise.EarlySuccessEndingText)
+                        ? promise.EarlySuccessEndingText : promise.SuccessEndingText
+                    : record.State == CarePromiseState.Failed ? promise.FailureEndingText
+                    : record.State == CarePromiseState.Declined ? promise.DeclinedEndingText : null;
+                if (!string.IsNullOrWhiteSpace(text))
+                    memories.Add(new KeyValuePair<int, string>(promise.TargetMonth, text));
+            }
+            var pages = memories.OrderBy(x => x.Key).GroupBy(x => x.Key)
+                .Select(month => string.Join("\n\n", month.Select(x => x.Value))).ToList();
+            if (pages.Count > 0 && !string.IsNullOrWhiteSpace(dialogueData.EndingIntroText))
+                pages.Insert(0, dialogueData.EndingIntroText);
+            return pages.ToArray();
         }
 
         private bool Play(string id, string key)
@@ -121,7 +153,8 @@ namespace WorkGame
 
         private void FinishDialogue(CareDialogueResult result)
         {
-            if (offeredPromise != null)
+            if (activeStory != null) CompleteStory();
+            else if (offeredPromise != null)
             {
                 Promises.Reply(offeredPromise, result.ChoiceKey == "accept");
                 offeredPromise = null;
@@ -163,6 +196,7 @@ namespace WorkGame
             care.Changed -= Refresh;
             Dialogue.Changed -= Refresh;
             Dialogue.Finished -= FinishDialogue;
+            Dialogue.ChoiceSelected -= SelectStoryChoice;
             Dialogue.Clear();
             Changed = null; Finished = null; Blocked = null;
             CareStarting = null; EndingStarting = null;

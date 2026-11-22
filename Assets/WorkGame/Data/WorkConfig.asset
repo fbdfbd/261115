@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WorkConfig
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkConfigSO
   Settings:
-    MonthSeconds: 90
+    MonthSeconds: 60
     HoldSeconds: 0.5
     StartAttendance: 100
     WrongPenalty: 1

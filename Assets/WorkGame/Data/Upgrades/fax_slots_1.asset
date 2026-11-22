@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WorkGame::WorkGame.WorkUpgradeSO
   Id: fax_slots_1
   Name: "\uD329\uC2A4 \uC778\uC6D0 I"
-  Description: "\uB3D9\uC2DC\uC5D0 \uB9E1\uAE38 \uC218 \uC788\uB294 \uC11C\uB958
-    +1"
-  Icon: {fileID: 0}
-  Cost: 600
+  Description: "팩스에 최대 2장을 맡깁니다.\n맡긴 순서대로 처리합니다."
+  Icon: {fileID: 21300000, guid: c98ad374361808f43a22068757220448, type: 3}
+  Cost: 2000
   Required:
   - {fileID: 11400000, guid: 0ebd2073aca56a648b03515d0ee401cc, type: 2}
   Effects:

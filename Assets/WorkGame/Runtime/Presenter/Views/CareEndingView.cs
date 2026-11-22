@@ -16,20 +16,25 @@ namespace WorkGame
         [SerializeField] private TMP_Text titleText, letterText, pageText, hintText;
         [SerializeField] private ScrollRect letterScroll;
         [SerializeField] private Button titleButton;
-        [Header("줄 표시·이미지 연출")]
-        [SerializeField, Min(0.01f)] private float lineSeconds = 0.3f;
+        [Header("글자 표시·이미지 연출")]
+        [SerializeField, Min(0.001f)] private float characterSeconds = 0.035f;
         [SerializeField, Min(0)] private float imageSeconds = 0.3f;
         [Header("마지막 페이지 완료 / 타이틀 버튼")]
         [SerializeField] private UnityEvent onCompleted = new UnityEvent();
         [SerializeField] private UnityEvent onTitleRequested = new UnityEvent();
-        private Sequence writing;
+        private Tween writing;
         private Tween imageTween;
-        private int lineCount;
+        private int lineCount, characterCount, visibleCharacters, nextLine;
+        private int scrollLine = -1;
+        private int[] lineEnds = Array.Empty<int>();
+        private float[] lineHeights = Array.Empty<float>();
         private bool paused, visible, complete;
         public bool InputBlocked { get; private set; }
         public bool IsWriting => writing != null;
+        public bool HasNextLine => nextLine < lineCount;
         public event Action NextRequested;
         public event Action Completed;
+        public event Action TitleRequested;
 
         private void Awake() => Hide();
         private void OnEnable()
@@ -44,7 +49,12 @@ namespace WorkGame
             Hide();
         }
         private void Next() { if (visible && !paused && !InputBlocked && !complete) NextRequested?.Invoke(); }
-        private void GoToTitle() { if (visible && complete && !paused && !InputBlocked) onTitleRequested.Invoke(); }
+        private void GoToTitle()
+        {
+            if (!visible || !complete || paused || InputBlocked) return;
+            TitleRequested?.Invoke();
+            onTitleRequested.Invoke();
+        }
         public void Open(string title)
         {
             visible = true; complete = false;
@@ -59,45 +69,82 @@ namespace WorkGame
             if (pageText != null) pageText.text = number + " / " + count;
             ShowImage(sprite);
             if (letterText == null) return;
+            letterText.textWrappingMode = TextWrappingModes.Normal;
+            letterText.overflowMode = TextOverflowModes.Overflow;
             letterText.text = text ?? "";
             letterText.maxVisibleLines = int.MaxValue;
+            letterText.maxVisibleCharacters = int.MaxValue;
             Canvas.ForceUpdateCanvases();
             letterText.ForceMeshUpdate();
             letterText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, letterText.preferredHeight);
             letterText.ForceMeshUpdate();
             lineCount = string.IsNullOrEmpty(text) ? 0 : letterText.textInfo.lineCount;
-            letterText.maxVisibleLines = 0;
-            if (letterScroll != null) letterScroll.verticalNormalizedPosition = 1;
-            if (lineCount == 0) { UpdateHint(false); return; }
-            UpdateHint(true);
-            writing = DOTween.Sequence().SetUpdate(true);
-            for (int i = 1; i <= lineCount; i++)
+            characterCount = letterText.textInfo.characterCount;
+            if (lineEnds.Length < lineCount)
             {
-                int line = i;
-                writing.AppendInterval(lineSeconds).AppendCallback(() => RevealLine(line));
+                Array.Resize(ref lineEnds, lineCount); Array.Resize(ref lineHeights, lineCount);
             }
-            writing.OnComplete(() => { writing = null; UpdateHint(false); });
+            for (int i = 0; i < lineCount; i++)
+            {
+                var line = letterText.textInfo.lineInfo[i];
+                lineEnds[i] = line.lastCharacterIndex + 1;
+                lineHeights[i] = line.visibleCharacterCount > 0
+                    ? letterText.textInfo.lineInfo[0].ascender - line.descender : i > 0 ? lineHeights[i - 1] : 0;
+            }
+            visibleCharacters = 0; nextLine = 0; scrollLine = -1;
+            letterText.maxVisibleCharacters = 0;
+            if (letterScroll != null) letterScroll.verticalNormalizedPosition = 1;
+            if (characterCount == 0) { UpdateHint(false); return; }
+            ShowNextLine();
+        }
+        public void ShowNextLine()
+        {
+            if (writing != null || !HasNextLine || letterText == null) return;
+            int end = Mathf.Min(characterCount, lineEnds[nextLine++]);
+            float duration = (end - visibleCharacters) * characterSeconds;
+            UpdateHint(true);
+            writing = DOTween.To(() => visibleCharacters, ShowCharacters, end, duration)
+                .SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
+                writing = null; UpdateHint(false);
+            });
             if (paused) writing.Pause();
         }
-        private void RevealLine(int count)
+        private void ShowCharacters(int count)
         {
-            letterText.maxVisibleLines = count;
-            if (letterScroll == null || letterScroll.viewport == null || count == 0) return;
+            if (visibleCharacters == count || letterText == null) return;
+            visibleCharacters = count; letterText.maxVisibleCharacters = count;
+            int line = Mathf.Max(0, scrollLine);
+            while (line + 1 < lineCount && count > lineEnds[line]) line++;
+            if (line == scrollLine) return;
+            scrollLine = line; ScrollToLine(line);
+        }
+        private void ScrollToLine(int line)
+        {
+            if (letterScroll == null || letterScroll.viewport == null || lineCount == 0) return;
             float total = letterText.rectTransform.rect.height - letterScroll.viewport.rect.height;
             if (total <= 0) return;
-            var lines = letterText.textInfo.lineInfo;
-            float shownHeight = lines[0].ascender - lines[count - 1].descender;
-            letterScroll.verticalNormalizedPosition = 1 - Mathf.Clamp01((shownHeight - letterScroll.viewport.rect.height + 12) / total);
+            letterScroll.verticalNormalizedPosition = 1 - Mathf.Clamp01((lineHeights[line] - letterScroll.viewport.rect.height + 12) / total);
+        }
+        public void FinishLine()
+        {
+            writing?.Complete();
         }
         public void FinishWriting()
         {
             StopWriting();
-            if (letterText != null) RevealLine(lineCount);
+            nextLine = lineCount;
+            if (letterText != null)
+            {
+                ShowCharacters(characterCount);
+                letterText.maxVisibleCharacters = int.MaxValue;
+                letterText.maxVisibleLines = int.MaxValue;
+            }
             UpdateHint(false);
         }
         private void UpdateHint(bool writingNow)
         {
-            if (hintText != null) hintText.text = writingNow ? "화면을 누르면 편지를 모두 표시합니다" : "화면을 눌러 계속";
+            if (hintText != null) hintText.text = writingNow ? "화면을 누르면 현재 줄을 모두 표시합니다" : "화면을 눌러 계속";
         }
         private void ShowImage(Sprite sprite)
         {

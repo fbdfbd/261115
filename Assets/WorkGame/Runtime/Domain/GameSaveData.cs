@@ -33,6 +33,9 @@ namespace WorkGame
         public string[] Upgrades;
         public bool SortEnabled;
         public bool FaxVisible;
+        public bool DoNotDisturbEnabled;
+        public string ReservePlanKey;
+        public int[] MonthlyExtraCounts;
         public int RandomSeed;
         public int RandomCalls;
         public double WorkSpeed;
@@ -81,6 +84,8 @@ namespace WorkGame
     [Serializable]
     public sealed class CareFlowSaveData
     {
+        public int HistoryVersion;
+        public string[] StoryUnlocks = Array.Empty<string>();
         public string[] Completed;
         public SavedDialogueLog[] History;
         public SavedPromise[] Promises;
@@ -89,6 +94,7 @@ namespace WorkGame
     [Serializable]
     public sealed class SavedDialogueLog
     {
+        public bool Legacy;
         public int Month;
         public string Dialogue;
         public int Index;
@@ -110,5 +116,6 @@ namespace WorkGame
         public string[] Endings = Array.Empty<string>();
         public string[] Dialogues = Array.Empty<string>();
         public string[] Upgrades = Array.Empty<string>();
+        public bool SharedUpgradesReady;
     }
 }

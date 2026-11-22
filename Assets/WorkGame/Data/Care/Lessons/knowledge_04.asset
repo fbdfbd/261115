@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "숲속 관찰일지 심화반"
   ShortName: "관찰일지"
   Description: "잎과 씨앗을 관찰하고 차이를 기록합니다. 나르미는 산책 가방을 챙겼는데 달이는 보고서용 돋보기를 넣었습니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 89ef15baff91e78498779a8fbb2511c9, type: 3}
   UnlockMonth: 3
   Cost: 180
   Gains:

@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: "도토리 수 세기 입문반"
   ShortName: "도토리 셈"
   Description: "도토리 열 알로 수 개념을 배웁니다. 달이가 셈하기 전에 먹지 않도록 교구와 간식은 따로 지급합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 349bab51761481544a46ec606dd866d4, type: 3}
   UnlockMonth: 1
   Cost: 100
   Gains:

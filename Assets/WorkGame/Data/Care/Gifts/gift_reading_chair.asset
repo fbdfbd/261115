@@ -15,7 +15,8 @@ MonoBehaviour:
   Id: gift_reading_chair
   Name: "꼬리 홈 독서 의자"
   Description: "꼬리를 구기지 않고 책을 읽는 의자입니다. 달이는 자리가 편해지자 책 한 권만 더 읽고 쉬겠다고 합니다."
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 990ed8d9fdf596c4496d46a33353b4f9, type: 3}
+  RoomSprite: {fileID: 21300000, guid: db35435f59a8524448aa45463451c996, type: 3}
   Cost: 600
   Kind: 2
   Friendship: 6

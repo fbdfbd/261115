@@ -111,7 +111,8 @@ namespace WorkGame
             for (int i = 4; i < total.Length; i++)
             {
                 long before = baseGains[i] + synergyGains[i];
-                long percent = percents[i] + percents[(int)CareStats.GetMain((CareStat)i)];
+                decimal percent = percents[i] + percents[(int)CareStats.GetMain((CareStat)i)]
+                    + (decimal)work.Upgrades.CareGrowthBonus * 100;
                 int room = StatMax - Run.GetStat((CareStat)i);
                 total[i] = (long)Math.Min(room, Math.Floor(before * (1 + percent / 100m)));
                 extra[i] = Math.Max(0, total[i] - Math.Min(room, before));

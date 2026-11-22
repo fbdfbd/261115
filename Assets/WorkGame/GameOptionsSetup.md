@@ -25,9 +25,9 @@ View와 Root, 각 버튼·슬라이더 참조는 툴이 연결합니다. OnClick
 - 볼륨 FillArea는 배경 전체 폭과 일치합니다. HandleArea만 핸들 반지름인 좌우 12만큼 안쪽에 둡니다.
 - 창 모드 ON은 일반 창, OFF는 전체 화면 창입니다. PC에서 실제 화면에 적용합니다.
 - 웹/모바일은 해상도·창 모드 조작을 비활성화하고 기기 설정을 사용합니다.
-- 배경음/효과음은 각각 0~1로 관리합니다. 아직 오디오 재생기는 연결하지 않았습니다.
-  나중에 Root의 `On Music Volume`, `On Sound Volume` 이벤트에 AudioManager 등을 연결합니다.
-  연결 시 현재 저장값을 한 번 보내고, 슬라이더 변경 때마다 새 값을 보냅니다.
+- 배경음/효과음은 각각 0~1로 관리합니다. BGM 재생기 연결은 [GameAudioSetup.md](GameAudioSetup.md)를 따릅니다.
+  GameBgmSceneRoot가 Options 이벤트를 구독해 저장 음량과 슬라이더 변경을 반영합니다.
+  이 구성을 쓸 때 Root의 `On Music Volume`, `On Sound Volume`에는 중복 연결하지 않습니다.
 - 설정은 `WorkGame.Options` 키로 게임 슬롯과 별도 저장합니다. 창을 닫거나 앱 포커스를 잃을 때 저장합니다.
   슬라이더를 움직이는 매 프레임에는 디스크에 저장하지 않습니다.
 - 타이틀 버튼은 **기존 루프 시작 체크포인트**를 자동 슬롯에 다시 저장한 뒤 `01_Title`로 이동합니다.
