@@ -4,6 +4,16 @@
 새 게임 시작 시 JSON을 읽습니다. 대사만 고치면 SO를 재생성할 필요가 없습니다.
 대화 UI 생성 툴은 CareDialogueUiSetup.md를 참고하세요. 실제 씬·프리팹·이미지는 직접 배치·연결합니다.
 
+## 새 게임 인트로
+
+IntroDialogue는 intro_meeting입니다. 새 게임은 업무 Ready 상태에서 인트로를 재생하고, 종료 전환이 화면을 덮으면 1월 업무를 시작합니다.
+빈 Care 방에서 시작하며 HUD·가구는 숨깁니다. HideCharacter가 true인 줄에서는 달이를 숨기고, 집으로 데려온 줄부터 울음 표정으로 표시합니다.
+인트로에서만 나르미의 자동 대사를 허용합니다. 로그 날짜는 한 달 전으로 표시하고 기존 월별 대화·선택지 규칙은 유지합니다.
+intro_squeak는 씬 Presentation의 Sounds에 연결된 기존 찍찍 효과음을 네 번 재생합니다. intro_timepass는 기존 대각선 전환을 사용합니다.
+인트로 중에는 업무 시간·급여·육성 월 진행이 발생하지 않습니다. 수동 저장은 막으며, 종료 후 생성되는 1월 WorkStart 체크포인트부터 이어하기합니다.
+인트로 도중 타이틀로 돌아가면 기존 저장을 덮어쓰지 않습니다. 다시 새 게임을 시작하면 인트로 처음부터 재생합니다.
+추가 에디터 연결은 없습니다. Unity CLI 없이 코드·씬 데이터 연결과 별도 C# 컴파일·일반/스킵/기록 복원 검증을 진행했습니다.
+
 ## 메인과 패널
 
 WorkRoot.CareFlow는 일반 C# 클래스입니다. Phase는 Working / Report / Dialogue / Free / Panel / Result / Ended입니다.
@@ -167,7 +177,7 @@ Target은 이 컴포넌트 자신이나 부모가 아닌 별도 자식 장식으
 
 예: {"Kind":0,"Layer":"event","Key":"story_nameplate","Seconds":0.25}
 
-명령은 배열 순서대로 실행됩니다. Sound는 Presentation의 Sounds와 전용 AudioSource를 연결합니다.
+명령은 배열 순서대로 실행됩니다. Sound는 Presentation의 Sounds에 연결합니다. 전용 AudioSource가 없으면 공통 SFX 플레이어를 사용해 옵션 음량·정지·중단을 적용합니다.
 Custom Cue UnityEvent는 시작 알림용입니다. 실제 완료를 기다려야 하는 Animator / Timeline 연출은
 CareDialogueCueExtension을 상속하고 Extensions 목록에 연결하세요.
 CanPlay(key), Play(cue), ApplyFinal(cue)를 구현합니다. Play는 완료까지 yield하고,

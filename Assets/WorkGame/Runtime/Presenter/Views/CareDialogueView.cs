@@ -46,7 +46,7 @@ namespace WorkGame
         private CareDialogueData shownDialogue;
         private int shownLine = -1, letterCount, shownLetters;
         private float letterClock;
-        private bool narrationLine;
+        private bool narrationLine, narrationSound;
         public bool IsWriting => shownLetters < letterCount;
         public event Action<CareSfxCue> SoundRequested;
         private float choiceStep;
@@ -86,12 +86,14 @@ namespace WorkGame
             Hide();
         }
 
-        public void Show(CareDialogueData dialogue, int lineIndex, bool allowSkip, string rewardText = "")
+        public void Show(CareDialogueData dialogue, int lineIndex, bool allowSkip, string rewardText = "",
+            bool playNarrationSound = false)
         {
             if (dialogue == null) { Hide(); return; }
             bool newLine = shownDialogue != dialogue || shownLine != lineIndex;
             bool advancing = visible && newLine;
             visible = true; canSkip = allowSkip;
+            narrationSound = playNarrationSound;
             WorkUi.Show(panelGroup, true);
             var line = dialogue.Lines[lineIndex];
             if (character != null) character.SetExpression((int)line.Emotion);
@@ -114,7 +116,7 @@ namespace WorkGame
                     letterCount = bodyText.textInfo.characterCount;
                     bodyText.maxVisibleCharacters = 0;
                 }
-                if (advancing) SoundRequested?.Invoke(CareSfxCue.DialogueNext);
+                if (advancing || playNarrationSound) SoundRequested?.Invoke(CareSfxCue.DialogueNext);
             }
             if (storyRewardText != null)
             {
@@ -125,9 +127,8 @@ namespace WorkGame
             ArrangeChoices(hasChoices ? Math.Min(dialogue.Choices.Length, choiceButtons.Count) : 0);
             for (int i = 0; i < choiceButtons.Count; i++)
             {
-                bool show = hasChoices && i < dialogue.Choices.Length;
-                if (choiceButtons[i] != null) WorkUi.Show(choiceButtons[i].gameObject, show);
-                if (show && i < choiceTexts.Count && choiceTexts[i] != null) choiceTexts[i].text = dialogue.Choices[i].Text;
+                if (hasChoices && i < dialogue.Choices.Length && i < choiceTexts.Count && choiceTexts[i] != null)
+                    choiceTexts[i].text = dialogue.Choices[i].Text;
             }
             if (continueHint != null) WorkUi.Show(continueHint, !hasChoices);
             UpdateInput();
@@ -145,6 +146,7 @@ namespace WorkGame
             shownDialogue = null; shownLine = -1; shownLetters = letterCount = 0;
             if (bodyText != null) bodyText.maxVisibleCharacters = int.MaxValue;
             WorkUi.Show(logGroup, false); WorkUi.Show(panelGroup, false);
+            UpdateInput();
         }
         private void ArrangeChoices(int count)
         {
@@ -164,6 +166,7 @@ namespace WorkGame
             choiceCount = count;
         }
         public void SetInputBlocked(bool blocked) { InputBlocked = blocked; UpdateInput(); }
+        public void SetOpacity(float alpha) { if (panelGroup != null) panelGroup.alpha = Mathf.Clamp01(alpha); }
         public void SetPresentationPlaying(bool value) { presentationPlaying = value; UpdateInput(); }
         public void SetPaused(bool value) { paused = value; UpdateInput(); }
         private void UpdateInput()
@@ -171,7 +174,15 @@ namespace WorkGame
             bool allowed = visible && !InputBlocked && !LogOpen && !presentationPlaying && !paused;
             if (skipButton != null) skipButton.interactable = allowed && canSkip;
             if (logButton != null) logButton.interactable = allowed;
-            foreach (var button in choiceButtons) if (button != null) button.interactable = allowed && !IsWriting;
+            bool choicesVisible = visible && hasChoices && !IsWriting && !presentationPlaying;
+            for (int i = 0; i < choiceButtons.Count; i++)
+            {
+                var button = choiceButtons[i];
+                if (button == null) continue;
+                bool show = choicesVisible && shownDialogue != null && i < shownDialogue.Choices.Length;
+                button.interactable = allowed && show;
+                if (button.gameObject.activeSelf != show) WorkUi.Show(button.gameObject, show);
+            }
             if (continueHint != null) WorkUi.Show(continueHint, visible && !hasChoices && !IsWriting);
         }
         private void Update()
@@ -181,7 +192,7 @@ namespace WorkGame
             int count = Mathf.Min(letterCount, shownLetters + Mathf.FloorToInt(letterClock / Mathf.Max(0.001f, characterSeconds)));
             if (count == shownLetters) return;
             letterClock -= (count - shownLetters) * Mathf.Max(0.001f, characterSeconds);
-            bool speak = !narrationLine && CareTextSound.HasLetter(bodyText, shownLetters, count);
+            bool speak = (!narrationLine || narrationSound) && CareTextSound.HasLetter(bodyText, shownLetters, count);
             shownLetters = count;
             if (bodyText != null) bodyText.maxVisibleCharacters = count;
             if (speak) SoundRequested?.Invoke(CareSfxCue.DialogueBlip);

@@ -63,9 +63,9 @@ namespace WorkGame.Editor
             var group = root.gameObject.AddComponent<CanvasGroup>();
             var view = root.gameObject.AddComponent<CareEndingChoiceView>();
             Image(root, backgroundColor, true);
-            var title = Text("Title", root, "달이의 다음 이야기", 48);
+            var title = Text("Title", root, "5년 후의 달이의 모습은…", 48);
             Area(title.rectTransform, 0.05f, 0.85f, 0.95f, 0.96f); title.color = cardColor;
-            var subtitle = Text("Subtitle", root, "달이가 걸어갈 길을 골라 주세요", 28);
+            var subtitle = Text("Subtitle", root, "달이의 모습을 골라 주세요", 28);
             Area(subtitle.rectTransform, 0.05f, 0.78f, 0.95f, 0.84f); subtitle.color = cardColor;
             var cardsRoot = Rect("Cards", root); Area(cardsRoot, 0.05f, 0.18f, 0.95f, 0.82f);
             var layout = cardsRoot.gameObject.AddComponent<HorizontalLayoutGroup>();
@@ -74,7 +74,7 @@ namespace WorkGame.Editor
             layout.childForceExpandWidth = false; layout.childForceExpandHeight = false;
             var cards = new List<CareEndingCardView>();
             for (int i = 0; i < 5; i++) cards.Add(BuildCard(cardsRoot, i));
-            var hint = Text("Hint", root, "하나의 미래를 선택하세요", 24);
+            var hint = Text("Hint", root, "하나의 모습을 선택하세요", 24);
             Area(hint.rectTransform, 0.05f, 0.08f, 0.95f, 0.15f); hint.color = cardColor;
             var fields = new SerializedObject(view);
             Set(fields, "panelGroup", group); Set(fields, "cardsRoot", cardsRoot);
@@ -93,7 +93,7 @@ namespace WorkGame.Editor
             Area(name.rectTransform, 0.08f, 0.69f, 0.92f, 0.94f); FitText(name, 24, titleSize);
             var divider = Rect("Divider", root); Area(divider, 0.08f, 0.64f, 0.92f, 0.64f);
             divider.sizeDelta = new Vector2(0, 2); Image(divider, new Color(0.74f, 0.79f, 0.73f));
-            var description = Text("Description", root, "달이가 선택할 수 있는 미래의 설명입니다.", descriptionSize);
+            var description = Text("Description", root, "5년 후 달이의 모습입니다.", descriptionSize);
             Area(description.rectTransform, 0.09f, 0.1f, 0.91f, 0.58f); FitText(description, 18, descriptionSize);
             var view = root.gameObject.AddComponent<CareEndingCardView>();
             var fields = new SerializedObject(view);

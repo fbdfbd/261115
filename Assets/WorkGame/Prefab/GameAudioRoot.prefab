@@ -49,3 +49,5 @@ MonoBehaviour:
   musicParameter: MusicVol
   sfxParameter: SFXVol
   sfxBoostDb: 3
+  resultLowPassHz: 1000
+  resultFilterSeconds: 0

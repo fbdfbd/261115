@@ -43,7 +43,6 @@ namespace WorkGame
         }
         public void Open()
         {
-            if (work.Run.Phase == WorkPhase.Ready) return;
             view.transform.SetAsLastSibling();
             view.ShowError(null); work.SetPaused(true); Refresh();
         }
@@ -54,7 +53,7 @@ namespace WorkGame
         }
         public void OpenHelp()
         {
-            if (work.Run.Phase == WorkPhase.Ready || view.IsHelpOpen) return;
+            if (view.IsHelpOpen) return;
             view.transform.SetAsLastSibling();
             pausedBeforeHelp = work.IsPaused;
             view.ShowHelp(true); work.SetPaused(true); Refresh();

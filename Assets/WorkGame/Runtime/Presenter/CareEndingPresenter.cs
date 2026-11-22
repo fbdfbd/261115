@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace WorkGame
 {
@@ -9,25 +9,31 @@ namespace WorkGame
         private readonly CareSystem care;
         private readonly WorkSystem work;
         private readonly CareEndingView view;
+        private readonly CareDialogueView dialogue;
         private readonly CareConfigSO config;
         private readonly CareFlowSystem flow;
-        private readonly List<CareEndingPage> pages = new List<CareEndingPage>();
+        private readonly Func<string, bool> wasRead;
         private CareEndingResult shown;
-        private int page;
-        private bool connected, paused, finished;
+        private CareEndingLine[] lines = Array.Empty<CareEndingLine>();
+        private CareDialogueData script;
+        private Sprite careerImage;
+        private int index;
+        private bool connected, paused, finished, canSkip;
         public event Action<string> ReadCompleted;
 
         public CareEndingPresenter(CareSystem care, WorkSystem work, CareEndingView view, CareConfigSO config,
-            CareFlowSystem flow = null)
+            CareFlowSystem flow = null, CareDialogueView dialogue = null, Func<string, bool> wasRead = null)
         {
-            this.care = care; this.work = work; this.view = view; this.config = config; this.flow = flow;
+            this.care = care; this.work = work; this.view = view; this.config = config;
+            this.flow = flow; this.dialogue = dialogue; this.wasRead = wasRead;
         }
         public void Connect()
         {
-            if (connected || view == null) return;
+            if (connected || view == null || dialogue == null) return;
             connected = true;
+            view.ConfigureDialogue(dialogue);
             care.EndingReady += Open; work.Changed += RefreshPause;
-            view.NextRequested += Next;
+            dialogue.NextRequested += Next; dialogue.SkipRequested += Skip; dialogue.LogRequested += ShowLog;
             view.Completed += FinishReading;
             if (care.Run.Ending != null) Open(care.Run.Ending);
             else view.Hide();
@@ -37,44 +43,61 @@ namespace WorkGame
             if (result == null) return;
             if (shown != result)
             {
-                shown = result; page = 0; finished = false;
-                BuildPages(result);
-                view.ClearImage();
+                shown = result; index = 0; finished = false; canSkip = wasRead?.Invoke(result.Ending.Id) == true;
+                var asset = config.Endings.FirstOrDefault(item => item != null && item.Id == result.Ending.Id)
+                    ?? config.FallbackEnding;
+                careerImage = asset?.Pages?.FirstOrDefault(page => page?.Image != null)?.Image ?? asset?.CollectionImage;
+                string careerText = asset?.Pages == null ? null : string.Join("\n", asset.Pages
+                    .Where(page => page != null && !string.IsNullOrWhiteSpace(page.Text)).Select(page => page.Text));
+                lines = CareEndingScript.Build(result, flow?.BuildEndingMemories(), careerText,
+                    asset == null || asset.AppendFriendshipText);
+                script = new CareDialogueData
+                {
+                    Id = "ending/" + result.Ending.Id,
+                    Lines = lines.Select(line => new CareDialogueLine
+                    {
+                        Speaker = "나레이션", Text = line.Text,
+                        Emotion = result.Friendship == CareFriendship.High ? CareDialogueEmotion.Happy : CareDialogueEmotion.Normal
+                    }).ToArray()
+                };
             }
-            view.Open(result.Ending.Name);
-            ShowPage();
-            if (finished) view.ShowComplete(false);
-            paused = work.IsPaused; view.SetPaused(paused);
+            view.Open(result.Ending.Name, careerImage);
+            paused = work.IsPaused; view.SetPaused(paused); dialogue.SetPaused(paused);
+            if (finished) { dialogue.Hide(); view.ShowComplete(false); }
+            else ShowLine();
         }
-        private void BuildPages(CareEndingResult result)
+        private bool CanInput => shown != null && !finished && !work.IsPaused && !view.InputBlocked
+            && !view.IsTransitioning && !dialogue.InputBlocked && !dialogue.LogOpen;
+        private void ShowLine()
         {
-            pages.Clear();
-            var memories = flow?.BuildEndingMemories() ?? Array.Empty<string>();
-            pages.AddRange(memories.Select(text => new CareEndingPage { Text = text }));
-            int narrativePages = pages.Count;
-            var asset = config.Endings.FirstOrDefault(x => x != null && x.Id == result.Ending.Id);
-            if (asset == null && config.FallbackEnding != null && config.FallbackEnding.Id == result.Ending.Id)
-                asset = config.FallbackEnding;
-            if (asset != null && asset.Pages != null)
-                pages.AddRange(asset.Pages.Where(x => x != null)
-                    .Select(x => new CareEndingPage { Image = x.Image, Text = x.Text }));
-            if (pages.Count == narrativePages) pages.Add(new CareEndingPage { Text = result.Ending.Text });
-            if ((asset == null || asset.AppendFriendshipText) && !string.IsNullOrWhiteSpace(result.FriendshipText))
-                pages.Add(new CareEndingPage { Text = result.FriendshipText });
+            if (lines[index].Scene == CareEndingScene.Career) view.ShowCareer(careerImage);
+            else view.ShowRoom(lines[index].CharacterVisible);
+            bool cutsceneChanged = index > 0 && lines[index - 1].Scene != lines[index].Scene
+                && (lines[index - 1].Scene == CareEndingScene.Career || lines[index].Scene == CareEndingScene.Career);
+            view.PresentDialogue(dialogue,
+                () => dialogue.Show(script, index, canSkip, playNarrationSound: true), cutsceneChanged);
         }
-        private void ShowPage() => view.ShowPage(pages[page].Image, pages[page].Text, page + 1, pages.Count);
         private void Next()
         {
-            if (shown == null || finished || work.IsPaused || view.InputBlocked) return;
-            if (view.IsWriting) { view.FinishLine(); return; }
-            if (view.HasNextLine) { view.ShowNextLine(); return; }
-            if (page + 1 < pages.Count) { page++; ShowPage(); }
-            else { finished = true; view.ShowComplete(); }
+            if (!CanInput) return;
+            if (++index < lines.Length) ShowLine();
+            else Complete();
+        }
+        private void Complete()
+        {
+            finished = true; dialogue.Hide(); view.ShowComplete();
+        }
+        private void Skip() { if (CanInput && canSkip) Complete(); }
+        private void ShowLog()
+        {
+            if (shown == null || finished) return;
+            dialogue.ShowLog(string.Join("\n\n", lines.Take(index + 1).Select(line => line.Text)));
         }
         private void RefreshPause()
         {
             if (paused == work.IsPaused) return;
             paused = work.IsPaused; view.SetPaused(paused);
+            if (shown != null && !finished) dialogue.SetPaused(paused);
         }
         private void FinishReading() { if (shown != null) ReadCompleted?.Invoke(shown.Ending.Id); }
         public void Disconnect()
@@ -82,8 +105,9 @@ namespace WorkGame
             if (!connected) return;
             connected = false;
             care.EndingReady -= Open; work.Changed -= RefreshPause;
-            view.NextRequested -= Next;
+            dialogue.NextRequested -= Next; dialogue.SkipRequested -= Skip; dialogue.LogRequested -= ShowLog;
             view.Completed -= FinishReading;
+            if (shown != null) dialogue.Hide();
             view.Hide();
         }
         public void Dispose() => Disconnect();

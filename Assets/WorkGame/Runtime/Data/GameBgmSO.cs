@@ -33,6 +33,10 @@ namespace WorkGame
         public GameBgmTrack Title = new GameBgmTrack();
         [Tooltip("타이틀 컬렉션 전용 곡. Clip 미지정 시 Title을 유지합니다.")]
         public GameBgmTrack Collection = new GameBgmTrack();
+        [Header("인트로 — 새 게임의 '한 달 전' 대화 전용")]
+        [Tooltip("IntroDialogue 재생 중 사용합니다. Clip 미지정 시 MONTH 1 Care BGM을 유지합니다.")]
+        public GameBgmTrack Intro = new GameBgmTrack();
+        [Header("튜토리얼·엔딩·월별 기본곡")]
         public GameBgmTrack Tutorial = new GameBgmTrack();
         public GameBgmTrack Ending = new GameBgmTrack();
         public GameBgmTrack DefaultWork = new GameBgmTrack();

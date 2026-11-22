@@ -25,6 +25,7 @@ namespace WorkGame
         [SerializeField] private TMP_Text detailConditionsTitle;
         [SerializeField] private RectTransform detailConditionsRow;
         [SerializeField] private TMP_Text[] detailConditions = new TMP_Text[4];
+        [SerializeField] private RectTransform[] detailConditionBackgrounds = new RectTransform[4];
         [SerializeField] private ScrollRect detailScroll;
         [SerializeField] private RectTransform detailContent;
         public bool IsOpen { get; private set; }
@@ -109,6 +110,8 @@ namespace WorkGame
                     var text = detailConditions[i];
                     bool show = i < columns.Length && !string.IsNullOrWhiteSpace(columns[i]);
                     WorkUi.Show(text.gameObject, show);
+                    var background = i < detailConditionBackgrounds.Length ? detailConditionBackgrounds[i] : null;
+                    if (background != null) WorkUi.Show(background.gameObject, show);
                     if (!show) continue;
                     var rect = text.rectTransform;
                     float left = start + columnIndex++ * columnWidth;
@@ -116,6 +119,13 @@ namespace WorkGame
                     rect.anchorMax = new Vector2(left + columnWidth, 1);
                     rect.offsetMin = new Vector2(12, 0);
                     rect.offsetMax = new Vector2(-12, 0);
+                    if (background != null)
+                    {
+                        background.anchorMin = rect.anchorMin;
+                        background.anchorMax = rect.anchorMax;
+                        background.offsetMin = rect.offsetMin;
+                        background.offsetMax = rect.offsetMax;
+                    }
                     text.alignment = TextAlignmentOptions.Top;
                     text.text = columns[i];
                     columnHeight = Mathf.Max(columnHeight, text.GetPreferredValues(columns[i]).y);

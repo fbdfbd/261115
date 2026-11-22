@@ -31,7 +31,8 @@ namespace WorkGame.Tests
             public readonly WorkSystem Work;
             public readonly CareSystem Care;
             public readonly CareFlowSystem Flow;
-            public Run(CareDialogueFile data, int logic = 20, int research = 20, GameSaveData saved = null)
+            public Run(CareDialogueFile data, int logic = 20, int research = 20, GameSaveData saved = null,
+                bool startWork = true, CareEnding fallback = null)
             {
                 var papers = Enumerable.Range(1, 12).Select(month => new WorkPaper(month, month, "01", "Test", "Test", "Score", "",
                     PickRule.Highest, PaperDisplay.Number, new[] { new WorkChoice("A", 1), new WorkChoice("B", 0) }));
@@ -42,10 +43,10 @@ namespace WorkGame.Tests
                     new CareLesson("home", "Home", 1, 0, new[] { new CareGain(CareStat.Logic, 3) }),
                     new CareLesson("rest", "Rest", 1, 0, Array.Empty<CareGain>())
                 }, Array.Empty<CareSynergy>(), Array.Empty<CareGift>(), Array.Empty<CareEnding>(),
-                    new CareEnding("fallback", "Fallback", 0, Array.Empty<CareGain>(), "", "", "", ""),
+                    fallback ?? new CareEnding("fallback", "Fallback", 0, Array.Empty<CareGain>(), "", "", "", ""),
                     new[] { new CareGain(CareStat.Logic, logic), new CareGain(CareStat.Research, research) });
                 Flow = new CareFlowSystem(Work, Care, data);
-                if (saved == null) Work.StartRun();
+                if (saved == null) { if (startWork) Work.StartRun(); }
                 else { Care.RestoreSave(saved.Care); Flow.RestoreSave(saved.Flow, saved.Point); }
             }
             public void BeginResult(string lesson = "rest")
@@ -84,15 +85,46 @@ namespace WorkGame.Tests
             Assert.That(run.Flow.HasStoryUnlock("nameplate"), Is.False);
             run.BeginResult(); run.Flow.ConfirmResult();
             Assert.That(run.Flow.Dialogue.Current.Id, Is.EqualTo("story"));
+            Assert.That(run.Flow.WillAdvanceAfterDialogue, Is.False);
             run.Flow.Dialogue.Next(); run.Flow.Dialogue.Choose(1);
             run.Flow.Dialogue.Next(); run.Flow.Dialogue.Next();
             Assert.That(run.Flow.Dialogue.Current.Id, Is.EqualTo("reply"));
+            Assert.That(run.Flow.WillAdvanceAfterDialogue, Is.True);
             Assert.That(run.Flow.Dialogue.WasCompleted("story/test"), Is.True);
             Assert.That(run.Flow.Dialogue.WasCompleted("story/second"), Is.False);
             Assert.That(run.Work.Run.Month, Is.EqualTo(2));
             run.Drain();
             Assert.That(run.Work.Run.Month, Is.EqualTo(3));
             Assert.That(run.Flow.Dialogue.WasCompleted("story/second"), Is.True);
+        }
+
+        [TestCase(3, true)]
+        [TestCase(4, true)]
+        [TestCase(6, false)]
+        [TestCase(8, true)]
+        public void EventExitTransitionWaitsUntilTheMonthActuallyEnds(int month, bool expected)
+        {
+            var data = JsonUtility.FromJson<CareDialogueFile>(File.ReadAllText(
+                Path.Combine(Application.dataPath, "WorkGame/Samples/CareDialogue.json")));
+            foreach (var dialogue in data.Dialogues) dialogue.Choices ??= Array.Empty<CareDialogueChoice>();
+            using var run = new Run(data);
+            run.ReachResult(month); run.Flow.ConfirmResult();
+            Assert.That(run.Flow.WillAdvanceAfterDialogue, Is.EqualTo(expected));
+            if (month != 6) return;
+            while (run.Flow.IsStoryPlaying)
+            {
+                if (run.Flow.Dialogue.HasChoices) run.Flow.Dialogue.Choose(0);
+                else run.Flow.Dialogue.Next();
+            }
+            Assert.That(run.Flow.Dialogue.RootDialogueId, Is.EqualTo("promise_album_offer"));
+            Assert.That(run.Flow.WillAdvanceAfterDialogue, Is.True);
+            run.Flow.Dialogue.Next();
+            run.Flow.Dialogue.SetPresentationBlocked(true);
+            Assert.That(run.Flow.Dialogue.Choose(0), Is.False);
+            Assert.That(run.Work.Run.Month, Is.EqualTo(6));
+            run.Flow.Dialogue.SetPresentationBlocked(false);
+            Assert.That(run.Flow.Dialogue.Choose(0), Is.True);
+            Assert.That(run.Work.Run.Month, Is.EqualTo(7));
         }
 
         [Test]
@@ -241,10 +273,69 @@ namespace WorkGame.Tests
             Assert.That(run.Flow.BuildEndingMemories(), Is.Empty);
             run.BeginResult(); run.Flow.ConfirmResult(); run.Drain();
             var memories = run.Flow.BuildEndingMemories();
-            Assert.That(memories, Is.EqualTo(new[] { "Intro", "Read story\n\nSelected encouragement" }));
+            Assert.That(memories, Is.EqualTo(new[] { "Intro", "Selected encouragement" }));
             using var loaded = new Run(data);
             loaded.Flow.RestoreSave(run.Flow.CaptureSave(), SavePoint.EndingChoice);
             Assert.That(loaded.Flow.BuildEndingMemories(), Is.EqualTo(memories));
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void AlbumPhotoWaitsForTheWholeSuccessDialogueAndSurvivesReload(bool early)
+        {
+            var data = JsonUtility.FromJson<CareDialogueFile>(File.ReadAllText(
+                Path.Combine(Application.dataPath, "WorkGame/Samples/CareDialogue.json")));
+            foreach (var dialogue in data.Dialogues) dialogue.Choices ??= Array.Empty<CareDialogueChoice>();
+            using var run = new Run(data);
+            run.ReachResult(6); run.Flow.ConfirmResult(); run.Drain();
+            Assert.That(run.Work.Run.Month, Is.EqualTo(7));
+            Assert.That(run.Flow.HasReadSuccessfulPromise("album"), Is.False);
+            while (run.Work.PendingCount > 0)
+            {
+                Assert.That(run.Work.StartHold(run.Work.CurrentPaper.Id, 0), Is.True);
+                run.Work.AddTime(1);
+            }
+            run.Work.AddTime(Math.Max(0, run.Work.MonthSeconds - (early ? 35 : 0) - run.Work.Run.Seconds));
+            Assert.That(run.Work.LeaveWork(), Is.True);
+            run.Flow.EnterCare();
+            Assert.That(run.Flow.Promises.Records.Single(record => record.Promise.Id == "album").State,
+                Is.EqualTo(CarePromiseState.Succeeded));
+            while (run.Flow.Dialogue.LineIndex < run.Flow.Dialogue.Current.Lines.Length - 1)
+            {
+                Assert.That(run.Flow.HasReadSuccessfulPromise("album"), Is.False);
+                run.Flow.Dialogue.Next();
+            }
+            Assert.That(run.Flow.HasReadSuccessfulPromise("album"), Is.False);
+            run.Flow.Dialogue.Next();
+            Assert.That(run.Flow.HasReadSuccessfulPromise("album"), Is.True);
+            run.Flow.RestoreSave(run.Flow.CaptureSave(), SavePoint.CareStart);
+            Assert.That(run.Flow.HasReadSuccessfulPromise("album"), Is.True);
+        }
+
+        [TestCase(-1, CareFriendship.Low, "Separate")]
+        [TestCase(0, CareFriendship.Normal, "Visits")]
+        [TestCase(50, CareFriendship.High, "Together")]
+        public void EndingScriptKeepsCareerBetweenMemoriesAndActualFriendship(int friendship,
+            CareFriendship tier, string expected)
+        {
+            var data = Data(); data.Stories = Array.Empty<CareStoryData>();
+            var ending = new CareEnding("fallback", "Fallback", 0, Array.Empty<CareGain>(),
+                "Career one\nCareer two", "Separate", "Visits", "Together");
+            using var run = new Run(data, fallback: ending);
+            run.Care.AddFriendship(friendship);
+            run.ReachResult(12); run.Flow.ConfirmResult(); run.Drain();
+            var result = run.Care.Run.Ending;
+            Assert.That(result.Friendship, Is.EqualTo(tier));
+            var lines = CareEndingScript.Build(result, new[] { "Five years later\nA real memory" });
+            Assert.That(lines.Select(line => line.Scene), Is.EqualTo(new[]
+            {
+                CareEndingScene.Memories, CareEndingScene.Memories,
+                CareEndingScene.Career, CareEndingScene.Career, CareEndingScene.Friendship
+            }));
+            Assert.That(lines.Last().Text, Is.EqualTo(expected));
+            Assert.That(CareEndingScript.Build(result, Array.Empty<string>()).First().Text, Does.Contain("5년"));
+            Assert.That(CareEndingScript.Build(result, null, appendFriendship: false)
+                .All(line => line.Scene != CareEndingScene.Friendship), Is.True);
         }
 
         [TestCase("baking", CarePromiseState.Succeeded, false)]
@@ -288,7 +379,7 @@ namespace WorkGame.Tests
                 Path.Combine(Application.dataPath, "WorkGame/Samples/CareDialogue.json")));
             foreach (var dialogue in data.Dialogues)
             {
-                Assert.That(dialogue.Lines.All(line => line.Speaker != "나르미"), Is.True, dialogue.Id);
+                Assert.That(dialogue.Id == data.IntroDialogue || dialogue.Lines.All(line => line.Speaker != "나르미"), Is.True, dialogue.Id);
                 var choices = dialogue.Choices ?? Array.Empty<CareDialogueChoice>();
                 if (!choices.Any(choice => choice.Key == "practical")) continue;
                 Assert.That(choices.Select(choice => choice.Key),
@@ -298,6 +389,55 @@ namespace WorkGame.Tests
                     && (dialogue.Id == "story_02_nameplate" ? string.IsNullOrEmpty(choice.NextDialogue)
                         : data.Dialogues.Any(reply => reply.Id == choice.NextDialogue))), Is.True, dialogue.Id);
             }
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void IntroKeepsWorkStoppedThenStartsJanuaryAndRestoresHistory(bool skip)
+        {
+            var data = JsonUtility.FromJson<CareDialogueFile>(File.ReadAllText(
+                Path.Combine(Application.dataPath, "WorkGame/Samples/CareDialogue.json")));
+            foreach (var dialogue in data.Dialogues) dialogue.Choices ??= Array.Empty<CareDialogueChoice>();
+            using var run = new Run(data, startWork: false);
+            run.Flow.Dialogue.SetReadCheck(_ => skip);
+            Assert.That(run.Flow.StartIntro(), Is.True);
+            Assert.That(run.Flow.StartIntro(), Is.False);
+            Assert.That(run.Flow.IsIntro, Is.True);
+            Assert.That(run.Flow.Dialogue.Line.Text, Is.EqualTo("한 달 전…"));
+            Assert.That(run.Flow.Dialogue.Line.HideCharacter, Is.True);
+            run.Work.AddTime(1000);
+            Assert.That(run.Work.Run.Seconds, Is.Zero);
+            Assert.That(run.Work.Run.Month, Is.Zero);
+            Assert.That(run.Work.Run.Phase, Is.EqualTo(WorkPhase.Ready));
+            Assert.That(run.Flow.CanGoNext, Is.False);
+            Assert.That(run.Flow.OpenPanel(CarePanel.Schedule), Is.False);
+            run.Flow.Dialogue.SetPresentationBlocked(true);
+            Assert.That(run.Flow.Dialogue.Next(), Is.False);
+            run.Flow.Dialogue.SetPresentationBlocked(false);
+            if (skip)
+            {
+                Assert.That(run.Flow.Dialogue.Skip(false), Is.True);
+                Assert.That(run.Flow.IsIntro, Is.True);
+            }
+            else
+            {
+                while (run.Flow.Dialogue.Line.HideCharacter) run.Flow.Dialogue.Next();
+                Assert.That(run.Flow.Dialogue.Line.Emotion, Is.EqualTo(CareDialogueEmotion.Sad));
+            }
+            run.Drain();
+            Assert.That(run.Flow.IsIntro, Is.False);
+            Assert.That(run.Work.Run.Month, Is.EqualTo(1));
+            Assert.That(run.Work.Run.Phase, Is.EqualTo(WorkPhase.Working));
+            Assert.That(run.Work.Run.Seconds, Is.Zero);
+            Assert.That(run.Work.Run.Money, Is.Zero);
+            Assert.That(run.Care.Run.FinishedMonth, Is.Zero);
+            Assert.That(run.Flow.Dialogue.WasCompleted("intro"), Is.True);
+            var saved = run.Flow.CaptureSave();
+            using var restored = new Run(data);
+            Assert.DoesNotThrow(() => restored.Flow.RestoreSave(saved, SavePoint.WorkStart));
+            Assert.That(restored.Flow.IsIntro, Is.False);
+            Assert.That(restored.Flow.Dialogue.History.Count, Is.EqualTo(run.Flow.Dialogue.History.Count));
+            Assert.That(restored.Flow.StartIntro(), Is.False);
         }
 
         [TestCase(0)]

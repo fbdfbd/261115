@@ -29,7 +29,8 @@ namespace WorkGame
             Refresh();
             flow.Dialogue.ReplayPresentation(EnterLine);
         }
-        private bool CanInput => !work.IsPaused && !view.InputBlocked && !view.LogOpen && !flow.Dialogue.PresentationBlocked;
+        private bool CanInput => flow.Phase != CareFlowPhase.Ended && !work.IsPaused && !view.InputBlocked
+            && !view.LogOpen && !flow.Dialogue.PresentationBlocked;
         private void SetPresentationBlocked(bool value)
         {
             flow.Dialogue.SetPresentationBlocked(value);
@@ -41,7 +42,7 @@ namespace WorkGame
             if (!CanInput) return;
             if (flow.Dialogue.IsOpen && !flow.Dialogue.HasChoices
                 && flow.Dialogue.LineIndex == flow.Dialogue.Current.Lines.Length - 1
-                && presentation != null && presentation.HasCutscene)
+                && presentation != null && (presentation.HasCutscene || flow.WillAdvanceAfterDialogue))
             {
                 FinishCutscene(() => flow.Dialogue.Next());
             }
@@ -51,7 +52,7 @@ namespace WorkGame
         {
             if (!CanInput || !flow.Dialogue.HasChoices || index < 0
                 || index >= flow.Dialogue.Current.Choices.Length) return;
-            if (presentation != null && presentation.HasCutscene
+            if (presentation != null && (presentation.HasCutscene || flow.WillAdvanceAfterDialogue)
                 && string.IsNullOrEmpty(flow.Dialogue.Current.Choices[index].NextDialogue))
                 FinishCutscene(() => flow.Dialogue.Choose(index));
             else flow.Dialogue.Choose(index);
@@ -63,7 +64,7 @@ namespace WorkGame
                 // Commit the final line or choice while the diagonal overlay fully covers the screen.
                 flow.Dialogue.SetPresentationBlocked(false);
                 finish();
-            });
+            }, flow.WillAdvanceAfterDialogue);
         }
         private void Skip()
         {
@@ -72,6 +73,7 @@ namespace WorkGame
         }
         private void Refresh()
         {
+            if (flow.Phase == CareFlowPhase.Ended || flow.Phase == CareFlowPhase.EndingChoice) return;
             paused = work.IsPaused;
             presentation?.SetPaused(paused);
             view.SetPaused(paused);
@@ -82,13 +84,15 @@ namespace WorkGame
         private void RefreshPause() { if (paused != work.IsPaused) Refresh(); }
         private void ShowLog()
         {
+            if (flow.Phase == CareFlowPhase.Ended || flow.Phase == CareFlowPhase.EndingChoice) return;
             var entries = flow.Dialogue.History;
             if (logCount != entries.Count)
             {
                 var text = new StringBuilder();
                 foreach (var entry in entries)
                 {
-                    text.Append(entry.Month).Append("월");
+                    if (entry.DialogueId == flow.IntroDialogueId) text.Append("한 달 전");
+                    else text.Append(entry.Month).Append("월");
                     if (!string.IsNullOrWhiteSpace(entry.Speaker)
                         && !string.Equals(entry.Speaker.Trim(), "나레이션", StringComparison.Ordinal))
                         text.Append(" · ").Append(entry.Speaker);

@@ -17,6 +17,7 @@ namespace WorkGame
         [SerializeField] private List<CanvasGroup> afterWorkGroups = new List<CanvasGroup>();
         [Header("육성 배경 — 대화 중에도 표시")]
         [SerializeField] private CanvasGroup careBackgroundGroup;
+        [SerializeField] private CareWindowView careWindowView;
         [Header("Care 전용 캐릭터 — 일반 UI 그룹과 분리, 대화 중에도 표시")]
         [SerializeField] private GameObject careCharacterRoot;
         [Header("Care 장착 가구 — 대화 중에도 표시")]
@@ -48,6 +49,7 @@ namespace WorkGame
                 workRoot.RunStarted += Bind;
                 workRoot.GameFinished += FinishRun;
                 workRoot.CareFlowChanged += RefreshCareButtons;
+                if (workRoot.EndingView != null) workRoot.EndingView.SceneChanged += RefreshCareButtons;
                 Bind(workRoot.System);
             }
             else ShowEmpty();
@@ -69,6 +71,7 @@ namespace WorkGame
                 workRoot.RunStarted -= Bind;
                 workRoot.GameFinished -= FinishRun;
                 workRoot.CareFlowChanged -= RefreshCareButtons;
+                if (workRoot.EndingView != null) workRoot.EndingView.SceneChanged -= RefreshCareButtons;
             }
             if (work != null) work.Changed -= Refresh;
             work = null;
@@ -115,15 +118,22 @@ namespace WorkGame
         {
             if (work == null) return;
             var flow = workRoot.CareFlow;
+            bool intro = flow?.IsIntro == true;
             bool ending = flow?.Phase == CareFlowPhase.EndingChoice || flow?.Phase == CareFlowPhase.Ended;
+            bool endingRoom = workRoot.EndingView != null && workRoot.EndingView.IsOpen && workRoot.EndingView.RoomVisible;
             if (ending) ShowGroups(workGroups, false);
             bool afterWork = work.Run.Phase == WorkPhase.AfterWork || work.Run.Phase == WorkPhase.Finished;
             bool reportDone = monthReport == null || finishedReportMonth == work.Run.Month;
-            WorkUi.Show(careBackgroundGroup, afterWork && reportDone && !ending);
-            if (roomFurniture != null) roomFurniture.SetVisible(afterWork && reportDone && !ending && flow != null);
+            WorkUi.Show(careBackgroundGroup, intro || endingRoom || (afterWork && reportDone && !ending));
+            if (endingRoom) careWindowView?.Show(CareLeaveKind.OnTime);
+            if (intro) careWindowView?.Show(CareLeaveKind.OnTime);
+            if (afterWork && reportDone && !ending && flow != null) careWindowView?.Show(flow.LeaveKind);
+            if (roomFurniture != null) roomFurniture.SetVisible(endingRoom || (afterWork && reportDone && !ending && flow != null));
             if (careCharacterRoot != null)
             {
-                bool showCharacter = afterWork && reportDone && !ending && flow != null;
+                bool showCharacter = endingRoom ? workRoot.EndingView.CharacterVisible
+                    : intro ? flow.Dialogue.IsOpen && !flow.Dialogue.Line.HideCharacter
+                    : afterWork && reportDone && !ending && flow != null;
                 if (careCharacterRoot.activeSelf != showCharacter) careCharacterRoot.SetActive(showCharacter);
             }
             bool dialogueOpen = flow != null && flow.Dialogue.IsOpen;
@@ -237,6 +247,7 @@ namespace WorkGame
             ShowGroups(workGroups, false);
             ShowGroups(afterWorkGroups, false);
             if (nextMonthButton != null) nextMonthButton.interactable = false;
+            RefreshCareButtons();
             onRunFinished.Invoke();
         }
 

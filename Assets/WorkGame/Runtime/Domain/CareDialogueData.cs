@@ -14,6 +14,7 @@ namespace WorkGame
         public string Speaker;
         public string Text;
         public CareDialogueEmotion Emotion;
+        public bool HideCharacter;
         // View가 이 키를 이미지로 바꿉니다. 빈 값이면 이전 이미지를 유지합니다.
         public string ImageKey;
         public CareDialogueCue[] Cues = Array.Empty<CareDialogueCue>();
@@ -149,6 +150,7 @@ namespace WorkGame
     [Serializable]
     public sealed class CareDialogueFile
     {
+        public string IntroDialogue;
         public string EndingIntroText;
         public CareLeaveSettings Leave = new CareLeaveSettings();
         public CareDialogueData[] Dialogues = Array.Empty<CareDialogueData>();

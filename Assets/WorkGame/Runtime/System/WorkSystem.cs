@@ -153,7 +153,7 @@ namespace WorkGame
 
         public void SetPaused(bool paused)
         {
-            if (disposed || Run.Phase == WorkPhase.Ready || IsPaused == paused) return;
+            if (disposed || IsPaused == paused) return;
             ClearHold();
             IsPaused = paused;
             Notify();

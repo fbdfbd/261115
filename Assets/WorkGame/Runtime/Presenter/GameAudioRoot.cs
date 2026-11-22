@@ -14,8 +14,14 @@ namespace WorkGame
         [SerializeField] private string sfxParameter = "SFXVol";
         [Tooltip("SFX 전체 출력 보정(dB). 옵션 슬라이더의 비율과 음소거는 유지합니다.")]
         [SerializeField, Range(0f, 12f)] private float sfxBoostDb = 3f;
+        [Header("Care 성장 결과 — BGM 먹먹함")]
+        [SerializeField, Range(100f, 22000f)] private float resultLowPassHz = 1000f;
+        [SerializeField, Min(0f)] private float resultFilterSeconds = 0.25f;
         private static GameAudioRoot instance;
         private AudioSource source;
+        private AudioLowPassFilter musicFilter;
+        private bool musicMuffled;
+        private float muffleAmount;
         private float gain, from, to;
         private GameBgmSession session;
         private AudioClip desiredClip;
@@ -54,6 +60,11 @@ namespace WorkGame
             source.spatialBlend = 0f;
             source.volume = 0f;
             source.outputAudioMixerGroup = musicGroup;
+            // This root has only the BGM source. SFX sources live on separate child objects.
+            musicFilter = gameObject.AddComponent<AudioLowPassFilter>();
+            musicFilter.lowpassResonanceQ = 1f;
+            musicFilter.cutoffFrequency = 22000f;
+            musicFilter.enabled = false;
             effects = new GameSfxPlayer(transform, sfxGroup);
         }
 
@@ -67,6 +78,7 @@ namespace WorkGame
             fadeSeconds = SafeGain(transitionSeconds, 0f, float.MaxValue);
             session = new GameBgmSession();
             session.Changed += OnSessionChanged;
+            musicMuffled = false;
             requestDirty = true;
             return session;
         }
@@ -74,15 +86,25 @@ namespace WorkGame
         public void SetMusicVolume(float value) { musicVolume = SafeGain(value); volumesDirty = true; }
         public void SetSoundVolume(float value) { soundVolume = SafeGain(value); volumesDirty = true; }
 
+        public void SetMusicMuffled(GameBgmSession owner, bool muffled)
+        {
+            // An unloading scene cannot change the filter belonging to a newer scene/session.
+            if (owner == null || owner.IsDisposed || !ReferenceEquals(owner, session)) return;
+            musicMuffled = muffled;
+        }
+
         private void OnSessionChanged(GameBgmSession sender)
         {
-            if (ReferenceEquals(session, sender)) requestDirty = true;
+            if (!ReferenceEquals(session, sender)) return;
+            requestDirty = true;
+            if (sender.IsDisposed) musicMuffled = false;
         }
 
         private void OnValidate() => volumesDirty = true;
 
         private void LateUpdate()
         {
+            UpdateMusicFilter(Time.unscaledDeltaTime);
             // Start/OnEnable ordering cannot apply mixer parameters in Awake accidentally.
             if (volumesDirty)
             {
@@ -117,6 +139,17 @@ namespace WorkGame
                 else if (to == 0f && source.clip != null) StopCurrent();
             }
             source.volume = gain * (musicOnMixer ? (musicVolume > 0f ? 1f : 0f) : musicVolume);
+        }
+
+        private void UpdateMusicFilter(float deltaSeconds)
+        {
+            if (musicFilter == null) return;
+            float seconds = SafeGain(resultFilterSeconds, 0f, 10f);
+            float target = musicMuffled ? 1f : 0f;
+            muffleAmount = seconds > 0f ? Mathf.MoveTowards(muffleAmount, target, deltaSeconds / seconds) : target;
+            float cutoff = SafeGain(resultLowPassHz, 100f, 22000f);
+            musicFilter.cutoffFrequency = Mathf.Exp(Mathf.Lerp(Mathf.Log(22000f), Mathf.Log(cutoff), muffleAmount));
+            musicFilter.enabled = muffleAmount > 0f;
         }
 
         private void Retarget()

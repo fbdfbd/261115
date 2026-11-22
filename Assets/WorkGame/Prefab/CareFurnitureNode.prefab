@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38, g: 0.65, b: 0.43, a: 0.35}
+  m_Color: {r: 0.85578537, g: 1, b: 0.7882353, a: 0.40392157}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!1 &3633474311710495320
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 407474361313468737}
   - component: {fileID: 1918114964782900705}
   - component: {fileID: 7079602439989938375}
+  - component: {fileID: 7766022499462181407}
   m_Layer: 0
   m_Name: CareFurnitureNode
   m_TagString: Untagged
@@ -458,10 +459,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3820695793955364867}
   - {fileID: 9135449821863700851}
   - {fileID: 2282789250940997092}
   - {fileID: 3213556327293956517}
+  - {fileID: 3820695793955364867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -490,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.95, g: 0.95, b: 0.92, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -563,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.27, g: 0.53, b: 0.31, a: 1}
+  m_EffectColor: {r: 0.94117653, g: 0.654902, b: 0.32941177, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!114 &1918114964782900705
@@ -602,7 +603,20 @@ MonoBehaviour:
   background: {fileID: 5701496612296825466}
   activeOutline: {fileID: 407474361313468737}
   normalColor: {r: 0.95, g: 0.95, b: 0.92, a: 1}
-  ownedColor: {r: 0.87, g: 0.9, b: 0.86, a: 1}
-  activeColor: {r: 0.74, g: 0.84, b: 0.74, a: 1}
-  priceColor: {r: 0.18, g: 0.22, b: 0.2, a: 1}
+  ownedColor: {r: 0.99807876, g: 1, b: 0.7311321, a: 1}
+  activeColor: {r: 0.94117653, g: 0.654902, b: 0.32941177, a: 1}
+  priceColor: {r: 0.23529413, g: 0.09411766, b: 0.043137256, a: 1}
   lowMoneyColor: {r: 0.72, g: 0.28, b: 0.26, a: 1}
+--- !u!114 &7766022499462181407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710344421741182192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
+  m_ShowMaskGraphic: 1

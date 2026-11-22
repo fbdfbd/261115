@@ -13,6 +13,20 @@ namespace WorkGame
         public bool HasStoryUnlock(string key) => key != null && storyUnlocks.Contains(key);
         public string StoryRewardText { get; private set; } = "";
         public bool IsStoryPlaying => activeStory != null;
+        public bool WillAdvanceAfterDialogue
+        {
+            get
+            {
+                if (!Dialogue.IsOpen) return false;
+                if (IsIntro || offeredPromise != null) return true;
+                if (activeStory == null || stories.Any(story => story != activeStory && story.Month == care.Month
+                    && !Dialogue.WasCompleted("story/" + story.Id))) return false;
+                var offer = dialogueData.Promises.FirstOrDefault(promise => promise.OfferMonth == care.Month);
+                if (offer == null) return true;
+                var record = Promises.Records.FirstOrDefault(item => item.Promise.Id == offer.Id);
+                return record != null && record.State != CarePromiseState.Offered;
+            }
+        }
 
         private void InitializeStories(CareDialogueFile data)
         {

@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -13,185 +13,198 @@ namespace WorkGame
         [SerializeField] private CareDialogueClickArea clickArea;
         [SerializeField] private Image picture;
         [SerializeField] private CanvasGroup pictureGroup;
-        [SerializeField] private TMP_Text titleText, letterText, pageText, hintText;
-        [SerializeField] private ScrollRect letterScroll;
-        [SerializeField] private Button titleButton;
-        [Header("글자 표시·이미지 연출")]
-        [SerializeField, Min(0.001f)] private float characterSeconds = 0.035f;
         [SerializeField, Min(0)] private float imageSeconds = 0.3f;
-        [Header("마지막 페이지 완료 / 타이틀 버튼")]
+        [Header("엔딩 대화창 등장")]
+        [SerializeField, Min(0)] private float dialogueDelaySeconds = 0.18f;
+        [SerializeField, Min(0)] private float dialogueFadeSeconds = 0.22f;
+        [SerializeField, Min(0)] private float lineDelaySeconds = 0.08f;
+        [Header("마지막 직업 이미지 - 끄면 대화 종료 후 바로 타이틀로 전환")]
+        [SerializeField] private bool showFinalCareerImage = true;
+        [SerializeField, Min(0)] private float titleFadeSeconds = 0.6f;
         [SerializeField] private UnityEvent onCompleted = new UnityEvent();
         [SerializeField] private UnityEvent onTitleRequested = new UnityEvent();
-        private Tween writing;
-        private Tween imageTween;
-        private int lineCount, characterCount, visibleCharacters, nextLine;
-        private int scrollLine = -1;
-        private int[] lineEnds = Array.Empty<int>();
-        private float[] lineHeights = Array.Empty<float>();
-        private bool paused, visible, complete;
+        private Tween imageTween, titleTween;
+        private Coroutine dialogueReveal;
+        private CareDialogueView revealingDialogue;
+        private Image fadeOverlay;
+        private Canvas imageCanvas;
+        private Sprite careerImage;
+        private bool paused, complete, returning, prepared;
+        public bool IsOpen { get; private set; }
+        public bool RoomVisible { get; private set; }
+        public bool CharacterVisible { get; private set; }
         public bool InputBlocked { get; private set; }
-        public bool IsWriting => writing != null;
-        public bool HasNextLine => nextLine < lineCount;
-        public event Action NextRequested;
+        public bool IsTransitioning => imageTween != null || dialogueReveal != null || returning;
+        public event Action SceneChanged;
         public event Action Completed;
         public event Action TitleRequested;
         public event Action<CareSfxCue> SoundRequested;
 
-        private void Awake() => Hide();
-        private void OnEnable()
+        private void Awake() { PrepareLayout(); Hide(); }
+        private void OnEnable() { if (clickArea != null) clickArea.Clicked += Next; }
+        private void OnDisable() { if (clickArea != null) clickArea.Clicked -= Next; Hide(); }
+        private void PrepareLayout()
         {
-            if (clickArea != null) clickArea.Clicked += Next;
-            if (titleButton != null) titleButton.onClick.AddListener(GoToTitle);
-        }
-        private void OnDisable()
-        {
-            if (clickArea != null) clickArea.Clicked -= Next;
-            if (titleButton != null) titleButton.onClick.RemoveListener(GoToTitle);
-            Hide();
-        }
-        private void Next() { if (visible && !paused && !InputBlocked && !complete) NextRequested?.Invoke(); }
-        private void GoToTitle()
-        {
-            if (!visible || !complete || paused || InputBlocked) return;
-            TitleRequested?.Invoke();
-            onTitleRequested.Invoke();
-        }
-        public void Open(string title)
-        {
-            visible = true; complete = false;
-            WorkUi.Show(panelGroup, true);
-            if (titleText != null) titleText.text = title;
-            if (titleButton != null) WorkUi.Show(titleButton.gameObject, false);
-            if (hintText != null) WorkUi.Show(hintText.gameObject, true);
-        }
-        public void ShowPage(Sprite sprite, string text, int number, int count)
-        {
-            SoundRequested?.Invoke(CareSfxCue.EndingPage);
-            StopWriting();
-            if (pageText != null) pageText.text = number + " / " + count;
-            ShowImage(sprite);
-            if (letterText == null) return;
-            letterText.textWrappingMode = TextWrappingModes.Normal;
-            letterText.overflowMode = TextOverflowModes.Overflow;
-            letterText.text = text ?? "";
-            letterText.maxVisibleLines = int.MaxValue;
-            letterText.maxVisibleCharacters = int.MaxValue;
-            Canvas.ForceUpdateCanvases();
-            letterText.ForceMeshUpdate();
-            letterText.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, letterText.preferredHeight);
-            letterText.ForceMeshUpdate();
-            lineCount = string.IsNullOrEmpty(text) ? 0 : letterText.textInfo.lineCount;
-            characterCount = letterText.textInfo.characterCount;
-            if (lineEnds.Length < lineCount)
+            if (prepared) return;
+            prepared = true;
+            imageCanvas = GetComponent<Canvas>();
+            if (imageCanvas == null) imageCanvas = gameObject.AddComponent<Canvas>();
+            imageCanvas.overrideSorting = true;
+            if (GetComponent<GraphicRaycaster>() == null) gameObject.AddComponent<GraphicRaycaster>();
+            // Existing letter prefab references remain valid. Only its presentation changes.
+            if (picture != null) picture.transform.SetParent(transform, false);
+            foreach (Transform child in transform)
+                if (picture == null || child != picture.transform) child.gameObject.SetActive(false);
+            var matte = GetComponent<Image>();
+            if (matte != null) { matte.color = Color.black; matte.raycastTarget = true; }
+            if (picture != null)
             {
-                Array.Resize(ref lineEnds, lineCount); Array.Resize(ref lineHeights, lineCount);
+                picture.gameObject.SetActive(true); picture.raycastTarget = false; picture.preserveAspect = false;
             }
-            for (int i = 0; i < lineCount; i++)
+            var fade = new GameObject("EndingTitleFade", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            fade.transform.SetParent(transform, false); fade.layer = gameObject.layer;
+            fadeOverlay = fade.GetComponent<Image>(); fadeOverlay.color = Color.clear; fadeOverlay.raycastTarget = false;
+            var rect = (RectTransform)fade.transform;
+            rect.anchorMin = Vector2.zero; rect.anchorMax = Vector2.one;
+            rect.offsetMin = rect.offsetMax = Vector2.zero;
+        }
+        public void ConfigureDialogue(CareDialogueView dialogue)
+        {
+            PrepareLayout();
+            var canvas = dialogue != null ? dialogue.GetComponentInParent<Canvas>() : null;
+            if (canvas == null) return;
+            imageCanvas.sortingLayerID = canvas.sortingLayerID;
+            imageCanvas.sortingOrder = canvas.sortingOrder - 1;
+        }
+        public void Open(string title, Sprite image = null)
+        {
+            CancelDialogueReveal();
+            PrepareLayout(); IsOpen = true; complete = false; returning = false;
+            careerImage = image;
+            var matte = GetComponent<Image>();
+            if (matte != null) matte.color = Color.black;
+            fadeOverlay.color = Color.clear;
+        }
+        public void PresentDialogue(CareDialogueView dialogue, Action show, bool cutsceneChanged)
+        {
+            CancelDialogueReveal();
+            revealingDialogue = dialogue;
+            dialogue.SetPresentationPlaying(true);
+            if (cutsceneChanged) dialogue.SetOpacity(0);
+            dialogueReveal = StartCoroutine(RevealDialogue(show, cutsceneChanged));
+        }
+        private IEnumerator RevealDialogue(Action show, bool cutsceneChanged)
+        {
+            yield return null;
+            while (imageTween != null) yield return null;
+            yield return DialogueDelay(cutsceneChanged ? dialogueDelaySeconds : lineDelaySeconds);
+            show();
+            if (cutsceneChanged) revealingDialogue.SetOpacity(0);
+            float duration = cutsceneChanged ? dialogueFadeSeconds : 0;
+            float elapsed = 0;
+            while (elapsed < duration)
             {
-                var line = letterText.textInfo.lineInfo[i];
-                lineEnds[i] = line.lastCharacterIndex + 1;
-                lineHeights[i] = line.visibleCharacterCount > 0
-                    ? letterText.textInfo.lineInfo[0].ascender - line.descender : i > 0 ? lineHeights[i - 1] : 0;
+                if (!paused && !InputBlocked && !revealingDialogue.InputBlocked) elapsed += Time.unscaledDeltaTime;
+                revealingDialogue.SetOpacity(Mathf.SmoothStep(0, 1, elapsed / duration));
+                yield return null;
             }
-            visibleCharacters = 0; nextLine = 0; scrollLine = -1;
-            letterText.maxVisibleCharacters = 0;
-            if (letterScroll != null) letterScroll.verticalNormalizedPosition = 1;
-            if (characterCount == 0) { UpdateHint(false); return; }
-            ShowNextLine();
+            revealingDialogue.SetOpacity(1);
+            revealingDialogue.SetPresentationPlaying(false);
+            revealingDialogue = null;
+            dialogueReveal = null;
         }
-        public void ShowNextLine()
+        private IEnumerator DialogueDelay(float seconds)
         {
-            if (writing != null || !HasNextLine || letterText == null) return;
-            int end = Mathf.Min(characterCount, lineEnds[nextLine++]);
-            float duration = (end - visibleCharacters) * characterSeconds;
-            UpdateHint(true);
-            writing = DOTween.To(() => visibleCharacters, ShowCharacters, end, duration)
-                .SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            float elapsed = 0;
+            while (elapsed < seconds)
             {
-                writing = null; UpdateHint(false);
-            });
-            if (paused) writing.Pause();
-        }
-        private void ShowCharacters(int count)
-        {
-            if (visibleCharacters == count || letterText == null) return;
-            visibleCharacters = count; letterText.maxVisibleCharacters = count;
-            int line = Mathf.Max(0, scrollLine);
-            while (line + 1 < lineCount && count > lineEnds[line]) line++;
-            if (line == scrollLine) return;
-            scrollLine = line; ScrollToLine(line);
-        }
-        private void ScrollToLine(int line)
-        {
-            if (letterScroll == null || letterScroll.viewport == null || lineCount == 0) return;
-            float total = letterText.rectTransform.rect.height - letterScroll.viewport.rect.height;
-            if (total <= 0) return;
-            letterScroll.verticalNormalizedPosition = 1 - Mathf.Clamp01((lineHeights[line] - letterScroll.viewport.rect.height + 12) / total);
-        }
-        public void FinishLine()
-        {
-            writing?.Complete();
-        }
-        public void FinishWriting()
-        {
-            StopWriting();
-            nextLine = lineCount;
-            if (letterText != null)
-            {
-                ShowCharacters(characterCount);
-                letterText.maxVisibleCharacters = int.MaxValue;
-                letterText.maxVisibleLines = int.MaxValue;
+                if (!paused && !InputBlocked && !revealingDialogue.InputBlocked) elapsed += Time.unscaledDeltaTime;
+                yield return null;
             }
-            UpdateHint(false);
         }
-        private void UpdateHint(bool writingNow)
+        private void CancelDialogueReveal()
         {
-            if (hintText != null) hintText.text = writingNow ? "화면을 누르면 현재 줄을 모두 표시합니다" : "화면을 눌러 계속";
+            if (dialogueReveal != null) StopCoroutine(dialogueReveal);
+            dialogueReveal = null;
+            if (revealingDialogue != null) revealingDialogue.SetPresentationPlaying(false);
+            revealingDialogue = null;
         }
-        private void ShowImage(Sprite sprite)
-        {
-            if (sprite == null || picture == null || picture.sprite == sprite) return;
-            imageTween?.Kill();
-            picture.sprite = sprite; picture.enabled = true;
-            if (pictureGroup == null) return;
-            pictureGroup.alpha = 0;
-            imageTween = DOTween.To(() => pictureGroup.alpha, value => pictureGroup.alpha = value, 1, imageSeconds).SetUpdate(true);
-            if (paused) imageTween.Pause();
-        }
-        public void ClearImage()
+        public void ShowRoom(bool character)
         {
             imageTween?.Kill(); imageTween = null;
-            if (picture != null) { picture.sprite = null; picture.enabled = false; }
-            if (pictureGroup != null) pictureGroup.alpha = 1;
+            RoomVisible = true; CharacterVisible = character;
+            WorkUi.Show(panelGroup, false); SceneChanged?.Invoke();
+        }
+        public void ShowCareer(Sprite sprite)
+        {
+            bool changed = RoomVisible || careerImage != sprite;
+            careerImage = sprite; RoomVisible = false; CharacterVisible = false;
+            WorkUi.Show(panelGroup, true);
+            if (picture != null) { picture.sprite = sprite; picture.enabled = sprite != null; FitPicture(); }
+            SceneChanged?.Invoke();
+            if (!changed || pictureGroup == null || sprite == null) return;
+            imageTween?.Kill(); pictureGroup.alpha = 0;
+            imageTween = DOTween.To(() => pictureGroup.alpha, value => pictureGroup.alpha = value, 1, imageSeconds)
+                .SetUpdate(true).OnComplete(() => imageTween = null);
+            if (paused) imageTween.Pause();
+            SoundRequested?.Invoke(CareSfxCue.EndingPage);
+        }
+        private void OnRectTransformDimensionsChange() { if (prepared) FitPicture(); }
+        private void FitPicture()
+        {
+            if (picture == null || picture.sprite == null) return;
+            var bounds = ((RectTransform)transform).rect.size;
+            var size = picture.sprite.rect.size;
+            float scale = Mathf.Max(bounds.x / Mathf.Max(1, size.x), bounds.y / Mathf.Max(1, size.y));
+            var rect = picture.rectTransform;
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = Vector2.zero; rect.localScale = Vector3.one; rect.sizeDelta = size * scale;
         }
         public void ShowComplete(bool notify = true)
         {
-            bool firstComplete = !complete;
-            FinishWriting(); complete = true;
-            if (hintText != null) WorkUi.Show(hintText.gameObject, false);
-            if (titleButton != null) WorkUi.Show(titleButton.gameObject, true);
-            if (notify) { Completed?.Invoke(); onCompleted.Invoke(); }
-            if (notify && firstComplete) SoundRequested?.Invoke(CareSfxCue.EndingComplete);
+            CancelDialogueReveal();
+            bool first = !complete; complete = true;
+            if (notify && first) { Completed?.Invoke(); onCompleted.Invoke(); SoundRequested?.Invoke(CareSfxCue.EndingComplete); }
+            if (showFinalCareerImage && careerImage != null) ShowCareer(careerImage);
+            else ReturnToTitle();
         }
-        public void SetInputBlocked(bool blocked)
+        private void Next()
         {
-            InputBlocked = blocked;
-            if (titleButton != null) titleButton.interactable = !blocked && !paused;
+            if (IsOpen && complete && !paused && !InputBlocked && !IsTransitioning) ReturnToTitle();
         }
+        private void ReturnToTitle()
+        {
+            if (returning) return;
+            if (RoomVisible)
+            {
+                var matte = GetComponent<Image>();
+                if (matte != null) matte.color = Color.clear;
+                if (picture != null) picture.enabled = false;
+            }
+            returning = true; WorkUi.Show(panelGroup, true);
+            titleTween = DOTween.To(() => fadeOverlay.color, value => fadeOverlay.color = value, Color.black, titleFadeSeconds)
+                .SetUpdate(true).OnComplete(() =>
+            {
+                titleTween = null; TitleRequested?.Invoke(); onTitleRequested.Invoke();
+            });
+            if (paused) titleTween.Pause();
+        }
+        public void SetInputBlocked(bool blocked) => InputBlocked = blocked;
         public void SetPaused(bool value)
         {
             paused = value;
-            if (value) { writing?.Pause(); imageTween?.Pause(); }
-            else { writing?.Play(); imageTween?.Play(); }
-            SetInputBlocked(InputBlocked);
+            if (value) { imageTween?.Pause(); titleTween?.Pause(); }
+            else { imageTween?.Play(); titleTween?.Play(); }
         }
-        private void StopWriting() { writing?.Kill(); writing = null; }
         public void Hide()
         {
-            StopWriting(); imageTween?.Kill(); imageTween = null;
+            CancelDialogueReveal();
+            imageTween?.Kill(); titleTween?.Kill(); imageTween = titleTween = null;
+            IsOpen = RoomVisible = CharacterVisible = complete = returning = false; careerImage = null;
+            if (picture != null) { picture.sprite = null; picture.enabled = false; }
             if (pictureGroup != null) pictureGroup.alpha = 1;
-            visible = false;
-            WorkUi.Show(panelGroup, false);
+            if (fadeOverlay != null) fadeOverlay.color = Color.clear;
+            WorkUi.Show(panelGroup, false); SceneChanged?.Invoke();
         }
     }
 }

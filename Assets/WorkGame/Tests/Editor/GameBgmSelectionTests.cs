@@ -8,6 +8,45 @@ namespace WorkGame.Tests
     public sealed class GameBgmSelectionTests
     {
         [Test]
+        public void IntroUsesDedicatedTrackAndReturnsToWorkWithoutAnEventOverride()
+        {
+            var music = ScriptableObject.CreateInstance<GameBgmSO>();
+            var config = ScriptableObject.CreateInstance<CareConfigSO>();
+            var clip = AudioClip.Create("Intro BGM test", 64, 1, 8000, false);
+            var owner = new GameObject("Intro BGM test");
+            owner.SetActive(false);
+            using var work = new WorkSystem(new WorkSettings(), Array.Empty<WorkPaper>());
+            using var care = config.CreateSystem(work);
+            using var flow = new CareFlowSystem(work, care, new CareDialogueFile {
+                IntroDialogue = "intro", Dialogues = new[] { new CareDialogueData {
+                    Id = "intro", Lines = new[] { new CareDialogueLine { Text = "한 달 전" } } } } });
+            using var session = new GameBgmSession();
+            try
+            {
+                var root = owner.AddComponent<GameBgmSceneRoot>();
+                Set(root, "music", music); Set(root, "work", work);
+                Set(root, "careFlow", flow); Set(root, "session", session);
+                music.Months[0].Care.Clip = clip; music.DefaultWork.Clip = clip;
+                Assert.That(flow.StartIntro(), Is.True);
+                Assert.That(work.Run.Phase, Is.EqualTo(WorkPhase.Ready));
+                Assert.That(Resolve(root), Is.SameAs(music.Months[0].Care));
+                music.Intro.Clip = clip;
+                music.Events = new[] { new GameEventBgm { DialogueId = "intro", Mode = GameEventBgmMode.Silence } };
+                typeof(GameBgmSceneRoot).GetMethod("RefreshMusic", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(root, null);
+                Assert.That(session.CurrentTrack, Is.SameAs(music.Intro));
+                Assert.That(flow.Dialogue.Next(), Is.True);
+                Assert.That(flow.IsIntro, Is.False);
+                typeof(GameBgmSceneRoot).GetMethod("RefreshMusic", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(root, null);
+                Assert.That(session.CurrentTrack, Is.SameAs(music.DefaultWork));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(owner); UnityEngine.Object.DestroyImmediate(clip);
+                UnityEngine.Object.DestroyImmediate(config); UnityEngine.Object.DestroyImmediate(music);
+            }
+        }
+
+        [Test]
         public void AllTwelveMonthsKeepWorkThroughReportAndCareThroughResultBeforeEnding()
         {
             var music = ScriptableObject.CreateInstance<GameBgmSO>();
@@ -35,10 +74,13 @@ namespace WorkGame.Tests
                     Assert.That(Resolve(root), Is.SameAs(music.Months[month - 1].Work), "급여 정산 중에는 Work 유지");
                     flow.EnterCare();
                     Assert.That(Resolve(root), Is.SameAs(music.Months[month - 1].Care));
+                    Assert.That(Muffled(root), Is.False);
                     for (int slot = 0; slot < CareSystem.SlotCount; slot++) care.SetLesson(slot, CareSystem.RestId);
                     Assert.That(flow.GoNext(), Is.True);
                     Assert.That(Resolve(root), Is.SameAs(music.Months[month - 1].Care), "육성 결과 중에는 Care 유지");
+                    Assert.That(Muffled(root), Is.True, "성장 결과에서만 BGM 필터 적용");
                     flow.ConfirmResult();
+                    Assert.That(Muffled(root), Is.False, "이벤트·다음 월로 넘어가면 필터 해제");
                 }
                 Assert.That(flow.Phase, Is.EqualTo(CareFlowPhase.Ended));
                 Assert.That(Resolve(root), Is.SameAs(music.Ending));
@@ -104,7 +146,7 @@ namespace WorkGame.Tests
                     })
                 });
                 Assert.That(upgrades.Buy("more-time"), Is.True);
-                work.AddTime(89);
+                work.AddTime(work.MonthSeconds - extraSeconds - 1);
                 Assert.That(Resolve(root), Is.SameAs(music.DefaultWork));
                 if (extraSeconds > 0)
                 {
@@ -197,6 +239,9 @@ namespace WorkGame.Tests
 
         private static void Set(object target, string field, object value)
             => target.GetType().GetField(field, BindingFlags.Instance | BindingFlags.NonPublic).SetValue(target, value);
+
+        private static bool Muffled(GameBgmSceneRoot root)
+            => (bool)typeof(GameBgmSceneRoot).GetProperty("ShouldMuffleMusic", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(root);
 
         private static GameBgmTrack Resolve(GameBgmSceneRoot root)
             => (GameBgmTrack)typeof(GameBgmSceneRoot).GetMethod("ResolveTrack", BindingFlags.Instance | BindingFlags.NonPublic)

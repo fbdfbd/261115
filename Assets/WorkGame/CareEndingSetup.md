@@ -1,56 +1,45 @@
-# 달이 엔딩 편지
+# 5년 후 엔딩
 
-## 생성과 연결
+## 진행 순서
 
-1. `Work Game > UI > Care Ending Tool`에서 프리팹을 생성합니다. 기본 Page는 1300×800입니다.
-2. 씬 Canvas 아래 배치하고 GameObject는 켜 둡니다. CanvasGroup으로 표시를 제어합니다.
-3. WorkRoot의 `Care Ending View`에 씬의 CareEndingView를 연결합니다. Presenter 컴포넌트는 필요 없습니다.
-4. 마지막 버튼의 타이틀 이동은 WorkRoot가 자동 연결합니다. 기존 시작 체크포인트를 자동 저장하고 `01_Title`로 이동합니다. `On Title Requested`는 추가 연출이 필요할 때만 사용합니다.
+엔딩 선택 → 5년 후 회고 → 풀스크린 직업 이미지와 근황 → Care 방의 친밀도별 근황 → 마지막 직업 이미지 → 클릭 후 검은 페이드 → 타이틀입니다.
+회고는 HUD와 Character를 숨긴 방에서 공통 CareDialogueView로 표시합니다. 따옴표 대사 없이 나레이션만 사용합니다.
+직업 이미지는 화면을 꽉 채우며 원본 비율을 유지합니다. 화면 비율에 따라 가장자리가 잘릴 수 있습니다.
+친밀도 장면에서는 직업 이미지를 닫고 방을 다시 보여 줍니다. HUD는 끝까지 숨깁니다.
+Low는 Character를 숨깁니다. Normal은 따로 산다는 설명 동안 숨기고 현재 방문 장면인 세 번째 문장부터 기본 표정으로 표시합니다. High는 웃음 표정으로 표시합니다.
 
-엔딩은 별도 Canvas 또는 업무·육성 전환 그룹 **바깥**에 배치하고 가장 앞에 표시하세요.
-WorkFlowRoot의 Work Groups / After Work Groups 안에 넣으면 엔딩 진입 시 부모가 숨겨집니다.
-기존 On Run Finished는 논리적인 게임 종료 시점입니다. 그 이벤트에 타이틀 이동을 연결했다면 제거해야 편지를 끝까지 읽을 수 있습니다.
+## 연결
 
-12월 육성 결과를 확인한 뒤 후보가 하나면 자동으로 열립니다. 여러 후보면 엔딩 선택창에서 고른 뒤 열립니다.
-선택창 연결은 CareEndingChoiceSetup.md를 참고합니다. 기존 판정 조건·친밀도 분기는 유지합니다.
+02_Game 씬의 WorkRoot에는 기존 CareDialogueView와 CareEndingView가 연결되어 있습니다.
+WorkFlowRoot는 EndingView.SceneChanged를 받아 방과 캐릭터를 제어합니다. 이미지는 전용 하위 Canvas에서 표시합니다. 실행 시 현재 다이얼로그 Canvas보다 한 단계 낮게 맞추므로 기존 Canvas 순서를 바꾸지 않습니다.
+CareEnding 프리팹에는 풀스크린 배경과 Picture만 남겼습니다. 기존 편지 UI와 타이틀 버튼은 제거했습니다.
+CareEndingTool로 새 프리팹을 만들 경우 WorkRoot의 CareEndingView에 연결하고 Canvas를 일반 Work/Care 전환 그룹 바깥에 배치합니다.
 
-## 데이터
+## 마지막 이미지 구간 끄기
 
-각 `CareEndingSO`의 Pages 목록에 순서대로 추가합니다.
+CareEndingView의 Show Final Career Image를 끄면 친밀도 대화 종료 후 바로 페이드아웃하고 타이틀로 돌아갑니다.
+켜면 직업 이미지를 한 번 더 보여 줍니다. 이때 다이얼로그는 숨기고 화면 클릭을 기다립니다.
+Image Seconds는 이미지 등장 시간입니다. Title Fade Seconds는 타이틀 복귀 전 검은 페이드 시간입니다.
+현재 프리팹은 마지막 이미지 켜짐 / 이미지 0.3초 / 타이틀 페이드 0.6초입니다.
 
-- Image: 좌측에 표시할 Sprite. 첫 페이지 외에는 비워 두면 이전 이미지를 유지합니다.
-- Text: 우측 편지. 줄바꿈을 직접 넣을 수 있고, 긴 문장은 화면 폭에 맞춰 줄이 나뉩니다.
-- Append Friendship Text: 친밀도에 맞는 LowText / NormalText / HighText를 마지막 페이지로 덧붙입니다. 기본 켜짐입니다.
+## 대사와 회고
 
-Pages를 비우면 기존 Text를 첫 페이지로 사용합니다. 이미지 없이 기존 데이터만으로 글 연출을 볼 수 있습니다.
-연출 페이지는 SO에서 관리하고 기존 본문·친밀도 후일담은 CareContent.json을 계속 사용합니다.
-build_care_data.py로 다시 가져와도 SO의 Pages / AppendFriendshipText는 보존합니다.
+CareEndingSO.Text와 Pages.Text에는 직업별 근황이 들어 있습니다. Pages의 첫 이미지를 직업 이미지로 사용합니다.
+LowText / NormalText / HighText는 친밀도별 마무리입니다. AppendFriendshipText를 끄면 이 부분을 생략합니다.
+Samples/CareContent.json도 현재 SO 문구와 맞췄습니다. 데이터 재생성 시 이미지 연결은 기존 가져오기 도구가 보존합니다.
+Samples/CareDialogue.json의 EndingText와 약속 결과 텍스트는 이번 회차의 실제 이력으로 회고를 만듭니다.
+같은 달에는 최종 선택이나 약속 결과 하나만 보여 줍니다. 명패를 우선하고 약속 결과를 다음으로 골라 최대 3개를 월순으로 표시합니다.
 
-## 연출과 입력
+대화창 페이드는 직업 컷씬의 등장·종료 경계에만 적용합니다. 이미지 페이드가 끝난 뒤 0.18초 기다리고 0.22초 페이드인합니다. 일반 문장과 방문 장면에서는 대화창을 유지하고 0.08초 간격만 둡니다.
+엔딩 나레이션은 기존 DialogueNext와 DialogueBlip 효과음을 사용합니다. 일반 나레이션의 무음 설정은 유지합니다.
+Dialogue Delay Seconds / Dialogue Fade Seconds / Line Delay Seconds에서 조절합니다. 글자 출력은 대화창 등장이 끝난 뒤 시작합니다.
 
-### 선택과 약속 회고
+## 입력과 기록
 
-엔딩 본문 앞에 이번 회차의 기억을 월순으로 보여 줍니다. `CareDialogue.json`의 `EndingIntroText`는 회고 도입부이며, 각 대화와 선택지의 `EndingText`가 실제로 읽은 대화·선택한 답변에 맞춰 표시됩니다. 같은 대화의 여러 줄을 읽어도 회고는 한 번만 나옵니다. 대화하지 않은 달이나 고르지 않은 답변은 추가하지 않습니다.
+글자 출력 중 클릭하면 현재 대사를 완성하고 다시 클릭하면 다음 대사로 넘어갑니다.
+로그에는 현재 엔딩에서 이미 읽은 문장만 표시합니다. 이미 읽은 엔딩은 스킵할 수 있습니다.
+일시정지하면 대사와 이미지·타이틀 페이드가 멈춥니다. 메뉴 입력 차단도 공유합니다.
+마지막 대사를 끝내면 엔딩 열람을 기록합니다. 이후 이미지 재표시 여부와 관계없이 컬렉션에 반영됩니다.
+타이틀 복귀는 기존 엔딩 선택 전 체크포인트를 보존합니다. 이어하기하면 선택 전 상태로 돌아옵니다.
 
-약속은 `SuccessEndingText` / `EarlySuccessEndingText` / `FailureEndingText` / `DeclinedEndingText`로 성공·특수 조기퇴근 성공·실패·거절을 구분합니다. 아직 결과가 나지 않은 약속은 회고하지 않습니다. 월별 대화 12개, 명패, 친구·진로 선택과 쿠키·사진첩·전시 약속의 문구가 들어 있습니다. 기존 대화 이력과 약속 저장 기록으로 복원하므로 저장 형식 변경은 필요 없습니다. 회고 문구가 없는 기존 데이터는 기존 엔딩 본문과 친밀도 후일담만 표시합니다.
-
-### 페이지 입력
-
-- 기본 0.035초 간격으로 한 글자씩 표시하고, 한 줄이 끝나면 클릭을 기다립니다. 출력 중 클릭하면 현재 줄만 즉시 완성하고 멈춥니다. 다시 클릭하면 다음 줄을 시작합니다. 자동 줄바꿈도 한 줄로 취급합니다.
-- 출력 완료 후 클릭하면 다음 페이지로 넘어갑니다. 페이지가 바뀌면 글은 위에서 다시 표시합니다.
-- 긴 편지는 표시된 줄을 따라 자동으로 스크롤합니다. 직접 드래그해 위쪽 글도 읽을 수 있습니다.
-- 다른 이미지가 지정되면 기본 0.3초 동안 나타납니다. 비워 두거나 같은 이미지를 쓰면 유지합니다.
-- 마지막 편지를 읽고 클릭하면 타이틀 버튼을 표시합니다. On Completed는 이 시점에 한 번 호출합니다.
-- 정지 중에는 클릭·줄 표시·이미지 Tween을 멈춥니다. 외부 모달은 View.SetInputBlocked(bool)로 입력을 막을 수 있습니다.
-- 별도 Update는 없습니다. 줄 표시는 DOTween의 간격·콜백으로 진행하며 숨길 때 종료합니다.
-
-## 크기 수정
-
-- Page: 창 크기.
-- Page/Body/PictureFrame: 이미지 영역. Picture의 Image는 Preserve Aspect를 켰습니다.
-- Page/Body/Letter: 편지 영역. Viewport의 여백, LetterText의 글자 크기·줄 간격을 조절합니다.
-- LetterText의 높이는 실행 중 글 길이로 계산하므로 직접 고정하지 않습니다. 폭은 부모 앵커를 따릅니다.
-- Title / PageNumber / ContinueHint / TitleButton: 각 RectTransform 앵커로 배치합니다.
-- View의 Line Seconds / Image Seconds: 연출 속도.
-
-LayoutGroup / LayoutElement / ContentSizeFitter는 넣지 않았습니다. 프리팹 생성·씬 배치·컴파일·테스트는 실행하지 않았습니다.
+Unity CLI는 사용하지 않았습니다. 별도 C# 컴파일과 순수 도메인 검사로 검증했으며 실제 화면은 Unity 에디터에서 확인해야 합니다.

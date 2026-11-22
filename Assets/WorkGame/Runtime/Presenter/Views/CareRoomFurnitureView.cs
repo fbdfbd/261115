@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace WorkGame
 {
@@ -18,6 +19,8 @@ namespace WorkGame
         [SerializeField] private WorkRoot workRoot;
         [SerializeField] private CareConfigSO config;
         [SerializeField] private List<Slot> slots = new List<Slot>();
+        [Tooltip("사진첩 약속 성공 후 Care 배경에 표시할 사진 오브젝트입니다. 일반 성공과 조기 성공에 공통으로 사용합니다.")]
+        [SerializeField] private Image albumPhoto;
         private readonly Dictionary<string, CareGiftSO> art = new Dictionary<string, CareGiftSO>();
         private CareSystem care;
         private bool visible;
@@ -28,15 +31,24 @@ namespace WorkGame
             if (config != null)
                 foreach (var gift in config.Gifts)
                     if (gift != null) art[gift.Id] = gift;
-            if (workRoot != null) workRoot.RunStarted += Bind;
+            if (workRoot != null)
+            {
+                workRoot.RunStarted += Bind;
+                workRoot.CareFlowChanged += Refresh;
+            }
             Bind(workRoot != null ? workRoot.System : null);
         }
 
         private void OnDisable()
         {
-            if (workRoot != null) workRoot.RunStarted -= Bind;
+            if (workRoot != null)
+            {
+                workRoot.RunStarted -= Bind;
+                workRoot.CareFlowChanged -= Refresh;
+            }
             if (care != null) care.Changed -= Refresh;
             care = null;
+            if (albumPhoto != null) albumPhoto.gameObject.SetActive(false);
             foreach (var slot in slots)
                 if (slot?.Renderer != null) { slot.Renderer.enabled = false; slot.Renderer.sprite = null; }
         }
@@ -57,11 +69,16 @@ namespace WorkGame
 
         private void Refresh()
         {
+            if (albumPhoto != null)
+                albumPhoto.gameObject.SetActive(visible && isActiveAndEnabled && workRoot != null
+                    && workRoot.CareFlow != null && !workRoot.CareFlow.IsIntro
+                    && workRoot.CareFlow.HasReadSuccessfulPromise("album"));
             foreach (var slot in slots)
             {
                 if (slot?.Renderer == null) continue;
                 string id = care?.Run.GetActiveGift(slot.Kind);
-                Sprite sprite = id != null && art.TryGetValue(id, out var gift) && gift.Kind == slot.Kind
+                CareGiftSO gift = null;
+                Sprite sprite = id != null && art.TryGetValue(id, out gift) && gift.Kind == slot.Kind
                     ? gift.RoomSprite : null;
                 var target = slot.Renderer;
                 if (target.sprite != sprite)
@@ -72,6 +89,7 @@ namespace WorkGame
                         var bounds = sprite.bounds;
                         float scale = Mathf.Min(Mathf.Max(0.01f, slot.Size.x) / Mathf.Max(0.01f, bounds.size.x),
                             Mathf.Max(0.01f, slot.Size.y) / Mathf.Max(0.01f, bounds.size.y));
+                        scale *= Mathf.Max(0.01f, gift.RoomScale);
                         target.transform.localScale = new Vector3(scale, scale, 1);
                         target.transform.localPosition = new Vector3(-bounds.center.x * scale, -bounds.min.y * scale, 0);
                     }

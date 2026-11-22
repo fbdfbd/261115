@@ -70,6 +70,7 @@ namespace WorkGame
         public CareSystem Care { get; private set; }
         public CarePresenter CarePresenter { get; private set; }
         public CareFlowSystem CareFlow { get; private set; }
+        public CareEndingView EndingView => careEndingView;
         public event Action<WorkSystem> RunStarted;
         public event Action<CareMonthResult> CareMonthFinished;
         public event Action<CareEndingResult> CareEndingReady;
@@ -206,7 +207,8 @@ namespace WorkGame
                 careSchedulePresenter = new CareSchedulePresenter(System, CarePresenter, CareFlow,
                     careScheduleView, scheduleButton, careConfig);
                 careSchedulePresenter.Connect();
-                careEndingPresenter = new CareEndingPresenter(Care, System, careEndingView, careConfig, CareFlow);
+                careEndingPresenter = new CareEndingPresenter(Care, System, careEndingView, careConfig, CareFlow,
+                    careDialogueView, WasEndingRead);
                 careEndingPresenter.ReadCompleted += OnEndingRead;
                 careEndingPresenter.Connect();
                 careEndingChoicePresenter = new CareEndingChoicePresenter(Care, CareFlow, careEndingChoiceView, careConfig, WasEndingRead);
@@ -223,7 +225,7 @@ namespace WorkGame
                 upgradePresenter = new WorkUpgradePresenter(System, Upgrades, upgradeView);
                 upgradePresenter.Connect();
             }
-            if (saved == null) System.StartRun();
+            if (saved == null && (careDialogueView == null || CareFlow == null || !CareFlow.StartIntro())) System.StartRun();
             RunStarted?.Invoke(System);
             if (saved?.Point == SavePoint.CareStart) EnterCare();
             else if (saved?.Point == SavePoint.EndingChoice) CareFlow.ResumeEndingChoice();
@@ -233,7 +235,7 @@ namespace WorkGame
         // 수동 슬롯 번호는 1~4입니다. 자동 슬롯을 포함해 총 5칸입니다.
         public bool SaveManual(int slot)
         {
-            if (slot < 1 || slot > 4) return false;
+            if (slot < 1 || slot > 4 || CareFlow?.IsIntro == true) return false;
             try { return Saves.SaveManual((SaveSlot)slot); }
             catch (Exception e) { ReportSaveError(e); return false; }
         }
@@ -247,7 +249,7 @@ namespace WorkGame
                 if (!Application.CanStreamedLevelBeLoaded("01_Title"))
                     throw new InvalidOperationException("타이틀 씬을 빌드 목록에 추가해 주세요.");
                 // 엔딩 선택 전 체크포인트를 유지해 이어하기에서 다시 선택할 수 있습니다.
-                if (!Saves.SaveAuto())
+                if (CareFlow?.IsIntro != true && !Saves.SaveAuto())
                     throw new InvalidOperationException("자동 저장할 시작 상태가 없습니다.");
                 returningToTitle = true;
                 WorkStartRequest.NewRun();
@@ -344,7 +346,11 @@ namespace WorkGame
             catch (Exception e) { ReportSaveError(e); }
             EndingReadCompleted?.Invoke(id);
         }
-        public void SetCareDialogueBlocked(bool blocked) => careDialogueView?.SetInputBlocked(blocked);
+        public void SetCareDialogueBlocked(bool blocked)
+        {
+            careDialogueView?.SetInputBlocked(blocked);
+            careEndingView?.SetInputBlocked(blocked);
+        }
         public void ClearCareLesson(int slot) => CarePresenter?.ClearLesson(slot);
         public void OpenSchedule() => careSchedulePresenter?.Open();
         private void OnCareFlowChanged() => CareFlowChanged?.Invoke();

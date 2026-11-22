@@ -26,6 +26,7 @@ namespace WorkGame
         [SerializeField] private UnityEvent<string> customCue = new UnityEvent<string>();
         private Coroutine routine;
         private bool paused;
+        private readonly List<IGameSfxHandle> soundHandles = new List<IGameSfxHandle>();
         public bool IsPlaying { get; private set; }
         public bool HasCutscene => cutscene != null && cutscene.IsVisible;
         public event Action<bool> BlockingChanged;
@@ -37,12 +38,14 @@ namespace WorkGame
             if (paused == value) return;
             paused = value;
             if (audioSource != null) { if (value) audioSource.Pause(); else audioSource.UnPause(); }
+            foreach (var handle in soundHandles) handle.SetPaused(value);
             foreach (var extension in extensions) if (extension != null) extension.SetPaused(value);
         }
 
         public void Play(CareDialogueCue[] cues, bool immediate)
         {
             if (cues == null || cues.Length == 0) return;
+            cutscene?.ConfigureDialogueCanvas(GetComponentInParent<Canvas>());
             if (immediate || !isActiveAndEnabled)
             {
                 foreach (var cue in cues) ApplyImmediate(cue);
@@ -93,6 +96,12 @@ namespace WorkGame
                         {
                             var sound = sounds.Find(x => x.Key == cue.Key);
                             if (sound?.Clip != null && audioSource != null) audioSource.PlayOneShot(sound.Clip);
+                            else if (sound?.Clip != null)
+                            {
+                                soundHandles.RemoveAll(handle => !handle.IsPlaying);
+                                var handle = GameAudioRoot.GetOrCreate(null)?.Effects?.Play(new GameSfxClip { Clip = sound.Clip });
+                                if (handle != null) soundHandles.Add(handle);
+                            }
                         }
                         yield return Delay(cue.Seconds);
                     }
@@ -145,9 +154,9 @@ namespace WorkGame
             if (IsPlaying == value) return;
             IsPlaying = value; BlockingChanged?.Invoke(value);
         }
-        public void FinishDialogue(Action finish)
+        public void FinishDialogue(Action finish, bool useTransition = false)
         {
-            if (!HasCutscene) { finish?.Invoke(); return; }
+            if ((!HasCutscene && !useTransition) || cutscene == null) { finish?.Invoke(); return; }
             SetPlaying(true);
             cutscene.FinishDialogue(finish, () => Clear());
         }
@@ -161,6 +170,8 @@ namespace WorkGame
             foreach (var extension in extensions) if (extension != null) extension.Cancel();
             foreach (var layer in layers) if (layer.Image != null) layer.Image.enabled = false;
             if (audioSource != null) audioSource.Stop();
+            foreach (var handle in soundHandles) handle.Dispose();
+            soundHandles.Clear();
             SetPlaying(false);
         }
     }

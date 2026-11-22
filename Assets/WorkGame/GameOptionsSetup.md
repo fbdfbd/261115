@@ -20,7 +20,10 @@ View와 Root, 각 버튼·슬라이더 참조는 툴이 연결합니다. OnClick
 
 ## 시스템
 
-- 지원 해상도를 Screen.resolutions에서 받아 중복 주사율을 제거하고 현재 창 크기도 포함합니다.
+- 해상도는 1280×720 / 1600×900 / 1920×1080 / 2560×1440 중 현재 모니터 크기에 들어가는 항목만 표시합니다. 기본값은 1920×1080입니다.
+- 2560×1440은 현재 모니터가 해당 크기를 지원할 때만 나옵니다. 옵션을 열 때 모니터를 다시 확인하며 지원하지 않는 저장 해상도는 가능한 값으로 보정합니다.
+- 작은 모니터에 기본 항목이 하나도 들어가지 않으면 화면 안에 들어가는 16:9 해상도를 사용합니다.
+- Player Settings의 Resizable Window는 꺼져 있습니다. 창 가장자리를 드래그해 크기를 바꾸지 못하며 기본 시작 크기는 1920×1080입니다.
 - 해상도 목록의 `Dropdown/Template` ScrollRect에서 Scroll Sensitivity를 조절합니다. 기본값은 35입니다.
 - 볼륨 FillArea는 배경 전체 폭과 일치합니다. HandleArea만 핸들 반지름인 좌우 12만큼 안쪽에 둡니다.
 - 창 모드 ON은 일반 창, OFF는 전체 화면 창입니다. PC에서 실제 화면에 적용합니다.
@@ -34,4 +37,12 @@ View와 Root, 각 버튼·슬라이더 참조는 툴이 연결합니다. OnClick
   업무/육성 도중 상태를 새 체크포인트로 캡처하지 않습니다. 저장 실패 시 이동하지 않습니다.
 - 실제 타이틀 씬 이름은 `01_Title`입니다. EditorBuildSettings에 추가했으며 기존 게임 씬 순서는 유지했습니다.
 
-컴파일·플레이·테스트 실행은 하지 않았습니다. 기존 저장 테스트에는 타이틀 복귀용 SaveAuto가 시작 상태를 유지하는 케이스를 추가했습니다.
+## Game 씬 16:9 고정
+
+02_Game의 Main Camera에 GameAspectView를 연결했습니다. 카메라 표시 영역을 중앙의 16:9로 맞추고 남는 영역은 검은 UI로 덮습니다.
+여백은 클릭을 차단하며 대각선 전환이나 컷씬 중에도 검은색을 유지합니다. 컴포넌트 비활성화 시 원래 카메라 영역으로 복원합니다.
+기존 배경·가구 위치는 변경하지 않았습니다. Game 씬의 카메라용 CanvasScaler 12개는 기존 1920×1080 / Expand 설정을 그대로 사용합니다.
+전체화면 창도 16:9 해상도로 요청합니다. Unity의 전체화면 창은 표시 비율이 다르면 자체 레터박스를 적용합니다.
+참고: [FullScreenWindow](https://docs.unity.com/en-us/engine/6000.3/script-reference/unityengine/fullscreenmode/fullscreenwindow), [Camera.rect](https://docs.unity.com/en-us/engine/6000.3/script-reference/unityengine/camera/rect).
+
+Unity CLI 없이 별도 C# 컴파일을 확인했습니다. 모니터별 옵션·저장 해상도 보정·카메라 영역 계산 247개 검사를 통과했습니다. 실제 빌드의 창 동작은 에디터 밖에서 확인해야 합니다.

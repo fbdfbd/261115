@@ -14,6 +14,9 @@ namespace WorkGame
         [SerializeField] private Button settingsButton;
         [SerializeField] private Button quitButton;
         [SerializeField] private TMP_Text errorText;
+        [Header("엔딩을 하나라도 끝까지 본 뒤 이미지 교체")]
+        [SerializeField] private UnityEngine.UI.Image endingImage;
+        [SerializeField] private Sprite afterEndingSprite;
         public event Action NewGameRequested;
         public event Action ContinueRequested;
         public event Action CollectionRequested;
@@ -37,6 +40,11 @@ namespace WorkGame
             if (quitButton != null) quitButton.onClick.RemoveListener(Quit);
         }
         public void SetContinueAvailable(bool available) { if (continueButton != null) continueButton.interactable = available; }
+        public void ShowEndingImage(bool hasReadEnding)
+        {
+            if (hasReadEnding && endingImage != null && afterEndingSprite != null)
+                endingImage.sprite = afterEndingSprite;
+        }
         public void SetCollectionAvailable(bool available)
         {
             collectionAvailable = available;

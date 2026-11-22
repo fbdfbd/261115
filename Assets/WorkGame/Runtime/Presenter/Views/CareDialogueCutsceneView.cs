@@ -17,13 +17,28 @@ namespace WorkGame
         public bool IsVisible { get; private set; }
         public bool IsClosing { get; private set; }
 
+        public void ConfigureDialogueCanvas(Canvas dialogueCanvas)
+        {
+            var canvas = GetComponentInParent<Canvas>();
+            if (canvas == null || dialogueCanvas == null || canvas == dialogueCanvas) return;
+            canvas.overrideSorting = true;
+            canvas.sortingLayerID = dialogueCanvas.sortingLayerID;
+            canvas.sortingOrder = dialogueCanvas.sortingOrder - 1;
+        }
+
         private void Awake() => Hide();
         private void OnDisable() => Cancel();
-        public override bool CanPlay(string key) => key == "story_nameplate";
+        public override bool CanPlay(string key) => key == "story_nameplate" || key == "intro_timepass";
         public override void SetPaused(bool value) => paused = value;
 
         public override IEnumerator Play(CareDialogueCue cue)
         {
+            if (cue.Key == "intro_timepass")
+            {
+                FinishDialogue(null, null);
+                while (IsClosing) yield return null;
+                yield break;
+            }
             if (!Show()) yield break;
             float elapsed = 0;
             group.alpha = 0;
@@ -38,6 +53,7 @@ namespace WorkGame
 
         public override void ApplyFinal(CareDialogueCue cue)
         {
+            if (cue.Key == "intro_timepass") return;
             if (Show()) group.alpha = 1;
         }
 

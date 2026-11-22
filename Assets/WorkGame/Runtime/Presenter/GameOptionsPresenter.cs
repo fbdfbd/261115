@@ -17,6 +17,11 @@ namespace WorkGame
             view.WindowedChanged += options.SetWindowed;
             view.MusicChanged += options.SetMusic;
             view.SoundChanged += options.SetSound;
+            RefreshDisplay();
+        }
+        public void RefreshDisplay()
+        {
+            options.RefreshDisplay();
             view.SetResolutions(options); Refresh();
         }
         private void Refresh() => view.ShowState(options);

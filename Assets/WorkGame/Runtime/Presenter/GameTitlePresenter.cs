@@ -28,6 +28,7 @@ namespace WorkGame
         {
             if (view != null) view.SetContinueAvailable(((SaveSlot[])Enum.GetValues(typeof(SaveSlot))).Any(saves.HasSave));
             if (view != null) view.SetCollectionAvailable(CanOpenCollection);
+            if (view != null) view.ShowEndingImage(saves.HasReadEnding);
         }
         private void OpenCollection() { if (CanOpenCollection) collection?.Invoke(); }
         public void Dispose()

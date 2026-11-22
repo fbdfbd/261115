@@ -56,7 +56,8 @@ namespace WorkGame
             if (!Application.CanStreamedLevelBeLoaded("01_Title")) { view?.ShowError("타이틀 씬을 빌드 목록에 추가해 주세요."); return; }
             try
             {
-                if (workRoot == null || !workRoot.Saves.SaveAuto()) { view?.ShowError("자동 저장할 시작 상태가 없습니다."); return; }
+                if (workRoot == null || (workRoot.CareFlow?.IsIntro != true && !workRoot.Saves.SaveAuto()))
+                { view?.ShowError("자동 저장할 시작 상태가 없습니다."); return; }
                 optionsRoot?.Options?.Save();
                 quitting = true;
                 WorkStartRequest.NewRun();

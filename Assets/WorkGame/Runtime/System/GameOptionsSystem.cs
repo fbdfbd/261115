@@ -5,14 +5,6 @@ using UnityEngine;
 
 namespace WorkGame
 {
-    public readonly struct GameResolution
-    {
-        public int Width { get; }
-        public int Height { get; }
-        public GameResolution(int width, int height) { Width = width; Height = height; }
-        public override string ToString() => Width + " x " + Height;
-    }
-
     // 옵션은 플레이 슬롯과 별도로 보관합니다. 소리는 이벤트만 제공하고 재생기는 연결하지 않습니다.
     public sealed class GameOptionsSystem
     {
@@ -29,9 +21,9 @@ namespace WorkGame
         }
 
         private readonly Settings settings;
-        private readonly GameResolution[] resolutions;
+        private GameResolution[] resolutions;
         private bool dirty;
-        public IReadOnlyList<GameResolution> Resolutions { get; }
+        public IReadOnlyList<GameResolution> Resolutions { get; private set; }
         public int ResolutionIndex { get; private set; }
         public bool Windowed => settings.Windowed;
         public float MusicVolume => settings.Music;
@@ -46,21 +38,29 @@ namespace WorkGame
             CanChangeDisplay = Application.platform == RuntimePlatform.WindowsPlayer
                 || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.LinuxPlayer
                 || Application.isEditor;
-            int width = Math.Max(1, Screen.width), height = Math.Max(1, Screen.height);
-            settings = ReadSettings(width, height);
-            resolutions = Screen.resolutions.Select(size => new GameResolution(size.width, size.height))
-                .Append(new GameResolution(width, height))
-                .Where(size => size.Width > 0 && size.Height > 0)
-                .GroupBy(size => (size.Width, size.Height)).Select(group => group.First())
-                .OrderBy(size => size.Width).ThenBy(size => size.Height).ToArray();
-            Resolutions = Array.AsReadOnly(resolutions);
-            ResolutionIndex = Array.FindIndex(resolutions, size => size.Width == settings.Width && size.Height == settings.Height);
-            if (ResolutionIndex < 0)
-            {
-                ResolutionIndex = Array.FindIndex(resolutions, size => size.Width == width && size.Height == height);
-                settings.Width = width; settings.Height = height;
-            }
+            settings = ReadSettings(1920, 1080);
+            RefreshDisplay(false);
             ApplyDisplay();
+        }
+
+        public void RefreshDisplay() => RefreshDisplay(true);
+        private void RefreshDisplay(bool apply)
+        {
+            var display = Screen.mainWindowDisplayInfo;
+            var current = Screen.currentResolution;
+            int width = display.width > 0 ? display.width : current.width;
+            int height = display.height > 0 ? display.height : current.height;
+            var supported = GameDisplayPolicy.GetResolutions(width, height);
+            bool listChanged = resolutions == null || !resolutions.SequenceEqual(supported);
+            resolutions = supported;
+            Resolutions = Array.AsReadOnly(resolutions);
+            ResolutionIndex = GameDisplayPolicy.GetResolutionIndex(resolutions, settings.Width, settings.Height);
+            var selected = resolutions[ResolutionIndex];
+            bool changed = settings.Width != selected.Width || settings.Height != selected.Height;
+            settings.Width = selected.Width; settings.Height = selected.Height;
+            if (changed) dirty = true;
+            if (apply && changed) ApplyDisplay();
+            if (apply && (changed || listChanged)) Changed?.Invoke();
         }
 
         public void SetResolution(int index)

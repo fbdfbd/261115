@@ -20,6 +20,11 @@ namespace WorkGame
         public CareFlowPhase Phase { get; private set; } = CareFlowPhase.Working;
         public CarePanel Panel { get; private set; }
         public CareLeaveKind LeaveKind { get; private set; }
+        public bool IsIntro { get; private set; }
+        public string IntroDialogueId => dialogueData.IntroDialogue;
+        public bool HasReadSuccessfulPromise(string id) => Promises.Records.Any(record =>
+            record.Promise.Id == id && record.State == CarePromiseState.Succeeded
+            && Dialogue.WasCompleted("entry/" + record.Promise.TargetMonth));
         public bool IsPaused => work.IsPaused;
         public bool CanGoNext => !disposed && !IsPaused && Phase == CareFlowPhase.Free
             && care.CanPlan && care.IsPlanFull;
@@ -46,6 +51,18 @@ namespace WorkGame
             Dialogue.Finished += FinishDialogue;
             care.Changed += Refresh;
             work.Changed += OnWorkChanged;
+        }
+
+        // 새 게임에서만 호출합니다. Ready 상태를 유지하므로 업무 시간·급여·월 진행은 발생하지 않습니다.
+        public bool StartIntro()
+        {
+            if (disposed || IsIntro || work.Run.Phase != WorkPhase.Ready || IsPaused
+                || string.IsNullOrEmpty(dialogueData.IntroDialogue) || Dialogue.IsOpen) return false;
+            IsIntro = true;
+            if (Play(dialogueData.IntroDialogue, "intro")) return true;
+            IsIntro = false;
+            SetPhase(CareFlowPhase.Working);
+            return false;
         }
 
         // 급여 정산서를 닫고 육성 메인이 보인 시점에 한 번 호출합니다.
@@ -111,7 +128,7 @@ namespace WorkGame
         // 저장된 선택·약속 기록으로 재구성하므로 엔딩 선택 체크포인트에서도 같은 회고를 보여 줍니다.
         public string[] BuildEndingMemories()
         {
-            var memories = new List<KeyValuePair<int, string>>();
+            var memories = new List<(int Month, string Text, int Priority)>();
             var definitions = dialogueData.Dialogues.ToDictionary(x => x.Id);
             var recalled = new HashSet<string>();
             foreach (var log in Dialogue.History)
@@ -122,7 +139,8 @@ namespace WorkGame
                     : definition.EndingText;
                 string key = log.DialogueId + (log.IsChoice ? "/choice" : "/dialogue");
                 if (!string.IsNullOrWhiteSpace(text) && recalled.Add(key))
-                    memories.Add(new KeyValuePair<int, string>(log.Month, text));
+                    memories.Add((log.Month, text, log.DialogueId == "story_02_nameplate" ? 4
+                        : log.DialogueId.StartsWith("story_", StringComparison.Ordinal) ? 2 : 1));
             }
             foreach (var record in Promises.Records)
             {
@@ -135,10 +153,13 @@ namespace WorkGame
                     : record.State == CarePromiseState.Failed ? promise.FailureEndingText
                     : record.State == CarePromiseState.Declined ? promise.DeclinedEndingText : null;
                 if (!string.IsNullOrWhiteSpace(text))
-                    memories.Add(new KeyValuePair<int, string>(promise.TargetMonth, text));
+                    memories.Add((promise.TargetMonth, text, 3));
             }
-            var pages = memories.OrderBy(x => x.Key).GroupBy(x => x.Key)
-                .Select(month => string.Join("\n\n", month.Select(x => x.Value))).ToList();
+            // One recollection per event month. Prefer the actual final choice/result over its setup.
+            var pages = memories.GroupBy(memory => memory.Month)
+                .Select(month => month.OrderBy(memory => memory.Priority).Last())
+                .OrderByDescending(memory => memory.Priority).ThenByDescending(memory => memory.Month).Take(3)
+                .OrderBy(memory => memory.Month).Select(memory => memory.Text).ToList();
             if (pages.Count > 0 && !string.IsNullOrWhiteSpace(dialogueData.EndingIntroText))
                 pages.Insert(0, dialogueData.EndingIntroText);
             return pages.ToArray();
@@ -148,12 +169,17 @@ namespace WorkGame
         {
             if (string.IsNullOrEmpty(id) || Dialogue.WasCompleted(key)) return false;
             Phase = CareFlowPhase.Dialogue;
-            return Dialogue.Play(id, key, care.Month);
+            return Dialogue.Play(id, key, IsIntro ? 1 : care.Month);
         }
 
         private void FinishDialogue(CareDialogueResult result)
         {
-            if (activeStory != null) CompleteStory();
+            if (IsIntro && result.RecordKey == "intro")
+            {
+                IsIntro = false;
+                work.StartRun();
+            }
+            else if (activeStory != null) CompleteStory();
             else if (offeredPromise != null)
             {
                 Promises.Reply(offeredPromise, result.ChoiceKey == "accept");

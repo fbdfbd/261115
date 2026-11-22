@@ -50,7 +50,11 @@ namespace WorkGame
 
         private void RefreshData()
         {
-            if (hud != null) ShowRows(hud.MainStats);
+            if (hud != null)
+            {
+                hud.SetMonth(care.Month);
+                ShowRows(hud.MainStats);
+            }
             if (Visible && view != null) RefreshStatus();
         }
 

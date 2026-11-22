@@ -52,6 +52,7 @@ namespace WorkGame
         public void Open()
         {
             if (view == null || view.IsOpen || changingScene) return;
+            presenter?.RefreshDisplay();
             transform.SetAsLastSibling();
             view.Open();
             if (workRoot != null)

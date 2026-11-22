@@ -12,6 +12,8 @@ namespace WorkGame
         public Sprite Icon;
         [Tooltip("Care 방에 장착 가구로 표시하는 이미지입니다. 가구함 아이콘과 별도로 사용합니다.")]
         public Sprite RoomSprite;
+        [Tooltip("방의 슬롯 크기에 맞춘 뒤 적용하는 가구별 표시 배율입니다.")]
+        [Min(0.01f)] public float RoomScale = 1;
         public CareGiftKind Kind;
         [Min(0)] public int Cost;
         [Tooltip("구매 순간 한 번 적용합니다. 음수도 가능합니다.")]

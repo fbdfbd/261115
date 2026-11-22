@@ -147,13 +147,17 @@ namespace WorkGame
 
         private void RefreshMusic()
         {
+            if (audioRoot != null) audioRoot.SetMusicMuffled(session, ShouldMuffleMusic);
             session.SetBaseTrack(ResolveTrack());
             SyncEventMusic();
         }
 
+        private bool ShouldMuffleMusic => scene == GameBgmScene.Game && !tutorial
+            && careFlow?.IsIntro != true && careFlow?.Phase == CareFlowPhase.Result;
+
         private void SyncEventMusic()
         {
-            string id = scene == GameBgmScene.Game && !tutorial && careFlow?.Phase == CareFlowPhase.Dialogue
+            string id = scene == GameBgmScene.Game && !tutorial && careFlow?.IsIntro != true && careFlow?.Phase == CareFlowPhase.Dialogue
                 ? careFlow.Dialogue.RootDialogueId : null;
             bool active = music.TryGetEvent(id, out var track);
             if (id == eventDialogueId && active == eventOverrideActive && ReferenceEquals(track, eventTrack)) return;
@@ -185,6 +189,7 @@ namespace WorkGame
             if (careFlow != null && (careFlow.Phase == CareFlowPhase.EndingChoice || careFlow.Phase == CareFlowPhase.Ended))
                 return music.Ending;
             if (careFlow == null && work.Run.Phase == WorkPhase.Finished) return music.Ending;
+            if (careFlow?.IsIntro == true) return music.Intro?.Clip != null ? music.Intro : music.GetMonth(1, true);
             if (work.Run.Phase == WorkPhase.Ready) return null;
             bool care = careFlow != null
                 ? careFlow.Phase != CareFlowPhase.Working && careFlow.Phase != CareFlowPhase.Report
@@ -228,6 +233,7 @@ namespace WorkGame
                 options.SoundChanged -= SendSound;
             }
             options = null;
+            if (audioRoot != null) audioRoot.SetMusicMuffled(session, false);
             session?.Dispose();
             session = null;
             audioRoot = null;

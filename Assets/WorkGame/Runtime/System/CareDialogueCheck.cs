@@ -18,11 +18,13 @@ namespace WorkGame
                 || data.Dialogues.Select(x => x.Id).Distinct().Count() != data.Dialogues.Length)
                 throw new ArgumentException("대화 ID는 비어 있거나 중복될 수 없습니다.");
             var ids = data.Dialogues.Select(x => x.Id).ToHashSet();
+            if (!string.IsNullOrEmpty(data.IntroDialogue) && !ids.Contains(data.IntroDialogue))
+                throw new ArgumentException("인트로 대화 ID를 찾을 수 없습니다: " + data.IntroDialogue);
             foreach (var dialogue in data.Dialogues)
             {
                 if (dialogue.Lines == null || dialogue.Lines.Length == 0 || dialogue.Choices == null
                     || dialogue.Lines.Any(x => x == null || string.IsNullOrWhiteSpace(x.Text)
-                        || x.Speaker == "나르미"
+                        || (x.Speaker == "나르미" && dialogue.Id != data.IntroDialogue)
                         || !Enum.IsDefined(typeof(CareDialogueEmotion), x.Emotion))
                     || dialogue.Choices.Any(x => x == null || string.IsNullOrWhiteSpace(x.Key) || string.IsNullOrWhiteSpace(x.Text))
                     || dialogue.Choices.Select(x => x.Key).Distinct().Count() != dialogue.Choices.Length)
